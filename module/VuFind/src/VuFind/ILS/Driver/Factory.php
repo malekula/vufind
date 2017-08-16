@@ -193,11 +193,7 @@ class Factory
      */
     public static function getKohaILSDI(ServiceManager $sm)
     {
-        $koha = new KohaILSDI($sm->getServiceLocator()->get('VuFind\DateConverter'));
-        $koha->setCacheStorage(
-            $sm->getServiceLocator()->get('VuFind\CacheManager')->getCache('object')
-        );
-        return $koha;
+        return new KohaILSDI($sm->getServiceLocator()->get('VuFind\DateConverter'));
     }
 
     /**

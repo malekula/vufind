@@ -12,9 +12,9 @@
 
 <? if (empty($token)): ?>
   <form action="<?=$this->url('channels-search')?>" class="form-inline">
-    <?=$this->transEsc('channel_searchbox_label')?>
+    Search for more channels:
     <input type="text" name="lookfor" class="form-control" value="<?=$this->escapeHtmlAttr($this->lookfor) ?>"/>
-    <input type="submit" value="<?=$this->escapeHtmlAttr($this->translate('Submit'))?>" class="btn btn-default" />
+    <input type="submit" class="btn btn-default" />
   </form>
 <? endif; ?>
 
