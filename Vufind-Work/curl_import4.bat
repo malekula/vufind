@@ -1,0 +1,24 @@
+curl http://192.168.56.31:8080/solr/biblio/update?commit=true -H "Content-Type: text/xml" --data-binary @f:\bjvvv.xml
+
+
+
+		
+		
+			
+				
+				
+				
+			
+			
+				
+				
+				
+				
+				
+				
+			
+				
+				
+				
+			
+				
