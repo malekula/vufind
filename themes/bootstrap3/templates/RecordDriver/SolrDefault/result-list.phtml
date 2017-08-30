@@ -168,8 +168,10 @@
         </span>
       <? endif; ?>
 
-      <? if ($this->cart()->isActiveInSearch() && $this->params->getOptions()->supportsCart() && $this->cart()->isActive()): ?>
+      <? if ($this->cart()->isActiveInSearch() && $this->params->getOptions()->supportsCart() && $this->cart()->isActive() && substr($this->driver->getUniqueId(),0,5) == 'BJVVV'): ?>
         <?=$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]); ?><br/>
+      <? else: ?>
+	<?=$this->render('record/dis-cart-buttons.phtml'); ?><br/>
       <? endif; ?>
 
       <? if ($this->userlist()->getMode() !== 'disabled'): ?>
