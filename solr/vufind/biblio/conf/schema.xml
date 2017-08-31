@@ -217,6 +217,22 @@
    <field name="fund" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="fund_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
 
+   <field name="Pagination" type="text" indexed="true" stored="true" multiValued="true"/>
+  
+   
+   
+   <field name="period_ModeOfPublication" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="period_Language" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="period_Periodicity" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="period_Years" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="period_HyperLink" type="text" indexed="true" stored="true" multiValued="true"/>
+
+   
+       
+   
+   
+   
+   
    
    
    
