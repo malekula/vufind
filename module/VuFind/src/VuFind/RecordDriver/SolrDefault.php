@@ -1965,6 +1965,11 @@ class SolrDefault extends AbstractBase
             ? $this->fields['long_lat_label'] : [];
     }
 
+    public function getLevels()
+    {
+        return isset($this->fields['Level']) ? $this->fields['Level'] : ['n/a'];
+    }
+    
     public function getGenres()
     {
         return isset($this->fields['genre']) ? $this->fields['genre'] : ['n/a'];

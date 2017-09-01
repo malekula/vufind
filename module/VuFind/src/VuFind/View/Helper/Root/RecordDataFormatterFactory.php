@@ -56,9 +56,13 @@ class RecordDataFormatterFactory
         );
         $helper->setDefaults('core', [$this, 'getDefaultCoreSpecs']);
         $helper->setDefaults('description', [$this, 'getDefaultDescriptionSpecs']);
+        $helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
+		$helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
+        $helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjvvv', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjscc', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjfcc', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('redkostj', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('litres', [$this, 'getDefaultLitresSpecs']);
         $helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
         return $helper;
@@ -343,6 +347,8 @@ class RecordDataFormatterFactory
                 $spec->setLine('Genres', 'getGenres');
                 // Описание (description)
                 $spec->setLine('Description', 'getDescriptions');
+                // Вид издания (level)
+                $spec->setLine('Level', 'getLevels');
                 
 		return $spec->getArray();
     }
