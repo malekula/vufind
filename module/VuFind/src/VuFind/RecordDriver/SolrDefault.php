@@ -551,7 +551,7 @@ class SolrDefault extends AbstractBase
      */
     public function getFormats()
     {
-        return isset($this->fields['format']) ? $this->fields['format'] : [];
+        return isset($this->fields['format']) ? $this->fields['format'] : ['n/a'];
     }
 
     /**
@@ -702,7 +702,7 @@ class SolrDefault extends AbstractBase
         // If ISBN is in the index, it should automatically be an array... but if
         // it's not set at all, we should normalize the value to an empty array.
         return isset($this->fields['isbn']) && is_array($this->fields['isbn']) ?
-            $this->fields['isbn'] : [];
+            $this->fields['isbn'] : ['n/a'];
     }
 
     /**
@@ -726,7 +726,7 @@ class SolrDefault extends AbstractBase
     public function getLanguages()
     {
         return isset($this->fields['language']) ?
-            $this->fields['language'] : [];
+            $this->fields['language'] : ['n/a'];
     }
 
     /**
@@ -1035,7 +1035,8 @@ class SolrDefault extends AbstractBase
     public function getPlacesOfPublication()
     {
         // Not currently stored in the Solr index
-        return [];
+        //return [];
+        return isset($this->fields['PlaceOfPublication']) ? $this->fields['PlaceOfPublication'] : ['n/a'];
     }
 
     /**
@@ -1113,7 +1114,7 @@ class SolrDefault extends AbstractBase
     public function getPublicationDates()
     {
         return isset($this->fields['publishDate']) ?
-            $this->fields['publishDate'] : [];
+            $this->fields['publishDate'] : ['n/a'];
     }
 
     /**
@@ -1174,7 +1175,7 @@ class SolrDefault extends AbstractBase
     public function getPublishers()
     {
         return isset($this->fields['publisher']) ?
-            $this->fields['publisher'] : [];
+            $this->fields['publisher'] : ['n/a'];
     }
 
     /**
@@ -1962,5 +1963,45 @@ class SolrDefault extends AbstractBase
     {
         return isset($this->fields['long_lat_label'])
             ? $this->fields['long_lat_label'] : [];
+    }
+
+    public function getGenres()
+    {
+        return isset($this->fields['genre']) ? $this->fields['genre'] : ['n/a'];
+    }
+    
+    public function getPaginations()
+    {
+        return isset($this->fields['Pagination']) ? $this->fields['Pagination'] : ['n/a'];
+    }
+    
+    public function getDescriptions()
+    {
+        return isset($this->fields['description']) ? $this->fields['description'] : ['n/a'];
+    }
+    
+    public function period_getModeOfPublications()
+    {
+        return isset($this->fields['period_ModeOfPublication']) ? $this->fields['period_ModeOfPublication'] : ['n/a'];
+    }
+    
+    public function period_getLanguages()
+    {
+        return isset($this->fields['period_Language']) ? $this->fields['period_Language'] : ['n/a'];
+    }
+    
+    public function period_getPeriodicity()
+    {
+        return isset($this->fields['period_Periodicity']) ? $this->fields['period_Periodicity'] : ['n/a'];
+    }
+    
+    public function period_getYears()
+    {
+        return isset($this->fields['period_Years']) ? $this->fields['period_Years'] : ['n/a'];
+    }
+    
+    public function period_getHyperLinks()
+    {
+        return isset($this->fields['period_HyperLink']) ? $this->fields['period_HyperLink'] : ['n/a'];
     }
 }
