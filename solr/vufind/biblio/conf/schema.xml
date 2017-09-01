@@ -218,6 +218,9 @@
    <field name="fund_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
 
    <field name="Pagination" type="text" indexed="true" stored="true" multiValued="true"/>
+   
+   <field name="Level" type="text" indexed="true" stored="true" multiValued="false"/>
+   <field name="Level_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
   
    
    
@@ -282,6 +285,7 @@
  <copyField source="fulltext" dest="fulltext_unstemmed"/>
  <copyField source="PlaceOfPublication" dest="PlaceOfPublication_facet"/>
  <copyField source="fund" dest="fund_facet"/>
+ <copyField source="Level" dest="Level_facet"/>
  
  <!-- CopyFields for Alphabetic Browse -->
  <copyField source="topic" dest="topic_browse"/>
