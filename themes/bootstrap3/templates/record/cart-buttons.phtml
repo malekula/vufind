@@ -1,5 +1,5 @@
 <? $cart = $this->cart(); ?>
-<? if ($cart->isActive()): ?>
+<? if ($cart->isActive() && strtolower(substr($this->id, 0, 5)) == 'bjvvv'): ?>
   <? $cartId = $this->source . '|' . $this->id; ?>
   <span class="btn-bookbag-toggle" data-cart-id="<?=$this->escapeHtmlAttr($this->id)?>" data-cart-source="<?=$this->escapeHtmlAttr($this->source)?>">
     <a class="cart-add hidden<? if(!$cart->contains($cartId)): ?> correct<? endif ?>">
