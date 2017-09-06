@@ -245,6 +245,11 @@ Series:
     - series^100
     - series2
   DismaxHandler: edismax
+  
+Language:
+  DismaxFields:
+    - language
+  DismaxHandler: edismax
 
 AllFields:
   DismaxFields:
