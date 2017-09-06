@@ -682,8 +682,10 @@ $config = [
             'VuFind\RecordDriver\EDS' => [
                 'tabs' => [
                     'Description' => 'Description',
-                    'TOC' => 'TOC', 'UserComments' => 'UserComments',
-                    'Reviews' => 'Reviews', 'Excerpt' => 'Excerpt',
+                    'TOC' => 'TOC',
+                    'UserComments' => 'UserComments',
+                    'Reviews' => 'Reviews',
+                    'Excerpt' => 'Excerpt',
                     'Preview' => 'preview',
                     'Details' => 'StaffViewArray',
                 ],
@@ -713,11 +715,15 @@ $config = [
             ],
             'VuFind\RecordDriver\SolrDefault' => [
                 'tabs' => [
-                    'Holdings' => 'HoldingsILS', 'Description' => 'Description',
-                    'TOC' => 'TOC', 'UserComments' => 'UserComments',
-                    'Reviews' => 'Reviews', 'Excerpt' => 'Excerpt',
-                    'Preview' => 'preview',
-                    'HierarchyTree' => 'HierarchyTree', 'Map' => 'Map',
+                    //'Holdings' => 'HoldingsILS',
+                    //'Description' => 'Description',
+                    //'TOC' => 'TOC',
+                    //'UserComments' => 'UserComments',
+                    //'Reviews' => 'Reviews',
+                    //'Excerpt' => 'Excerpt',
+                    //'Preview' => 'preview',
+                    //'HierarchyTree' => 'HierarchyTree',
+                    //'Map' => 'Map',
                     'Similar' => 'SimilarItemsCarousel',
                     'Details' => 'StaffViewArray',
                 ],
