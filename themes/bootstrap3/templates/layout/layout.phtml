@@ -120,73 +120,144 @@ JS;
       $this->headScript()->appendScript($setupJS);
     ?>
     <?=$this->headScript()?>
+      <link href="/vufind/themes/bootprint3/css/libfl.css?_=1499547038" rel="stylesheet" type="text/css">
   </head>
   <body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> <?=$this->layoutClass('offcanvas-row')?><? if ($this->layout()->rtl): ?> rtl<? endif; ?>">
-    <? // Set up the search box -- there are three possible cases:
-      // 1. No search box was set; we should default to the normal box
-      // 2. It was set to false; we should display nothing
-      // 3. It is set to a custom string; we should display the provided version
-      // Set up default search box if no data was provided from the template;
-      // this covers case 1.  Cases 2 and 3 are then covered by logic below.
-      if (!isset($this->layout()->searchbox)) {
-        $this->layout()->searchbox = $this->render('search/searchbox.phtml');
-      }
-    ?>
-    <header class="hidden-print">
-      <? if (isset($this->layout()->srmessage)): // message for benefit of screen-reader users ?>
-        <span class="sr-only"><?=$this->layout()->srmessage ?></span>
-      <? endif; ?>
-      <a class="sr-only" href="#content"><?=$this->transEsc('Skip to content') ?></a>
-      <?=$this->render('header.phtml')?>
-    </header>
-    <nav class="breadcrumbs">
-      <div class="container">
-        <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
-          && !empty($this->layout()->breadcrumbs)
-          && $this->layout()->breadcrumbs !== false
-        ): ?>
-          <ul class="breadcrumb hidden-print">
-            <? if(is_array($this->layout()->breadcrumbs)): ?>
-              <? if(count($this->layout()->breadcrumbs) > 1): ?>
-                <?=$this->render('breadcrumbs/multi.phtml', [
-                    'parents' => $this->layout()->breadcrumbs,
-                    'title'   => $this->layout()->title,
-                    'from'    => $this->layout()->from
-                  ]) ?>
-              <? else: ?>
-                <?=$this->render('breadcrumbs/default.phtml', [
-                    'parents' => $this->layout()->breadcrumbs,
-                    'title'   => $this->layout()->title
-                  ]) ?>
-              <? endif; ?>
-            <? else: ?>
-              <?=$this->layout()->breadcrumbs ?>
-            <? endif; ?>
-          </ul>
-        <? endif; ?>
-      </div>
-    </nav>
-    <div role="main" class="main">
-      <div id="content" class="container">
-        <?=$this->layout()->content ?>
-      </div>
-    </div>
-    <?=$this->render('footer.phtml')?>
-    <!-- MODAL IN CASE WE NEED ONE -->
-    <div id="modal" class="modal fade hidden-print" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
+    <div id="layout_wrapper">
+        <div id="nav" class="clear">
+            <div class="content_big">
+                <ul class="menu">
+                    <li><a href="/ru/item/catalogue">Каталоги</a></li>
+                    <li><a href="/ru/item/events">Мероприятия</a></li>
+                    <li><a href="/ru/item/novosti-biblioteki">Новости</a></li>
+                    <li><a href="/ru/item/centers">Национальные центры</a></li>
+                    <li><a href="/ru/item/uslugi-biblioteki">Услуги</a></li>
+                    <li><a href="/ru/item/about">О библиотеке</a></li>
+                    <li class="search"></li>
+                </ul>
+                <div class="header_right"><a href="http://opac.libfl.ru/WebReaderT/" class="become_link">Стать читателем</a>
+                    <!--a.enter_link(href='/')=__("Войти")-->
+                </div>
+            </div>
         </div>
-      </div>
+        <? // Set up the search box -- there are three possible cases:
+          // 1. No search box was set; we should default to the normal box
+          // 2. It was set to false; we should display nothing
+          // 3. It is set to a custom string; we should display the provided version
+          // Set up default search box if no data was provided from the template;
+          // this covers case 1.  Cases 2 and 3 are then covered by logic below.
+          if (!isset($this->layout()->searchbox)) {
+            $this->layout()->searchbox = $this->render('search/searchbox.phtml');
+          }
+        ?>
+        <header>
+            <div id="header">
+                <div class="content_big clear"><a href="/" class="logo_wrapper desktop_version"><img id="random" src="/vufind/themes/bootstrap3/images/svg/breve-icon.svg" alt=""><span><b>Библиотека<br>Иностранной&nbsp;Литературы</b><br><p>Library&nbsp;for&nbsp;Foreign<br>Literature</p></span></a>
+                    <!--.split_line-->
+                    <!--.logo_95-->
+                    <div class="quick_links_wrapper">
+                        <div class="blue_quick_links desktop_version"><a href="/static/online_resources">Online-Ресурсы</a><br><a href="http://profi.libfl.ru/">Академия Рудомино</a><br><a href="/ru/item/projects">Проекты библиотеки </a>
+                            <!--br-->
+                            <!--a(href='/static/litres')=__("Litres.Библиотека")-->
+                        </div>
+                        <div class="quick_links desktop_version"><a href="/ru/item/contacts">Контактная информация</a><br><a href="/ru/item/contacts#time_anchor" class="work_hours_hover">Часы работы</a><br><small>Сегодня работает до&nbsp;<span id="workday_end"></span></small>
+                            <!--a.work_hours_hover(href='/' + lang + '/item/contacts#time_anchor')=__("Часы работы")-->
+                        </div>
+                    </div>
+                    <div class="vf_search_wrapper"><span class="search_switch">Поиск по каталогу&nbsp;</span>
+                        <div class="vf_search_form desktop_version">
+                            <input id="search" name="search" type="text" placeholder="Поиск по сайту" value=""><img src="/vufind/themes/bootstrap3/images/svg/caron-icon.svg">
+                            <div class="vf_search_select">
+                                <div data-text="Поиск по сайту" data-action="" class="vf_search_option">весь сайт</div>
+                                <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option">мероприятия</div>
+                                <div data-text="Поиск по статьям" data-action="articles" class="vf_search_option">статьи</div>
+                                <div data-text="Поиск по документам" data-action="documents" class="vf_search_option">документы</div>
+                                <div data-text="Поиск по подборкам" data-action="books_collections" class="vf_search_option">подборки</div>
+                                <div class="advanced_search">расширенный поиск</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wiseman_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/plato.png" alt="Вуаля! Теперь я понимаю Платона." title="Вуаля! Теперь я понимаю Платона.">
+                        <div class="random_quote_block"><span><b>Voila!<br>Plato is not greek for you.</b></span></div>
+                        <clear></clear>
+                    </div>
+                    <!--.search_wrapper.desktop_version
+                    img(src='/images/svg/caron-icon.svg', alt='', enctype="multipart/form-data")
+
+                    //input#search(name='search', type='text', placeholder=__("Поиск по сайту"), value=(search ? search : ""))
+
+                    .random_quote_block
+                        span!=__("<b>Voila!<br>Plato is not<br>greek for you.</b>")
+                    -->
+                    <div class="work_hours_block">
+                        <div class="work_hours_row"><b>Будние дни</b>&nbsp;&mdash;&nbsp;с 11.00 до 21.00</div>
+                        <div class="work_hours_row work_hours_border"><b>Сб, вс и предпраздничные дни</b>&nbsp;&mdash;&nbsp;с 11.00 до 19.00</div>
+                        <!--.work_hours_row.work_hours_border
+                        b Воскресенье
+                        | &nbsp;&mdash;&nbsp;выходной
+              -->
+                        <div class="work_hours_row"><b>Санитарный день</b>&nbsp;&mdash;&nbsp;последний четверг месяца</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="hidden-print">
+          <? if (isset($this->layout()->srmessage)): // message for benefit of screen-reader users ?>
+            <span class="sr-only"><?=$this->layout()->srmessage ?></span>
+          <? endif; ?>
+          <a class="sr-only" href="#content"><?=$this->transEsc('Skip to content') ?></a>
+          <?=$this->render('header.phtml')?>
+        </div>
+        <div class="breadcrumbs">
+          <div class="container">
+            <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
+              && !empty($this->layout()->breadcrumbs)
+              && $this->layout()->breadcrumbs !== false
+            ): ?>
+              <ul class="breadcrumb hidden-print">
+                <? if(is_array($this->layout()->breadcrumbs)): ?>
+                  <? if(count($this->layout()->breadcrumbs) > 1): ?>
+                    <?=$this->render('breadcrumbs/multi.phtml', [
+                        'parents' => $this->layout()->breadcrumbs,
+                        'title'   => $this->layout()->title,
+                        'from'    => $this->layout()->from
+                      ]) ?>
+                  <? else: ?>
+                    <?=$this->render('breadcrumbs/default.phtml', [
+                        'parents' => $this->layout()->breadcrumbs,
+                        'title'   => $this->layout()->title
+                      ]) ?>
+                  <? endif; ?>
+                <? else: ?>
+                  <?=$this->layout()->breadcrumbs ?>
+                <? endif; ?>
+              </ul>
+            <? endif; ?>
+          </div>
+        </div>
+        <div role="main" class="main">
+          <div id="content" class="container">
+            <?=$this->layout()->content ?>
+          </div>
+        </div>
+
+        <?=$this->render('footer.phtml')?>
     </div>
-    <div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc('sidebar_expand') ?>"></i></div>
-    <div class="offcanvas-overlay" data-toggle="offcanvas"></div>
-    <?=$this->googleanalytics()?>
-    <?=$this->piwik()?>
-    <? if ($this->recaptcha()->active()): ?>
-      <?=$this->inlineScript(\Zend\View\Helper\HeadScript::FILE, "https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit&hl=" . $this->layout()->userLang, 'SET')?>
-    <? endif; ?>
+      <!-- MODAL IN CASE WE NEED ONE -->
+      <div id="modal" class="modal fade hidden-print" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
+              </div>
+          </div>
+      </div>
+      <div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc('sidebar_expand') ?>"></i></div>
+      <div class="offcanvas-overlay" data-toggle="offcanvas"></div>
+      <?=$this->googleanalytics()?>
+      <?=$this->piwik()?>
+      <? if ($this->recaptcha()->active()): ?>
+          <?=$this->inlineScript(\Zend\View\Helper\HeadScript::FILE, "https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit&hl=" . $this->layout()->userLang, 'SET')?>
+      <? endif; ?>
   </body>
 </html>

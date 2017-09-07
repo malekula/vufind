@@ -57,15 +57,15 @@
   </ul>
 <? endif; ?>
 
-<?=$this->record($this->driver)->getToolbar()?>
+
 
 <div class="record source<?=$this->escapeHtmlAttr($this->driver->getSourceIdentifier())?>">
-  <div class="<?=$this->layoutClass('mainbody')?>">
+  <div class="mainbody">
     <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getUniqueId())?>" class="hiddenId" />
     <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getSourceIdentifier()) ?>" class="hiddenSource" />
     <?=$this->flashmessages()?>
     <?=$this->record($this->driver)->getCoreMetadata()?>
-
+      <?=$this->record($this->driver)->getToolbar()?>
     <? if (count($this->tabs) > 0): ?>
       <a name="tabnav"></a>
       <div class="record-tabs">
@@ -104,10 +104,10 @@
     <?=$this->driver->supportsCoinsOpenURL()?'<span class="Z3988" title="'.$this->escapeHtmlAttr($this->driver->getCoinsOpenURL()).'"></span>':''?>
   </div>
 
-  <div class="<?=$this->layoutClass('sidebar')?>">
+  <!--<div class="<?=$this->layoutClass('sidebar')?>">
     <? foreach ($this->related()->getList($this->driver) as $current): ?>
       <?=$this->related()->render($current)?>
     <? endforeach; ?>
-  </div>
+  </div>-->
 </div>
 <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$(document).ready(recordDocReady);', 'SET'); ?>

@@ -2,25 +2,20 @@
   <form name="<?=$this->escapeHtmlAttr($this->title)?>Filter" id="<?=$this->escapeHtmlAttr($this->title)?>Filter">
     <?=$results->getUrlQuery()->asHiddenFields(['page' => "/./", 'filter' => "/^{$this->title}:.*/"])?>
     <input type="hidden" name="<?=$this->escapeHtmlAttr($this->facet['type'])?>range[]" value="<?=$this->escapeHtmlAttr($this->title)?>"/>
-    <div class="date-fields">
-      <? $extraInputAttribs = ($this->facet['type'] == 'date') ? 'maxlength="4" ' : ''; ?>
-      <div class="date-from">
-        <label for="<?=$this->escapeHtmlAttr($this->title)?>from">
-          <?=$this->transEsc('date_from')?>:
-        </label>
-        <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>from" id="<?=$this->escapeHtmlAttr($this->title)?>from" value="<?=isset($this->facet['values'][0])?$this->escapeHtmlAttr($this->facet['values'][0]):''?>" <?=$extraInputAttribs?>/>
-      </div>
-      <div class="date-to">
-        <label for="<?=$this->escapeHtmlAttr($this->title)?>to">
-          <?=$this->transEsc('date_to')?>:
-        </label>
-        <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" <?=$extraInputAttribs?>/>
-      </div>
-    </div>
     <? if ($this->facet['type'] == 'date'): ?>
       <div class="slider-container"><input type="text" class="hidden" id="<?=$this->escapeHtmlAttr($this->title)?><?=$this->escapeHtml($this->facet['type'])?>Slider"/></div>
     <? endif; ?>
-    <input class="btn btn-default" type="submit" value="<?=$this->transEsc('Set')?>"/>
+    <!--<input class="btn btn-default" type="submit" value="<?=$this->transEsc('Set')?>"/>-->
+      <div class="date-fields">
+          <? $extraInputAttribs = ($this->facet['type'] == 'date') ? 'maxlength="4" ' : ''; ?>
+          <div class="date-from">
+              <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>from" id="<?=$this->escapeHtmlAttr($this->title)?>from" value="<?=isset($this->facet['values'][0])?$this->escapeHtmlAttr($this->facet['values'][0]):''?>" <?=$extraInputAttribs?>/>
+          </div>
+          <span class="datepicker_mdash"></span>
+          <div class="date-to">
+              <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" <?=$extraInputAttribs?>/>
+          </div>
+      </div>
   </form>
 </div>
 <? if ($this->facet['type'] == 'date'): ?>

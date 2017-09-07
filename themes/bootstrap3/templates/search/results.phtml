@@ -51,12 +51,22 @@
   $this->headScript()->appendFile("check_save_statuses.js");
 ?>
 
+<div class="search_tools">
+    <? if (($recordTotal = $this->results->getResultTotal()) > 0): // only display these at very top if we have results ?>
+        <? foreach ($this->results->getRecommendations('top') as $current): ?>
+            <?=$this->recommend($current)?>
+        <? endforeach; ?>
+    <? endif; ?>
+    <? if ($recordTotal > 0): ?>
+        <div class="search-controls">
+            <?=$this->render('search/controls/limit.phtml')?>
+            <?=$this->render('search/controls/sort.phtml')?>
+            <?=$this->render('search/controls/view.phtml')?>
+        </div>
+    <? endif; ?>
+</div>
 <div class="<?=$this->layoutClass('mainbody')?>">
-  <? if (($recordTotal = $this->results->getResultTotal()) > 0): // only display these at very top if we have results ?>
-    <? foreach ($this->results->getRecommendations('top') as $current): ?>
-      <?=$this->recommend($current)?>
-    <? endforeach; ?>
-  <? endif; ?>
+
   <?=$this->flashmessages()?>
   <nav class="search-header hidden-print">
     <div class="search-stats">
@@ -67,13 +77,7 @@
       <? endif; ?>
     </div>
 
-    <? if ($recordTotal > 0): ?>
-      <div class="search-controls">
-        <?=$this->render('search/controls/limit.phtml')?>
-        <?=$this->render('search/controls/sort.phtml')?>
-        <?=$this->render('search/controls/view.phtml')?>
-      </div>
-    <? endif; ?>
+
   </nav>
   <? /* End Listing Options */ ?>
 

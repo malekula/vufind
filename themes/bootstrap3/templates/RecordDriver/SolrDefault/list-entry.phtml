@@ -31,7 +31,7 @@
       <?=$thumbnail ?>
     <? endif; ?>
     <div class="media-body">
-      <div class="result-body">
+      <div class="result-body b">
         <div class="resultItemLine1">
           <? $missing = $this->driver instanceof \VuFind\RecordDriver\Missing; ?>
           <? if (!$missing): ?><a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="getFull" data-view="<?=$this->params->getOptions()->getListViewOption() ?>"><? endif; ?>

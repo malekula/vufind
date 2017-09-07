@@ -1,4 +1,4 @@
-<?
+<?/*
   $transParams = [
     '%%start%%' => $this->localizedNumber($this->results->getStartRecord()),
     '%%end%%'   => $this->localizedNumber($this->results->getEndRecord()),
@@ -25,4 +25,18 @@
   <?=$showingResults; ?>, <?=$this->transEsc('query time')?>: <?=$this->localizedNumber($qtime, 2).$this->transEsc('seconds_abbrev')?>
 <? else: ?>
   <?=$showingResults; ?>
-<? endif; ?>
+<? endif; */?>
+
+<div class="search_info_wrapper">
+    <div class="search_info_you">Вы искали</div>
+    <!--<div class="search_info_text"><? echo $this->escapeHtml($this->lookfor) ?></div>-->
+    <? if ($this->layout()->searchbox !== false): ?>
+        <div class="search container navbar">
+            <nav class="nav searchbox hidden-print">
+                <?=$this->layout()->searchbox ?>
+            </nav>
+        </div>
+    <? endif; ?>
+    <div class="search_info_found">Найдено документов: <? echo $this->localizedNumber($this->results->getStartRecord()) ?>&mdash;<? echo $this->localizedNumber($this->results->getEndRecord()) ?> из <? echo $this->localizedNumber($this->recordTotal) ?>.</div>
+    <div class="search_info_advanced"><a href="/vufind/Search/Advanced">перейти к расширенному поиску</a></div>
+</div>
