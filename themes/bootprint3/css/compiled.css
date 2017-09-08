@@ -341,17 +341,7 @@ a {
     text-decoration: none
 }
 
-a:hover,
-a:focus,
-.channel .channel-record.is-selected {
-    color: #092b47;
-    text-decoration: underline
-}
 
-a:focus {
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px
-}
 
 figure {
     margin: 0
@@ -2070,10 +2060,7 @@ output {
 }
 
 .form-control:focus {
-    border-color: #619144;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(97, 145, 68, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(97, 145, 68, 0.6)
+    box-shadow: 0 0 8px rgba(0,0,243,0.6);
 }
 
 .form-control::-moz-placeholder {
@@ -2639,46 +2626,6 @@ fieldset[disabled] a.btn {
     border-color: #ccc
 }
 
-.btn-default:focus,
-.btn-default.focus {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #8c8c8c
-}
-
-.btn-default:hover {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad
-}
-
-.btn-default:active,
-.btn-default.active,
-.open>.dropdown-toggle.btn-default {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad
-}
-
-.btn-default:active:hover,
-.btn-default.active:hover,
-.open>.dropdown-toggle.btn-default:hover,
-.btn-default:active:focus,
-.btn-default.active:focus,
-.open>.dropdown-toggle.btn-default:focus,
-.btn-default:active.focus,
-.btn-default.active.focus,
-.open>.dropdown-toggle.btn-default.focus {
-    color: #333;
-    background-color: #d4d4d4;
-    border-color: #8c8c8c
-}
-
-.btn-default:active,
-.btn-default.active,
-.open>.dropdown-toggle.btn-default {
-    background-image: none
-}
 
 .btn-default.disabled:hover,
 .btn-default[disabled]:hover,
@@ -3772,11 +3719,6 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
     padding: 5px
 }
 
-.nav>li>a:hover,
-.nav>li>a:focus {
-    text-decoration: none;
-    background-color: #eee
-}
 
 .nav>li.disabled>a {
     color: #777
@@ -10053,47 +9995,9 @@ footer:after,
     border: 0
 }
 
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    clip: auto
-}
 
-.sr-only-focusable:active,
-.sr-only-focusable:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    clip: auto
-}
 
-.btn:focus {
-    outline: dotted 2px #000
-}
 
-div.active:focus {
-    outline: dotted 1px #000
-}
-
-a:focus {
-    outline: dotted 1px #000
-}
-
-.close:hover,
-.close:focus {
-    outline: dotted 1px #000
-}
-
-.nav>li>a:hover,
-.nav>li>a:focus {
-    outline: dotted 1px #000
-}
 
 .carousel-indicators li,
 .carousel-indicators li.active {
@@ -13333,12 +13237,6 @@ a,
     color: #06C
 }
 
-a:hover,
-.btn-link:hover,
-.channel .channel-record.is-selected {
-    color: #09F
-}
-
 .alert,
 .savedLists {
     padding: 8px
@@ -13910,7 +13808,7 @@ div#content {
     display: none;
 }
 .result-formats {
-    margin-bottom: 0;
+    margin-bottom: 10px;
 }
 .result-formats span.format {
     padding: 0;
@@ -14131,6 +14029,7 @@ li.digitization_btn {
     color: #0000f3;
     padding: 10px 18px;
     float: left;
+    display: none !important;
 }
 ul.record-nav.nav.nav-pills.hidden-print li.dropdown {
     float: right;
@@ -14143,6 +14042,9 @@ ul.record-nav.nav.nav-pills.hidden-print li.dropdown a {
     color: #0000f3;
     padding: 0;
     margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
 }
 .tab-content {
     padding: 0;
@@ -14162,7 +14064,7 @@ ul.record-nav.nav.nav-pills.hidden-print li.dropdown a {
     border: none;
     border-bottom: 3px solid transparent;
     padding: 11px 2px;
-    margin: 0 4px;
+    margin-right: 35px;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     color: #242728;
@@ -14172,18 +14074,18 @@ ul.record-nav.nav.nav-pills.hidden-print li.dropdown a {
 .record-tabs .nav.nav-tabs {
     margin-bottom: 35px;
 }
-table.table.citation {
+.tab-content table.table {
     table-layout: auto;
 }
-table.table.citation td,
-table.table.citation th {
+.tab-content table.table td,
+.tab-content table.table th {
     text-align: left;
 }
-table.table.citation th {
+.tab-content table.table th {
     font-weight: bold;
 }
-table.table.citation tr:nth-child(odd) td,
-table.table.citation tr:nth-child(odd) th {
+.tab-content table.table tr:nth-child(odd) td,
+.tab-content table.table tr:nth-child(odd) th {
     background-color: #f6f7f7 !important;
 }
 i.fa-plus, i.fa-plus-circle {
@@ -14193,6 +14095,11 @@ i.fa-plus, i.fa-plus-circle {
     top: -2px;
     position: relative;
     margin-right: 4px;
+}
+.facet.narrow-toggle {
+    padding-left: 20px;
+    background: url('../images/new/plus.png') no-repeat left center;
+    margin-left: 10px;
 }
 i.fa-sign-in {
     display: none;
@@ -14205,20 +14112,26 @@ a, .btn-link {
     padding-top: 50px;
 }
 .btn.btn-primary {
-    box-shadow: 0 6px 24px rgba(42, 42, 183, 0.14);
-    background-color: #ffffff;
+    background-color: #0000f3;
     font-family: "Leto Sans";
     font-size: 15px;
     font-weight: 700;
     line-height: 30px;
-    color: #0000f3;
-    padding: 4px 19px;
+    color: #fff;
+    padding: 4px 26px;
     border: none;
+    outline: none;
 }
 .btn.btn-default {
     border: none;
     background: none;
     color: #0000f3;
+    outline: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+.btn.btn-default:hover {
+    opacity: 0.8;
 }
 .adv-submit {
     margin: 25px 0;
@@ -14233,6 +14146,42 @@ legend {
 a.tag-record {
     position: relative;
     left: 12px;
+}
+.record .media-body h3 {
+    margin-top: 0;
+    margin-bottom: 60px;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: bold;
+    font-family: 'Leto Sans';
+}
+.record .media-body p {
+    font-size: 16px;
+    line-height: 1.4;
+}
+.record .media-body table.table {
+    margin-left: -7px;
+}
+.record_media_split_line {
+    width: 100%;
+    height: 1px;
+    background-color: #ebeff2;
+    margin: 35px 0;
+}
+.adv-search {
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+.adv-search .adv-term-remove {
+    color: transparent;
+    background: url('../images/new/plus.png') no-repeat center;
+    transform: rotate(45deg);
+    background-size: 11px;
+    font-size: 0;
+    opacity: 1;
+}
+label.search_bool {
+    margin-bottom: 14px;
 }
 
 

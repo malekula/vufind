@@ -5,7 +5,6 @@
     <? if ($this->facet['type'] == 'date'): ?>
       <div class="slider-container"><input type="text" class="hidden" id="<?=$this->escapeHtmlAttr($this->title)?><?=$this->escapeHtml($this->facet['type'])?>Slider"/></div>
     <? endif; ?>
-    <!--<input class="btn btn-default" type="submit" value="<?=$this->transEsc('Set')?>"/>-->
       <div class="date-fields">
           <? $extraInputAttribs = ($this->facet['type'] == 'date') ? 'maxlength="4" ' : ''; ?>
           <div class="date-from">
@@ -15,6 +14,7 @@
           <div class="date-to">
               <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" <?=$extraInputAttribs?>/>
           </div>
+          <input class="btn btn-default" type="submit" value="Принять"/>
       </div>
   </form>
 </div>

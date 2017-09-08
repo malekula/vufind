@@ -33,6 +33,7 @@
       $type_of_record = strtolower(stristr($this->driver->getUniqueID(), '_', true));
       $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
     ?>
+      <div class="record_media_split_line"></div>
     <? if (!empty($coreFields)): ?>
       <table class="table table-striped" summary="<?=$this->transEsc('Bibliographic Details')?>">
         <? foreach ($coreFields as $key => $current): ?>

@@ -549,6 +549,15 @@ h1 {
     line-height: 30px;
     text-transform: none;
 }
+.footer_social_wrapper {
+    margin-bottom: 30px;
+}
+.footer_social_wrapper .rounded_btn {
+    margin: 0 12px 0 0;
+}
+/*.footer_counter {
+    float: right;
+}*/
 .menu li {
     float: left;
     margin-right: 26px;
@@ -725,6 +734,7 @@ small.work_time {
     margin-top: -0.3px;
 }
 .footer_year {
+    display: block;
     color: #6b7274;
     font-size: 12px;
     float: right;
@@ -859,24 +869,19 @@ small.work_time {
 .logo_wrapper img {
     /*float: left;*/
     display: block;
-    width: 75px;
+    width: 60px;
     /*margin-right: 20px;*/
 }
 .logo_wrapper > span {
     display: block;
-    float: left;
     color: #242728;
-    font-size: 14px;
-    font-weight: 200;
-    letter-spacing: 0.7px;
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    line-height: 21px;
-    margin: 12px 0 0 74px;
+    line-height: 1.4;
+    margin-top: 24px;
 }
-.logo_wrapper span b {
-    font-weight: 600;
-}
-
 /*.logo_wrapper span span:nth-child(1) {
     letter-spacing: 1.5px;
 }
@@ -963,7 +968,7 @@ textarea:focus:-ms-input-placeholder {
 .quick_links_wrapper {
     float: left;
     margin-top: -4px;
-    margin-left: 60px;
+    margin-left: 190px;
 }
 /*.blue_quick_links {
     float: left;
@@ -2000,18 +2005,21 @@ span.plan_day_wrapper {
     background: #0000f3;
 }
 .rounded_btn.vk_btn {
-    background: #5e83a7 url(/images/svg/vk-icon.svg) no-repeat center;
-    background-size: 16px 16px;
+    background: #507299 url(/images/svg/vk-icon.svg) no-repeat center;
+    background-size: 16px;
 }
 .rounded_btn.fb_btn {
-    background: #52659c url(/images/svg/fb-icon.svg) no-repeat center;
+    background: #3b5998 url(/images/svg/fb-icon.svg) no-repeat center;
     background-size: 16px 16px;
 }
 .rounded_btn.insta_btn {
     background: url(/images/svg/insta-icon.svg) no-repeat center;
     background-size: cover;
 }
-
+.rounded_btn.yt_btn {
+    background: #ff0000 url(/images/svg/youtube-icon.svg) no-repeat center;
+    background-size: 16px;
+}
 .tagline {
     float: left;
     display: inline-block;
@@ -4128,7 +4136,7 @@ label.checkbox .icheckbox_minimal {
     font-weight: 200;
     line-height: 27px;
 }
-.event_description .inner_quote {
+.inner_quote {
     padding: 20px 0 20px 130px;
     font-family: 'Leto Sans', Arial, Helvetica;
     font-size: 24px;

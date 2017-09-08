@@ -17,6 +17,7 @@
   <? $exportFormats = $this->export()->getFormatsForRecord($this->driver); ?>
   <? if(count($exportFormats) > 0): ?>
     <li class="dropdown">
+        <a href="#" rel="nofollow">Нашли ошибку?</a>
       <a class="export-toggle dropdown-toggle" data-toggle="dropdown" href="<?=$this->recordLink()->getActionUrl($this->driver, 'Export')?>" rel="nofollow">Экспорт записи</a>
       <ul class="dropdown-menu" role="menu">
         <? foreach ($exportFormats as $exportFormat): ?>
