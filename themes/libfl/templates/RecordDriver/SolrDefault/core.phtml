@@ -29,7 +29,6 @@
     <?/* Display Main Details */?>
     <?
       $formatter = $this->recordDataFormatter();
-      //$coreFields = $formatter->getData($driver, $formatter->getDefaults('core'));
       $type_of_record = strtolower(stristr($this->driver->getUniqueID(), '_', true));
       $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
     ?>

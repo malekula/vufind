@@ -224,6 +224,7 @@
    <field name="Level" type="string" indexed="true" stored="true" multiValued="false" termVectors="true"/>
    <field name="Level_facet" type="textFacet" indexed="true" stored="false" multiValued="false"/>
   
+  
    
    
    <field name="period_ModeOfPublication" type="text" indexed="true" stored="true" multiValued="true"/>
@@ -233,7 +234,73 @@
    <field name="period_HyperLink" type="text" indexed="true" stored="true" multiValued="true"/>
 
    
-       
+   <field name="Title_another_chart" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Title_same_author" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Parallel_title" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Info_pertaining_title" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Responsibility_statement" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Part_number" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Part_title" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Language_title_alt" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Title_unified" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Title_unified_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Another_title" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Another_title_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Unified_Caption" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Unified_Caption_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Info_title_alt" type="text" indexed="true" stored="true" multiValued="true"/>
+   
+   <field name="Creation_role" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Author_another_chart" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Another_author_AF_all" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Creation_role_another_author" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Editor_AF_all" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Editor_role" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Editor" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Collective_author_all" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Organization_nature" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Printing" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Publication_info" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="EditionType" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Country" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="PlaceOfPublication_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+ 
+   <field name="PrintingHouse_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="PrintingHouse" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="GeoNamePlaceOfPublication_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="GeoNamePlaceOfPublication" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="IncorrectISBN" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="CanceledISSN" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="IncorrectISSN" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="IntermediateTranslateLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="SummaryLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="TableOfContentsLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="TitlePageLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="BasicTitleLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="AccompayingMaterialLanguage" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Volume" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Illustrations" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Dimensions" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="AccompayingMaterial" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="NumberInSeries" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="NumberInSubseries" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="CatalogerNote" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="DirectoryNote" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="AdditionalBibRecord" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Location" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="Location_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
+   <field name="Exemplar" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="HyperLink" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="OwnerPerson_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="OwnerPerson" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="OwnerOrganization_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="OwnerOrganization" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="Ownership" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="NoteOwner" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="OwnerExemplar" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="IllustrationMaterial" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="MethodOfAccess" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="MethodOfAccess_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
    
    
    
@@ -288,7 +355,8 @@
  <copyField source="PlaceOfPublication" dest="PlaceOfPublication_facet"/>
  <copyField source="fund" dest="fund_facet"/>
  <copyField source="Level" dest="Level_facet"/>
- 
+ <copyField source="Location" dest="Location_facet"/>
+ <copyField source="MethodOfAccess" dest="MethodOfAccess_facet"/>
  <!-- CopyFields for Alphabetic Browse -->
  <copyField source="topic" dest="topic_browse"/>
  <copyField source="author" dest="author_browse"/>

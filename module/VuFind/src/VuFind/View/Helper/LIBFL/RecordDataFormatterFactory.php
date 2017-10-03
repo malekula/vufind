@@ -26,7 +26,7 @@
  * @link     https://vufind.org/wiki/development:architecture:record_data_formatter
  * Wiki
  */
-namespace VuFind\View\Helper\Root;
+namespace VuFind\View\Helper\LIBFL;
 
 /**
  * Factory for record driver data formatting view helper
@@ -56,15 +56,15 @@ class RecordDataFormatterFactory
         );
         $helper->setDefaults('core', [$this, 'getDefaultCoreSpecs']);
         $helper->setDefaults('description', [$this, 'getDefaultDescriptionSpecs']);
-                //$helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
-		//$helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
-                //$helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
-                $helper->setDefaults('bjvvv', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('bjscc', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('bjfcc', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('redkostj', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('litres', [$this, 'getDefaultLitresSpecs']);
-                //$helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
+        $helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
+        $helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('bjvvv', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('bjscc', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('bjfcc', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('redkostj', [$this, 'getDefaultBjvvvSpecs']);
+        $helper->setDefaults('litres', [$this, 'getDefaultLitresSpecs']);
+        $helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
         return $helper;
     }
 
@@ -330,25 +330,25 @@ class RecordDataFormatterFactory
 		);
 		
 		// Язык
-		$spec->setLine('Language', 'getLanguages');	
+		//$spec->setLine('Language', 'getLanguages');	
                 // Издательство (publisher)
-                $spec->setLine('Publisher', 'getPublishers');
-                // Место издания (PlaceOfPublication)
-                $spec->setLine('place_of_publication', 'getPlacesOfPublication');
+                //$spec->setLine('Publisher', 'getPublishers');
                 // Год публикации (publishDate)
                 $spec->setLine('Published', 'getPublicationDates');
+                // Место издания (PlaceOfPublication)
+                $spec->setLine('place_of_publication', 'getPlacesOfPublication');
 		// Формат (format)
-		$spec->setLine('Format', 'getFormats');
+		//$spec->setLine('Format', 'getFormats');
                 // Объем (Pagination)
-                $spec->setLine('Pagination', 'getPaginations');
-                // Номер ISBN (isbn)
-                $spec->setLine('ISBN', 'getISBNs');
+                //$spec->setLine('Pagination', 'getPaginations');
                 // Тематика (genre)
                 $spec->setLine('Genres', 'getGenres');
+                // Номер ISBN (isbn)
+                $spec->setLine('ISBN', 'getISBNs');
                 // Описание (description)
-                $spec->setLine('Description', 'getDescriptions');
+                //$spec->setLine('Description', 'getDescriptions');
                 // Вид издания (level)
-                $spec->setLine('Level', 'getLevels');
+                //$spec->setLine('Level', 'getLevels');
                 
 		return $spec->getArray();
     }

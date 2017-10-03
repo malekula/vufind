@@ -551,7 +551,7 @@ class SolrDefault extends AbstractBase
      */
     public function getFormats()
     {
-        return isset($this->fields['format']) ? $this->fields['format'] : ['n/a'];
+        return isset($this->fields['format']) ? $this->fields['format'] : [];
     }
 
     /**
@@ -702,7 +702,7 @@ class SolrDefault extends AbstractBase
         // If ISBN is in the index, it should automatically be an array... but if
         // it's not set at all, we should normalize the value to an empty array.
         return isset($this->fields['isbn']) && is_array($this->fields['isbn']) ?
-            $this->fields['isbn'] : ['n/a'];
+            $this->fields['isbn'] : [];
     }
 
     /**
@@ -726,7 +726,7 @@ class SolrDefault extends AbstractBase
     public function getLanguages()
     {
         return isset($this->fields['language']) ?
-            $this->fields['language'] : ['n/a'];
+            $this->fields['language'] : [];
     }
 
     /**
@@ -1036,7 +1036,7 @@ class SolrDefault extends AbstractBase
     {
         // Not currently stored in the Solr index
         //return [];
-        return isset($this->fields['PlaceOfPublication']) ? $this->fields['PlaceOfPublication'] : ['n/a'];
+        return isset($this->fields['PlaceOfPublication']) ? $this->fields['PlaceOfPublication'] : [];
     }
 
     /**
@@ -1114,7 +1114,7 @@ class SolrDefault extends AbstractBase
     public function getPublicationDates()
     {
         return isset($this->fields['publishDate']) ?
-            $this->fields['publishDate'] : ['n/a'];
+            $this->fields['publishDate'] : [];
     }
 
     /**
@@ -1175,7 +1175,7 @@ class SolrDefault extends AbstractBase
     public function getPublishers()
     {
         return isset($this->fields['publisher']) ?
-            $this->fields['publisher'] : ['n/a'];
+            $this->fields['publisher'] : [];
     }
 
     /**
@@ -1964,49 +1964,67 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['long_lat_label'])
             ? $this->fields['long_lat_label'] : [];
     }
+    
+    /**
+     * Get publication information for search result-list.
+     *
+     * @return array
+     */
+    public function getSummPublished()
+    {
+        //return isset($this->fields['long_lat_label']) ? $this->fields['long_lat_label'] : [];
+        $summPublished = array();
+        $summPublished['place'] = (!empty($this->getPlacesOfPublication()[0])) ? $this->getPlacesOfPublication()[0] : '';
+        $summPublished['year'] = (!empty($this->getPublicationDates()[0])) ? $this->getPublicationDates()[0] : '';
+        if (!empty($summPublished['place']) || !empty($summPublished['year'])) {
+            $place = (!empty($summPublished['place']) && !empty($summPublished['year'])) ? $summPublished['place'] . ', ': $summPublished['place'];
+            $year = (!empty($summPublished['year'])) ? $summPublished['year'] . ' г.' : '';
+        }
+        return [$place.$year];
+    }
 
     public function getLevels()
     {
-        return isset($this->fields['Level']) ? $this->fields['Level'] : ['n/a'];
+        return isset($this->fields['Level']) ? $this->fields['Level'] : [];
     }
     
     public function getGenres()
     {
-        return isset($this->fields['genre']) ? $this->fields['genre'] : ['n/a'];
+        return isset($this->fields['genre']) ? $this->fields['genre'] : [];
     }
     
     public function getPaginations()
     {
-        return isset($this->fields['Pagination']) ? $this->fields['Pagination'] : ['n/a'];
+        return isset($this->fields['Pagination']) ? $this->fields['Pagination'] : [];
     }
     
     public function getDescriptions()
     {
-        return isset($this->fields['description']) ? $this->fields['description'] : ['n/a'];
+        return isset($this->fields['description']) ? $this->fields['description'] : [];
     }
     
     public function period_getModeOfPublications()
     {
-        return isset($this->fields['period_ModeOfPublication']) ? $this->fields['period_ModeOfPublication'] : ['n/a'];
+        return isset($this->fields['period_ModeOfPublication']) ? $this->fields['period_ModeOfPublication'] : [];
     }
     
     public function period_getLanguages()
     {
-        return isset($this->fields['period_Language']) ? $this->fields['period_Language'] : ['n/a'];
+        return isset($this->fields['period_Language']) ? $this->fields['period_Language'] : [];
     }
     
     public function period_getPeriodicity()
     {
-        return isset($this->fields['period_Periodicity']) ? $this->fields['period_Periodicity'] : ['n/a'];
+        return isset($this->fields['period_Periodicity']) ? $this->fields['period_Periodicity'] : [];
     }
     
     public function period_getYears()
     {
-        return isset($this->fields['period_Years']) ? $this->fields['period_Years'] : ['n/a'];
+        return isset($this->fields['period_Years']) ? $this->fields['period_Years'] : [];
     }
     
     public function period_getHyperLinks()
     {
-        return isset($this->fields['period_HyperLink']) ? $this->fields['period_HyperLink'] : ['n/a'];
+        return isset($this->fields['period_HyperLink']) ? $this->fields['period_HyperLink'] : [];
     }
 }

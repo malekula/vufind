@@ -13691,7 +13691,7 @@ ul.random.image li img {
 .navbar-right, .navbar-header,
 /*.search.container.navbar,*/ .searchtools, .breadcrumb,
 #searchForm_type, .searchForm button, .searchForm a {
-    display: none !important;
+    /*display: none !important;*/
 }
 .main {
     background-color: #ecf1f5;

@@ -19,7 +19,6 @@
     <div class="result-body">
         <div class="result-formats">
             <?=$this->record($this->driver)->getFormatList() ?>
-
             <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
                 <span class="status ajax-availability hidden">
             <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
@@ -38,7 +37,7 @@
         <? else: ?>
           <? $summAuthors = $this->driver->getPrimaryAuthorsWithHighlighting(); if (!empty($summAuthors)): ?>
             <div class="about_info_block">
-                <span class="about_label">Автор</span>
+                <span class="about_label"><?=$this->transEsc('Author');?></span>
                 <? $authorCount = count($summAuthors); foreach ($summAuthors as $i => $summAuthor): ?>
                   <a href="<?=$this->record($this->driver)->getLink('author', $this->highlight($summAuthor, null, true, false))?>"><?=$this->highlight($summAuthor)?></a><?=$i + 1 < $authorCount ? ',' : ''?>
                 <? endforeach; ?>
@@ -48,7 +47,7 @@
           <? $journalTitle = $this->driver->getContainerTitle(); $summDate = $this->driver->getPublicationDates(); ?>
           <? if (!empty($journalTitle)): ?>
             <div class="about_info_block">
-                <span class="about_label">Место издания</span>
+                <span class="about_label"><?=$this->transEsc('Published in');?></span>
                 <? $containerSource = $this->driver->getSourceIdentifier(); ?>
                 <? $containerID = $this->driver->getContainerRecordID(); ?>
                 <? /* TODO: handle highlighting more elegantly here: */?>
@@ -57,8 +56,9 @@
             </div>
           <? elseif (!empty($summDate)): ?>
             <div class="about_info_block">
-              <span class="about_label">Опубликовано</span>
-                <?=$this->escapeHtml($summDate[0])?>
+              <span class="about_label"><?=$this->transEsc('summPublished');?></span>
+                <?//=$this->escapeHtml($summDate[0])?>
+                <?=$this->driver->getSummPublished()[0];?>
             </div>
           <? endif; ?>
           <? $summInCollection = $this->driver->getContainingCollections(); if (!empty($summInCollection)): ?>
