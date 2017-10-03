@@ -1,0 +1,25 @@
+<? if ($this->pageCount): ?>
+  <ul class="pagination">
+    <? if (isset($this->previous)): ?>
+      <li><a class="page-prev" href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->previous)?>"></a></li>
+    <? endif; ?>
+
+    <? if (count($this->pagesInRange) > 1): ?>
+      <? foreach ($this->pagesInRange as $page): ?>
+        <? if ($page != $this->current): ?>
+          <li><a href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($page)?>"><?=$page?></a></li>
+        <? else: ?>
+          <li class="active"><span><?=$page?></span></li>
+        <? endif; ?>
+      <? endforeach; ?>
+    <? endif; ?>
+
+    <? if (isset($this->next)): ?>
+      <? if (!isset($this->options['disableLast']) || !$this->options['disableLast']): ?>
+        <!--<li><span class="page_dots">...</span></li>
+        <li><a href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->pageCount)?>"><?=$this->pageCount?></a></li>-->
+      <? endif; ?>
+      <li><a class="page-next" href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->next)?>"></a></li>
+    <? endif; ?>
+  </ul>
+<? endif; ?>
