@@ -17,6 +17,7 @@ return array(
         'lib/autocomplete.js',
         'common.js',
         'lightbox.js',
+        'browser.js',
     ),
     'less' => array(
         'active' => false,
@@ -29,6 +30,7 @@ return array(
             'layoutclass' => 'VuFind\View\Helper\LIBFL\Factory::getLayoutClass',
             'recaptcha' => 'VuFind\View\Helper\LIBFL\Factory::getRecaptcha',
             'recorddataformatter' => 'VuFind\View\Helper\LIBFL\RecordDataFormatterFactory',
+            'reporterror' => 'VuFind\View\Helper\LIBFL\Factory::getReporterror',
         ),
         'invokables' => array(
             'highlight' => 'VuFind\View\Helper\LIBFL\Highlight',

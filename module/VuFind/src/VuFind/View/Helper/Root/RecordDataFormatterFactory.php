@@ -56,15 +56,6 @@ class RecordDataFormatterFactory
         );
         $helper->setDefaults('core', [$this, 'getDefaultCoreSpecs']);
         $helper->setDefaults('description', [$this, 'getDefaultDescriptionSpecs']);
-                //$helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
-		//$helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
-                //$helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
-                $helper->setDefaults('bjvvv', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('bjscc', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('bjfcc', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('redkostj', [$this, 'getDefaultBjvvvSpecs']);
-                //$helper->setDefaults('litres', [$this, 'getDefaultLitresSpecs']);
-                //$helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
         return $helper;
     }
 
@@ -305,102 +296,5 @@ class RecordDataFormatterFactory
         $spec->setLine('Publication_Place', 'getHierarchicalPlaceNames');
         $spec->setTemplateLine('Author Notes', true, 'data-authorNotes.phtml');
         return $spec->getArray();
-    }
-
-    public function getDefaultBjvvvSpecs()
-    {
-		$spec = new RecordDataFormatter\SpecBuilder();
-		
-		// Главный автор
-		$spec->setTemplateLine(
-			'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml',
-			[
-				'useCache' => true,
-				'labelFunction' => function($data) {
-					return count($data['primary']) > 1 ? 'Main Authors' : 'Main Author';
-				},
-				'context' => [
-					'type' => 'primary',
-					'schemaLabel' => 'author',
-					'requireDataFields' => [
-						['name' => 'role', 'prefix' => 'CreatorRoles::']
-					]
-				]
-			]
-		);
-		
-		// Язык
-		$spec->setLine('Language', 'getLanguages');	
-                // Издательство (publisher)
-                $spec->setLine('Publisher', 'getPublishers');
-                // Место издания (PlaceOfPublication)
-                $spec->setLine('place_of_publication', 'getPlacesOfPublication');
-                // Год публикации (publishDate)
-                $spec->setLine('Published', 'getPublicationDates');
-		// Формат (format)
-		$spec->setLine('Format', 'getFormats');
-                // Объем (Pagination)
-                $spec->setLine('Pagination', 'getPaginations');
-                // Номер ISBN (isbn)
-                $spec->setLine('ISBN', 'getISBNs');
-                // Тематика (genre)
-                $spec->setLine('Genres', 'getGenres');
-                // Описание (description)
-                $spec->setLine('Description', 'getDescriptions');
-                // Вид издания (level)
-                $spec->setLine('Level', 'getLevels');
-                
-		return $spec->getArray();
-    }
-    
-    public function getDefaultLitresSpecs()
-    {
-		$spec = new RecordDataFormatter\SpecBuilder();
-		
-		// Главный автор
-		$spec->setTemplateLine(
-			'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml',
-			[
-				'useCache' => true,
-				'labelFunction' => function($data) {
-					return count($data['primary']) > 1 ? 'Main Authors' : 'Main Author';
-				},
-				'context' => [
-					'type' => 'primary',
-					'schemaLabel' => 'author',
-					'requireDataFields' => [
-						['name' => 'role', 'prefix' => 'CreatorRoles::']
-					]
-				]
-			]
-		);
-                // Издательство (publisher)
-                $spec->setLine('Publisher', 'getPublishers'); 
-                // Год публикации (publishDate)
-                $spec->setLine('Published', 'getPublicationDates');
-                // Номер ISBN (isbn)
-                $spec->setLine('ISBN', 'getISBNs');
-                // Тематика (genre)
-                $spec->setLine('Genres', 'getGenres');
-                
-		return $spec->getArray();
-    }
-    
-    public function getDefaultPeriodSpecs()
-    {
-		$spec = new RecordDataFormatter\SpecBuilder();
-                
-                // Вид издания (period_ModeOfPublication)
-                $spec->setLine('period_mode_of_publication', 'period_getModeOfPublications'); 
-                // Язык (period_Language)
-                $spec->setLine('period_language', 'period_getLanguages');
-                // Периодичность (period_Periodicity)
-                $spec->setLine('period_periodicity', 'period_getPeriodicity');
-                // Доступные года (period_Years)
-                $spec->setLine('period_years', 'period_getYears');
-                // Гиперссылки (period_HyperLink)
-                $spec->setLine('period_hyperlink', 'period_getHyperLinks');
-                
-		return $spec->getArray();
     }
 }

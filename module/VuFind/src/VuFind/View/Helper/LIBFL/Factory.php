@@ -21,7 +21,7 @@
  *
  * @category VuFind
  * @package  View_Helpers
- * @author   Demian Katz <demian.katz@villanova.edu>
+ * @author   Maksim Kuleba <maksim.kuleba@gmail.com>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     https://vufind.org/wiki/development Wiki
  */
@@ -33,7 +33,7 @@ use Zend\ServiceManager\ServiceManager;
  *
  * @category VuFind
  * @package  View_Helpers
- * @author   Demian Katz <demian.katz@villanova.edu>
+ * @author   Maksim Kuleba <maksim.kuleba@gmail.com>
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     https://vufind.org/wiki/development Wiki
  *
@@ -94,5 +94,19 @@ class Factory
             $sm->getServiceLocator()->get('VuFind\Recaptcha'),
             $sm->getServiceLocator()->get('VuFind\Config')->get('config')
         );
+    }
+    
+    /**
+     * Construct the Reporterror helper.
+     *
+     * @param ServiceManager $sm Service manager.
+     *
+     * @return Reporterror
+     */
+    public static function getReporterror(ServiceManager $sm)
+    {
+        $config = $sm->getServiceLocator()->get('VuFind\Config')->get('config');
+        $enabled = isset($config->Reporterror->tab_enabled) ? $config->Reporterror->tab_enabled : false;
+        return new Reporterror($enabled);
     }
 }
