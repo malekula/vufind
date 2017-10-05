@@ -1,0 +1,30 @@
+<?php
+    // Set page title.
+    $this->headTitle($this->translate('Access') . ': ' . $this->driver->getBreadcrumb());
+
+    $formatter = $this->recordDataFormatter();
+    $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
+    
+    if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
+        $exemplars = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']), TRUE);
+    }
+    $getAccessMethod = $this->driver->getMethodOfAccess()[0];
+    $accessMethod = (!empty($getAccessMethod)) ? '('.$getAccessMethod.')' : '';
+    if (!empty($exemplars)) {
+        foreach ($exemplars as $num=>$exemplar):
+            echo '<h3 style="font-weight:bold;">Экземпляр ' . $num .'</h3>';
+            echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+            foreach ($exemplar as $param=>$value):
+                if ($param == 'exemplar_id') {
+                    $accessStatus = $this->driver->getAccessStatus($value);
+                } else {
+                    echo "<tr><th>".$this->transEsc($param).": </th><td>".$value."</td></tr>";
+                }
+            endforeach;
+            echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>К выдаче: ".$accessStatus." ".$accessMethod."</td></tr>";
+            echo '</table>';
+        endforeach;
+    } else {
+        echo "<tr><td>" . $this->transEsc('exemplar_no_exemplars') . "</td></tr>";
+    }
+?>

@@ -1993,6 +1993,11 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['genre']) ? $this->fields['genre'] : [];
     }
     
+    public function getMethodOfAccess()
+    {
+        return isset($this->fields['MethodOfAccess']) ? $this->fields['MethodOfAccess'] : [];
+    }
+    
     public function getPaginations()
     {
         return isset($this->fields['Pagination']) ? $this->fields['Pagination'] : [];
@@ -2026,5 +2031,21 @@ class SolrDefault extends AbstractBase
     public function period_getHyperLinks()
     {
         return isset($this->fields['period_HyperLink']) ? $this->fields['period_HyperLink'] : [];
+    }
+    
+    public function getExemplars()
+    {
+        return isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
+    }
+    
+    public function getAccessStatus($exemplar_id)
+    {
+        $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+        try {
+            $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>"BJVVV"));
+        } catch (Exception $ex) {
+            var_dump($ex->getMessage());
+        }
+        return $result->GetBookStatusResult;
     }
 }

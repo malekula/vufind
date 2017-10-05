@@ -716,8 +716,8 @@ $config = [
             ],
             'VuFind\RecordDriver\SolrDefault' => [
                 'tabs' => [
-                    'Holdings' => 'HoldingsILS',
-                    'Description' => 'Description',
+                    //'Holdings' => 'HoldingsILS',
+                    //'Description' => 'Description',
                     //'TOC' => 'TOC',
                     //'UserComments' => 'UserComments',
                     //'Reviews' => 'Reviews',
@@ -727,6 +727,7 @@ $config = [
                     //'Map' => 'Map',
                     //'Similar' => 'SimilarItemsCarousel',
                     //'Details' => 'StaffViewArray',
+                    'Exemplars' => 'Exemplar',
                 ],
                 'defaultTab' => null,
                 // 'backgroundLoadedTabs' => ['UserComments', 'Details']

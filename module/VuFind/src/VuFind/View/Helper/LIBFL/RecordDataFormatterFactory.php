@@ -56,6 +56,8 @@ class RecordDataFormatterFactory
         );
         $helper->setDefaults('core', [$this, 'getDefaultCoreSpecs']);
         $helper->setDefaults('description', [$this, 'getDefaultDescriptionSpecs']);
+        $helper->setDefaults('libfl_description', [$this, 'getLibflDescriptionSpecs']);
+        $helper->setDefaults('libfl_exemplar', [$this, 'getLibflExemplarSpecs']);
         $helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
         $helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
@@ -303,6 +305,35 @@ class RecordDataFormatterFactory
         $spec->setLine('Access', 'getAccessRestrictions');
         $spec->setLine('Finding Aid', 'getFindingAids');
         $spec->setLine('Publication_Place', 'getHierarchicalPlaceNames');
+        $spec->setTemplateLine('Author Notes', true, 'data-authorNotes.phtml');
+        return $spec->getArray();
+    }
+
+    public function getLibflExemplarSpecs()
+    {
+        $spec = new RecordDataFormatter\SpecBuilder();
+        $spec->setLine('Exemplar', 'getExemplars');
+        return $spec->getArray();
+    }
+    
+    public function getLibflDescriptionSpecs() {
+        $spec = new RecordDataFormatter\SpecBuilder();
+        $spec->setLine('Test', 'getTest');
+        $spec->setTemplateLine(
+            'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml', [
+                'useCache' => FALSE,
+                'labelFunction' => function($data) {
+                    return count($data['primary']) > 1 ? 'Main Authors' : 'Main Author';
+                },
+                'context' => [
+                    'type' => 'primary',
+                    'schemaLabel' => 'author',
+                    'requireDataFields' => [
+                        ['name' => 'role', 'prefix' => 'CreatorRoles::']
+                    ]
+                ]
+            ]
+        );
         $spec->setTemplateLine('Author Notes', true, 'data-authorNotes.phtml');
         return $spec->getArray();
     }
