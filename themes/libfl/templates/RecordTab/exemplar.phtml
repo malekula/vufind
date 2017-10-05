@@ -6,25 +6,83 @@
     $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
     
     if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
-        $exemplars = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']), TRUE);
+        $exemplars = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
     }
-    $getAccessMethod = $this->driver->getMethodOfAccess()[0];
-    $accessMethod = (!empty($getAccessMethod)) ? '('.$getAccessMethod.')' : '';
+    $getAccessMethod = (string) $this->driver->getMethodOfAccess()[0];
+    $accessMethod = (!empty($getAccessMethod)) ? strtolower($getAccessMethod) : '';
     if (!empty($exemplars)) {
         foreach ($exemplars as $num=>$exemplar):
             echo '<h3 style="font-weight:bold;">Экземпляр ' . $num .'</h3>';
             echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
-            foreach ($exemplar as $param=>$value):
-                if ($param == 'exemplar_id') {
-                    $accessStatus = $this->driver->getAccessStatus($value);
-                } else {
-                    echo "<tr><th>".$this->transEsc($param).": </th><td>".$value."</td></tr>";
-                }
-            endforeach;
-            echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>К выдаче: ".$accessStatus." ".$accessMethod."</td></tr>";
+            if (!empty($exemplar->exemplar_carrier))
+                echo "<tr><th>".$this->transEsc('exemplar_carrier').": </th><td>".$exemplar->exemplar_carrier."</td></tr>";
+            if (!empty($accessMethod))
+                echo "<tr><th>".$this->transEsc('MethodOfAccess').": </th><td>".$accessMethod."</td></tr>";
+            if (!empty($exemplar->exemplar_access))
+                echo "<tr><th>".$this->transEsc('exemplar_access').": </th><td>".$exemplar->exemplar_access."</td></tr>";
+            if (!empty($exemplar->exemplar_hyperlink))
+                echo "<tr><th>".$this->transEsc('exemplar_hyperlink').": </th><td>".$exemplar->exemplar_hyperlink."</td></tr>";
+            if (!empty($exemplar->exemplar_class_edition))
+                echo "<tr><th>".$this->transEsc('exemplar_class_edition').": </th><td>".$exemplar->exemplar_class_edition."</td></tr>";
+            if (!empty($exemplar->exemplar_location))
+                echo "<tr><th>".$this->transEsc('exemplar_location').": </th><td>".$exemplar->exemplar_location."</td></tr>";
+            if (!empty($exemplar->exemplar_rack_location))
+                echo "<tr><th>".$this->transEsc('exemplar_rack_location').": </th><td>".$exemplar->exemplar_rack_location."</td></tr>";
+            if (!empty($exemplar->exemplar_placing_cipher))
+                echo "<tr><th>".$this->transEsc('exemplar_placing_cipher').": </th><td>".$exemplar->exemplar_placing_cipher."</td></tr>";
+            if (!empty($exemplar->exemplar_inventory_number))
+                echo (!empty($exemplar->exemplar_inv_note))
+                    ? "<tr><th>".$this->transEsc('exemplar_inventory_number').": </th><td>".$exemplar->exemplar_inventory_number." (".$this->transEsc('exemplar_inv_note').": ".$exemplar->exemplar_inv_note.")</td></tr>"
+                    : "<tr><th>".$this->transEsc('exemplar_inventory_number').": </th><td>".$exemplar->exemplar_inventory_number."</td></tr>";
+            if (!empty($exemplar->exemplar_barcode))
+                echo "<tr><th>".$this->transEsc('exemplar_barcode').": </th><td>".$exemplar->exemplar_barcode."</td></tr>";
+            if (!empty($exemplar->exemplar_collection))
+                echo "<tr><th>".$this->transEsc('exemplar_collection').": </th><td>".$exemplar->exemplar_collection."</td></tr>";
+            if (!empty($exemplar->exemplar_interlaced_to))
+                echo "<tr><th>".$this->transEsc('exemplar_interlaced_to').": </th><td>".$exemplar->exemplar_interlaced_to."</td></tr>";
+            if (!empty($exemplar->exemplar_trophy))
+                echo "<tr><th>".$this->transEsc('exemplar_trophy').": </th><td>".$exemplar->exemplar_trophy."</td></tr>";
+            if (!empty($exemplar->exemplar_binding_kind))
+                echo "<tr><th>".$this->transEsc('exemplar_binding_kind').": </th><td>".$exemplar->exemplar_binding_kind."</td></tr>";
+            if (!empty($exemplar->exemplar_binding_age))
+                echo "<tr><th>".$this->transEsc('exemplar_binding_age').": </th><td>".$exemplar->exemplar_binding_age."</td></tr>";
+            if (!empty($exemplar->exemplar_binding_type))
+                echo "<tr><th>".$this->transEsc('exemplar_binding_type').": </th><td>".$exemplar->exemplar_binding_type."</td></tr>";
+            if (!empty($exemplar->exemplar_cover_material))
+                echo "<tr><th>".$this->transEsc('exemplar_cover_material').": </th><td>".$exemplar->exemplar_cover_material."</td></tr>";
+            if (!empty($exemplar->exemplar_material_on_cover))
+                echo "<tr><th>".$this->transEsc('exemplar_material_on_cover').": </th><td>".$exemplar->exemplar_material_on_cover."</td></tr>";
+            if (!empty($exemplar->exemplar_spine_material))
+                echo "<tr><th>".$this->transEsc('exemplar_spine_material').": </th><td>".$exemplar->exemplar_spine_material."</td></tr>";
+            if (!empty($exemplar->exemplar_bandages))
+                echo "<tr><th>".$this->transEsc('exemplar_bandages').": </th><td>".$exemplar->exemplar_bandages."</td></tr>";
+            if (!empty($exemplar->exemplar_stamping_on_cover))
+                echo "<tr><th>".$this->transEsc('exemplar_stamping_on_cover').": </th><td>".$exemplar->exemplar_stamping_on_cover."</td></tr>";
+            if (!empty($exemplar->exemplar_embossing_on_spine))
+                echo "<tr><th>".$this->transEsc('exemplar_embossing_on_spine').": </th><td>".$exemplar->exemplar_embossing_on_spine."</td></tr>";
+            if (!empty($exemplar->exemplar_fittings))
+                echo "<tr><th>".$this->transEsc('exemplar_fittings').": </th><td>".$exemplar->exemplar_fittings."</td></tr>";
+            if (!empty($exemplar->exemplar_bugs))
+                echo "<tr><th>".$this->transEsc('exemplar_bugs').": </th><td>".$exemplar->exemplar_bugs."</td></tr>";
+            if (!empty($exemplar->exemplar_forth))
+                echo "<tr><th>".$this->transEsc('exemplar_forth').": </th><td>".$exemplar->exemplar_forth."</td></tr>";
+            if (!empty($exemplar->exemplar_cutoff))
+                echo "<tr><th>".$this->transEsc('exemplar_cutoff').": </th><td>".$exemplar->exemplar_cutoff."</td></tr>";
+            if (!empty($exemplar->exemplar_condition))
+                echo "<tr><th>".$this->transEsc('exemplar_condition').": </th><td>".$exemplar->exemplar_condition."</td></tr>";
+            if (!empty($exemplar->exemplar_case))
+                echo "<tr><th>".$this->transEsc('exemplar_case').": </th><td>".$exemplar->exemplar_case."</td></tr>";
+            if (!empty($exemplar->exemplar_embossing_on_edge))
+                echo "<tr><th>".$this->transEsc('exemplar_embossing_on_edge').": </th><td>".$exemplar->exemplar_embossing_on_edge."</td></tr>";
+            if (!empty($exemplar->exemplar_binding_note))
+                echo "<tr><th>".$this->transEsc('exemplar_binding_note').": </th><td>".$exemplar->exemplar_binding_note."</td></tr>";
+            if (!empty($exemplar->exemplar_old_original))
+                echo "<tr><th>".$this->transEsc('exemplar_old_original').": </th><td>".$exemplar->exemplar_old_original."</td></tr>";
+            $accessStatus = ($exemplar->exemplar_id) ? $this->driver->getAccessStatus($exemplar->exemplar_id) : 'недоступен';
+            echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>Статус: ".$accessStatus."</td></tr>";
             echo '</table>';
         endforeach;
     } else {
-        echo "<tr><td>" . $this->transEsc('exemplar_no_exemplars') . "</td></tr>";
+        echo "<tr><td>" . $this->transEsc('no_exemplars') . "</td></tr>";
     }
 ?>
