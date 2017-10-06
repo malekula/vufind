@@ -2035,7 +2035,8 @@ class SolrDefault extends AbstractBase
     
     public function getExemplars()
     {
-        return isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
+        $fields = explode(",", $this->mainConfig->RecordTabs->exemplar_fields);
+        return isset($this->fields['Exemplar']) ? [json_encode(array($fields, $this->fields['Exemplar']), JSON_UNESCAPED_UNICODE)] : [];
     }
     
     public function getAccessStatus($exemplar_id)
