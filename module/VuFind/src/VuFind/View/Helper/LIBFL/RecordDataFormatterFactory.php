@@ -359,8 +359,8 @@ class RecordDataFormatterFactory
                 $spec->setLine('genre', 'getGenres');
                 $spec->setLine('topic', 'getTopic');
                 $spec->setLine('fund', 'getFund');
-                $spec->setLine('format', 'getFormat');
-                $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
+                $spec->setTemplateLine('format', 'getFormat', 'format-record.phtml');
+                $spec->setTemplateLine('MethodOfAccess', 'getMethodOfAccess', 'access_method-record.phtml');
 		return $spec->getArray();
     }
     

@@ -1,0 +1,5 @@
+<?php if ($this->driver->getRecordStatus()) :?>
+<span class="status" style="color:green;"><?=$this->transEsc('record-available') ?></span>&nbsp;<span class="access-method" style="text-transform: lowercase;"><?=$this->driver->getMethodOfAccess()[0]; ?></span>
+<?php else: ?>
+<span class="status" style="color:#ff0000;"><?=$this->transEsc('record-not-available') ?></span>
+<?php endif; ?>

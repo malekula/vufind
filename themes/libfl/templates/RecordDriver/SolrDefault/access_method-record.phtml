@@ -1,0 +1,7 @@
+<span>
+    <?php
+        foreach (array_unique($data) as $accessMethod):
+            echo $this->transEsc($accessMethod) . '<br />';
+        endforeach;
+    ?>
+</span>
