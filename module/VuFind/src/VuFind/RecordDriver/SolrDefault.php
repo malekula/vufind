@@ -2048,4 +2048,18 @@ class SolrDefault extends AbstractBase
         }
         return $result->GetBookStatusResult;
     }
+    
+    public function getAllFields()
+    {
+        $fields = explode(",", $this->mainConfig->RecordTabs->description_fields);
+        $description = array();
+        foreach ($fields as $field) {
+            if (isset($this->fields[$field]) && is_array($this->fields[$field])) {
+                $description[$field] = (is_array($this->fields[$field])) ? $this->fields[$field] : [$this->fields[$field]] ;
+            } else {
+                $description[$field] = [];
+            }
+        }      
+        return json_encode($description, JSON_UNESCAPED_UNICODE);
+    }
 }

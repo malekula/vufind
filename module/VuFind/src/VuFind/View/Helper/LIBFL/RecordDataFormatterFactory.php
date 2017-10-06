@@ -316,25 +316,10 @@ class RecordDataFormatterFactory
         return $spec->getArray();
     }
     
-    public function getLibflDescriptionSpecs() {
+    public function getLibflDescriptionSpecs()
+    {
         $spec = new RecordDataFormatter\SpecBuilder();
-        $spec->setLine('Test', 'getTest');
-        $spec->setTemplateLine(
-            'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml', [
-                'useCache' => FALSE,
-                'labelFunction' => function($data) {
-                    return count($data['primary']) > 1 ? 'Main Authors' : 'Main Author';
-                },
-                'context' => [
-                    'type' => 'primary',
-                    'schemaLabel' => 'author',
-                    'requireDataFields' => [
-                        ['name' => 'role', 'prefix' => 'CreatorRoles::']
-                    ]
-                ]
-            ]
-        );
-        $spec->setTemplateLine('Author Notes', true, 'data-authorNotes.phtml');
+        $spec->setLine('Fields', 'getAllFields');
         return $spec->getArray();
     }
 
