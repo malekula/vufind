@@ -1,1 +1,10 @@
-<span class="access-method" style="text-transform: lowercase;"><?=$this->driver->getMethodOfAccess()[0]; ?></span>
+<?php
+    $cntMethods = count(array_unique($this->driver->getMethodOfAccess()));
+    $cntPrint = 0;
+    foreach (array_unique($this->driver->getMethodOfAccess()) as $method): 
+        $cntPrint++;
+        echo ($cntMethods == $cntPrint) 
+            ? '<span style="text-transform: lowercase;">'.$this->transEsc($method) .'</span>'
+            : '<span style="text-transform: lowercase;">'.$this->transEsc($method) .',&nbsp;</span>';
+    endforeach;
+?>
