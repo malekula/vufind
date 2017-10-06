@@ -35,6 +35,7 @@ return array(
         'invokables' => array(
             'highlight' => 'VuFind\View\Helper\LIBFL\Highlight',
             'search' => 'VuFind\View\Helper\LIBFL\Search',
+            'record' => 'VuFind\View\Helper\LIBFL\Record',
         )
     )
 );

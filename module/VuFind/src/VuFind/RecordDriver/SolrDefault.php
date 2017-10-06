@@ -2039,6 +2039,19 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['Exemplar']) ? [json_encode(array($fields, $this->fields['Exemplar']), JSON_UNESCAPED_UNICODE)] : [];
     }
     
+    public function getRecordStatus()
+    {
+        $getExemplars = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
+        $exemplars = json_decode(htmlspecialchars_decode($getExemplars[0]), TRUE);
+        $cntNA = 0;
+        foreach ($exemplars as $exemplar) {
+            $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id']) : '';
+            if (empty($checkStatus))
+                $cntNA++;
+        }
+        return (count($exemplars) == $cntNA) ? FALSE : TRUE; 
+    }
+    
     public function getAccessStatus($exemplar_id)
     {
         $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
