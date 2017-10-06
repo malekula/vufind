@@ -326,8 +326,8 @@ class RecordDataFormatterFactory
     public function getDefaultBjvvvSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-		
-		// Главный автор
+		$spec->setLine('title_short', 'getTitleShort');
+		/*// Главный автор
 		$spec->setTemplateLine(
 			'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml',
 			[
@@ -343,69 +343,72 @@ class RecordDataFormatterFactory
 					]
 				]
 			]
-		);
-		
-		// Язык
-		//$spec->setLine('Language', 'getLanguages');	
-                // Издательство (publisher)
-                //$spec->setLine('Publisher', 'getPublishers');
-                // Год публикации (publishDate)
-                $spec->setLine('Published', 'getPublicationDates');
-                // Место издания (PlaceOfPublication)
-                $spec->setLine('place_of_publication', 'getPlacesOfPublication');
-		// Формат (format)
-		//$spec->setLine('Format', 'getFormats');
-                // Объем (Pagination)
-                //$spec->setLine('Pagination', 'getPaginations');
-                // Тематика (genre)
-                $spec->setLine('Genres', 'getGenres');
-                // Номер ISBN (isbn)
-                $spec->setLine('ISBN', 'getISBNs');
-                // Описание (description)
-                //$spec->setLine('Description', 'getDescriptions');
-                // Вид издания (level)
-                //$spec->setLine('Level', 'getLevels');
-                
+		);*/
+                $spec->setLine('author', 'getAuthor');
+                $spec->setLine('author2', 'getAuthor2');
+                $spec->setLine('author_corporate', 'getAuthorCorporate');
+                $spec->setLine('level', 'getLevel');
+                $spec->setLine('title_another_chart', 'getTitleAnotherChart');
+                $spec->setLine('title_alt', 'getTitleAlt');
+                $spec->setLine('country', 'getCountry');
+                $spec->setLine('placeofpublication', 'getPlacesOfPublication');
+                $spec->setLine('publisher', 'getPublishers');
+                $spec->setLine('publishdate', 'getPublicationDates');
+                $spec->setLine('language', 'getLanguages');
+                $spec->setLine('Volume', 'getVolume');
+                $spec->setLine('genre', 'getGenres');
+                $spec->setLine('topic', 'getTopic');
+                $spec->setLine('fund', 'getFund');
+                $spec->setLine('format', 'getFormat');
+                $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
 		return $spec->getArray();
     }
     
     public function getDefaultLitresSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-		
-		// Главный автор
-		$spec->setTemplateLine(
-			'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml',
-			[
-				'useCache' => true,
-				'labelFunction' => function($data) {
-					return count($data['primary']) > 1 ? 'Main Authors' : 'Main Author';
-				},
-				'context' => [
-					'type' => 'primary',
-					'schemaLabel' => 'author',
-					'requireDataFields' => [
-						['name' => 'role', 'prefix' => 'CreatorRoles::']
-					]
-				]
-			]
-		);
-                // Издательство (publisher)
-                $spec->setLine('Publisher', 'getPublishers'); 
-                // Год публикации (publishDate)
-                $spec->setLine('Published', 'getPublicationDates');
-                // Номер ISBN (isbn)
-                $spec->setLine('ISBN', 'getISBNs');
-                // Тематика (genre)
-                $spec->setLine('Genres', 'getGenres');
-                
+		$spec->setLine('title_short', 'getTitleShort');
+                $spec->setLine('author', 'getAuthor');
+                $spec->setLine('author2', 'getAuthor2');
+                $spec->setLine('author_corporate', 'getAuthorCorporate');
+                $spec->setLine('level', 'getLevel');
+                $spec->setLine('title_another_chart', 'getTitleAnotherChart');
+                $spec->setLine('title_alt', 'getTitleAlt');
+                $spec->setLine('country', 'getCountry');
+                $spec->setLine('placeofpublication', 'getPlacesOfPublication');
+                $spec->setLine('publisher', 'getPublishers');
+                $spec->setLine('publishdate', 'getPublicationDates');
+                $spec->setLine('language', 'getLanguages');
+                $spec->setLine('Volume', 'getVolume');
+                $spec->setLine('genre', 'getGenres');
+                $spec->setLine('topic', 'getTopic');
+                $spec->setLine('fund', 'getFund');
+                $spec->setLine('format', 'getFormat');
+                $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
 		return $spec->getArray();
     }
     
     public function getDefaultPeriodSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-                
+                $spec->setLine('title_short', 'getTitleShort');
+                $spec->setLine('author', 'getAuthor');
+                $spec->setLine('author2', 'getAuthor2');
+                $spec->setLine('author_corporate', 'getAuthorCorporate');
+                $spec->setLine('level', 'getLevel');
+                $spec->setLine('title_another_chart', 'getTitleAnotherChart');
+                $spec->setLine('title_alt', 'getTitleAlt');
+                $spec->setLine('country', 'getCountry');
+                $spec->setLine('placeofpublication', 'getPlacesOfPublication');
+                $spec->setLine('publisher', 'getPublishers');
+                $spec->setLine('publishdate', 'getPublicationDates');
+                $spec->setLine('language', 'getLanguages');
+                $spec->setLine('Volume', 'getVolume');
+                $spec->setLine('genre', 'getGenres');
+                $spec->setLine('topic', 'getTopic');
+                $spec->setLine('fund', 'getFund');
+                $spec->setLine('format', 'getFormat');
+                $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
                 // Вид издания (period_ModeOfPublication)
                 $spec->setLine('period_mode_of_publication', 'period_getModeOfPublications'); 
                 // Язык (period_Language)

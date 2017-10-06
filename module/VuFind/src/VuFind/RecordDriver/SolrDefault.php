@@ -2063,4 +2063,79 @@ class SolrDefault extends AbstractBase
         }      
         return json_encode($description, JSON_UNESCAPED_UNICODE);
     }
+    
+    /**
+     * Get the short title of the record.
+     *
+     * @return string
+     */
+    public function getTitleShort()
+    {
+        return isset($this->fields['title_short']) ? $this->fields['title_short'] : [];
+    }
+    
+    /**
+     * Get the author of the record.
+     *
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return isset($this->fields['author']) ? $this->fields['author'] : [];
+    }
+    
+    /**
+     * Get the another author of the record.
+     *
+     * @return string
+     */
+    public function getAuthor2()
+    {
+        return isset($this->fields['author2']) ? $this->fields['author2'] : [];
+    }
+    
+    public function getAuthorCorporate()
+    {
+        return isset($this->fields['author_corporate']) ? $this->fields['author_corporate'] : [];
+    }
+    
+    public function getLevel()
+    {
+        return isset($this->fields['Level']) ? $this->fields['Level'] : [];
+    }
+    
+    public function getTitleAnotherChart()
+    {
+        return isset($this->fields['Title_another_chart']) ? $this->fields['Title_another_chart'] : [];
+    }
+    
+    public function getTitleAlt()
+    {
+        return isset($this->fields['title_alt']) ? $this->fields['title_alt'] : [];
+    }
+    
+    public function getCountry()
+    {
+        return isset($this->fields['Country']) ? $this->fields['Country'] : [];
+    }
+    
+    public function getVolume()
+    {
+        return isset($this->fields['Volume']) ? $this->fields['Volume'] : [];
+    }
+    
+    public function getTopic()
+    {
+        return isset($this->fields['topic']) ? $this->fields['topic'] : [];
+    }
+    
+    public function getFund()
+    {
+        return isset($this->fields['fund']) ? $this->fields['fund'] : [];
+    }
+    
+    public function getFormat()
+    {
+        return isset($this->fields['format']) ? $this->fields['format'] : [];
+    }
 }
