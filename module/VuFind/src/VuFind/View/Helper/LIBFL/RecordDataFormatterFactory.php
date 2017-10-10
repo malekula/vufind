@@ -326,7 +326,6 @@ class RecordDataFormatterFactory
     public function getDefaultBjvvvSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-		$spec->setLine('title_short', 'getTitleShort');
 		/*// Главный автор
 		$spec->setTemplateLine(
 			'MainAuthors', 'getDeduplicatedAuthors', 'data-authors.phtml',
@@ -367,7 +366,6 @@ class RecordDataFormatterFactory
     public function getDefaultLitresSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-		$spec->setLine('title_short', 'getTitleShort');
                 $spec->setLine('author', 'getAuthor');
                 $spec->setLine('author2', 'getAuthor2');
                 $spec->setLine('author_corporate', 'getAuthorCorporate');
@@ -391,7 +389,6 @@ class RecordDataFormatterFactory
     public function getDefaultPeriodSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-                $spec->setLine('title_short', 'getTitleShort');
                 $spec->setLine('author', 'getAuthor');
                 $spec->setLine('author2', 'getAuthor2');
                 $spec->setLine('author_corporate', 'getAuthorCorporate');
