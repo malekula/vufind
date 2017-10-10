@@ -8,6 +8,9 @@
   <? if (count($this->driver->getCitationFormats()) > 0): ?>
     <li><a class="cite-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'Cite')?>" rel="nofollow"><i class="fa fa-asterisk" aria-hidden="true"></i> <?=$this->transEsc('Cite this')?></a></li>
   <? endif; ?>
+    <? if ($this->reporterror()->tabEnabled()): ?>
+    <li><a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->url() . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?></a></li>
+    <? endif; ?>
   <!--<? if ($this->accountCapabilities()->getSmsSetting() !== 'disabled'): ?>
     <li><a class="sms-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'SMS')?>" rel="nofollow"><i class="fa fa-mobile" aria-hidden="true"></i> <?=$this->transEsc('Text this')?></a></li>
   <? endif; ?>
@@ -17,9 +20,6 @@
   <? $exportFormats = $this->export()->getFormatsForRecord($this->driver); ?>
   <? if(count($exportFormats) > 0): ?>
     <li class="dropdown">
-        <? if ($this->reporterror()->tabEnabled()): ?>
-            <a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->url() . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?></a>
-        <? endif; ?>
       <a class="export-toggle dropdown-toggle" data-toggle="dropdown" href="<?=$this->recordLink()->getActionUrl($this->driver, 'Export')?>" rel="nofollow">Экспорт записи</a>
       <ul class="dropdown-menu" role="menu">
         <? foreach ($exportFormats as $exportFormat): ?>
