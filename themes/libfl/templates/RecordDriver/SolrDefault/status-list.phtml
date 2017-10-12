@@ -3,13 +3,13 @@
     //if ($status) {
         switch($status) {
             case 'available':
-                echo "<span class='status' style='color:#008000;'>".$this->transEsc('record-'.$status)."</span>&nbsp<span class='access-method' style='text-transform: lowercase;'>".$this->driver->getMethodOfAccess()[0]."</span>";
+                echo "<span class='status' style='color:#008000;'>".$this->transEsc('status_'.$status)."</span>&nbsp<span class='access-method' style='text-transform: lowercase;'>".$this->driver->getMethodOfAccess()[0]."</span>";
                 break;
             case 'booked':
-                echo "<span class='status' style='color:#ff9d00;'>".$this->transEsc('record-'.$status)."</span>";
+                echo "<span class='status' style='color:#ff9d00;'>".$this->transEsc('status_'.$status)."</span>";
                 break;
             case 'busy':
-                echo "<span class='status' style='color:#ff0000;'>".$this->transEsc('record-'.$status)."</span>";
+                echo "<span class='status' style='color:#ff0000;'>".$this->transEsc('status_'.$status)."</span>";
                 break;
             default:
                 echo "<span class='status'>не удалось получить статус</span>";
