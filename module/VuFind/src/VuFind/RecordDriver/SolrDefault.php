@@ -551,7 +551,7 @@ class SolrDefault extends AbstractBase
      */
     public function getFormats()
     {
-        return isset($this->fields['format']) ? $this->fields['format'] : [];
+        return isset($this->fields['format']) ? $this->fields['format'] : ['n/a'];
     }
 
     /**
