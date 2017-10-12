@@ -25,8 +25,7 @@
                     echo "<tr><th>".$this->transEsc($field).": </th><td>".$exemplar->$field."</td></tr>";
                 }
             }
-            echo $exemplar->exemplar_id.' ';
-            echo $accessStatus = ($exemplar->exemplar_id) ? $this->driver->getAccessStatus($exemplar->exemplar_id, $this->driver->getUniqueId()) : 'Не доступен';
+            $accessStatus = ($exemplar->exemplar_id) ? $this->driver->getAccessStatus($exemplar->exemplar_id, $this->driver->getUniqueId()) : 'Не доступен';
             echo (empty($accessMethod))
                 ? "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>Статус: ".$this->transEsc('status_'.$accessStatus)."</td></tr>"
                 : "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>Статус: ".$this->transEsc('status_'.$accessStatus)." (".$accessMethod.") </td></tr>";
