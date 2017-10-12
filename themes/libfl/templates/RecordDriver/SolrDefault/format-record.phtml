@@ -1,0 +1,7 @@
+<span>
+    <?php
+        foreach (array_unique($data) as $format):
+            echo $this->transEsc($format) . '<br />';
+        endforeach;
+    ?>
+</span>

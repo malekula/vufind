@@ -684,4 +684,26 @@ class Record extends AbstractHelper
         return isset($this->config->OpenURL->replace_other_urls)
             && $this->config->OpenURL->replace_other_urls;
     }
+    
+    /**
+     * Render a list of record status.
+     *
+     * @return string
+     */
+    public function getStatusList()
+    {
+        //return $this->renderTemplate('access_method-list.phtml');        
+        return $this->renderTemplate('status-list.phtml');
+    }
+    
+    /**
+     * Render a list of record access method.
+     *
+     * @return string
+     */
+    public function getMethodOfAccess()
+    {
+        return $this->renderTemplate('access_method-list.phtml');
+    }
+
 }

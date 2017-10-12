@@ -2044,19 +2044,32 @@ class SolrDefault extends AbstractBase
         return strtolower(substr($recordUID, 0, strrpos($recordUID, '_')));
     }
     
-    public function gerRecordStatus()
+    public function getRecordStatus($recordUID)
     {
         $getExemplars = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
         if (isset($getExemplars[0]) && !empty($getExemplars[0])) {
             $exemplars = json_decode(htmlspecialchars_decode($getExemplars[0]), TRUE);
             if (isset($exemplars) && !empty($exemplars)) {
-                $cntNA = 0;
+                $cntNotAvailable = 0; //Conter not available records
+                $cntBooked = 0; //Counter booked records
                 foreach ($exemplars as $exemplar) {
-                    $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $fund) : '';
-                    if (empty($checkStatus))
-                        $cntNA++;
+                    $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $recordUID) : '';
+                    if (!empty($checkStatus) && $checkStatus == 'available') {
+                        return $checkStatus;
+                    } else if (!empty($checkStatus)) {
+                        switch ($checkStatus) {
+                            case 'busy':
+                                $cntNotAvailable++;
+                                break;
+                            case 'booked':
+                                $cntBooked++;
+                                break;
+                        }
+                    }
                 }
-                return (count($exemplars) == $cntNA) ? FALSE : TRUE;
+                return (count($exemplars) == $cntNotAvailable) ? FALSE : TRUE;
+            } else {
+                return;
             }
         }
     }
