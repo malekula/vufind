@@ -2039,14 +2039,44 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['Exemplar']) ? [json_encode(array($fields, $this->fields['Exemplar']), JSON_UNESCAPED_UNICODE)] : [];
     }
     
-    public function getAccessStatus($exemplar_id)
+    public function gerRecordStatus()
+    {
+        $getExemplars = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
+        if (isset($getExemplars[0]) && !empty($getExemplars[0])) {
+            $exemplars = json_decode(htmlspecialchars_decode($getExemplars[0]), TRUE);
+            if (isset($exemplars) && !empty($exemplars)) {
+                $cntNA = 0;
+                foreach ($exemplars as $exemplar) {
+                    $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $fund) : '';
+                    if (empty($checkStatus))
+                        $cntNA++;
+                }
+                return (count($exemplars) == $cntNA) ? FALSE : TRUE;
+            }
+        }
+    }
+    
+    public function getAccessStatus($exemplar_id, $fund)
     {
         $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+        switch ($fund) {
+            case 'bjvvv':
+                try {
+                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>"BJVVV"));
+                } catch (Exception $ex) {
+                    var_dump($ex->getMessage());
+                }
+                break;
+            default: 
+                break;
+        }
+        
+        /*$client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
         try {
             $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>"BJVVV"));
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
-        }
+        }*/
         return $result->GetBookStatusResult;
     }
     
