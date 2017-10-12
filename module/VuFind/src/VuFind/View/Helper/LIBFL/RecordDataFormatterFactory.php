@@ -58,8 +58,7 @@ class RecordDataFormatterFactory
         $helper->setDefaults('description', [$this, 'getDefaultDescriptionSpecs']);
         $helper->setDefaults('libfl_description', [$this, 'getLibflDescriptionSpecs']);
         $helper->setDefaults('libfl_exemplar', [$this, 'getLibflExemplarSpecs']);
-        $helper->setDefaults('brit', [$this, 'getDefaultBjvvvSpecs']);
-        $helper->setDefaults('sovet', [$this, 'getDefaultBjvvvSpec']);
+        $helper->setDefaults('brit_sovet', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjacc', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjvvv', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('bjscc', [$this, 'getDefaultBjvvvSpecs']);

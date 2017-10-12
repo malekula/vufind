@@ -29,7 +29,7 @@
     <?/* Display Main Details */?>
     <?
       $formatter = $this->recordDataFormatter();
-      $type_of_record = strtolower(stristr($this->driver->getUniqueID(), '_', true));
+      $type_of_record = $this->driver->getFundRecordUID($this->driver->getUniqueId());
       $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
     ?>
       <div class="record_media_split_line"></div>
