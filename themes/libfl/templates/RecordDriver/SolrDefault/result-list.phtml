@@ -11,6 +11,18 @@
     <? $thumbnail = ob_get_contents(); ?>
   <? ob_end_clean(); ?>
 <? endif; ?>
+
+
+<?php
+    //print_r(gettype($this->record()));
+?>
+
+<div class="ajaxItem">
+
+
+
+
+
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getUniqueID())?>" class="hiddenId" />
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getSourceIdentifier())?>" class="hiddenSource" />
 <div class="media">
@@ -19,6 +31,9 @@
         <div class="result-formats">
             <?//=$this->record($this->driver)->getFormatList() ?>
             <?=$this->record($this->driver)->getFormatList() . " | " . $this->record($this->driver)->getStatusList();?>
+            <!--<span class="status ajax-availability hidden">
+                <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
+            </span>-->
             <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
                 <span class="status ajax-availability hidden">
                     <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
@@ -211,4 +226,9 @@
   <? if ($thumbnail && $thumbnailAlignment == 'right'): ?>
     <?=$thumbnail ?>
   <? endif ?>
+</div>
+
+
+
+
 </div>

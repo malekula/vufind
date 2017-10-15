@@ -2044,6 +2044,53 @@ class SolrDefault extends AbstractBase
         return strtolower(substr($recordUID, 0, strrpos($recordUID, '_')));
     }
     
+    public function getStatusRecords($record_ids)
+    {
+        /*$statuses = [];
+        foreach ($record_ids as $recordUID) {
+            $getExemplars = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
+            if (isset($getExemplars[0]) && !empty($getExemplars[0])) {
+                $exemplars = json_decode(htmlspecialchars_decode($getExemplars[0]), TRUE);
+                if (isset($exemplars) && !empty($exemplars)) {
+                    $cntNotAvailable = 0; //Counter not available exemplars
+                    $cntBooked = 0; //Counter booked exemplars
+                    foreach ($exemplars as $exemplar) {
+                        $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $recordUID) : '';
+                        if (!empty($checkStatus) && $checkStatus == 'available') {
+                            $statuses[] = array('record_ID'=>$recordUID, 'status'=>$checkStatus);
+                            continue;
+                        } else {
+                            switch ($checkStatus) {
+                                case 'busy':
+                                    $cntNotAvailable++;
+                                    if (count($exemplars) == $cntNotAvailable) {
+                                        $statuses[] = array('record_ID'=>$recordUID, 'status'=>$checkStatus);
+                                    }
+                                    break;
+                                case 'booked':
+                                    $cntBooked++;
+                                    if (count($exemplars) == $cntBooked) {
+                                        $statuses[] = array('record_ID'=>$recordUID, 'status'=>$checkStatus);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                } else {
+                    $statuses[] = array('record_ID'=>$recordUID, 'status'=>'none');
+                }
+            } else {
+                $statuses[] = array('record_ID'=>$this->fields, 'status'=>'none exemplars');
+            }
+        }
+        /*$statuses = [];
+        $statuses[] = array('id'=>'BJVVV_001', 'status'=>'available', 'message'=>'message status');
+        $statuses[] = array('id'=>'BJVVV_002', 'status'=>'busy', 'message'=>'message status');
+        $statuses[] = array('id'=>'BJVVV_003', 'status'=>'booked', 'message'=>'message status');
+        $statuses[] = array('id'=>'BJVVV_004', 'status'=>'available', 'message'=>'message status');
+        return $statuses;*/
+    }
+    
     public function getRecordStatus($recordUID)
     {
         $getExemplars = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : [];
@@ -2053,7 +2100,10 @@ class SolrDefault extends AbstractBase
                 $cntNotAvailable = 0; //Conter not available records
                 $cntBooked = 0; //Counter booked records
                 foreach ($exemplars as $exemplar) {
-                    $checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $recordUID) : '';
+                    //$checkStatus = (isset($exemplar['exemplar_id'])) ? $this->getAccessStatus($exemplar['exemplar_id'], $recordUID) : '';
+                    $i = rand(0, 100);
+                    $checkStatus = ($i>10) ? 'available' : 'busy';
+                    //$checkStatus = 'available';
                     if (!empty($checkStatus) && $checkStatus == 'available') {
                         return $checkStatus;
                     } else if (!empty($checkStatus)) {
@@ -2066,8 +2116,10 @@ class SolrDefault extends AbstractBase
                                 break;
                         }
                     }
+                    continue;
                 }
-                return (count($exemplars) == $cntNotAvailable) ? FALSE : TRUE;
+                //return (count($exemplars) == $cntNotAvailable) ? FALSE : TRUE;
+                return $checkStatus;
             } else {
                 return;
             }
