@@ -2129,65 +2129,60 @@ class SolrDefault extends AbstractBase
     public function getAccessStatus($exemplar_id, $recordUID)
     {
         $fund = $this->getFundRecordUID($recordUID);
-        $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
-        switch ($fund) {
-            case 'bjvvv':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            case 'redkostj':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            case 'brit_sovet':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            case 'bjacc':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            case 'bjfcc':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            case 'bjscc':
-                try {
-                    $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>  strtoupper($fund)));
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
-            default:
-                try {
-                    $result->GetBookStatusResult = 'none';
-                } catch (Exception $ex) {
-                    var_dump($ex->getMessage());
-                }
-                break;
+        if (isset($exemplar_id) && !empty($exemplar_id)) {
+            $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+            switch ($fund) {
+                case 'bjvvv':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                case 'redkostj':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                case 'brit_sovet':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                case 'bjacc':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                case 'bjfcc':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                case 'bjscc':
+                    try {
+                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+                default:
+                    try {
+                        $result->GetBookStatusResult = 'none';
+                    } catch (Exception $ex) {
+                        var_dump($ex->getMessage());
+                    }
+                    break;
+            }
         }
-        
-        /*$client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
-        try {
-            $result = $client->GetBookStatus(array("IDDATA"=>"$exemplar_id", "BaseName"=>"BJVVV"));
-        } catch (Exception $ex) {
-            var_dump($ex->getMessage());
-        }*/
         return $result->GetBookStatusResult;
     }
     
