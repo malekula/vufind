@@ -12,3 +12,9 @@ composer.phar
 import/solrmarc.log
 node_modules
 public/swagger-ui
+nbproject/
+index.xml
+index[0-9].xml
+soap.php
+mail.php
+root/
