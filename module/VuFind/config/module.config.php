@@ -150,7 +150,6 @@ $config = [
             'worldcat' => 'VuFind\Controller\Factory::getWorldcatController',
             'worldcatrecord' => 'VuFind\Controller\Factory::getWorldcatrecordController',
             'reporterror' => 'VuFind\Controller\Factory::getReporterrorController',
-            'status' => 'VuFind\Controller\Factory::getStatusController',
         ],
     ],
     'controller_plugins' => [

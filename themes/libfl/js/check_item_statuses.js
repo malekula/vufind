@@ -29,7 +29,7 @@ function checkItemStatuses(_container) {
         return;
     }
     console.log(data);
-    /*$(".ajax-availability").removeClass('hidden');
+    $(".ajax-availability").removeClass('hidden');
     $.ajax({
         dataType: 'json',
         method: 'POST',
@@ -110,7 +110,7 @@ function checkItemStatuses(_container) {
         }
         // display the error message on each of the ajax status place holder
         $('.ajax-availability').append(response.responseJSON.data).addClass('text-danger');
-    });*/
+    });
 }
 
 $(document).ready(function checkItemStatusReady() {

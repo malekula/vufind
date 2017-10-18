@@ -13,9 +13,8 @@
 <? endif; ?>
 
 
-<?php
-    //print_r(gettype($this->record()));
-?>
+
+
 
 <div class="ajaxItem">
 
@@ -30,10 +29,7 @@
     <div class="result-body">
         <div class="result-formats">
             <?//=$this->record($this->driver)->getFormatList() ?>
-            <?=$this->record($this->driver)->getFormatList() . " | " . $this->record($this->driver)->getStatusList();?>
-            <!--<span class="status ajax-availability hidden">
-                <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
-            </span>-->
+            <?=$this->record($this->driver)->getFormatList();// . " | " . $this->record($this->driver)->getStatusList();?>
             <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
                 <span class="status ajax-availability hidden">
                     <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
