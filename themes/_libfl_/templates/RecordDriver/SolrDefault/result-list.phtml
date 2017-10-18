@@ -14,17 +14,11 @@
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getUniqueID())?>" class="hiddenId" />
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getSourceIdentifier())?>" class="hiddenSource" />
 <div class="media">
+  <? if ($thumbnail && $thumbnailAlignment == 'left'): ?>
+    <?=$thumbnail ?>
+  <? endif ?>
   <div class="media-body">
     <div class="result-body">
-        <div class="result-formats">
-            <?//=$this->record($this->driver)->getFormatList() ?>
-            <?=$this->record($this->driver)->getFormatList();// . " | " . $this->record($this->driver)->getStatusList();?>
-            <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
-                <span class="status ajax-availability hidden">
-                    <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
-                </span>
-            <? endif; ?>
-        </div>
       <div>
         <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title getFull" data-view="<?=$this->params->getOptions()->getListViewOption() ?>">
           <?=$this->record($this->driver)->getTitleHtml()?>
@@ -36,40 +30,33 @@
           <?=implode('<br>', array_map(array($this, 'escapeHtml'), $this->driver->getSummary())); ?>
         <? else: ?>
           <? $summAuthors = $this->driver->getPrimaryAuthorsWithHighlighting(); if (!empty($summAuthors)): ?>
-            <div class="about_info_block">
-                <span class="about_label"><?=$this->transEsc('Author');?></span>
-                <? $authorCount = count($summAuthors); foreach ($summAuthors as $i => $summAuthor): ?>
-                  <a href="<?=$this->record($this->driver)->getLink('author', $this->highlight($summAuthor, null, true, false))?>"><?=$this->highlight($summAuthor)?></a><?=$i + 1 < $authorCount ? ',' : ''?>
-                <? endforeach; ?>
-            </div>
+            <?=$this->transEsc('by')?>
+            <? $authorCount = count($summAuthors); foreach ($summAuthors as $i => $summAuthor): ?>
+              <a href="<?=$this->record($this->driver)->getLink('author', $this->highlight($summAuthor, null, true, false))?>"><?=$this->highlight($summAuthor)?></a><?=$i + 1 < $authorCount ? ',' : ''?>
+            <? endforeach; ?>
           <? endif; ?>
 
           <? $journalTitle = $this->driver->getContainerTitle(); $summDate = $this->driver->getPublicationDates(); ?>
           <? if (!empty($journalTitle)): ?>
-            <div class="about_info_block">
-                <span class="about_label"><?=$this->transEsc('Published in');?></span>
-                <? $containerSource = $this->driver->getSourceIdentifier(); ?>
-                <? $containerID = $this->driver->getContainerRecordID(); ?>
-                <? /* TODO: handle highlighting more elegantly here: */?>
-                <a href="<?=($containerID ? $this->recordLink()->getUrl("$containerSource|$containerID") : $this->record($this->driver)->getLink('journaltitle', str_replace(array('{{{{START_HILITE}}}}', '{{{{END_HILITE}}}}'), '', $journalTitle)))?>"><?=$this->highlight($journalTitle) ?></a>
-                <?=!empty($summDate) ? ' (' . $this->escapeHtml($summDate[0]) . ')' : ''?>
-            </div>
+            <?=!empty($summAuthor) ? '<br />' : ''?>
+            <?=$this->transEsc('Published in')?>
+            <? $containerSource = $this->driver->getSourceIdentifier(); ?>
+            <? $containerID = $this->driver->getContainerRecordID(); ?>
+            <? /* TODO: handle highlighting more elegantly here: */?>
+            <a href="<?=($containerID ? $this->recordLink()->getUrl("$containerSource|$containerID") : $this->record($this->driver)->getLink('journaltitle', str_replace(array('{{{{START_HILITE}}}}', '{{{{END_HILITE}}}}'), '', $journalTitle)))?>"><?=$this->highlight($journalTitle) ?></a>
+            <?=!empty($summDate) ? ' (' . $this->escapeHtml($summDate[0]) . ')' : ''?>
           <? elseif (!empty($summDate)): ?>
-            <div class="about_info_block">
-              <span class="about_label"><?=$this->transEsc('summPublished');?></span>
-                <?//=$this->escapeHtml($summDate[0])?>
-                <?=$this->driver->getSummPublished()[0];?>
-            </div>
+            <?=!empty($summAuthor) ? '<br />' : ''?>
+            <?=$this->transEsc('Published') . ' ' . $this->escapeHtml($summDate[0])?>
           <? endif; ?>
           <? $summInCollection = $this->driver->getContainingCollections(); if (!empty($summInCollection)): ?>
             <? foreach ($summInCollection as $collId => $collText): ?>
-                <div class="about_info_block">
-                    <!--<b><?=$this->transEsc("in_collection_label")?></b>-->
-                    <span class="about_label">Коллекция</span>
-                    <a class="collectionLinkText" href="<?=$this->url('collection', array('id' => $collId))?>?recordID=<?=urlencode($this->driver->getUniqueID())?>">
-                        <?=$this->escapeHtml($collText)?>
-                    </a>
-                </div>
+              <div>
+                <b><?=$this->transEsc("in_collection_label")?></b>
+                <a class="collectionLinkText" href="<?=$this->url('collection', array('id' => $collId))?>?recordID=<?=urlencode($this->driver->getUniqueID())?>">
+                  <?=$this->escapeHtml($collText)?>
+                </a>
+              </div>
             <? endforeach; ?>
           <? endif; ?>
         <? endif; ?>
@@ -150,7 +137,15 @@
         <? endif; ?>
       <? endif; ?>
 
+      <div class="result-formats">
+        <?=$this->record($this->driver)->getFormatList() ?>
 
+        <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
+          <span class="status ajax-availability hidden">
+            <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
+          </span>
+        <? endif; ?>
+      </div>
 
       <div class="result-previews">
         <?=$this->record($this->driver)->getPreviews()?>
@@ -173,10 +168,8 @@
         </span>
       <? endif; ?>
 
-      <? if ($this->cart()->isActiveInSearch() && $this->params->getOptions()->supportsCart() && $this->cart()->isActive() && substr($this->driver->getUniqueId(),0,5) == 'BJVVV'): ?>
+      <? if ($this->cart()->isActiveInSearch() && $this->params->getOptions()->supportsCart() && $this->cart()->isActive()): ?>
         <?=$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]); ?><br/>
-      <? else: ?>
-	<?=$this->render('record/dis-cart-buttons.phtml'); ?><br/>
       <? endif; ?>
 
       <? if ($this->userlist()->getMode() !== 'disabled'): ?>
@@ -205,9 +198,6 @@
       <?=$this->driver->supportsCoinsOpenUrl()?'<span class="Z3988" title="'.$this->escapeHtmlAttr($this->driver->getCoinsOpenUrl()).'"></span>':''?>
     </div>
   </div>
-    <? if ($thumbnail && $thumbnailAlignment == 'left'): ?>
-        <?=$thumbnail ?>
-    <? endif ?>
   <? if ($thumbnail && $thumbnailAlignment == 'right'): ?>
     <?=$thumbnail ?>
   <? endif ?>
