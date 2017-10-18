@@ -37,6 +37,7 @@ function checkItemStatuses(_container) {
         data: {'id': data}
     })
     .done(function checkItemStatusDone(response) {
+        console.log(response);
         $.each(response.data, function checkItemDoneEach(i, result) {
             var item = elements[result.id];
             if (!item) {
