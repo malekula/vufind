@@ -64,7 +64,7 @@ class ReporterrorController extends AbstractBase
             $reportError = isset($config->Reporterror) ? $config->Reporterror : null;
             $recipient_email = isset($reportError->recipient_email) ? $reportError->recipient_email : 'vufind@libfl.ru';
             $recipient_name = isset($reportError->recipient_name) ? $reportError->recipient_name : 'ВГБИЛ';
-            $email_subject = isset($reportError->email_subject) ? $reportError->email_subject : 'VuFind Report Error!';
+            $email_subject = isset($reportError->email_subject) ? date("d.m.Y H:i").' '.$reportError->email_subject : date("d.m.Y H:i").' VuFind Report Error!';
             $sender_email = isset($reportError->sender_email) ? $reportError->sender_email : 'vufind-noreply@libfl.ru';
             $sender_name = isset($reportError->sender_name) ? $reportError->sender_name : 'VuFind Report Error!';
 
