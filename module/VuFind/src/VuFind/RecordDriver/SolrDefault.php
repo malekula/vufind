@@ -2052,7 +2052,7 @@ class SolrDefault extends AbstractBase
             switch ($fund) {
                 case 'bjvvv':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
