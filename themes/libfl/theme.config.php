@@ -5,6 +5,7 @@ return array(
         'compiled.css',
 	'libfl.css',
         'print.css:print',
+        'statuses.css',
         'flex-fallback.css:lt IE 10', // flex polyfill
     ),
     'js' => array(

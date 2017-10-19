@@ -1,0 +1,15 @@
+.status-available {
+    color: #008000;
+}
+
+.status-unavailable {
+    color: #FF0000;
+}
+
+.status-booked {
+    color: #ff9100;
+}
+
+.status-unknown {
+    color: #909698;
+}

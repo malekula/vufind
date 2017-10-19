@@ -24,6 +24,13 @@
                     <span class="label label-default"><?=$this->transEsc('Loading')?>...</span>
                 </span>
             <? endif; ?>
+            <span>
+                <?php
+                    $accessMethod = $this->record($this->driver)->getMethodOfAccess();
+                    if (strlen($accessMethod) > 75)
+                        echo '('.$accessMethod.')';
+                ?>
+            </span>
         </div>
       <div>
         <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title getFull" data-view="<?=$this->params->getOptions()->getListViewOption() ?>">

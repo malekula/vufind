@@ -175,9 +175,26 @@ class StatusController extends AbstractBase
         $this->disableSessionWrites();  // avoid session write timing bug
         $ILS = $this->getILS();
         $ids = $this->params()->fromPost('id', $this->params()->fromQuery('id'));
-        $results = $ILS->getStatuses($ids);
+        $getStatuses = $ILS->getStatuses($ids);
         
-        return $this->output(json_decode($results->GetBookStatusResult), self::STATUS_OK);
+        $results = json_decode($getStatuses->GetBookStatusResult);
+        foreach ($results as $result) {
+            switch ($result->availability) {
+                case 'available':
+                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
+                    break;
+                case 'unavailable':
+                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
+                    break;
+                case 'booked':
+                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
+                    break;
+                case 'unknown':
+                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
+                    break;
+            }
+        }
+        return $this->output($results, self::STATUS_OK);
     }
 
     /**

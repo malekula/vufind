@@ -1995,7 +1995,7 @@ class SolrDefault extends AbstractBase
     
     public function getMethodOfAccess()
     {
-        return isset($this->fields['MethodOfAccess']) ? $this->fields['MethodOfAccess'] : [];
+        return isset($this->fields['MethodOfAccess']) ? $this->fields['MethodOfAccess'] : [''];
     }
     
     public function getPaginations()
@@ -2059,35 +2059,35 @@ class SolrDefault extends AbstractBase
                     break;
                 case 'redkostj':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
                     break;
                 case 'brit_sovet':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
                     break;
                 case 'bjacc':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
                     break;
                 case 'bjfcc':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
                     break;
                 case 'bjscc':
                     try {
-                        $result = $client->GetBookStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
+                        $result = $client->GetExemplarStatus(array("IDDATA"=>$exemplar_id, "BaseName"=>strtoupper($fund)));
                     } catch (Exception $ex) {
                         var_dump($ex->getMessage());
                     }
@@ -2101,7 +2101,7 @@ class SolrDefault extends AbstractBase
                     break;
             }
         }
-        return $result->GetBookStatusResult;
+        return $result->GetExemplarStatusResult;
     }
     
     public function getAllFields()
