@@ -104,7 +104,7 @@ class Wikipedia implements TranslatorAwareInterface
         $uri = 'http://' . $this->lang . '.wikipedia.org/w/api.php' .
                '?action=query&prop=revisions&rvprop=content&format=php' .
                '&list=allpages&titles=' . urlencode($author);
-
+        var_dump($author);
         $response = $this->client->setUri($uri)->setMethod('GET')->send();
         if ($response->isSuccess()) {
             return $this->parseWikipedia(unserialize($response->getBody()));

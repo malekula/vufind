@@ -150,6 +150,7 @@ $config = [
             'worldcat' => 'VuFind\Controller\Factory::getWorldcatController',
             'worldcatrecord' => 'VuFind\Controller\Factory::getWorldcatrecordController',
             'reporterror' => 'VuFind\Controller\Factory::getReporterrorController',
+            'status' => 'VuFind\Controller\Factory::getStatusController',
         ],
     ],
     'controller_plugins' => [
@@ -482,6 +483,7 @@ $config = [
                     'sierra' => 'VuFind\ILS\Driver\Sierra',
                     'virtua' => 'VuFind\ILS\Driver\Virtua',
                     'xcncip2' => 'VuFind\ILS\Driver\XCNCIP2',
+                    'libfl' => 'VuFind\ILS\Driver\LIBFL',
                 ],
             ],
             'recommend' => [
