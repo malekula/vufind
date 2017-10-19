@@ -1,17 +1,18 @@
 /*global VuFind */
-function linkCallnumbers(callnumber, callnumber_handler) {
-    if (callnumber_handler) {
-        var cns = callnumber.split(',\t');
-        for (var i = 0; i < cns.length; i++) {
-            cns[i] = '<a href="' + VuFind.path + '/Alphabrowse/Home?source=' + encodeURI(callnumber_handler) + '&amp;from=' + encodeURI(cns[i]) + '">' + cns[i] + '</a>';
-        }
-        return cns.join(',\t');
-    }
-    return callnumber;
+
+function getBookStatus(bookID) {
+    return $.ajax({
+        dataType: 'json',
+        method: 'POST',
+        async: true,
+        url: VuFind.path + '/STATUS/JSON?method=getItemStatuses',
+        data: {'id': bookID}
+    }).promise();
 }
 
-function checkBookStatuses(_container) {
-    var container = _container || $('body');
+function checkBookStatuses() {
+    
+    var container = $('body');
 
     var elements = {};
     var data = $.map(container.find('.ajaxItem'), function ajaxItemMap(record) {
@@ -28,33 +29,19 @@ function checkBookStatuses(_container) {
     if (!data.length) {
         return;
     }
-    console.log(data);
     $(".ajax-availability").removeClass('hidden');
-    $.ajax({
-        dataType: 'json',
-        method: 'POST',
-        url: VuFind.path + '/STATUS/JSON?method=getItemStatuses',
-        data: {'id': data}
-    })
-    .done(function checkItemStatusDone(response) {
-        console.log(response);
-        $.each(response.data, function checkItemDoneEach(i, result) {
-            var item = elements[result.id];
-            if (!item) {
-                return;
-            }
-            item.find('.status').empty().append(result.availability_message);
+    $.each(data, function(index, bookID) {
+        var UID = [bookID];
+        getBookStatus(UID).done(function (book) {
+            $.each(book.data, function checkItemDoneEach(i, result) {
+                var item = elements[result.id];
+                if (!item) {
+                    return;
+                }
+                item.find('.status').empty().append(result.availability_message);
+                item.find('.access-method').removeClass('hidden');
+            });
         });
-
-        $(".ajax-availability").removeClass('ajax-availability');
-    })
-    .fail(function checkItemStatusFail(response, textStatus) {
-        $('.ajax-availability').empty();
-        if (textStatus === 'abort' || typeof response.responseJSON === 'undefined') {
-            return;
-        }
-        // display the error message on each of the ajax status place holder
-        $('.ajax-availability').append(response.responseJSON.data).addClass('text-danger');
     });
 }
 
