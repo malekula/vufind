@@ -31,9 +31,8 @@ function checkBookStatuses() {
     }
     $(".ajax-availability").removeClass('hidden');
     $.each(data, function(index, bookID) {
-        var UID = [bookID];
-        getBookStatus(UID).done(function (book) {
-            $.each(book.data, function checkItemDoneEach(i, result) {
+        getBookStatus(bookID).done(function (book) {
+            $.each(book, function checkItemDoneEach(i, result) {
                 var item = elements[result.id];
                 if (!item) {
                     return;

@@ -174,25 +174,22 @@ class StatusController extends AbstractBase
     {
         $this->disableSessionWrites();  // avoid session write timing bug
         $ILS = $this->getILS();
-        $ids = $this->params()->fromPost('id', $this->params()->fromQuery('id'));
-        $getStatuses = $ILS->getStatuses($ids);
-        
+        $bookID = $this->params()->fromPost('id', $this->params()->fromQuery('id'));
+        $getStatuses = $ILS->getStatuses($bookID);
         $results = json_decode($getStatuses->GetBookStatusResult);
-        foreach ($results as $result) {
-            switch ($result->availability) {
-                case 'available':
-                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
-                    break;
-                case 'unavailable':
-                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
-                    break;
-                case 'booked':
-                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
-                    break;
-                case 'unknown':
-                    $result->availability_message = "<span class='label status-".$result->availability."'>".$this->translate('status_'.$result->availability)."</span>";
-                    break;
-            }
+        switch ($results->availability) {
+            case 'available':
+                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+                break;
+            case 'unavailable':
+                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+                break;
+            case 'booked':
+                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+                break;
+            case 'unknown':
+                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+                break;
         }
         return $this->output($results, self::STATUS_OK);
     }
@@ -392,70 +389,7 @@ class StatusController extends AbstractBase
      */
     protected function getItemStatusGroup($record, $messages, $callnumberSetting)
     {
-        // Summarize call number, location and availability info across all items:
-        $locations =  [];
-        $use_unknown_status = $available = false;
-        foreach ($record as $info) {
-            // Find an available copy
-            if ($info['availability']) {
-                $available = $locations[$info['location']]['available'] = true;
-            }
-            // Check for a use_unknown_message flag
-            if (isset($info['use_unknown_message'])
-                && $info['use_unknown_message'] == true
-            ) {
-                $use_unknown_status = true;
-                $locations[$info['location']]['status_unknown'] = true;
-            }
-            // Store call number/location info:
-            $locations[$info['location']]['callnumbers'][] = $info['callnumber'];
-        }
-
-        // Build list split out by location:
-        $locationList = false;
-        foreach ($locations as $location => $details) {
-            $locationCallnumbers = array_unique($details['callnumbers']);
-            // Determine call number string based on findings:
-            $callnumberHandler = $this->getCallnumberHandler(
-                $locationCallnumbers, $callnumberSetting
-            );
-            $locationCallnumbers = $this->pickValue(
-                $locationCallnumbers, $callnumberSetting, 'Multiple Call Numbers'
-            );
-            $locationInfo = [
-                'availability' =>
-                    isset($details['available']) ? $details['available'] : false,
-                'location' => htmlentities(
-                    $this->translate('location_' . $location, [], $location),
-                    ENT_COMPAT, 'UTF-8'
-                ),
-                'callnumbers' =>
-                    htmlentities($locationCallnumbers, ENT_COMPAT, 'UTF-8'),
-                'status_unknown' => isset($details['status_unknown'])
-                    ? $details['status_unknown'] : false,
-                'callnumber_handler' => $callnumberHandler
-            ];
-            $locationList[] = $locationInfo;
-        }
-
-        $availability_message = $use_unknown_status
-            ? $messages['unknown']
-            : $messages[$available ? 'available' : 'unavailable'];
-
-        // Send back the collected details:
-        return [
-            'id' => $record[0]['id'],
-            'availability' => ($available ? 'true' : 'false'),
-            'availability_message' => $availability_message,
-            'location' => false,
-            'locationList' => $locationList,
-            'reserve' =>
-                ($record[0]['reserve'] == 'Y' ? 'true' : 'false'),
-            'reserve_message' => $record[0]['reserve'] == 'Y'
-                ? $this->translate('on_reserve')
-                : $this->translate('Not On Reserve'),
-            'callnumber' => false
-        ];
+        return [];
     }
 
     /**
@@ -465,57 +399,7 @@ class StatusController extends AbstractBase
      */
     protected function getSaveStatusesAjax()
     {
-        $this->disableSessionWrites();  // avoid session write timing bug
-        // check if user is logged in
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->output(
-                $this->translate('You must be logged in first'),
-                self::STATUS_NEED_AUTH,
-                401
-            );
-        }
-
-        // loop through each ID check if it is saved to any of the user's lists
-        $ids = $this->params()->fromPost('id', $this->params()->fromQuery('id', []));
-        $sources = $this->params()->fromPost(
-            'source', $this->params()->fromQuery('source', [])
-        );
-        if (!is_array($ids) || !is_array($sources)) {
-            return $this->output(
-                $this->translate('Argument must be array.'),
-                self::STATUS_ERROR,
-                400
-            );
-        }
-        $result = $checked = [];
-        foreach ($ids as $i => $id) {
-            $source = isset($sources[$i]) ? $sources[$i] : DEFAULT_SEARCH_BACKEND;
-            $selector = $source . '|' . $id;
-
-            // We don't want to bother checking the same ID more than once, so
-            // use the $checked flag array to avoid duplicates:
-            if (isset($checked[$selector])) {
-                continue;
-            }
-            $checked[$selector] = true;
-
-            $data = $user->getSavedData($id, null, $source);
-            if ($data && count($data) > 0) {
-                $result[$selector] = [];
-                // if this item was saved, add it to the list of saved items.
-                foreach ($data as $list) {
-                    $result[$selector][] = [
-                        'list_url' => $this->url()->fromRoute(
-                            'userList',
-                            ['id' => $list->list_id]
-                        ),
-                        'list_title' => $list->list_title
-                    ];
-                }
-            }
-        }
-        return $this->output($result, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -578,9 +462,7 @@ class StatusController extends AbstractBase
      */
     protected function generateSalt()
     {
-        return str_replace(
-            '.', '', $this->getRequest()->getServer()->get('REMOTE_ADDR')
-        );
+        return;
     }
 
     /**
@@ -590,7 +472,7 @@ class StatusController extends AbstractBase
      */
     protected function getSaltAjax()
     {
-        return $this->output($this->generateSalt(), self::STATUS_OK);
+        return;
     }
 
     /**
@@ -600,30 +482,7 @@ class StatusController extends AbstractBase
      */
     protected function loginAjax()
     {
-        // Fetch Salt
-        $salt = $this->generateSalt();
-
-        // HexDecode Password
-        $password = pack('H*', $this->params()->fromPost('password'));
-
-        // Decrypt Password
-        $password = base64_decode(\VuFind\Crypt\RC4::encrypt($salt, $password));
-
-        // Update the request with the decrypted password:
-        $this->getRequest()->getPost()->set('password', $password);
-
-        // Authenticate the user:
-        try {
-            $this->getAuthManager()->login($this->getRequest());
-        } catch (AuthException $e) {
-            return $this->output(
-                $this->translate($e->getMessage()),
-                self::STATUS_ERROR,
-                401
-            );
-        }
-
-        return $this->output(true, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -633,38 +492,7 @@ class StatusController extends AbstractBase
      */
     protected function tagRecordAjax()
     {
-        $user = $this->getUser();
-        if ($user === false) {
-            return $this->output(
-                $this->translate('You must be logged in first'),
-                self::STATUS_NEED_AUTH,
-                401
-            );
-        }
-        // empty tag
-        try {
-            $driver = $this->getRecordLoader()->load(
-                $this->params()->fromPost('id'),
-                $this->params()->fromPost('source', DEFAULT_SEARCH_BACKEND)
-            );
-            $tag = $this->params()->fromPost('tag', '');
-            $tagParser = $this->serviceLocator->get('VuFind\Tags');
-            if (strlen($tag) > 0) { // don't add empty tags
-                if ('false' === $this->params()->fromPost('remove', 'false')) {
-                    $driver->addTags($user, $tagParser->parse($tag));
-                } else {
-                    $driver->deleteTags($user, $tagParser->parse($tag));
-                }
-            }
-        } catch (\Exception $e) {
-            return $this->output(
-                ('development' == APPLICATION_ENV) ? $e->getMessage() : 'Failed',
-                self::STATUS_ERROR,
-                500
-            );
-        }
-
-        return $this->output($this->translate('Done'), self::STATUS_OK);
+        return;
     }
 
     /**
@@ -674,36 +502,7 @@ class StatusController extends AbstractBase
      */
     protected function getRecordTagsAjax()
     {
-        $user = $this->getUser();
-        $is_me_id = null === $user ? null : $user->id;
-        // Retrieve from database:
-        $tagTable = $this->getTable('Tags');
-        $tags = $tagTable->getForResource(
-            $this->params()->fromQuery('id'),
-            $this->params()->fromQuery('source', DEFAULT_SEARCH_BACKEND),
-            0, null, null, 'count', $is_me_id
-        );
-
-        // Build data structure for return:
-        $tagList = [];
-        foreach ($tags as $tag) {
-            $tagList[] = [
-                'tag'   => $tag->tag,
-                'cnt'   => $tag->cnt,
-                'is_me' => !empty($tag->is_me)
-            ];
-        }
-
-        // Set layout to render content only:
-        $this->layout()->setTemplate('layout/lightbox');
-        $view = $this->createViewModel(
-            [
-                'tagList' => $tagList,
-                'loggedin' => null !== $user
-            ]
-        );
-        $view->setTemplate('record/taglist');
-        return $view;
+        return;
     }
 
     /**
@@ -713,41 +512,7 @@ class StatusController extends AbstractBase
      */
     protected function getRecordDetailsAjax()
     {
-        $driver = $this->getRecordLoader()->load(
-            $this->params()->fromQuery('id'),
-            $this->params()->fromQuery('source')
-        );
-        $viewtype = preg_replace(
-            '/\W/', '',
-            trim(strtolower($this->params()->fromQuery('type')))
-        );
-        $request = $this->getRequest();
-        $config = $this->serviceLocator->get('Config');
-
-        $recordTabPlugin = $this->serviceLocator
-            ->get('VuFind\RecordTabPluginManager');
-        $details = $recordTabPlugin
-            ->getTabDetailsForRecord(
-                $driver,
-                $config['vufind']['recorddriver_tabs'],
-                $request,
-                'Information'
-            );
-
-        $rtpm = $this->serviceLocator->get('VuFind\RecordTabPluginManager');
-        $html = $this->getViewRenderer()
-            ->render(
-                "record/ajaxview-" . $viewtype . ".phtml",
-                [
-                    'defaultTab' => $details['default'],
-                    'driver' => $driver,
-                    'tabs' => $details['tabs'],
-                    'backgroundTabs' => $rtpm->getBackgroundTabNames(
-                        $driver, $this->getRecordTabConfig()
-                    )
-                ]
-            );
-        return $this->output($html, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -762,30 +527,7 @@ class StatusController extends AbstractBase
      */
     protected function getVisDataAjax($fields = ['publishDate'])
     {
-        $this->disableSessionWrites();  // avoid session write timing bug
-        $results = $this->getResultsManager()->get('Solr');
-        $params = $results->getParams();
-        $params->initFromRequest($this->getRequest()->getQuery());
-        foreach ($this->params()->fromQuery('hf', []) as $hf) {
-            $params->addHiddenFilter($hf);
-        }
-        $params->getOptions()->disableHighlighting();
-        $params->getOptions()->spellcheckEnabled(false);
-        $filters = $params->getFilters();
-        $dateFacets = $this->params()->fromQuery('facetFields');
-        $dateFacets = empty($dateFacets) ? [] : explode(':', $dateFacets);
-        $fields = $this->processDateFacets($filters, $dateFacets, $results);
-        $facets = $this->processFacetValues($fields, $results);
-        foreach ($fields as $field => $val) {
-            $facets[$field]['min'] = $val[0] > 0 ? $val[0] : 0;
-            $facets[$field]['max'] = $val[1] > 0 ? $val[1] : 0;
-            $facets[$field]['removalURL']
-                = $results->getUrlQuery()->removeFacet(
-                    $field,
-                    isset($filters[$field][0]) ? $filters[$field][0] : null
-                )->getParams(false);
-        }
-        return $this->output($facets, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -800,24 +542,7 @@ class StatusController extends AbstractBase
      */
     protected function processDateFacets($filters, $dateFacets, $results)
     {
-        $result = [];
-        foreach ($dateFacets as $current) {
-            $from = $to = '';
-            if (isset($filters[$current])) {
-                foreach ($filters[$current] as $filter) {
-                    if (preg_match('/\[[\d\*]+ TO [\d\*]+\]/', $filter)) {
-                        $range = explode(' TO ', trim($filter, '[]'));
-                        $from = $range[0] == '*' ? '' : $range[0];
-                        $to = $range[1] == '*' ? '' : $range[1];
-                        break;
-                    }
-                }
-            }
-            $result[$current] = [$from, $to];
-            $result[$current]['label']
-                = $results->getParams()->getFacetLabel($current);
-        }
-        return $result;
+        return [];
     }
 
     /**
@@ -831,20 +556,7 @@ class StatusController extends AbstractBase
      */
     protected function processFacetValues($fields, $results)
     {
-        $facets = $results->getFullFieldFacets(array_keys($fields));
-        $retVal = [];
-        foreach ($facets as $field => $values) {
-            $newValues = ['data' => []];
-            foreach ($values['data']['list'] as $current) {
-                // Only retain numeric values!
-                if (preg_match("/^[0-9]+$/", $current['value'])) {
-                    $newValues['data'][]
-                        = [$current['value'], $current['count']];
-                }
-            }
-            $retVal[$field] = $newValues;
-        }
-        return $retVal;
+        return [];
     }
 
     /**
@@ -854,13 +566,7 @@ class StatusController extends AbstractBase
      */
     protected function getACSuggestionsAjax()
     {
-        $this->disableSessionWrites();  // avoid session write timing bug
-        $query = $this->getRequest()->getQuery();
-        $autocompleteManager = $this->serviceLocator
-            ->get('VuFind\AutocompletePluginManager');
-        return $this->output(
-            $autocompleteManager->getSuggestions($query), self::STATUS_OK
-        );
+        return;
     }
 
     /**
@@ -950,51 +656,7 @@ class StatusController extends AbstractBase
      */
     protected function commentRecordAjax()
     {
-        // Make sure comments are enabled:
-        if (!$this->commentsEnabled()) {
-            return $this->output(
-                $this->translate('Comments disabled'),
-                self::STATUS_ERROR,
-                403
-            );
-        }
-
-        $user = $this->getUser();
-        if ($user === false) {
-            return $this->output(
-                $this->translate('You must be logged in first'),
-                self::STATUS_NEED_AUTH,
-                401
-            );
-        }
-
-        $id = $this->params()->fromPost('id');
-        $comment = $this->params()->fromPost('comment');
-        if (empty($id) || empty($comment)) {
-            return $this->output(
-                $this->translate('bulk_error_missing'),
-                self::STATUS_ERROR,
-                400
-            );
-        }
-
-        $useCaptcha = $this->recaptcha()->active('userComments');
-        $this->recaptcha()->setErrorMode('none');
-        if (!$this->formWasSubmitted('comment', $useCaptcha)) {
-            return $this->output(
-                $this->translate('recaptcha_not_passed'),
-                self::STATUS_ERROR,
-                403
-            );
-        }
-
-        $table = $this->getTable('Resource');
-        $resource = $table->findResource(
-            $id, $this->params()->fromPost('source', DEFAULT_SEARCH_BACKEND)
-        );
-        $id = $resource->addComment($comment, $user);
-
-        return $this->output($id, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -1004,42 +666,7 @@ class StatusController extends AbstractBase
      */
     protected function deleteRecordCommentAjax()
     {
-        // Make sure comments are enabled:
-        if (!$this->commentsEnabled()) {
-            return $this->output(
-                $this->translate('Comments disabled'),
-                self::STATUS_ERROR,
-                403
-            );
-        }
-
-        $user = $this->getUser();
-        if ($user === false) {
-            return $this->output(
-                $this->translate('You must be logged in first'),
-                self::STATUS_NEED_AUTH,
-                401
-            );
-        }
-
-        $id = $this->params()->fromQuery('id');
-        if (empty($id)) {
-            return $this->output(
-                $this->translate('bulk_error_missing'),
-                self::STATUS_ERROR,
-                400
-            );
-        }
-        $table = $this->getTable('Comments');
-        if (!$table->deleteIfOwnedByUser($id, $user)) {
-            return $this->output(
-                $this->translate('edit_list_fail'),
-                self::STATUS_ERROR,
-                403
-            );
-        }
-
-        return $this->output($this->translate('Done'), self::STATUS_OK);
+        return;
     }
 
     /**
@@ -1049,13 +676,7 @@ class StatusController extends AbstractBase
      */
     protected function getRecordCommentsAsHTMLAjax()
     {
-        $driver = $this->getRecordLoader()->load(
-            $this->params()->fromQuery('id'),
-            $this->params()->fromQuery('source', DEFAULT_SEARCH_BACKEND)
-        );
-        $html = $this->getViewRenderer()
-            ->render('record/comments-list.phtml', ['driver' => $driver]);
-        return $this->output($html, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -1065,25 +686,7 @@ class StatusController extends AbstractBase
      */
     protected function exportFavoritesAjax()
     {
-        $format = $this->params()->fromPost('format');
-        $export = $this->serviceLocator->get('VuFind\Export');
-        $url = $export->getBulkUrl(
-            $this->getViewRenderer(), $format,
-            $this->params()->fromPost('ids', [])
-        );
-        $html = $this->getViewRenderer()->render(
-            'ajax/export-favorites.phtml',
-            ['url' => $url, 'format' => $format]
-        );
-        return $this->output(
-            [
-                'result' => $this->translate('Done'),
-                'result_additional' => $html,
-                'needs_redirect' => $export->needsRedirect($format),
-                'export_type' => $export->getBulkExportType($format),
-                'result_url' => $url
-            ], self::STATUS_OK
-        );
+        return [];
     }
 
     /**
@@ -1095,74 +698,7 @@ class StatusController extends AbstractBase
      */
     protected function getResolverLinksAjax()
     {
-        $this->disableSessionWrites();  // avoid session write timing bug
-        $openUrl = $this->params()->fromQuery('openurl', '');
-        $searchClassId = $this->params()->fromQuery('searchClassId', '');
-
-        $config = $this->getConfig();
-        $resolverType = isset($config->OpenURL->resolver)
-            ? $config->OpenURL->resolver : 'other';
-        $pluginManager = $this->serviceLocator
-            ->get('VuFind\ResolverDriverPluginManager');
-        if (!$pluginManager->has($resolverType)) {
-            return $this->output(
-                $this->translate("Could not load driver for $resolverType"),
-                self::STATUS_ERROR,
-                500
-            );
-        }
-        $resolver = new \VuFind\Resolver\Connection(
-            $pluginManager->get($resolverType)
-        );
-        if (isset($config->OpenURL->resolver_cache)) {
-            $resolver->enableCache($config->OpenURL->resolver_cache);
-        }
-        $result = $resolver->fetchLinks($openUrl);
-
-        // Sort the returned links into categories based on service type:
-        $electronic = $print = $services = [];
-        foreach ($result as $link) {
-            switch (isset($link['service_type']) ? $link['service_type'] : '') {
-            case 'getHolding':
-                $print[] = $link;
-                break;
-            case 'getWebService':
-                $services[] = $link;
-                break;
-            case 'getDOI':
-                // Special case -- modify DOI text for special display:
-                $link['title'] = $this->translate('Get full text');
-                $link['coverage'] = '';
-            case 'getFullTxt':
-            default:
-                $electronic[] = $link;
-                break;
-            }
-        }
-
-        // Get the OpenURL base:
-        if (isset($config->OpenURL) && isset($config->OpenURL->url)) {
-            // Trim off any parameters (for legacy compatibility -- default config
-            // used to include extraneous parameters):
-            list($base) = explode('?', $config->OpenURL->url);
-        } else {
-            $base = false;
-        }
-
-        $moreOptionsLink = $resolver->supportsMoreOptionsLink()
-            ? $resolver->getResolverUrl($openUrl) : '';
-
-        // Render the links using the view:
-        $view = [
-            'openUrlBase' => $base, 'openUrl' => $openUrl, 'print' => $print,
-            'electronic' => $electronic, 'services' => $services,
-            'searchClassId' => $searchClassId,
-            'moreOptionsLink' => $moreOptionsLink
-        ];
-        $html = $this->getViewRenderer()->render('ajax/resolverLinks.phtml', $view);
-
-        // output HTML encoded in JSON object
-        return $this->output($html, self::STATUS_OK);
+        return;
     }
 
     /**
@@ -1302,36 +838,7 @@ class StatusController extends AbstractBase
      */
     protected function getFacetDataAjax()
     {
-        $this->disableSessionWrites();  // avoid session write timing bug
-
-        $facet = $this->params()->fromQuery('facetName');
-        $sort = $this->params()->fromQuery('facetSort');
-        $operator = $this->params()->fromQuery('facetOperator');
-
-        $results = $this->getResultsManager()->get('Solr');
-        $params = $results->getParams();
-        $params->addFacet($facet, null, $operator === 'OR');
-        $params->initFromRequest($this->getRequest()->getQuery());
-
-        $facets = $results->getFullFieldFacets([$facet], false, -1, 'count');
-        if (empty($facets[$facet]['data']['list'])) {
-            return $this->output([], self::STATUS_OK);
-        }
-
-        $facetList = $facets[$facet]['data']['list'];
-
-        $facetHelper = $this->serviceLocator
-            ->get('VuFind\HierarchicalFacetHelper');
-        if (!empty($sort)) {
-            $facetHelper->sortFacetList($facetList, $sort == 'top');
-        }
-
-        return $this->output(
-            $facetHelper->buildFacetArray(
-                $facet, $facetList, $results->getUrlQuery()
-            ),
-            self::STATUS_OK
-        );
+        return;
     }
 
     /**

@@ -40,6 +40,8 @@ namespace VuFind\ILS\Driver;
  */
 class LIBFL extends AbstractBase
 {
+    protected $soap;
+
     /**
      * Initialize the driver.
      *
@@ -51,7 +53,7 @@ class LIBFL extends AbstractBase
      */
     public function init()
     {
-        // Sample driver doesn't care about configuration.
+        $this->soap = $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
     }
 
     /**
@@ -67,19 +69,7 @@ class LIBFL extends AbstractBase
      */
     public function getStatus($id)
     {
-        return [
-            [
-                'id' => $id,
-                'availability' => 1,
-                'status' => 'Available',
-                'location' => '3rd Floor Main Library',
-                'reserve' => 'N',
-                'callnumber' => 'A1234.567',
-                'duedate' => '',
-                'number' => 1,
-                'barcode' => '1234567890',
-            ]
-        ];
+        return [];
     }
 
     /**
@@ -92,15 +82,14 @@ class LIBFL extends AbstractBase
      *
      * @return mixed     An array of getStatus() return values on success.
      */
-    public function getStatuses($idList)
+    public function getStatuses($bookID)
     {
-        $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
         try {
-            $statuses = $client->GetBookStatus(array("books"=>$idList));
+            $status = $this->soap->GetBookStatus(array("book"=>$bookID));
         } catch (Exception $e) {
-            $statuses = $e->getMessage();
+            $status = $e->getMessage();
         }
-        return $statuses;
+        return $status;
     }
 
     /**
@@ -120,7 +109,7 @@ class LIBFL extends AbstractBase
      */
     public function getHolding($id, array $patron = null)
     {
-        return $this->getStatus($id);
+        return [];
     }
 
     /**
