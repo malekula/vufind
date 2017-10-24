@@ -492,12 +492,45 @@ class Record extends AbstractHelper
                     break;
                 }
             }
-
+            $details['additional_covers'] = $this->getOtherCovers($this->driver->getUniqueID());
             $details['html'] = $this->contextHelper->renderInContext(
                 'record/cover.phtml', $details
             );
         }
         return $details;
+    }
+    
+    public function getOtherCovers($record) {
+        $fund = strtolower(explode('_', $record)[0]);
+        $id = explode('_', $record)[1];
+        $covers = array();
+        if (file_exists($_SERVER['VUFIND_LOCAL_COVERS'] . '/' . $fund . '/' . $id)) {
+            $directory = filter_input(INPUT_SERVER, 'VUFIND_LOCAL_COVERS') . '/' . $fund . '/' . $id;
+            $allowed_types = array("jpg", "png", "gif", "jpeg");
+            $file_parts = array();
+            $ext = "";
+            $title = "";
+            $i = 0;
+            $dir_handle = @opendir($directory) or die("Ошибка при открытии папки !!!");
+            while ($file = readdir($dir_handle)) {
+                if ($file == "." || $file == "..")
+                    continue;
+                $file_parts = explode(".", $file);
+                $ext = strtolower(array_pop($file_parts));
+
+
+                if (in_array($ext, $allowed_types)) {
+                    /*echo '<div class = "blok_img" >
+                          <img src="' . $directory . '/' . $file . '" class="pimg" title="' . $file . '" />
+                          </div>';*/
+                    //$covers[$i] = $directory . '/' . $file;
+                    $covers[$i] = '/vufind/covers/' . $fund . '/' . $id . '/' . $file;
+                    $i++;
+                }
+            }
+            closedir($dir_handle);
+        }
+        return $covers;
     }
 
     /**

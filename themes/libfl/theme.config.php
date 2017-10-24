@@ -7,6 +7,7 @@ return array(
         'print.css:print',
         'statuses.css',
         'flex-fallback.css:lt IE 10', // flex polyfill
+        'fancybox/jquery.fancybox.min.css',
     ),
     'js' => array(
         'vendor/base64.js:lt IE 10', // btoa polyfill
@@ -19,6 +20,7 @@ return array(
         'common.js',
         'lightbox.js',
         'browser.js',
+        'fancybox/jquery.fancybox.min.js',
     ),
     'less' => array(
         'active' => false,
