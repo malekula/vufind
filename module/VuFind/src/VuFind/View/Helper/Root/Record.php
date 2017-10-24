@@ -520,10 +520,6 @@ class Record extends AbstractHelper
 
 
                 if (in_array($ext, $allowed_types)) {
-                    /*echo '<div class = "blok_img" >
-                          <img src="' . $directory . '/' . $file . '" class="pimg" title="' . $file . '" />
-                          </div>';*/
-                    //$covers[$i] = $directory . '/' . $file;
                     $covers[$i] = '/vufind/covers/' . $fund . '/' . $id . '/' . $file;
                     $i++;
                 }
