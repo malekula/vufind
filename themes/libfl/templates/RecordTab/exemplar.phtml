@@ -19,6 +19,8 @@
             echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
             foreach ($fields as $field) {
                 if (!empty($exemplar->$field)) {
+                    if ($field == 'exemplar_hyperlink')
+                        $exemplar->$field = "<a href='".$exemplar->$field."' target='_blank'>".$exemplar->$field."</a>";
                     if ($field == 'exemplar_inv_note') {
                         echo "<tr><th>".$this->transEsc('exemplar_inventory_number').": </th><td>".$exemplar->exemplar_inventory_number." (".$this->transEsc('exemplar_inv_note').": ".$exemplar->exemplar_inv_note.")</td></tr>";
                     }
