@@ -18,7 +18,11 @@
             <p><?= $this->truncate($summary, 300) ?></p>
 
             <? if (strlen($summary) > 300): ?>
+<<<<<<< HEAD
                 <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
+=======
+                <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'Description') ?>#libfldescription'><?= $this->transEsc('Full description') ?></a></p>
+>>>>>>> b7d170c65593f1a378706e02e0822ab57860f003
             <? endif; ?>
         <? endif; ?>
 
