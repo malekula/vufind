@@ -11,7 +11,7 @@
     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
     foreach ($keys as $key) {
         if (!empty($fields->$key)) {
-            echo "<tr><th>".$this->transEsc(strtolower($key)).": </th><td>".implode('; ', $fields->$key)."</td></tr>";
+            echo "<tr><th>".$this->transEsc(strtolower($key)).": </th><td>".implode('; ', array_unique($fields->$key))."</td></tr>";
         }
     } 
     echo '</table>';
