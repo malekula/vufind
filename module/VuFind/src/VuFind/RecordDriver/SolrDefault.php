@@ -2168,6 +2168,11 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['title_alt']) ? $this->fields['title_alt'] : [];
     }
     
+    public function getAnnotation()
+    {
+        return isset($this->fields['annotation']) ? $this->fields['annotation'] : [];
+    }
+    
     public function getCountry()
     {
         return isset($this->fields['Country']) ? $this->fields['Country'] : [];

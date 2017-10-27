@@ -11,13 +11,16 @@
         <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
 
         <?
-            $summary = $this->driver->getSummary();
-            $summary = isset($summary[0]) ? $this->escapeHtml($summary[0]) : false;
+            //$summary = $this->driver->getSummary();
+            //$summary = isset($summary[0]) ? $this->escapeHtml($summary[0]) : false;
+            
+            $annotation = $this->driver->getAnnotation();
+            $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
         ?>
-        <? if ($summary): ?>
-            <p><?= $this->truncate($summary, 300) ?></p>
+        <? if ($annotation): ?>
+            <p><?= $this->truncate($annotation, 300) ?></p>
 
-            <? if (strlen($summary) > 300): ?>
+            <? if (strlen($annotation) > 300): ?>
                 <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
             <? endif; ?>
         <? endif; ?>
