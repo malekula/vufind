@@ -88,6 +88,8 @@ class CartController extends AbstractBase
             return 'Save';
         } else if (strlen($this->params()->fromPost('export', '')) > 0) {
             return 'Export';
+        } else if (strlen($this->params()->fromPost('addOrder', '')) > 0) {
+            return 'Order';
         }
         // Check if the user is in the midst of a login process; if not,
         // use the provided default.
@@ -459,6 +461,44 @@ class CartController extends AbstractBase
         );
     }
 
+    public function orderAction()
+    {
+        $ids = is_null($this->params()->fromPost('selectAll'))
+            ? $this->params()->fromPost('ids', $this->params()->fromQuery('ids'))
+            : $this->params()->fromPost('idsAll');
+        if (!is_array($ids) || empty($ids)) {
+            $ids = $this->followup()->retrieveAndClear('cartIds');
+        }
+        if (!is_array($ids) || empty($ids)) {
+            return $this->redirectToSource('error', 'bulk_noitems_advice');
+        }
+        $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+        $pins = $this->getPins($ids);
+        $client->InsertArrayIntoBasket(array('PINs' => $pins, 'IDSession' => $_COOKIE['VUFIND_SESSION']));
+        $message = [
+            'html' => true,
+            'msg' => $this->translate('order_save_success') . ' '
+            . '<a href="http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
+            . $this->translate('order_go_to_list') . '</a>.'
+        ];
+        return $this->redirectToSource('success', $message);
+    }
+
+    protected function getPins($ids)
+    {
+        if (!empty($ids)) {
+            $pins = array();
+            foreach ($ids as $id) {
+                $pins[] = (int) explode('_', $id)[1];
+            }
+            return $pins;
+        } else {
+            return FALSE;
+        }
+        
+    }
+    
+    
     /**
      * Support method: redirect to the page we were on when the bulk action was
      * initiated.

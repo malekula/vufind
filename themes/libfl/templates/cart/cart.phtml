@@ -61,7 +61,7 @@
   <? endif; ?>
   <?=$this->render('cart/contents.phtml')?>
   <hr style="margin: 18px 0px;">
-  <button type="button" class="btn btn-success">Сделать заказ</button>
+  <button type="submit" class="btn btn-success" name="addOrder" value="1" title="<?=$this->transEsc('cartCreateOrder')?>"><?=$this->transEsc('cartCreateOrder')?></button>
 </form>
 
 <?
