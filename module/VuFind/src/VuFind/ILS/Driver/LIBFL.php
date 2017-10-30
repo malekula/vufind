@@ -91,6 +91,26 @@ class LIBFL extends AbstractBase
         }
         return $status;
     }
+    
+    /**
+     * Get Exemplar Statuses
+     *
+     * This is responsible for retrieving the status information for a
+     * exemplars of records.
+     *
+     * @param array $ids The array of record ids to retrieve the status for
+     *
+     * @return mixed     An array of getStatus() return values on success.
+     */
+    public function getExemplarStatuses($exemplarID, $fund)
+    {
+        try {
+            $status = $this->soap->GetExemplarStatus(array("IDDATA"=>$exemplarID, "BaseName"=>strtoupper($fund)));
+        } catch (Exception $e) {
+            $status = $e->getMessage();
+        }
+        return $status;
+    }
 
     /**
      * Get Holding

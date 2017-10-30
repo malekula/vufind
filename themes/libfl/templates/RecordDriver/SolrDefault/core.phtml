@@ -1,19 +1,18 @@
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?= $this->driver->getSchemaOrgFormats() ?> Product">
     <?
-    $QRCode = $this->record($this->driver)->getQRCode("core");
-    $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
-    $cover = $coverDetails['html'];
-    $preview = $this->record($this->driver)->getPreviews();
+        $this->headScript()->appendFile("check_exemplar_statuses.js");
+        $QRCode = $this->record($this->driver)->getQRCode("core");
+        $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
+        $cover = $coverDetails['html'];
+        $preview = $this->record($this->driver)->getPreviews();
     ?>
 
     <div class="media-body">
-
+        <div class="record-info">
+            <input type="hidden" name="recordID" value="<?=$this->driver->getFundRecordUID($this->driver->getUniqueId())?>" class="recordID">
+        </div>
         <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
-
         <?
-            //$summary = $this->driver->getSummary();
-            //$summary = isset($summary[0]) ? $this->escapeHtml($summary[0]) : false;
-            
             $annotation = $this->driver->getAnnotation();
             $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
         ?>
@@ -75,5 +74,4 @@
             <? endif; ?>
         </div>
     <? endif; ?>
-    <?php //phpinfo();?>
 </div>
