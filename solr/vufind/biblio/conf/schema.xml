@@ -219,10 +219,11 @@
    <!--<field name="author"       type="textProper" indexed="true" stored="true"  multiValued="true" termVectors="true"/>
    <field name="author_facet" type="textFacet"  indexed="true" stored="true"  multiValued="true"/>-->
 
-   <field name="Pagination" type="text" indexed="true" stored="true" multiValued="true"/>
-   
+   <field name="Pagination" type="text" indexed="true" stored="true" multiValued="true"/> 
    <field name="Level" type="string" indexed="true" stored="true" multiValued="false" termVectors="true"/>
    <field name="Level_facet" type="textFacet" indexed="true" stored="false" multiValued="false"/>
+   <field name="Level_id" type="string" indexed = "true" stored="true" multiValued="false"/>
+   <field name="Annotation" type ="text" indexed = "true" stored = "true" multiValued="true"/>
   
   
    
