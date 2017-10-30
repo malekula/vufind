@@ -5,7 +5,7 @@ function getBookStatus(bookID) {
         dataType: 'json',
         method: 'POST',
         async: true,
-        url: VuFind.path + '/STATUS/JSON?method=getItemStatuses',
+        url: VuFind.path + '/STATUS/JSON?method=getBookStatuses',
         data: {'id': bookID}
     }).promise();
 }

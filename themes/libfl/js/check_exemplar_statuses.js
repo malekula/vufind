@@ -27,7 +27,7 @@ function checkExemplarStatuses() {
         return datum;
     });
     var fund = $('.record-info .recordID').val();
-    if (!data.length) {
+    if (!data.length || !fund.length) {
         return;
     }
     $(".ajax-availability").removeClass('hidden');
@@ -35,7 +35,6 @@ function checkExemplarStatuses() {
         getExemplarStatus(exemplarID, fund).done(function (exemplar) {
             $.each(exemplar, function checkItemDoneEach(i, result) {
                 var item = elements[result.id];
-                console.log(item);
                 if (!item) {
                     return;
                 }

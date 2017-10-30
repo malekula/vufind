@@ -170,7 +170,7 @@ class StatusController extends AbstractBase
      * @author Chris Delis <cedelis@uillinois.edu>
      * @author Tuan Nguyen <tuan@yorku.ca>
      */
-    protected function getItemStatusesAjax()
+    protected function getBookStatusesAjax()
     {
         $this->disableSessionWrites();  // avoid session write timing bug
         $ILS = $this->getILS();
@@ -189,6 +189,9 @@ class StatusController extends AbstractBase
                 break;
             case 'unknown':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+                break;
+            default:
+                $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
                 break;
         }
         return $this->output($results, self::STATUS_OK);
