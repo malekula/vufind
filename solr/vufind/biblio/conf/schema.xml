@@ -288,8 +288,6 @@
    <field name="CatalogerNote" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="DirectoryNote" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="AdditionalBibRecord" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="Location" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="Location_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
    <field name="Exemplar" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="HyperLink" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerPerson_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
@@ -300,13 +298,18 @@
    <field name="NoteOwner" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerExemplar" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="IllustrationMaterial" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="MethodOfAccess" type="text" indexed="true" stored="true" multiValued="true"/>
-   <field name="MethodOfAccess_facet" type="textFacet" indexed="true" stored="false" multiValued="true"/>
+
+   <field name="MethodOfAccess" type="textFacet" indexed="true" stored="true" multiValued="true" termVectors="true"/>
    
-   
-   
-   
-   
+   <field name="Location" type="textFacet" indexed="true" stored="true" multiValued="true"/>
+  <!-- Пример для фасетов -->
+  <!--      
+   <field name="fund"         type="string" indexed="true" stored="true"  multiValued="true" termVectors="true"/>
+   <field name="fund_facet"   type="textFacet"  indexed="true" stored="true" multiValued="true"/>
+   <field name="Level" type="string" indexed="true" stored="true" multiValued="true" termVectors="true"/>
+   <field name="Level_facet" type="textFacet" indexed="true" stored="false" multiValued="false"/>-->
+
+
    
    
    
@@ -355,9 +358,8 @@
  <copyField source="fulltext" dest="fulltext_unstemmed"/>
  <copyField source="PlaceOfPublication" dest="PlaceOfPublication_facet"/>
  <copyField source="fund" dest="fund_facet"/>
- <copyField source="Level" dest="Level_facet"/>
- <copyField source="Location" dest="Location_facet"/>
- <copyField source="MethodOfAccess" dest="MethodOfAccess_facet"/>
+ <!--<copyField source="genre" dest="genre_facet"/>-->
+
  <!-- CopyFields for Alphabetic Browse -->
  <copyField source="topic" dest="topic_browse"/>
  <copyField source="author" dest="author_browse"/>
