@@ -478,8 +478,9 @@ class CartController extends AbstractBase
         $message = [
             'html' => true,
             'msg' => $this->translate('order_save_success') . ' '
-            . '<a href="http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
-            . $this->translate('order_go_to_list') . '</a>.'
+            //. '<a href="http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
+            //. $this->translate('order_go_to_list') . '</a>.'
+            . '<script type="text/javascript">window.location.replace("http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '")</script>'
         ];
         return $this->redirectToSource('success', $message);
     }
