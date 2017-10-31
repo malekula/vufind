@@ -2170,7 +2170,7 @@ class SolrDefault extends AbstractBase
     
     public function getAnnotation()
     {
-        return isset($this->fields['annotation']) ? $this->fields['annotation'] : [];
+        return isset($this->fields['Annotation']) ? $this->fields['Annotation'] : [];
     }
     
     public function getCountry()
