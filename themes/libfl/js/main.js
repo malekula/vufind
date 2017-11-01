@@ -12,6 +12,10 @@ $(document).ready(function() {
             $(e).parent().addClass('active');
         }
     });
+    function changeSearchPlaceholder() {
+        var placeholders = ['Charlotte Bronte', 'Пётр Великий', 'Kaze no uta o kike', 'Атлант расправил плечи'];
+        $("#search").attr('placeholder', placeholders[Math.floor(Math.random()*placeholders.length)]);
+    }
     $("#search").keypress(function(e){
         var q = $(this).val();
         if (q.length && e.which==13) {
@@ -44,7 +48,8 @@ $(document).ready(function() {
                 window.location = "http://libfl.ru/" + lang + "/search?q=" + encodeURI(q) + filters;
             }
         }
-    })
+    });
+    changeSearchPlaceholder();
     $("#index_search").keypress(function(e){
         var q=$(this).val()
         if (q.length && e.which==13) {
@@ -767,6 +772,7 @@ $(document).ready(function() {
             $(this).text('Поиск по каталогу');
             $('#search').attr('placeholder', 'Поиск по каталогу');
         }
+        changeSearchPlaceholder();
     });
     if (window.location.search.indexOf('&f=') > 0) {
         var filter = window.location.search.substr(window.location.search.indexOf('&f=') + 3);
