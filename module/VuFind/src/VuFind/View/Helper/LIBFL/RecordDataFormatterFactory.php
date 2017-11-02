@@ -65,7 +65,8 @@ class RecordDataFormatterFactory
         $helper->setDefaults('bjfcc', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('redkostj', [$this, 'getDefaultBjvvvSpecs']);
         $helper->setDefaults('litres', [$this, 'getDefaultLitresSpecs']);
-        $helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
+	$helper->setDefaults('period', [$this, 'getDefaultPeriodSpecs']);
+	$helper->setDefaults('pearson', [$this, 'getDefaultBjvvvSpecs']);
         return $helper;
     }
 
