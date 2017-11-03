@@ -69,8 +69,10 @@ class Options extends \VuFind\Search\Solr\Options
      */
     public function getSearchAction()
     {
+        //return 'author-home';
         //return 'author-search';
-        return 'search-results';
+        //return 'search-results';
+        return 'combined-results';
     }
 
     /**
