@@ -1,1 +1,2 @@
-<?=$this->url('search-advanced')?>?author=<?=urlencode($this->lookfor)?>
+<?//=$this->url('search-results')?>?author=<?=urlencode($this->lookfor)?>
+<?=$this->url('search-results');?>?sort=relevance&join=AND&lookfor0%5B%5D=<?=urldecode($this->lookfor)?>&type0%5B%5D=Author
