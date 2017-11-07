@@ -17,11 +17,14 @@
             $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
         ?>
         <? if ($annotation): ?>
+            <?= $this->truncate($annotation, 10000) ?>
+        <!--
             <p><?= $this->truncate($annotation, 300) ?></p>
 
             <? if (strlen($annotation) > 300): ?>
                 <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
             <? endif; ?>
+        -->
         <? endif; ?>
 
         <? if ($this->userlist()->getMode() !== 'disabled'): ?>
