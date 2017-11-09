@@ -17,7 +17,6 @@ return array(
         'vendor/validator.min.js',
         'lib/form-attr-polyfill.js', // input[form] polyfill, cannot load conditionally, since we need all versions of IE
         'lib/autocomplete.js',
-        'gtag.js',
         'common.js',
         'lightbox.js',
         'browser.js',
