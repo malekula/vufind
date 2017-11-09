@@ -24,6 +24,8 @@
     } ?>
     <?=$this->headLink()?>
     <?=$this->headStyle()?>
+      <link rel="shortcut icon" type="image/png" href="/vufind/themes/bootstrap3/images/favicon/favicon.png" sizes="16x16">
+      <link rel="shortcut icon" type="image/png" href="/vufind/themes/bootstrap3/images/favicon/favicon2x.png" sizes="32x32">
     <?
       if (!isset($this->renderingError)) {
         // Add translation strings
@@ -177,7 +179,7 @@ JS;
         ?>
         <header>
             <div id="header">
-                <div class="content_big clear"><a href="http://libfl.ru/" class="logo_wrapper desktop_version"><img id="random" src="/vufind/themes/bootstrap3/images/svg/acute-logo.svg" alt="">
+                <div class="content_big clear"><a href="http://libfl.ru/" class="logo_wrapper desktop_version"><img id="random" src="" alt="">
                         <!--span!=__("Библиотека<br>Иностранной<br>Литературы")--></a>
                     <!--.split_line-->
                     <!--.logo_95-->
@@ -210,9 +212,21 @@ JS;
                             </div>
                         </div>
                     </div>
-                    <div class="wiseman_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/plato.png" alt="Вуаля! Теперь я понимаю Платона." title="Вуаля! Теперь я понимаю Платона.">
-                        <div class="random_quote_block"><span><b>Voila!<br>Plato is not greek for you.</b></span></div>
+                    <div id="random_quote1" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/marquez.png" alt="Габриэль Гарсиа Маркез" title="Габриэль Гарсиа Маркез расставит все точки над и и а.">
+                        <div class="random_quote_block"><span><b>Gabriel García Márquez<br>will dot the í's and á's.</b></span></div>
                         <clear></clear>
+                    </div>
+                    <div id="random_quote2" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/plato.jpg" alt="Платон" title="Вуаля! Теперь я понимаю Платона.">
+                        <div class="random_quote_block"><span><b>Voilá!<br>Plato is not greek for you.</b></span></div>
+                        <clear>				</clear>
+                    </div>
+                    <div id="random_quote3" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/capek.jpg" alt="Карел Чапек" title="Дочитали книгу Карела Чапека? Поставьте сверху галочку.">
+                        <div class="random_quote_block"><span><b>Just finished Karel Čapek's<br>book? Put a tick above.</b></span></div>
+                        <clear></clear>
+                    </div>
+                    <div id="random_quote4" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/sartr.png" alt="Жан-Поль Сартр" title="Потерял смысл жизни? Попробуй французских экзистенциалистов.">
+                        <div class="random_quote_block"><span><b>Lost your raison d'être?<br>Try French existentialists.</b></span></div>
+                        <clear>		</clear>
                     </div>
                     <div class="side_social_wrapper">
                         <ul>

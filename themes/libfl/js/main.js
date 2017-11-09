@@ -4,6 +4,47 @@ $(document).ready(function() {
         $('#workday_end').text(time[moment().day()]);
     })();
 
+    /* Random quote */
+
+    NumberOfDivsToRandomDisplay = 4;
+    var CookieName = 'DivRamdomValueCookie';
+
+    function DisplayRandomQuote() {
+        var r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay);
+        if(NumberOfDivsToRandomDisplay > 1) {
+            var ck = 0;
+            var cookiebegin = document.cookie.indexOf(CookieName + "=");
+            if(cookiebegin > -1) {
+                cookiebegin += 1 + CookieName.length;
+                cookieend = document.cookie.indexOf(";",cookiebegin);
+                if(cookieend < cookiebegin) { cookieend = document.cookie.length; }
+                ck = parseInt(document.cookie.substring(cookiebegin,cookieend));
+            }
+            while(r == ck) { r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay); }
+            document.cookie = CookieName + "=" + r;
+        }
+        for( var i=1; i<=NumberOfDivsToRandomDisplay; i++) {
+            document.getElementById("random_quote"+i).style.display='none';
+        }
+        document.getElementById("random_quote"+r).style.display='block';
+    }
+
+    DisplayRandomQuote();
+
+    /**/
+
+    $('.vf_search_wrapper img').on('click', function() {
+        $(this).toggleClass('active');
+    });
+
+    /*$('.vf_search_wrapper img').on('click', function() {
+     var rotator = $('.vf_search_wrapper img');
+     if (rotator.hasClass('clicked')) {
+     $('.vf_search_wrapper img').removeClass('clicked');
+     } else {
+     $(this).toggleClass('clicked');
+     }
+     });*/
 
 
     var CurrentPage = window.location.pathname;
@@ -21,7 +62,7 @@ $(document).ready(function() {
         if (q.length && e.which==13) {
             var wrap = $('#search_wrapper');
             if (wrap.hasClass('catalogue')) {
-                var search_url = 'http://catalog.libfl.ru/vufind/Search/Results?';
+                var search_url = 'http://catalog.libfl.ru/Search/Results?';
                 switch ($(this).attr('data-filters')) {
                     case 'author':
                         search_url += 'sort=relevance&join=AND&lookfor0%5B%5D=' + encodeURI(q) + '&type0%5B%5D=Author&bool0%5B%5D=AND&illustration=-1&daterange%5B%5D=publishDate';
@@ -45,7 +86,7 @@ $(document).ready(function() {
                 var lang = pp[0] || pp[1] || "ru";
                 var filters = '';
                 if ($(this).attr('data-filters')) filters = '&f=' + $(this).attr('data-filters');
-                window.location = "http://libfl.ru/" + lang + "/search?q=" + encodeURI(q) + filters;
+                window.location = "http://libfl.ru/ru/search?q=" + encodeURI(q) + filters;
             }
         }
     });
@@ -306,6 +347,17 @@ $(document).ready(function() {
         }, 4000);
     }
 
+    /* logo randomizer */
+
+    function logoRandomizer() {
+        var logoVariations = ['/vufind/themes/bootstrap3/images/svg/accent-logo.svg', '/vufind/themes/bootstrap3/images/svg/acute-logo.svg', '/vufind/themes/bootstrap3/images/svg/breve-logo.svg', '/vufind/themes/bootstrap3/images/svg/circumflex-logo.svg', '/vufind/themes/bootstrap3/images/svg/tilde-logo.svg', '/vufind/themes/bootstrap3/images/svg/umlaut-logo.svg'];
+        var randomNum = Math.floor(Math.random() * logoVariations.length);
+        document.getElementById("random").src = logoVariations[randomNum];
+    }
+    logoRandomizer();
+
+    /**/
+
     function backShowBlock(elem, time) {
         setTimeout(function() {
             elem.removeClass('moved moved_back');
@@ -406,8 +458,9 @@ $(document).ready(function() {
     }
     var Index_Btn_Href = $('a.index_other_events').attr('href');
 
-    $('.event_content .btn_social, .collection_page_socials .btn_social').each(function(i,e) {
-        $(e).attr('href', $(e).attr('href') + window.location.href)
+    $('.event_content .btn_social, .collection_page_socials .btn_social, .inner_menu_share .inner_share_btn').each(function(i,e) {
+        //$(e).attr('href', $(e).attr('href') + window.location.href)
+        $(e).attr('href', $(e).attr('href').replace('%url%',  window.location.href))
     });
     if ($('meta[property="og:image"]').length) {
         //$('meta[property="og:image"]').attr('content', 'http://libfl.ru' + $('meta[property="og:image"]').attr('content'));
