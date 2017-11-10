@@ -1,17 +1,29 @@
 <? /* Display thumbnail if appropriate: */ ?>
-<? if ($cover): ?>
 
-  <? if ($this->link): ?><a href="" onclick="return false"><? endif; ?>
-
-  <img alt="<?=$this->transEsc('Cover Image')?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" src="<?=$this->escapeHtmlAttr($cover); ?>"/>
-  <? if ($this->link): ?></a><? endif; ?>
-<? else: ?>
-  <img src="<?=$this->url('cover-unavailable')?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" alt="<?=$this->transEsc('No Cover Image')?>"/>
-<? endif; ?>
 <?php
-    if ($additional_covers) {
-        foreach ($additional_covers as $addCover) {
-            echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($addCover)."' style='display:none'></a>";
+if ($additional_covers) {
+    $local_cover = NULL;
+    foreach ($additional_covers as $addCover) {
+        $exp = explode('/', $addCover);
+        $getCover = $exp[count($exp)-1];
+        if (explode('.', $getCover)[0] == 'cover') {
+            $local_cover = $addCover;
         }
+        echo "<a data-fancybox='covers' href='" . $this->escapeHtmlAttr($addCover) . "' style='display:none'></a>";
     }
+}
 ?>
+<? if ($local_cover): ?>
+    <? if ($this->link): ?><a href="" onclick="return false"><? endif; ?>
+    <img alt="<?= $this->transEsc('Cover Image') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" src="<?=$local_cover;?>"/>
+    <? if ($this->link): ?></a><? endif; ?>
+<? else: ?>
+    <? if ($cover): ?>
+        <? if ($this->link): ?><a href="" onclick="return false"><? endif; ?>
+        <img alt="<?= $this->transEsc('Cover Image') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" src="<?= $this->escapeHtmlAttr($cover); ?>"/>
+        <? if ($this->link): ?></a><? endif; ?>
+    <? else: ?>
+        <img src="<?= $this->url('cover-unavailable') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" alt="<?= $this->transEsc('No Cover Image') ?>"/>
+    <? endif; ?>
+<? endif; ?>
+

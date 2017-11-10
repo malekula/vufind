@@ -520,7 +520,7 @@ class Record extends AbstractHelper
 
 
                 if (in_array($ext, $allowed_types)) {
-                    $covers[$i] = '/vufind/covers/' . $fund . '/' . $id . '/' . $file;
+                    $covers[$i] = '/covers/' . $fund . '/' . $id . '/' . $file;
                     $i++;
                 }
             }
