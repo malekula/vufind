@@ -100,7 +100,6 @@ a:hover {
     margin: 0;
 }
 nav {
-    z-index: 9999;
     position: relative;
 }
 input, textarea {
@@ -804,7 +803,7 @@ small.work_time {
 .fixed_logo {
     float: left;
     padding: 5px;
-    background: #0000f3 url('/images/svg/tilde-white-icon.svg') no-repeat center;
+    background: #0000f3 url('../images/svg/tilde-white-icon.svg') no-repeat center;
     background-origin: content-box;
     width: 51px;
     height: 51px;
