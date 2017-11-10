@@ -350,7 +350,7 @@ $(document).ready(function() {
     /* logo randomizer */
 
     function logoRandomizer() {
-        var logoVariations = ['/vufind/themes/bootstrap3/images/svg/accent-logo.svg', '/vufind/themes/bootstrap3/images/svg/acute-logo.svg', '/vufind/themes/bootstrap3/images/svg/breve-logo.svg', '/vufind/themes/bootstrap3/images/svg/circumflex-logo.svg', '/vufind/themes/bootstrap3/images/svg/tilde-logo.svg', '/vufind/themes/bootstrap3/images/svg/umlaut-logo.svg'];
+        var logoVariations = ['/themes/bootstrap3/images/svg/accent-logo.svg', '/themes/bootstrap3/images/svg/acute-logo.svg', '/themes/bootstrap3/images/svg/breve-logo.svg', '/themes/bootstrap3/images/svg/circumflex-logo.svg', '/themes/bootstrap3/images/svg/tilde-logo.svg', '/themes/bootstrap3/images/svg/umlaut-logo.svg'];
         var randomNum = Math.floor(Math.random() * logoVariations.length);
         document.getElementById("random").src = logoVariations[randomNum];
     }

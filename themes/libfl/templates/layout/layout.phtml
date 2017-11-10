@@ -35,8 +35,8 @@
     } ?>
     <?=$this->headLink()?>
     <?=$this->headStyle()?>
-      <link rel="shortcut icon" type="image/png" href="/vufind/themes/bootstrap3/images/favicon/favicon.png" sizes="16x16">
-      <link rel="shortcut icon" type="image/png" href="/vufind/themes/bootstrap3/images/favicon/favicon2x.png" sizes="32x32">
+      <link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon.png" sizes="16x16">
+      <link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon2x.png" sizes="32x32">
     <?
       if (!isset($this->renderingError)) {
         // Add translation strings
@@ -133,7 +133,7 @@ JS;
       $this->headScript()->appendScript($setupJS);
     ?>
     <?=$this->headScript()?>
-      <link href="/vufind/themes/bootprint3/css/libfl.css?_=1499547038" rel="stylesheet" type="text/css">
+      <link href="/themes/bootprint3/css/libfl.css?_=1499547038" rel="stylesheet" type="text/css">
   </head>
   <body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> <?=$this->layoutClass('offcanvas-row')?><? if ($this->layout()->rtl): ?> rtl<? endif; ?>">
     <div id="layout_wrapper">
@@ -145,7 +145,7 @@ JS;
                 <div class="content_big">
                     <ul class="menu">
                         <li><a href="http://libfl.ru/ru/item/catalogue">Каталоги</a></li>
-                        <li class="active"><a href="http://libfl.ru/ru/item/events">Мероприятия</a></li>
+                        <li><a href="http://libfl.ru/ru/item/events">Мероприятия</a></li>
                         <li><a href="http://libfl.ru/ru/item/novosti-biblioteki">Новости</a></li>
                         <li><a href="http://libfl.ru/ru/item/centers">Национальные центры</a></li>
                         <li><a href="http://libfl.ru/ru/item/uslugi-biblioteki">Услуги</a></li>
@@ -166,7 +166,7 @@ JS;
                         -->
                         <ul class="menu">
                             <li><a href="http://libfl.ru/ru/item/catalogue">Каталоги</a></li>
-                            <li class="active"><a href="http://libfl.ru/ru/item/events">Мероприятия</a></li>
+                            <li><a href="http://libfl.ru/ru/item/events">Мероприятия</a></li>
                             <li><a href="http://libfl.ru/ru/item/novosti-biblioteki">Новости</a></li>
                             <li><a href="http://libfl.ru/ru/item/centers">Национальные центры</a></li>
                             <li><a href="http://libfl.ru/ru/item/uslugi-biblioteki">Услуги</a></li>
@@ -206,7 +206,7 @@ JS;
                     <div id="search_wrapper" class="vf_search_wrapper catalogue">
                         <span class="search_switch">Поиск по каталогу&nbsp;</span>
                         <div class="vf_search_form desktop_version">
-                            <input id="search" name="search" type="text" value=""><img src="/vufind/themes/bootstrap3/images/svg/caron-icon.svg">
+                            <input id="search" name="search" type="text" value=""><img src="/themes/bootstrap3/images/svg/caron-icon.svg">
                             <div class="vf_search_select site_search">
                                 <div data-text="Поиск по сайту" data-action="" class="vf_search_option">весь сайт</div>
                                 <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option">мероприятия</div>
@@ -219,23 +219,23 @@ JS;
                                 <div data-text="Поиск по автору" data-action="author" class="vf_search_option">автор</div>
                                 <div data-text="Поиск по названию" data-action="title" class="vf_search_option">название</div>
                                 <div data-text="Поиск по предметной области" data-action="subject" class="vf_search_option">предметная область</div>
-                                <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISNN</div><a href="http://catalog.libfl.ru/vufind/Search/Advanced" class="advanced_search" target="_blank">расширенный поиск</a>
+                                <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISNN</div><a href="http://catalog.libfl.ru/Search/Advanced" class="advanced_search" target="_blank">расширенный поиск</a>
                             </div>
                         </div>
                     </div>
-                    <div id="random_quote1" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/marquez.png" alt="Габриэль Гарсиа Маркез" title="Габриэль Гарсиа Маркез расставит все точки над и и а.">
+                    <div id="random_quote1" style="display:none;" class="wisemen_block desktop_version"><img src="/themes/bootstrap3/images/wisemen/marquez.png" alt="Габриэль Гарсиа Маркез" title="Габриэль Гарсиа Маркез расставит все точки над и и а.">
                         <div class="random_quote_block"><span><b>Gabriel García Márquez<br>will dot the í's and á's.</b></span></div>
                         <clear></clear>
                     </div>
-                    <div id="random_quote2" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/plato.jpg" alt="Платон" title="Вуаля! Теперь я понимаю Платона.">
+                    <div id="random_quote2" style="display:none;" class="wisemen_block desktop_version"><img src="/themes/bootstrap3/images/wisemen/plato.jpg" alt="Платон" title="Вуаля! Теперь я понимаю Платона.">
                         <div class="random_quote_block"><span><b>Voilá!<br>Plato is not greek for you.</b></span></div>
                         <clear>				</clear>
                     </div>
-                    <div id="random_quote3" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/capek.jpg" alt="Карел Чапек" title="Дочитали книгу Карела Чапека? Поставьте сверху галочку.">
+                    <div id="random_quote3" style="display:none;" class="wisemen_block desktop_version"><img src="/themes/bootstrap3/images/wisemen/capek.jpg" alt="Карел Чапек" title="Дочитали книгу Карела Чапека? Поставьте сверху галочку.">
                         <div class="random_quote_block"><span><b>Just finished Karel Čapek's<br>book? Put a tick above.</b></span></div>
                         <clear></clear>
                     </div>
-                    <div id="random_quote4" style="display:none;" class="wisemen_block desktop_version"><img src="/vufind/themes/bootstrap3/images/wisemen/sartr.png" alt="Жан-Поль Сартр" title="Потерял смысл жизни? Попробуй французских экзистенциалистов.">
+                    <div id="random_quote4" style="display:none;" class="wisemen_block desktop_version"><img src="/themes/bootstrap3/images/wisemen/sartr.png" alt="Жан-Поль Сартр" title="Потерял смысл жизни? Попробуй французских экзистенциалистов.">
                         <div class="random_quote_block"><span><b>Lost your raison d'être?<br>Try French existentialists.</b></span></div>
                         <clear>		</clear>
                     </div>
@@ -260,7 +260,7 @@ JS;
                         </ul>
                     </div>
                     <!--.search_wrapper.desktop_version
-                    img(src='/vufind/themes/bootstrap3/images/svg/caron-icon.svg', alt='', enctype="multipart/form-data")			
+                    img(src='/themes/bootstrap3/images/svg/caron-icon.svg', alt='', enctype="multipart/form-data")			
                     
                     //input#search(name='search', type='text', placeholder=__("Поиск по сайту"), value=(search ? search : ""))
                     
@@ -338,9 +338,9 @@ JS;
           <?=$this->inlineScript(\Zend\View\Helper\HeadScript::FILE, "https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit&hl=" . $this->layout()->userLang, 'SET')?>
       <? endif; ?>
   </body>
-  <script src="/vufind/themes/libfl/js/moment-with-locales.min.js"></script>
-  <script src="/vufind/themes/libfl/js/moment-timezone-with-data-2010-2020.min.js"></script>
-  <script src="/vufind/themes/libfl/js/jquery-ui.all.min.js"></script>
-  <script src="/vufind/themes/libfl/js/jquery.form.js"></script>
-  <script src="/vufind/themes/libfl/js/main.js?_=1499547038"></script>
+  <script src="/themes/libfl/js/moment-with-locales.min.js"></script>
+  <script src="/themes/libfl/js/moment-timezone-with-data-2010-2020.min.js"></script>
+  <script src="/themes/libfl/js/jquery-ui.all.min.js"></script>
+  <script src="/themes/libfl/js/jquery.form.js"></script>
+  <script src="/themes/libfl/js/main.js?_=1499547038"></script>
 </html>

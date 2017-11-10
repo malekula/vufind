@@ -3399,6 +3399,8 @@ ui-selectmenu-menu.ui-front.ui-selectmenu-open span.ui-icon {
     font-size: 16px;
     margin-top: 20px;
     box-shadow: 0px 6px 24px 0 rgba(42, 42, 183, 0.14);
+    padding-left: 0;
+    list-style-type: none;
 }
 .ui-menu .ui-menu-item {
     padding: 9px 10px 8px;
