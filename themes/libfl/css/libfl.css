@@ -100,7 +100,6 @@ a:hover {
     margin: 0;
 }
 nav {
-    z-index: 9999;
     position: relative;
 }
 input, textarea {
