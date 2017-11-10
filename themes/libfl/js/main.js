@@ -136,7 +136,7 @@ $(document).ready(function() {
     $('.input-daterange').addClass('selected');
 
     function resizeRecalc() {
-        $('select').selectmenu({
+        /*$('select').selectmenu({
             select: function(event, ui) {
                 $(this).trigger('change')
                 if ($(this).val()) {
@@ -145,7 +145,7 @@ $(document).ready(function() {
                     $(this).siblings('.ui-selectmenu-button').removeClass('ui-selected');
                 }
             }
-        });
+        });*/
         if (window.innerWidth < 700) {
             $('.event_image_wrapper, .inner_page_teaser_image').css('opacity', 0);
             setTimeout(function() {
@@ -212,7 +212,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.input-daterange').datepicker({
+    /*$('.input-daterange').datepicker({
         format: "dd.mm.yy",
         weekStart: 1,
         language: "ru"
@@ -232,7 +232,7 @@ $(document).ready(function() {
             $('.clear_events_date').show();
             $('.datepicker.dropdown-menu').hide();
         }
-    });
+    });*/
     $('.events_cal_btn').on('click', function(e) {
         if ($(e.target).hasClass('clear_events_date')) return;
         $('#picker-container').show();
@@ -245,7 +245,7 @@ $(document).ready(function() {
         $('#events_date_start').val('').trigger('change');
         $('.clear_events_date').hide();
     });
-    $('#date_input').datepicker({
+    /*$('#date_input').datepicker({
         format: "dd.mm.yyyy",
         weekStart: 1,
         language: "ru",
@@ -266,7 +266,7 @@ $(document).ready(function() {
                 $(this).parent().removeClass('active');
             }
         }
-    });
+    });*/
     $('#date_btn').on('click', function() {
         $('#picker-container').show();
         $('#date_input').data("datepicker").show()
