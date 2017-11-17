@@ -8,8 +8,9 @@ if ($additional_covers) {
         $getCover = $exp[count($exp)-1];
         if (explode('.', $getCover)[0] == 'cover') {
             $local_cover = $addCover;
+        } else {
+            echo "<a data-fancybox='covers' href='" . $this->escapeHtmlAttr($addCover) . "' style='display:none'></a>";
         }
-        echo "<a data-fancybox='covers' href='" . $this->escapeHtmlAttr($addCover) . "' style='display:none'></a>";
     }
 }
 ?>
