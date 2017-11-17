@@ -494,6 +494,9 @@ class Record extends AbstractHelper
             }
             $details['additional_covers'] = $this->getOtherCovers($this->driver->getUniqueID());
             $details['html'] = $this->contextHelper->renderInContext(
+                'record/cover-result-list.phtml', $details
+            );
+            $details['html-record'] = $this->contextHelper->renderInContext(
                 'record/cover.phtml', $details
             );
         }
