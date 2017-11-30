@@ -3,7 +3,7 @@
         $this->headScript()->appendFile("check_exemplar_statuses.js");
         $QRCode = $this->record($this->driver)->getQRCode("core");
         $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
-        $cover = $coverDetails['html'];
+        $cover = $coverDetails['html-record'];
         $preview = $this->record($this->driver)->getPreviews();
     ?>
 

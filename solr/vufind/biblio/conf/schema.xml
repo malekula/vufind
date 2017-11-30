@@ -302,6 +302,8 @@
    <field name="MethodOfAccess" type="textFacet" indexed="true" stored="true" multiValued="true" termVectors="true"/>
    
    <field name="Location" type="textFacet" indexed="true" stored="true" multiValued="true"/>
+   <field name="PlacingCipher" type = "string" indexed="true" stored="true" multiValued = "true"/>
+
   <!-- Пример для фасетов -->
   <!--      
    <field name="fund"         type="string" indexed="true" stored="true"  multiValued="true" termVectors="true"/>

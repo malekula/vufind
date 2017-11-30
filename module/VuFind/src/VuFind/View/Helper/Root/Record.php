@@ -494,6 +494,9 @@ class Record extends AbstractHelper
             }
             $details['additional_covers'] = $this->getOtherCovers($this->driver->getUniqueID());
             $details['html'] = $this->contextHelper->renderInContext(
+                'record/cover-result-list.phtml', $details
+            );
+            $details['html-record'] = $this->contextHelper->renderInContext(
                 'record/cover.phtml', $details
             );
         }
@@ -520,7 +523,7 @@ class Record extends AbstractHelper
 
 
                 if (in_array($ext, $allowed_types)) {
-                    $covers[$i] = '/vufind/covers/' . $fund . '/' . $id . '/' . $file;
+                    $covers[$i] = '/covers/' . $fund . '/' . $id . '/' . $file;
                     $i++;
                 }
             }
