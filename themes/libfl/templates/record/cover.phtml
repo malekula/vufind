@@ -1,12 +1,18 @@
 <? /* Display thumbnail if appropriate: */ ?>
 
 <?php
+function sort_covers($a, $b) {
+    if ($a < $b && array_pop(explode('/', $b)) == 'cover.jpg') {
+        return 1;
+    } else {
+        return ($a < $b) ? -1 : 1;
+    }
+}
 if ($additional_covers) {
     $local_cover = NULL;
-    arsort($additional_covers);
+    usort($additional_covers, "sort_covers");
     foreach ($additional_covers as $addCover) {
-        $exp = explode('/', $addCover);
-        $getCover = $exp[count($exp)-1];
+        $getCover = array_pop(explode('/', $addCover));
         if (explode('.', $getCover)[0] == 'cover') {
             $local_cover = $addCover;
             if ($this->link):
