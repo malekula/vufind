@@ -1,15 +1,15 @@
 <? /* Display thumbnail if appropriate: */ ?>
 
 <?php
-function sort_covers($a, $b) {
-    if ($a < $b && array_pop(explode('/', $b)) == 'cover.jpg') {
-        return 1;
-    } else {
-        return ($a < $b) ? -1 : 1;
-    }
-}
 if ($additional_covers) {
     $local_cover = NULL;
+    function sort_covers($a, $b) {
+        if ($a < $b && array_pop(explode('/', $b)) == 'cover.jpg') {
+            return 1;
+        } else {
+            return ($a < $b) ? -1 : 1;
+        }
+    }
     usort($additional_covers, "sort_covers");
     foreach ($additional_covers as $addCover) {
         $getCover = array_pop(explode('/', $addCover));
