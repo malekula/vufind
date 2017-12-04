@@ -6,7 +6,7 @@
     <? endif; ?>
     <div class="solr-facet-container">
       <? foreach ($this->facetList as $field => $list): ?>
-        <div class="solr-adv-facet">
+        <div class="solr-adv-facet <?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>">
           <label for="limit_<?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>"><?=$this->transEsc($list['label'])?>:</label>
           <select class="form-control" id="limit_<?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>" name="filter[]" multiple="multiple" size="10">
             <? if (is_array($this->hierarchicalFacets) && in_array($field, $this->hierarchicalFacets)): ?>

@@ -10372,7 +10372,30 @@ textarea::placeholder {
         flex-wrap: wrap
     }
     .solr-adv-facet {
-        flex: 1 25%
+        flex: 1 50%
+    }
+    
+    .MethodOfAccess {
+        flex: 1 33%;
+        margin-bottom: 15px;
+    }
+    
+    .fund {
+        flex: 1 33%;
+        margin-bottom: 15px;
+    }
+    
+    .Location {
+        flex: 1 33%;
+        margin-bottom: 15px;
+    }
+    
+    .language {
+        flex: 1 33%;
+    }
+    
+    .topic_facet {
+        flex: 1 67%;
     }
 }
 
@@ -12155,7 +12178,7 @@ h3 {
         font-weight: normal
     }
     .form-control {
-        max-width: 400px
+        /*max-width: 400px*/
     }
     #modal .form-control {
         max-width: none
