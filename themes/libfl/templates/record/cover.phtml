@@ -3,28 +3,37 @@
 <?php
 if ($additional_covers) {
     $local_cover = NULL;
+    usort($additional_covers);
     foreach ($additional_covers as $addCover) {
-        $exp = explode('/', $addCover);
-        $getCover = $exp[count($exp)-1];
+        $getCover = array_pop(explode('/', $addCover));
         if (explode('.', $getCover)[0] == 'cover') {
             $local_cover = $addCover;
+            if ($this->link):
+                if ($linkPreview):
+                    echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' data-linkpreview='true' class='recorddriver' src='".$local_cover."' /></a>";
+                else:
+                    echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' class='recorddriver' src='".$local_cover."' /></a>";
+                endif;
+            endif;
         } else {
             echo "<a data-fancybox='covers' href='" . $this->escapeHtmlAttr($addCover) . "' style='display:none'></a>";
         }
     }
+} else {
+    if ($cover):
+        if ($this->link):
+            if ($linkPreview):
+                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' data-linkpreview='true' class='recorddriver' src='".$local_cover."' /></a>";
+            else:
+                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' class='recorddriver' src='".$local_cover."' /></a>";
+            endif;
+        endif;
+    else:
+        if ($linkPreview):
+            echo "<img src='".$this->url('cover-unavailable')."' data-linkpreview='true' class='recorddriver' alt='".$this->transEsc('No Cover Image')."' />";
+        else:
+            echo "<img src='".$this->url('cover-unavailable')."' class='recorddriver' alt='".$this->transEsc('No Cover Image')."' />";
+        endif;
+    endif;
 }
 ?>
-<? if ($local_cover): ?>
-    <? if ($this->link): ?><a data-fancybox="covers" href="<?=$this->escapeHtmlAttr($local_cover)?>"><? endif; ?>
-    <img alt="<?= $this->transEsc('Cover Image') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" src="<?=$local_cover;?>"/>
-    <? if ($this->link): ?></a><? endif; ?>
-<? else: ?>
-    <? if ($cover): ?>
-        <? if ($this->link): ?><a data-fancybox="covers" href="<?=$this->escapeHtmlAttr($cover)?>"><? endif; ?>
-        <img alt="<?= $this->transEsc('Cover Image') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" src="<?= $this->escapeHtmlAttr($cover); ?>"/>
-        <? if ($this->link): ?></a><? endif; ?>
-    <? else: ?>
-        <img src="<?= $this->url('cover-unavailable') ?>" <? if ($linkPreview): ?>data-linkpreview="true" <? endif; ?>class="recordcover" alt="<?= $this->transEsc('No Cover Image') ?>"/>
-    <? endif; ?>
-<? endif; ?>
-
