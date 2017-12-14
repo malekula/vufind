@@ -23,9 +23,9 @@ if ($additional_covers) {
     if ($cover):
         if ($this->link):
             if ($linkPreview):
-                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' data-linkpreview='true' class='recorddriver' src='".$local_cover."' /></a>";
+                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($cover)."'><img alt='".$this->transEsc('Cover Image')."' data-linkpreview='true' class='recorddriver' src='".$cover."' /></a>";
             else:
-                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($local_cover)."'><img alt='".$this->transEsc('Cover Image')."' class='recorddriver' src='".$local_cover."' /></a>";
+                echo "<a data-fancybox='covers' href='".$this->escapeHtmlAttr($cover)."'><img alt='".$this->transEsc('Cover Image')."' class='recorddriver' src='".$cover."' /></a>";
             endif;
         endif;
     else:
