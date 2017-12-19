@@ -150,6 +150,7 @@ $config = [
             'worldcat' => 'VuFind\Controller\Factory::getWorldcatController',
             'worldcatrecord' => 'VuFind\Controller\Factory::getWorldcatrecordController',
             'reporterror' => 'VuFind\Controller\Factory::getReporterrorController',
+            'bookreader' => 'VuFind\Controller\Factory::getBookreaderController',
             'status' => 'VuFind\Controller\Factory::getStatusController',
         ],
     ],
@@ -867,6 +868,7 @@ $staticRoutes = [
     'Web/Home', 'Web/FacetList', 'Web/Results',
     'Worldcat/Advanced', 'Worldcat/Home', 'Worldcat/Search',
     'Reporterror/Home', 'Reporterror/Email',
+    'Bookreader/Viewer',
 ];
 
 $routeGenerator = new \VuFind\Route\RouteGenerator();
