@@ -32,7 +32,10 @@ class BookreaderController extends AbstractBase
      */
     public function viewerAction()
     { 
+        $layout = $this->layout();
+        $layout->setTemplate('layout/bookreader');
         $view = $this->createViewModel();
+        //$view->setTerminal(true);
         return $view;
     }
 }

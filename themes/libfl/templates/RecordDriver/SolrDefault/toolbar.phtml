@@ -11,7 +11,7 @@
     <? if ($this->reporterror()->tabEnabled()): ?>
         <li><a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->url() . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?></a></li>
     <? endif; ?>
-    <li><a id="readonline" href="<?= $this->url('bookreader-viewer') . '?bookID=' . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("Read online") ?></a></li>
+        <li><a id="readonline" href="<?= $this->url('bookreader-viewer') . '?bookID=' . $this->driver->getUniqueId(); ?>" rel="nofollow" target="_blank"><?= $this->transEsc("Читать книгу") ?></a></li>
   <!--<? if ($this->accountCapabilities()->getSmsSetting() !== 'disabled'): ?>
     <li><a class="sms-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'SMS')?>" rel="nofollow"><i class="fa fa-mobile" aria-hidden="true"></i> <?=$this->transEsc('Text this')?></a></li>
   <? endif; ?>
