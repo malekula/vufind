@@ -79,7 +79,7 @@ function BookReader() {
     this.lastDisplayableIndex2up = null;
 
     // Should be overriden (before init) by custom implmentations.
-    this.logoURL = 'https://www.archive.org';
+    this.logoURL = 'https://catalog.libfl.ru';
 
     // Base URL for UI images - should be overriden (before init) by
     // custom implementations.
@@ -158,7 +158,7 @@ function BookReader() {
 
     // Settings for mobile
     this.enableMobileNav = true;
-    this.mobileNavTitle = 'Internet Archive';
+    this.mobileNavTitle = 'Book Reader Menu';
     this.onePageMinBreakpoint = 800;
 
     // Keep track of what page you are on
@@ -196,6 +196,7 @@ BookReader.prototype.init = function() {
     } else if ('undefined' != typeof(params.page)) {
         startIndex = this.getPageIndex(params.page);
     }
+    console.log(params);
     if ('undefined' == typeof(startIndex) && this.enablePageResume && this.numLeafs > 2) {
         // Check cookies
         var val = this.getResumeValue();

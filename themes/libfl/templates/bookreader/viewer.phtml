@@ -14,6 +14,7 @@
     $this->headScript()->appendFile('mmenu/jquery.mmenu.min.js');
     $this->headScript()->appendFile('mmenu/jquery.mmenu.navbars.min.js');
     //$this->headScript()->appendFile('bookreader/excanvas.compiled.js');
+    $this->headScript()->appendFile('bookreader/BookReader-common.js');
     $this->headScript()->appendFile('bookreader/BookReader.js');
     //$this->headScript()->appendFile('bookreader/jquery.ui.touch-punch.min.js
 ?>
@@ -114,22 +115,33 @@
         }
     };
     br.getSpreadIndices = function (pindex) {
+        console.log(BookReader.prototype.encrypt(10));
         var spreadIndices = [null, null];
         if ('rl' == this.pageProgression) {
             if (this.getPageSide(pindex) == 'R') {
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex + 1);
                 spreadIndices[1] = pindex;
                 spreadIndices[0] = pindex + 1;
             } else {
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex - 1);
                 spreadIndices[0] = pindex;
                 spreadIndices[1] = pindex - 1;
             }
         } else {
             if (this.getPageSide(pindex) == 'L') {
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex + 1);
                 spreadIndices[0] = pindex;
                 spreadIndices[1] = pindex + 1;
+                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
             } else {
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex - 1);
                 spreadIndices[1] = pindex;
                 spreadIndices[0] = pindex - 1;
+                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
             }
         }
         return spreadIndices;
@@ -146,13 +158,13 @@
     br.metadata = [
         {label: 'Title', value: 'Здесь будет отображаться название книги'},
         {label: 'Author', value: 'Автор книги'},
-        {label: 'Demo Info', value: 'Краткое описание книги (о чем книга и т. п.)'},
+        {label: 'Description', value: 'Краткое описание книги (о чем книга и т. п.)'},
     ];
     br.enableMobileNav = true;
-    br.mobileNavTitle = 'BookReader demo';
+    br.mobileNavTitle = 'Settings';
     br.imagesBaseURL = '/themes/libfl/images/bookreader/';
     br.getEmbedCode = function (frameWidth, frameHeight, viewParams) {
-        return "Embed code not supported in bookreader demo.";
+        return "Embed code not supported in bookreader.";
     };
     br.ui = 'full'; // embed, full (responsive)
     br.init();
@@ -160,4 +172,3 @@
     $('.BRtoolbarSectionSearch').hide();
     // $('#btnSrch').hide();
 </script>
-
