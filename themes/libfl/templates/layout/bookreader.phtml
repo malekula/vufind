@@ -1,0 +1,41 @@
+<?= $this->doctype('HTML5') ?>
+<html lang="<?= $this->layout()->userLang ?>">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74053759-9"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-74053759-9');
+        </script>
+        <meta http-equiv="Cache-Control" content="private">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <?= $this->headMeta() ?>
+        <?= $this->headTitle() ?>
+        <?= $this->headLink() ?>
+        <?= $this->headStyle() ?>
+        <link rel="shortcut icon" type="image/png" href="/themes/libfl/images/favicon/favicon.png" sizes="16x16">
+        <link rel="shortcut icon" type="image/png" href="/themes/libfl/images/favicon/favicon2x.png" sizes="32x32">
+        <?
+        // Session keep-alive
+        if ($this->KeepAlive()) {
+            $this->headScript()->appendScript('var keepAliveInterval = ' . $this->KeepAlive());
+            $this->headScript()->appendFile("keep_alive.js");
+        }
+        ?>
+        <?= $this->headScript() ?>
+    </head>
+    <body>
+        <?=$this->layout()->content ?>
+    </body>
+    <!--<script src="/themes/libfl/js/moment-with-locales.min.js"></script>
+    <script src="/themes/libfl/js/moment-timezone-with-data-2010-2020.min.js"></script>-->
+    <!--<script src="/themes/libfl/js/jquery-ui.all.min.js"></script>-->
+    <!--<script src="/themes/libfl/js/jquery.form.js"></script>
+    <script src="/themes/libfl/js/main.js?_=1499547038"></script>-->
+</html>

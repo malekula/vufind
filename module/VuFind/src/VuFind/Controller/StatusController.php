@@ -196,7 +196,44 @@ class StatusController extends AbstractBase
         }
         return $this->output($results, self::STATUS_OK);
     }
-    
+
+    /**
+     * Crypt url bookreader page
+     *
+     * @return \Zend\Http\Response
+     * @author Maksim Kuleba <maksim.kuleba@gmail.com>
+     */
+    protected function encryptAjax()
+    {
+        $this->disableSessionWrites();  // avoid session write timing bug
+        $current_index = $this->params()->fromPost('current_index', $this->params()->fromQuery('current_index'));
+        $result[0] = $this->encrypt($current_index);
+        $result[1] = $this->decrypt($result[0]);
+        return $this->output($result, self::STATUS_OK);
+    }
+
+    protected function decryptAjax()
+    {
+        $this->disableSessionWrites();
+        $hashString = $this->params()->fromPost('hash', $this->params()->fromQuery('hash'));
+        $page = explode('.', $this->decrypt($hashString))[0];
+        return $this->output($page, self::STATUS_OK);
+    }
+
+    private function encrypt($index)
+    {
+        $salt = $index*3;
+        $str = $index.'.'.$salt;
+        $hash = strrev(base64_encode(strrev(base64_encode($str))));
+        return $hash;
+    }
+
+    private function decrypt($hash)
+    {
+        $str = base64_decode(strrev(base64_decode(strrev($hash))));
+        return $str;
+    }
+
     /**
      * Get Exemplar Statuses
      *
@@ -228,7 +265,7 @@ class StatusController extends AbstractBase
             case 'unknown':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
-            default: 
+            default:
                 $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
                 break;
         }

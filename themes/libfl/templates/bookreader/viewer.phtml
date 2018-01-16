@@ -1,0 +1,174 @@
+<?php
+    $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.css');
+    $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.navbars.css');
+    $this->headLink()->appendStylesheet('bookreader/BookReader.css');
+    $this->headLink()->appendStylesheet('bookreader/BookReader-ia.css');
+    //$this->headLink()->appendStylesheet('bookreader/BookReaderEmbed.css');
+
+    $this->headScript()->appendFile('bookreader/jquery-1.10.2.min.js');
+    $this->headScript()->appendFile('bookreader/jquery-ui-1.12.0.min.js');
+    $this->headScript()->appendFile('bookreader/jquery.browser.min.js');
+    $this->headScript()->appendFile('bookreader/dragscrollable-br.js');
+    $this->headScript()->appendFile('bookreader/jquery.colorbox-min.js');
+    $this->headScript()->appendFile('bookreader/jquery.bt.min.js');
+    $this->headScript()->appendFile('mmenu/jquery.mmenu.min.js');
+    $this->headScript()->appendFile('mmenu/jquery.mmenu.navbars.min.js');
+    //$this->headScript()->appendFile('bookreader/excanvas.compiled.js');
+    $this->headScript()->appendFile('bookreader/BookReader-common.js');
+    $this->headScript()->appendFile('bookreader/BookReader.js');
+    //$this->headScript()->appendFile('bookreader/jquery.ui.touch-punch.min.js
+?>
+<!--<div id="BookReader" style="height: 600px; overflow: hidden;">
+    Библиотека иностранной литературы<br/>
+    <noscript>
+    <p>
+        The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="http://www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
+    </p>
+    </noscript>
+</div>-->
+<div id="IABookReaderWrapper">
+    <div id="IABookReaderMessageWrapper" style="display: none;"></div>
+    <div id="BookReader" class="ui-full mm-page mm-slideout">
+        Библиотека иностранной литературы<br/>
+        <noscript>
+        <p>
+            The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="http://www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
+        </p>
+        </noscript>
+    </div>
+</div>
+<script type="text/javascript">
+    function clickIE() {
+        if (document.all) {
+            return false;
+        }
+    }
+    function clickNS(e) {
+        if (document.layers || (document.getElementById && !document.all)) {
+            if (e.which == 2 || e.which == 3) {
+                return false;
+            }
+        }
+    }
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS;
+    } else {
+        document.onmouseup = clickNS;
+        document.oncontextmenu = clickIE;
+    }
+    document.oncontextmenu = new Function("return false");
+</script>
+<script>
+    /**
+     * We achieve a flexbox-like sizing with JS to maximize browser support
+     */
+    function throttle(fn, threshhold, scope) {
+        threshhold || (threshhold = 250);
+        var last,
+            deferTimer;
+        return function () {
+            var context = scope || this;
+            var now = +new Date,
+                args = arguments;
+                if (last && now < last + threshhold) {
+                    // hold on to it
+                    clearTimeout(deferTimer);
+                        deferTimer = setTimeout(function () {
+                        last = now;
+                        fn.apply(context, args);
+                    }, threshhold);
+                } else {
+                    last = now;
+                    fn.apply(context, args);
+                }
+        };
+    }
+</script>
+<script>
+    // Set some config variables -- $$$ NB: Config object format has not been finalized
+    var brConfig = {theme:"ia"};
+    brConfig["mode"] = 2;
+</script>
+<script type="text/javascript">
+    br = new BookReader();
+    br.getPageWidth = function(index) {
+        return 800;
+    };
+    br.getPageHeight = function(index) {
+        return 1200;
+    };
+    br.getPageURI = function(index, reduce, rotate) {
+        var leafStr = '0000';
+        var imgStr = (index+1).toString();
+        var re = new RegExp("0{"+imgStr.length+"}$");
+        //var url = 'http://www.archive.org/download/BookReader/img/page'+leafStr.replace(re, imgStr) + '.jpg';
+        //var url = 'http://angelyo.ru/iabr/images2/page'+leafStr.replace(re, imgStr) + '.jpg';
+        var url = '/books/bjvvv/88/page'+leafStr.replace(re, imgStr) + '.jpg';
+        return url;
+    };
+    br.getPageSide = function(index) {
+        if (0 == (index & 0x1)) {
+            return 'R';
+        } else {
+            return 'L';
+        }
+    };
+    br.getSpreadIndices = function (pindex) {
+        console.log(BookReader.prototype.encrypt(10));
+        var spreadIndices = [null, null];
+        if ('rl' == this.pageProgression) {
+            if (this.getPageSide(pindex) == 'R') {
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex + 1);
+                spreadIndices[1] = pindex;
+                spreadIndices[0] = pindex + 1;
+            } else {
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex - 1);
+                spreadIndices[0] = pindex;
+                spreadIndices[1] = pindex - 1;
+            }
+        } else {
+            if (this.getPageSide(pindex) == 'L') {
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex + 1);
+                spreadIndices[0] = pindex;
+                spreadIndices[1] = pindex + 1;
+                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
+            } else {
+                //spreadIndices[1] = BookReader.prototype.encrypt(pindex);
+                //spreadIndices[0] = BookReader.prototype.encrypt(pindex - 1);
+                spreadIndices[1] = pindex;
+                spreadIndices[0] = pindex - 1;
+                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
+            }
+        }
+        return spreadIndices;
+    };
+    br.getPageNum = function (index) {
+        return index + 1;
+    };
+    br.numLeafs = 1470;
+    br.bookTitle = 'Здесь будет отображаться название книги';
+    br.bookUrl = 'http://catalog.libfl.ru/';
+    br.bookUrlText = 'И обратная ссылка на страницу ресурса';
+    br.bookUrlTitle = 'Back to details on book';
+    br.thumbnail = 'http://angelyo.ru/iabr/images2/page0001.jpg';
+    br.metadata = [
+        {label: 'Title', value: 'Здесь будет отображаться название книги'},
+        {label: 'Author', value: 'Автор книги'},
+        {label: 'Description', value: 'Краткое описание книги (о чем книга и т. п.)'},
+    ];
+    br.enableMobileNav = true;
+    br.mobileNavTitle = 'Settings';
+    br.imagesBaseURL = '/themes/libfl/images/bookreader/';
+    br.getEmbedCode = function (frameWidth, frameHeight, viewParams) {
+        return "Embed code not supported in bookreader.";
+    };
+    br.ui = 'full'; // embed, full (responsive)
+    br.init();
+    $('#BRtoolbar').find('.read').hide();
+    $('.BRtoolbarSectionSearch').hide();
+    // $('#btnSrch').hide();
+</script>
