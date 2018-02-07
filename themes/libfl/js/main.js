@@ -4,31 +4,46 @@ $(document).ready(function() {
         $('#workday_end').text(time[moment().day()]);
     })();
 
+    /* Placeholder */
+
+    function changeCatalogueSearchPlaceholder() {
+        var placeholders = ['James Joyce', 'Les Misérables', 'The Great Gatsby', 'Götz von Berlichingen', 'Золотой телёнок', 'Il gattopardo', 'Antoine de Saint-Exupéry', 'Françoise Sagan', 'Доктор Живаго'];
+        $("#searchForm_lookfor").attr('placeholder', placeholders[Math.floor(Math.random()*placeholders.length)]);
+    }
+
+    changeCatalogueSearchPlaceholder();
+    /*$("#index_search").keypress(function(e){
+        var q=$(this).val()
+        if (q.length && e.which==13) {
+            $("#index_search_form").submit();
+        }
+    })*/
+
     /* Random quote */
 
-    NumberOfDivsToRandomDisplay = 4;
-    var CookieName = 'DivRamdomValueCookie';
-
+    var NumberOfDivsToRandomDisplay = 4,
+    CookieName = 'DivRamdomValueCookie';
+    
     function DisplayRandomQuote() {
         var r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay);
         if(NumberOfDivsToRandomDisplay > 1) {
             var ck = 0;
             var cookiebegin = document.cookie.indexOf(CookieName + "=");
             if(cookiebegin > -1) {
-                cookiebegin += 1 + CookieName.length;
-                cookieend = document.cookie.indexOf(";",cookiebegin);
+            cookiebegin += 1 + CookieName.length;
+            cookieend = document.cookie.indexOf(";",cookiebegin);
                 if(cookieend < cookiebegin) { cookieend = document.cookie.length; }
                 ck = parseInt(document.cookie.substring(cookiebegin,cookieend));
-            }
+                }
             while(r == ck) { r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay); }
             document.cookie = CookieName + "=" + r;
-        }
+            }
         for( var i=1; i<=NumberOfDivsToRandomDisplay; i++) {
             document.getElementById("random_quote"+i).style.display='none';
         }
-        document.getElementById("random_quote"+r).style.display='block';
+    document.getElementById("random_quote"+r).style.display='block';
     }
-
+    
     DisplayRandomQuote();
 
     /**/
@@ -1028,7 +1043,7 @@ $(document).ready(function() {
                                 var date = moment(min).format('D MMMM')+"—"+moment(max).format('D MMMM')
                             } else
                                 var date = moment(e.schedule[0].from).format('D MMMM');
-                            html += cur_block.template.replace(/%image%/g, "/attachments/"+e.topImage.attachment.preview.defaultUrl)
+                            html += cur_block.template.replace(/%image%/g, "/attachments/"+e.topImage.attachment.middle.defaultUrl)
                                 .replace(/%type%/g, '/'+lang+'/item/events#{category:'+e.category._id+'}').replace(/%type_name%/g, e.category.title[lang])
                                 .replace(/%tag%/g, e.subCategory ? ('&ensp;|&ensp;' + e.subCategory) : '').replace(/%date%/g, date)
                                 .replace(/%title%/g, e.title[lang]).replace(/%url%/g, '/'+lang+'/event/'+e.slug);
