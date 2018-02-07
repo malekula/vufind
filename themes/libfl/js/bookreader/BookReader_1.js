@@ -158,7 +158,7 @@ function BookReader() {
 
     // Settings for mobile
     this.enableMobileNav = true;
-    this.mobileNavTitle = 'Settings';
+    this.mobileNavTitle = 'Book Reader Menu';
     this.onePageMinBreakpoint = 800;
 
     // Keep track of what page you are on
@@ -196,6 +196,7 @@ BookReader.prototype.init = function() {
     } else if ('undefined' != typeof(params.page)) {
         startIndex = this.getPageIndex(params.page);
     }
+    console.log(params);
     if ('undefined' == typeof(startIndex) && this.enablePageResume && this.numLeafs > 2) {
         // Check cookies
         var val = this.getResumeValue();
@@ -2161,17 +2162,16 @@ BookReader.prototype.twoPageSetCursor = function() {
 // currentIndex()
 //______________________________________________________________________________
 // Returns the currently active index.
-BookReader.prototype.currentIndex = function(hashIndex) {
-      // $$$ we should be cleaner with our idea of which index is active in 1up/2up
-      if (this.mode == this.constMode1up || this.mode == this.constModeThumb) {
-          return this.firstIndex; // $$$ TODO page in center of view would be better
-      } else if (this.mode == this.constMode2up) {
-          // Only allow indices that are actually present in book
-          //return BookReader.prototype.encrypt(false, BookReader.util.clamp(this.firstIndex, 0, this.numLeafs - 1));
-          return BookReader.util.clamp(this.firstIndex, 0, this.numLeafs - 1);
-      } else {
-          throw 'currentIndex called for unimplemented mode ' + this.mode;
-      }
+BookReader.prototype.currentIndex = function() {
+    // $$$ we should be cleaner with our idea of which index is active in 1up/2up
+    if (this.mode == this.constMode1up || this.mode == this.constModeThumb) {
+        return this.firstIndex; // $$$ TODO page in center of view would be better
+    } else if (this.mode == this.constMode2up) {
+        // Only allow indices that are actually present in book
+        return BookReader.util.clamp(this.firstIndex, 0, this.numLeafs - 1);
+    } else {
+        throw 'currentIndex called for unimplemented mode ' + this.mode;
+    }
 }
 
 // setCurrentIndex(index)
@@ -2182,57 +2182,6 @@ BookReader.prototype.setCurrentIndex = function(index) {
     this.firstIndex = index;
 }
 
-// Encrypt()
-//______________________________________________________________________________
-// Encrypt the page number
-BookReader.prototype.encrypt = function(hash, current_index) {
-    //console.log('Index: ' + current_index);
-    if (hash) {
-        return hash;
-    } else if (current_index >= 0) {
-        var xhr = new XMLHttpRequest();
-        var data = 'current_index=' + encodeURIComponent(current_index);
-        xhr.open('POST', 'http://localhost/STATUS/JSON?method=encrypt', false);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(data);
-        if (xhr.status == 200) {
-            //console.log(xhr.responseText);
-            var result = xhr.responseText;
-            var strCode = result.split(',');
-            var code = strCode[0].split(':');
-            var hash = code[1].slice(1, -1);
-            return BookReader.prototype.encrypt(hash, current_index);
-        }
-    } else {
-        return 'error';
-    }
-}
-
-// Decrypt()
-//______________________________________________________________________________
-// Decrypt the page hash number
-BookReader.prototype.decrypt = function(hash=false, current_index) {
-    console.log('Hash: ' + hash + ' / Current index: ' + current_index);
-    if (current_index) {
-        return current_index;
-    } else if (hash) {
-        var xhr = new XMLHttpRequest();
-        var data = 'hash=' + encodeURIComponent(hash);
-        xhr.open('POST', 'http://localhost/STATUS/JSON?method=decrypt', false);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send(data);
-        if (xhr.status == 200) {
-            //console.log(xhr.responseText);
-            var result = xhr.responseText;
-            var strPage = result.split(',');
-            var response_data = strPage[0].split(':');
-            var current_index = response_data[1].slice(1, -1);
-            return BookReader.prototype.decrypt(false, current_index);
-        }
-    } else {
-        return 'error';
-    }
-}
 
 // right()
 //______________________________________________________________________________
@@ -2743,6 +2692,7 @@ BookReader.prototype.setMouseHandlers2UP = function() {
 //______________________________________________________________________________
 BookReader.prototype.prefetchImg = function(index) {
     var pageURI = this._getPageURI(index);
+
     // Load image if not loaded or URI has changed (e.g. due to scaling)
     var loadImage = false;
     if (undefined == this.prefetchedImgs[index]) {
@@ -3706,9 +3656,6 @@ BookReader.prototype.initEmbedNavbar = function() {
 
 
 BookReader.prototype.getNavPageNumString = function(index, excludePrefix) {
-    if (typeof(index) == 'string') {
-        index = BookReader.prototype.decrypt(index)*1;
-    }
     excludePrefix = excludePrefix === undefined ? false : true;
     var pageNum = this.getPageNum(index);
     var pageStr;

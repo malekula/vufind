@@ -868,7 +868,7 @@ $staticRoutes = [
     'Web/Home', 'Web/FacetList', 'Web/Results',
     'Worldcat/Advanced', 'Worldcat/Home', 'Worldcat/Search',
     'Reporterror/Home', 'Reporterror/Email',
-    'Bookreader/Viewer',
+    'Bookreader/Viewer', 'Bookreader/Crypt',
 ];
 
 $routeGenerator = new \VuFind\Route\RouteGenerator();
