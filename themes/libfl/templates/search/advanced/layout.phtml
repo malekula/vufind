@@ -77,7 +77,7 @@
       <? endif; ?>
       <div class="clearfix">
         <!-- -->
-      <div class="<?=$this->layoutClass('sidebar')?>">
+      <!--<div class="<?=$this->layoutClass('sidebar')?>">-->
       <? if ($hasDefaultsApplied): ?>
         <input type="hidden" name="dfApplied" value="1" />
       <? endif ?>
@@ -103,7 +103,7 @@
         <a class="help-link" data-lightbox href="<?=$this->url('help-home')?>?topic=advsearch&amp;_=<?=time() ?>"><?=$this->transEsc("Help with Advanced Search")?></a>
         <a class="help-link" data-lightbox href="<?=$this->url('help-home')?>?topic=search&amp;_=<?=time() ?>"><?=$this->transEsc("Help with Search Operators")?></a>
       </div>
-    </div>
+    <!--</div>-->
 
         <!-- -->
 
@@ -157,15 +157,15 @@
                 <? endfor; ?>
               </div>
               <div class="adv-group-match">
-                <label class="search_bool"><?=$this->transEsc("search_match")?>:&nbsp;</label>
-                <select name="bool<?=$group ?>[]" id="search_bool<?=$group ?>" class="form-control">
+                <label class="search_bool"><?=$this->transEsc("search_match")?></label>
+                <select name="bool<?=$group ?>[]" id="search_bool<?=$group ?>" class="boolean form-control">
                   <option value="AND"<? if(isset($setSearchGroups[$group]) && 'AND' == $setSearchGroups[$group]):?> selected<?endif;?>><?=$this->transEsc("search_AND")?></option>
                   <option value="OR"<? if(isset($setSearchGroups[$group]) && 'OR' == $setSearchGroups[$group]):?> selected<?endif;?>><?=$this->transEsc("search_OR")?></option>
                   <option value="NOT"<? if(isset($setSearchGroups[$group]) && 'NOT' == $setSearchGroups[$group]):?> selected<?endif;?>><?=$this->transEsc("search_NOT")?></option>
                 </select>
               </div>
-              <a href="#" class="adv-group-close hidden"><i class="fa fa-close"></i> <?=$this->transEsc("del_search")?></a>
-              <input class="clear-btn clean-icon" type="button" value="">
+              <a href="#" class="adv-group-close hidden"><i class="fa fa-close"></i> <!--<?=$this->transEsc("del_search")?>--></a>
+              
             </div>
             <? if($group == 0): ?>
               </div>
@@ -174,8 +174,12 @@
         <? endif; ?>
       </div>
       <div class="adv-submit">
-        <input class="clear-btn btn btn-default clean-icon" type="button">
+        
         <input class="btn btn-primary" type="submit" value="<?= $this->transEsc('Find')?>">
+        <div class='clean'>
+          <input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">
+          <img class='clean-img' src='/themes/libfl/images/svg/brush.svg'>
+        </div>
       </div>
       <? if (isset($this->extraAdvancedControls)): ?>
         <div class="clearfix">
@@ -188,7 +192,7 @@
       <? endif; ?>
     </div>
 
-    <div class="<?=$this->layoutClass('helper')?>">
+    <!--<div class="<?=$this->layoutClass('helper')?>">
       <? if ($hasDefaultsApplied): ?>
         <input type="hidden" name="dfApplied" value="1" />
       <? endif ?>
@@ -208,12 +212,12 @@
             <? endforeach; ?>
           </div>
         <? endforeach; ?>
-      <? endif; ?>
+      <? endif; ?>-->
       <!--<h4><?=$this->transEsc("Search Tips")?></h4>-->
-      <div class="facet-group">
+      <!--<div class="facet-group">
         <a class="facet help-link" data-lightbox href="<?=$this->url('help-home')?>?topic=advsearch&amp;_=<?=time() ?>"><?=$this->transEsc("Help with Advanced Search")?></a>
         <a class="facet help-link" data-lightbox href="<?=$this->url('help-home')?>?topic=search&amp;_=<?=time() ?>"><?=$this->transEsc("Help with Search Operators")?></a>
-      </div>
-    </div>
+      </div>-->
+    <!--</div>-->
   </form>
 </div>
