@@ -730,6 +730,7 @@ $config = [
                     //'Map' => 'Map',
                     //'Similar' => 'SimilarItemsCarousel',
                     //'Details' => 'StaffViewArray',
+                    'LIBFLAccess' => 'LIBFLAccess',
                     'Exemplars' => 'Exemplar',
                     'LIBFLDescription' => 'LIBFLDescription',
                 ],

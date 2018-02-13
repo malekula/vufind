@@ -47,6 +47,7 @@
                             echo "<tr><th>".$this->transEsc($field).": </th><td>".$this->transEsc($exemplar->$field)."</td></tr>";
                         }
                     }
+                    echo "<tr><th>Описание доступа: </th><td>".$this->transEsc(str_replace('{{exemplar_location}}', $this->transEsc($exemplar->exemplar_location), $this->transEsc($exemplar->exemplar_access)))."</td></tr>";
                     echo "<input type='hidden' name='exemplarID' value='".$exemplar->exemplar_id."' class='exemplarID'>";
                     echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
                             . "<span class='status ajax-availability hidden'>"
