@@ -17,14 +17,14 @@ namespace VuFind\RecordTab;
  * @author Maksim Kuleba <maksim.a.kuleba@libfl.ru>
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  */
-class Exemplar extends AbstractBase {
+class LIBFLAccess extends AbstractBase {
     /**
      *
      * @return string
      */
     public function getDescription()
     {
-        return 'Exemplars';
+        return 'tabAccess';
     }
 
 }

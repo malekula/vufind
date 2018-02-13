@@ -37,6 +37,8 @@
         </noscript>
     </div>
 </div>
+
+<!-- Disable mouse buttons -->
 <script type="text/javascript">
     function clickIE() {
         if (document.all) {
@@ -59,6 +61,8 @@
     }
     document.oncontextmenu = new Function("return false");
 </script>
+<!-- //Disable mouse buttons -->
+
 <script>
     /**
      * We achieve a flexbox-like sizing with JS to maximize browser support
@@ -71,17 +75,17 @@
             var context = scope || this;
             var now = +new Date,
                 args = arguments;
-                if (last && now < last + threshhold) {
-                    // hold on to it
-                    clearTimeout(deferTimer);
-                        deferTimer = setTimeout(function () {
-                        last = now;
-                        fn.apply(context, args);
-                    }, threshhold);
-                } else {
+            if (last && now < last + threshhold) {
+                // hold on to it
+                clearTimeout(deferTimer);
+                    deferTimer = setTimeout(function () {
                     last = now;
                     fn.apply(context, args);
-                }
+                }, threshhold);
+            } else {
+                last = now;
+                fn.apply(context, args);
+            }
         };
     }
 </script>
@@ -135,13 +139,13 @@
                 //spreadIndices[1] = BookReader.prototype.encrypt(pindex + 1);
                 spreadIndices[0] = pindex;
                 spreadIndices[1] = pindex + 1;
-                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
+                //console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
             } else {
                 //spreadIndices[1] = BookReader.prototype.encrypt(pindex);
                 //spreadIndices[0] = BookReader.prototype.encrypt(pindex - 1);
                 spreadIndices[1] = pindex;
                 spreadIndices[0] = pindex - 1;
-                console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
+                //console.log(spreadIndices[0] + ' / ' + spreadIndices[1]);
             }
         }
         return spreadIndices;

@@ -1,0 +1,102 @@
+<?php
+    // Set page title.
+    $this->headTitle($this->translate('tabAccess') . ': ' . $this->driver->getBreadcrumb());
+
+    $formatter = $this->recordDataFormatter();
+    $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
+
+    if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
+        $getExemplarsData = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
+    }
+
+    $fields = $getExemplarsData[0];
+    $exemplars = json_decode($getExemplarsData[1][0]);
+    $accessMethods = $this->driver->getMethodOfAccess();
+    $getAccessMethod = (string) $this->driver->getMethodOfAccess()[0];
+    $accessMethod = (!empty($getAccessMethod)) ? strtolower($getAccessMethod) : '';
+
+    $internetAccess = array_uintersect($accessMethods, array('4002','4003'),"strcasecmp");
+    $libraryAccess = array_uintersect($accessMethods, array('4000','4001','4004','4005','4006','4999'),"strcasecmp");
+    if (!empty($exemplars)) {
+        if (is_array($internetAccess) && !empty($internetAccess)) {
+            echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
+            foreach ($exemplars as $num=>$exemplar):
+                if (in_array($exemplar->exemplar_access, array('1001','1002','1004','1008','1009'))) {
+                    echo "<div id='exemplar_'".$num."' class='exemplar' style='padding:0px 0px 0px 26px;'>";
+                    echo "<table class='table table-striped' summary='".$this->transEsc('Exemplars')."' style='margin-bottom:40px;'>";
+                    echo "<i class='fa fa-external-link' style='margin:0px 5px 0px 0px;'></i><a href='".str_replace('http://','//',$exemplar->exemplar_hyperlink)."' target='_blank'>Читать книгу</a>";
+                    echo "</table>";
+                    echo "</div>";
+                }
+            endforeach;
+        }
+        if (is_array($libraryAccess) && !empty($libraryAccess)) {
+            echo "<h2 style='margin-top: 30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>Доступ в помещении библиотеки</h2>";
+            foreach ($exemplars as $num=>$exemplar):
+                if (in_array($exemplar->exemplar_access, array('1000','1003','1005','1006','1007'))) {
+                    echo "<div id='exemplar_'".$num."' class='exemplar' style='padding: 0px 0px 0px 26px;'>";
+                    echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>Экземпляр ' . $num .'</h3>';
+                    echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+                    foreach ($fields as $field) {
+                        if (!empty($exemplar->$field)) {
+                            if ($field == 'exemplar_hyperlink')
+                                $exemplar->$field = "<a href='".$exemplar->$field."' target='_blank'>".$exemplar->$field."</a>";
+                            if ($field == 'exemplar_inv_note') {
+                                echo "<tr><th>".$this->transEsc('exemplar_inventory_number').": </th><td>".$exemplar->exemplar_inventory_number." (".$this->transEsc('exemplar_inv_note').": ".$exemplar->exemplar_inv_note.")</td></tr>";
+                            }
+                            echo "<tr><th>".$this->transEsc($field).": </th><td>".$this->transEsc($exemplar->$field)."</td></tr>";
+                        }
+                    }
+                    echo "<input type='hidden' name='exemplarID' value='".$exemplar->exemplar_id."' class='exemplarID'>";
+                    echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+                            . "<span class='status ajax-availability hidden'>"
+                            . "<span>".$this->transEsc('status_loading')."...</span>"
+                            . "</span>"
+                            //. "<span class='access-method hidden'>&nbsp;(".$this->transEsc($accessMethod).")</span>"
+                            . "<span class='access-method hidden'>&nbsp;(".$this->transEsc($exemplar->exemplar_access).")</span>"
+                            . "</td></tr>";
+                    echo '</table>';
+                    echo '</div>';
+                }
+            endforeach;
+        }
+
+        /*if (in_array($accessMethod, array('4002','4003'))) {
+            echo "<h2>Электронный удаленный доступ</h2>";
+        } else {
+            echo "<h2>Доступ в помещении библиотеки</h2>";
+        }*/
+        foreach ($exemplars as $num=>$exemplar):
+            if (in_array($exemplar->exemplar_access, array('1001','1002','1004','1008','1009'))) {
+                //echo "<h2>Электронный удаленный доступ</h2>";
+                //echo $exemplar->exemplar_hyperlink;
+            } else {
+                //echo "<h2>Доступ в помещении библиотеки</h2>";
+            }
+            /*echo '<div id="exemplar_'.$num.'" class=exemplar>';
+            echo '<h3 style="font-weight:bold;">Экземпляр ' . $num .'</h3>';
+            echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+            foreach ($fields as $field) {
+                if (!empty($exemplar->$field)) {
+                    if ($field == 'exemplar_hyperlink')
+                        $exemplar->$field = "<a href='".$exemplar->$field."' target='_blank'>".$exemplar->$field."</a>";
+                    if ($field == 'exemplar_inv_note') {
+                        echo "<tr><th>".$this->transEsc('exemplar_inventory_number').": </th><td>".$exemplar->exemplar_inventory_number." (".$this->transEsc('exemplar_inv_note').": ".$exemplar->exemplar_inv_note.")</td></tr>";
+                    }
+                    echo "<tr><th>".$this->transEsc($field).": </th><td>".$exemplar->$field."</td></tr>";
+                }
+            }
+            echo "<input type='hidden' name='exemplarID' value='".$exemplar->exemplar_id."' class='exemplarID'>";
+            echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+                    . "<span class='status ajax-availability hidden'>"
+                    . "<span>".$this->transEsc('status_loading')."...</span>"
+                    . "</span>"
+                    . "<span class='access-method hidden'>&nbsp;(".$this->transEsc($accessMethod).")</span>"
+                    . "</td></tr>";
+            echo '</table>';
+            echo '</div>';*/
+        endforeach;
+    } else {
+        echo "<tr><td>" . $this->transEsc('no_exemplars') . "</td></tr>";
+    }
+?>

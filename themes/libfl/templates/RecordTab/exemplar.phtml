@@ -1,14 +1,14 @@
 <?php
     // Set page title.
-    $this->headTitle($this->translate('Access') . ': ' . $this->driver->getBreadcrumb());
+    $this->headTitle($this->translate('Exemplars') . ': ' . $this->driver->getBreadcrumb());
 
     $formatter = $this->recordDataFormatter();
     $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
-    
+
     if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
         $getExemplarsData = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
     }
-    
+
     $fields = $getExemplarsData[0];
     $exemplars = json_decode($getExemplarsData[1][0]);
     $getAccessMethod = (string) $this->driver->getMethodOfAccess()[0];
@@ -29,12 +29,12 @@
                 }
             }
             echo "<input type='hidden' name='exemplarID' value='".$exemplar->exemplar_id."' class='exemplarID'>";
-            echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+            /*echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
                     . "<span class='status ajax-availability hidden'>"
                     . "<span>".$this->transEsc('status_loading')."...</span>"
                     . "</span>"
-                    . "<span class='access-method hidden'>&nbsp;(".$accessMethod.")</span>"
-                    . "</td></tr>";
+                    . "<span class='access-method hidden'>&nbsp;(".$this->transEsc($accessMethod).")</span>"
+                    . "</td></tr>";*/
             echo '</table>';
             echo '</div>';
         endforeach;

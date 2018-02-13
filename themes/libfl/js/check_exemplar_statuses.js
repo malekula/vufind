@@ -11,7 +11,7 @@ function getExemplarStatus(exemplarID, fund) {
 }
 
 function checkExemplarStatuses() {
-    
+
     var container = $('body');
 
     var elements = {};
