@@ -142,7 +142,16 @@ class LIBFL extends AbstractBase
             }
         }
         $groupStatus->id = $exemplarGroupID;
-        $groupStatus->availability = (in_array('available', $statuses)) ? 'available' : 'unavailable';
+        //$groupStatus->availability = (in_array('available', $statuses)) ? 'available' : (in_array('busy', $statuses)) ? 'busy' : 'unavailable';
+        if (in_array('available', $statuses)) {
+            $groupStatus->availability = 'available';
+        } else if (in_array('unavailable', $statuses)) {
+            $groupStatus->availability = 'unavailable';
+        } else if (in_array('busy', $statuses)) {
+            $groupStatus->availability = 'busy';
+        } else {
+            $groupStatus->availability = 'unknown';
+        }
         return $groupStatus;
     }
 

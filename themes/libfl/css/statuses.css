@@ -6,7 +6,7 @@
     color: #a40918;
 }
 
-.status-booked {
+.status-busy {
     color: #ff9100;
 }
 
@@ -24,7 +24,7 @@
     font-weight: bold;
 }
 
-.exemplar-status-booked {
+.exemplar-status-busy {
     color: #ff9100;
     font-weight: bold;
 }

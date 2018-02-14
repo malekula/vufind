@@ -301,7 +301,7 @@ class StatusController extends AbstractBase
             case 'unavailable':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
-            case 'booked':
+            case 'busy':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
             case 'unknown':
