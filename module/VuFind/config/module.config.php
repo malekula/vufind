@@ -731,8 +731,8 @@ $config = [
                     //'Similar' => 'SimilarItemsCarousel',
                     //'Details' => 'StaffViewArray',
                     'LIBFLAccess' => 'LIBFLAccess',
-                    'Exemplars' => 'Exemplar',
                     'LIBFLDescription' => 'LIBFLDescription',
+                    'Exemplars' => 'Exemplar',
                 ],
                 'defaultTab' => null,
                 // 'backgroundLoadedTabs' => ['UserComments', 'Details']
