@@ -29,7 +29,7 @@
               ?>
               <? foreach ($sorted as $i => $display): ?>
                 <? $value = $list['list'][$i]; ?>
-                <option value="<?=$this->escapeHtmlAttr(($value['operator'] == 'OR' ? '~' : '') . $field . ':"' . $value['value'] . '"')?>"<?=(isset($value['selected']) && $value['selected'])?' selected="selected"':''?>><?=$this->escapeHtml($display)?></option>
+                <option value="<?=$this->escapeHtmlAttr(($value['operator'] == 'OR' ? '~' : '') . $field . ':"' . $value['value'] . '"')?>"<?=(isset($value['selected']) && $value['selected'])?' selected="selected"':''?>><?=$this->escapeHtml($this->translate($display))?></option>
               <? endforeach; ?>
             <? endif; ?>
           </select>

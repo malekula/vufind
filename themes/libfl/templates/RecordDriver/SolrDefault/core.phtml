@@ -39,13 +39,12 @@
             $formatter = $this->recordDataFormatter();
             $type_of_record = $this->driver->getFundRecordUID($this->driver->getUniqueId());
             $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
-            print_r($this->driver->getMethodOfAccess());
         ?>
         <div class="record_media_split_line"></div>
             <? if (!empty($coreFields)): ?>
                 <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
                     <? foreach ($coreFields as $key => $current): ?>
-                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $current['value'] ?></td></tr>
+                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $this->translate($current['value']) ?></td></tr>
                 <? endforeach; ?>
                 </table>
             <? endif; ?>

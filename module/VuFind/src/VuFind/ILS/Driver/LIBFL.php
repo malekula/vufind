@@ -92,7 +92,7 @@ class LIBFL extends AbstractBase
         }
         return $status;
     }
-    
+
     /**
      * Get Exemplar Statuses
      *
@@ -111,6 +111,39 @@ class LIBFL extends AbstractBase
             $status = $e->getMessage();
         }
         return $status;
+    }
+
+    /**
+     * Get Group Exemplar Statuses
+     *
+     * This is responsible for retrieving the status information for a
+     * exemplars of records.
+     *
+     * @param array $ids The array of record ids to retrieve the status for
+     *
+     * @return mixed     An array of getStatus() return values on success.
+     */
+    public function getGroupExemplarStatuses($exemplarGroupID, $fund)
+    {
+        $exemplarIDs = explode('.', $exemplarGroupID);
+        $groupStatus = (object)[];
+        $statuses = array();
+        foreach ($exemplarIDs as $id=>$exemplarID) {
+            try {
+                $status = $this->soap->GetExemplarStatus(array("IDDATA"=>$exemplarID, "BaseName"=>strtoupper($fund)));
+                $result = json_decode($status->GetExemplarStatusResult);
+                if (!in_array($result->availability, $statuses)) {
+                    $statuses[] = $result->availability;
+                }
+                $exemplar_id = 'exemplar';
+                $groupStatus->$exemplar_id[$exemplarID] = $result->availability;
+            } catch (Exception $e) {
+                $status = $e->getMessage();
+            }
+        }
+        $groupStatus->id = $exemplarGroupID;
+        $groupStatus->availability = (in_array('available', $statuses)) ? 'available' : 'unavailable';
+        return $groupStatus;
     }
 
     /**
@@ -150,6 +183,3 @@ class LIBFL extends AbstractBase
         return [];
     }
 }
-
-
-

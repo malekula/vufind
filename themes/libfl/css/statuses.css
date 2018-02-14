@@ -13,3 +13,23 @@
 .status-unknown {
     color: #909698;
 }
+
+.exemplar-status-available {
+    color: #09a435;
+    font-weight: bold;
+}
+
+.exemplar-status-unavailable {
+    color: #a40918;
+    font-weight: bold;
+}
+
+.exemplar-status-booked {
+    color: #ff9100;
+    font-weight: bold;
+}
+
+.exemplar-status-unknown {
+    color: #909698;
+    font-weight: bold;
+}
