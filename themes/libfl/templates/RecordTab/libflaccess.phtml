@@ -16,10 +16,11 @@
     $accessMethod = (!empty($getAccessMethod)) ? strtolower($getAccessMethod) : '';
 
     $internetAccessTab = array_uintersect($accessMethods, array('4002','4003'), "strcasecmp");
-    $libraryAccessTab = array_uintersect($accessMethods, array('4000','4006','4999'), "strcasecmp");
+    $libraryAccessTab = array_uintersect($accessMethods, array('4000','4006'), "strcasecmp");
     $homeAccessTab = array_uintersect($accessMethods, array('4001'), "strcasecmp");
     $pearsonPrintAccessTab = array_uintersect($accessMethods, array('4004'), "strcasecmp");
     $deniedAccessTab = array_uintersect($accessMethods, array('4005'), "strcasecmp");
+    $unknownAccessTab = array_uintersect($accessMethods, array('4999'), "strcasecmp");
     if (!empty($exemplars)) {
         $newExemplars = array();
         foreach ($exemplars as $num=>$exemplar) {
@@ -35,16 +36,69 @@
         /*echo '<pre>';
         print_r($newExemplars);
         echo '</pre>';*/
+        //echo $accessMethod;
         if (is_array($internetAccessTab) && !empty($internetAccessTab)) {
             echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
-            foreach ($exemplars as $num=>$exemplar):
-                if (in_array($exemplar->exemplar_access, array('1001','1002','1004','1008'))) {
+            foreach ($newExemplars as $access=>$exemplar):
+
+                $accessCodes = explode('.', $access);
+                $accessCode = $accessCodes[0];
+                $locationCode = $accessCodes[1];
+                if ($accessExemplars = array_uintersect($accessCodes, array('1001','1002','1004','1008'),"strcasecmp")) {
+                    echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
+                    echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
+                    echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+                    $group_inv_number = NULL;
+                    $group_exemplars_id = NULL;
+                    $exemplar_hyperlink = NULL;
+                    $exemplarID = NULL;
+                    foreach ($exemplar as $num => $item) {
+                        $group_inv_number = (is_null($group_inv_number)) ? $item['exemplar_inventory_number'] : $group_inv_number.'.'.$item['exemplar_inventory_number'];
+                        $group_exemplars_id = (is_null($group_exemplars_id)) ? $item['exemplar_id'] : $group_exemplars_id.'.'.$item['exemplar_id'];
+                        $exemplarID = $item['exemplar_id'];
+                        if (isset($item['exemplar_carrier']) && !empty($item['exemplar_carrier']))
+                            $exemplar_carrier = $item['exemplar_carrier'];
+                        if (isset($item['exemplar_hyperlink']) && !empty($item['exemplar_hyperlink']))
+                            $exemplar_hyperlink = $item['exemplar_hyperlink'];
+                    }
+                    switch ($accessCode) {
+                        case '1001':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            break;
+                        case '1002':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            break;
+                        case '1004':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция для Litres</a></td></tr>";
+                            break;
+                        case '1008':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            break;
+                        default:
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                    }
+                    echo "<input type='hidden' name='exemplarGroupID' value='".$group_exemplars_id."' class='exemplarGroupID'>";
+                    echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+                            . "<span class='status ajax-availability hidden'>"
+                            . "<span>".$this->transEsc('status_loading')."...</span>"
+                            . "</span>"
+                            . "</td></tr>";
+                    echo '</table>';
+                    echo '</div>';
+                }
+
+                /*if (in_array($exemplar->exemplar_access, array('1001','1002','1004','1008'))) {
                     echo "<div id='exemplar_'".$num."' class='exemplar' style='padding:0px 0px 0px 26px;'>";
                     echo "<table class='table table-striped' summary='".$this->transEsc('Exemplars')."' style='margin-bottom:40px;'>";
                     echo "<i class='fa fa-external-link' style='margin:0px 5px 0px 0px;'></i><a href='".str_replace('http://','//',$exemplar->exemplar_hyperlink)."' target='_blank'>Читать книгу</a>";
                     echo "</table>";
                     echo "</div>";
-                }
+                }*/
             endforeach;
         }
         if (is_array($pearsonPrintAccessTab) && !empty($pearsonPrintAccessTab)) {
@@ -170,66 +224,13 @@
                 }
             endforeach;
         }
-        if (is_array($deniedAccessTab) && !empty($deniedAccessTab)) {
-            echo "<h2 style='margin-top: 30px;'><i class='fa fa-print' style='margin: 0px 5px 0px 0px;'></i>Доступ ограничен</h2>";
-            foreach ($newExemplars as $access=>$exemplar):
-                $accessCodes = explode('.', $access);
-                $accessCode = $accessCodes[0];
-                $locationCode = $accessCodes[1];
-                if ($accessExemplars = array_uintersect($accessCodes, array('1999'),"strcasecmp")) {
-                    echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
-                    echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
-                    echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
-                    $group_inv_number = NULL;
-                    $group_exemplars_id = NULL;
-                    $exemplar_carrier = NULL;
-                    $exemplar_rack_location = NULL;
-                    $exemplar_placing_cipher = NULL;
-                    $exemplarID = NULL;
-                    foreach ($exemplar as $num => $item) {
-                        $group_inv_number = (is_null($group_inv_number)) ? $item['exemplar_inventory_number'] : $group_inv_number.'.'.$item['exemplar_inventory_number'];
-                        $group_exemplars_id = (is_null($group_exemplars_id)) ? $item['exemplar_id'] : $group_exemplars_id.'.'.$item['exemplar_id'];
-                        $exemplarID = $item['exemplar_id'];
-                        if (isset($item['exemplar_carrier']) && !empty($item['exemplar_carrier']))
-                            $exemplar_carrier = $item['exemplar_carrier'];
-                        if (isset($item['exemplar_rack_location']) && !empty($item['exemplar_rack_location']))
-                            $exemplar_rack_location = $item['exemplar_rack_location'];
-                        if (isset($item['exemplar_placing_cipher']) && !empty($item['exemplar_placing_cipher']))
-                            $exemplar_placing_cipher = $item['exemplar_placing_cipher'];
-                    }
-                    switch ($accessCode) {
-                        case '1999':
-                            //echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th><td>'.str_replace('.', ', ', $group_inv_number).'</td></tr>';
-                            /*echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';*/
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
-                            break;
-                        default:
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
-                    }
-                    echo "<input type='hidden' name='exemplarGroupID' value='".$group_exemplars_id."' class='exemplarGroupID'>";
-                    echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
-                            . "<span class='status ajax-availability hidden'>"
-                            . "<span>".$this->transEsc('status_loading')."...</span>"
-                            . "</span>"
-                            . "</td></tr>";
-                    echo '</table>';
-                    echo '</div>';
-                }
-            endforeach;
-        }
         if (is_array($libraryAccessTab) && !empty($libraryAccessTab)) {
             echo "<h2 style='margin-top: 30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>Доступ в помещении библиотеки</h2>";
             foreach ($newExemplars as $access=>$exemplar):
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
                 $locationCode = $accessCodes[1];
-                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1007','1010','1011','1012',),"strcasecmp")) {
+                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1007','1010','1011','1012'),"strcasecmp")) {
                     echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
                     echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
                     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
@@ -312,6 +313,124 @@
                             . "<span>".$this->transEsc('status_loading')."...</span>"
                             . "</span>"
                             . "</td></tr>";
+                    echo '</table>';
+                    echo '</div>';
+                }
+            endforeach;
+        }
+        if (is_array($deniedAccessTab) && !empty($deniedAccessTab)) {
+            echo "<h2 style='margin-top: 30px;'><i class='fa fa-print' style='margin: 0px 5px 0px 0px;'></i>Доступ ограничен</h2>";
+            foreach ($newExemplars as $access=>$exemplar):
+                $accessCodes = explode('.', $access);
+                $accessCode = $accessCodes[0];
+                $locationCode = $accessCodes[1];
+                if ($accessExemplars = array_uintersect($accessCodes, array('1999'),"strcasecmp")) {
+                    echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
+                    echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
+                    echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+                    $group_inv_number = NULL;
+                    $group_exemplars_id = NULL;
+                    $exemplar_carrier = NULL;
+                    $exemplar_rack_location = NULL;
+                    $exemplar_placing_cipher = NULL;
+                    $exemplarID = NULL;
+                    foreach ($exemplar as $num => $item) {
+                        $group_inv_number = (is_null($group_inv_number)) ? $item['exemplar_inventory_number'] : $group_inv_number.'.'.$item['exemplar_inventory_number'];
+                        $group_exemplars_id = (is_null($group_exemplars_id)) ? $item['exemplar_id'] : $group_exemplars_id.'.'.$item['exemplar_id'];
+                        $exemplarID = $item['exemplar_id'];
+                        if (isset($item['exemplar_carrier']) && !empty($item['exemplar_carrier']))
+                            $exemplar_carrier = $item['exemplar_carrier'];
+                        if (isset($item['exemplar_rack_location']) && !empty($item['exemplar_rack_location']))
+                            $exemplar_rack_location = $item['exemplar_rack_location'];
+                        if (isset($item['exemplar_placing_cipher']) && !empty($item['exemplar_placing_cipher']))
+                            $exemplar_placing_cipher = $item['exemplar_placing_cipher'];
+                    }
+                    switch ($accessCode) {
+                        case '1999':
+                            //echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th><td>'.str_replace('.', ', ', $group_inv_number).'</td></tr>';
+                            /*echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
+                            echo '<td>';
+                            foreach (explode('.', $group_inv_number) as $inv_number) {
+                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
+                            }
+                            echo '</td></tr>';*/
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            //echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
+                            break;
+                        default:
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                    }
+                    echo "<input type='hidden' name='exemplarGroupID' value='".$group_exemplars_id."' class='exemplarGroupID'>";
+                    echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+                            . "<span class='status ajax-availability hidden'>"
+                            . "<span>".$this->transEsc('status_loading')."...</span>"
+                            . "</span>"
+                            . "</td></tr>";
+                    echo '</table>';
+                    echo '</div>';
+                }
+            endforeach;
+        }
+        if (is_array($unknownAccessTab) && !empty($unknownAccessTab)) {
+            echo "<h2 style='margin-top: 30px;'><i class='fa fa-question-circle' style='margin: 0px 5px 0px 0px;'></i>Невозможно определить доступ</h2>";
+            foreach ($newExemplars as $access=>$exemplar):
+
+                //echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                //$stop = 1;
+                //continue;
+                $accessCodes = explode('.', $access);
+                $accessCode = $accessCodes[0];
+                $locationCode = $accessCodes[1];
+                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1007','1010','1011','1012','1999'),"strcasecmp")) {
+                    echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
+                    //echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
+                    echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
+                    $group_inv_number = NULL;
+                    $group_exemplars_id = NULL;
+                    $exemplar_carrier = NULL;
+                    $exemplar_rack_location = NULL;
+                    $exemplar_placing_cipher = NULL;
+                    $exemplarID = NULL;
+                    foreach ($exemplar as $num => $item) {
+                        $group_inv_number = (is_null($group_inv_number)) ? $item['exemplar_inventory_number'] : $group_inv_number.'.'.$item['exemplar_inventory_number'];
+                        $group_exemplars_id = (is_null($group_exemplars_id)) ? $item['exemplar_id'] : $group_exemplars_id.'.'.$item['exemplar_id'];
+                        $exemplarID = $item['exemplar_id'];
+                        if (isset($item['exemplar_carrier']) && !empty($item['exemplar_carrier']))
+                            $exemplar_carrier = $item['exemplar_carrier'];
+                        if (isset($item['exemplar_rack_location']) && !empty($item['exemplar_rack_location']))
+                            $exemplar_rack_location = $item['exemplar_rack_location'];
+                        if (isset($item['exemplar_placing_cipher']) && !empty($item['exemplar_placing_cipher']))
+                            $exemplar_placing_cipher = $item['exemplar_placing_cipher'];
+                    }
+                    /*switch ($accessCode) {
+                        case '1003':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        case '1007':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        case '1010':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        case '1011':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        case '1012':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        case '1999':
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                            break;
+                        default:
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                    }*/
+                    echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
+                    echo "<input type='hidden' name='exemplarGroupID' value='".$group_exemplars_id."' class='exemplarGroupID'>";
+                    /*echo "<tr><td colspan='2' style='background-color: #fff!important; border-style: solid!important; border-width: 1px 0px 1px 0px!important; border-color: #b9b9b9!important; color:#0000f3; font-weight:bold;'>"
+                            . "<span class='status ajax-availability hidden'>"
+                            . "<span>".$this->transEsc('status_loading')."...</span>"
+                            . "</span>"
+                            . "</td></tr>";*/
                     echo '</table>';
                     echo '</div>';
                 }
