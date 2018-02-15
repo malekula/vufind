@@ -85,7 +85,6 @@ function checkExemplarStatuses() {
             //console.log(exemplar);
             $.each(exemplar, function checkItemDoneEach(i, result) {
                 var item = elements[result.id];
-                //console.log(result.exemplar);
                 if (!item) {
                     return;
                 }

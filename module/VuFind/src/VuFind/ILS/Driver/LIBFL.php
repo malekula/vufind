@@ -86,7 +86,7 @@ class LIBFL extends AbstractBase
     public function getStatuses($bookID)
     {
         try {
-            $status = $this->soap->GetBookStatus(array("book"=>$bookID));
+            $status = $this->soap->GetBookStatus(array("id"=>$bookID));
         } catch (Exception $e) {
             $status = $e->getMessage();
         }

@@ -33,10 +33,10 @@
                 'exemplar_inv_note' => $exemplar->exemplar_inv_note,
             );
         }
-        /*echo '<pre>';
+        echo '<pre>';
         print_r($newExemplars);
-        echo '</pre>';*/
-        //echo $accessMethod;
+        echo '</pre>';
+        echo $accessMethod;
         if (is_array($internetAccessTab) && !empty($internetAccessTab)) {
             echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
             foreach ($newExemplars as $access=>$exemplar):
