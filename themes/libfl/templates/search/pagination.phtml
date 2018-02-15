@@ -16,8 +16,8 @@
 
     <? if (isset($this->next)): ?>
       <? if (!isset($this->options['disableLast']) || !$this->options['disableLast']): ?>
-        <!--<li><span class="page_dots">...</span></li>
-        <li><a href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->pageCount)?>"><?=$this->pageCount?></a></li>-->
+        <li><span class="page_dots">...</span></li>
+        <li><a href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->pageCount)?>"><?=$this->pageCount?></a></li>
       <? endif; ?>
       <li><a class="page-next" href="<?=$this->currentPath() . $this->results->getUrlQuery()->setPage($this->next)?>"></a></li>
     <? endif; ?>

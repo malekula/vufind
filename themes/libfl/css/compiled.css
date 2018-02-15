@@ -521,6 +521,7 @@ h2,
 .h2 {
     font-size: 30px;
     font-weight: bold;
+    color: #242728;
 }
 
 h3,
@@ -4957,11 +4958,17 @@ a.thumbnail.active {
 .alert>ul {
     margin-bottom: 0
 }
+.alert>ul>li {
+    line-height: 1.6;
+}
 
 .alert>p+p {
     margin-top: 5px
 }
-
+.sad-book {
+    width: 44px;
+    margin-bottom: 10px;
+}
 .alert-dismissable,
 .alert-dismissible {
     padding-right: 35px
@@ -4991,9 +4998,8 @@ a.thumbnail.active {
 
 .alert-info,
 .savedLists {
-    background-color: #d9edf7;
-    border-color: #bce8f1;
-    color: #31708f
+    background: #f7f9fa;
+    box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .alert-info hr {
@@ -10062,7 +10068,7 @@ a.carousel-control:focus {
 
 .alert-info,
 .savedLists {
-    color: #214c62
+    color: #242728;
 }
 
 .alert-warning {
@@ -11410,6 +11416,9 @@ header .container.navbar {
     display: block;
     padding-top: 1rem;
     padding-bottom: 1rem
+}
+.search-stats h2 {
+    margin-bottom: 40px;
 }
 
 @media (min-width:768px) {
@@ -13294,7 +13303,8 @@ a,
 
 .alert,
 .savedLists {
-    padding: 8px
+    margin: 20px 0 60px 0;
+    padding: 25px
 }
 
 .breadcrumbs .container {
@@ -13484,6 +13494,9 @@ body {
 
 .main .container {
     padding-top: 1rem
+}
+.main .container .navbar {
+    padding-top: 0;
 }
 
 @media (min-width:768px) {
@@ -13918,6 +13931,7 @@ span.about_label {
     border-bottom: 2px solid #000000;
     padding-left: 10px;
     font-family: 'Leto Sans';
+    color: #242728;
 }
 .facet-group .facet,
 .facet-group .collapse,
@@ -13977,6 +13991,10 @@ span.about_label {
     border: none;
     border-radius: 3px;
     box-shadow: 0 1px 5px rgba(42, 42, 183, 0.18);
+}
+input#publishDatefrom,
+input#publishDateto {
+    padding: 5px;
 }
 .adv-term-type, .adv-term-input {
     height: 48px;
@@ -14227,6 +14245,7 @@ a, .btn-link {
     opacity: 0.8;
 }
 .adv-submit {
+    position: relative;
     margin: 25px 0;
 }
 .adv-submit .btn-primary {
@@ -14280,10 +14299,14 @@ a.tag-record {
     line-height: 2.5;
     opacity: .2;
 }
+.solr-facets legend {
+    font-size: 24px !important;
+    margin-bottom: 40px !important;
+}
 #advSearchForm legend {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     border-bottom: none;
 }
 label.search_bool {
@@ -14337,15 +14360,17 @@ select#limit_language {
 .help-link {
     display: block;
 }
-.clean {
-    width: 
-    position: relative;
+.clean {  
+    position: absolute;
+    top: 20px;
+    right: 0;
+    height: 44px;
 }
 .clean-img {
     position: absolute;
     right: 0;
     top: 0;
-    width: 12px;
+    height: 44px;
     cursor: pointer;
 }
 

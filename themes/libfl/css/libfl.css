@@ -5223,6 +5223,10 @@ img.news_right_image {
         padding-top: 0;
         padding-bottom: 20px;
     }
+    
+    .solr-adv-facet {
+        margin-bottom: 20px;
+    }
     .sidebar {
         /*display: none;*/
     } 

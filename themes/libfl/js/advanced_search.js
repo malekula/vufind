@@ -121,8 +121,16 @@ function deleteGroup(group) {
   return false;
 }
 
-$(document).ready(function advSearchReady() {
+/*$(document).ready(function advSearchReady() {
   $('.clear-btn').click(function clearBtnClick() {
+    $('input[type="text"]').val('');
+    $("option:selected").removeAttr("selected");
+    $("#illustrated_-1").click();
+  });
+});*/
+
+$(document).ready(function advSearchReady() {
+  $('.clean-img').click(function clearBtnClick() {
     $('input[type="text"]').val('');
     $("option:selected").removeAttr("selected");
     $("#illustrated_-1").click();

@@ -69,11 +69,12 @@
 <div class="<?=$this->layoutClass('mainbody')?>">
 
   <?=$this->flashmessages()?>
-  <nav class="search-header hidden-print">
+  <nav class="search-header hidden-print">    
     <div class="search-stats">
       <? if ($recordTotal > 0): ?>
         <?=$this->context()->renderInContext('search/controls/showing.phtml', ['lookfor' => $lookfor, 'recordTotal' => $recordTotal]) ?>
       <? else: ?>
+        <img src='/themes/libfl/images/svg/sad-book.svg' class='sad-book'>
         <h2><?=$this->transEsc('nohit_heading')?></h2>
       <? endif; ?>
     </div>
