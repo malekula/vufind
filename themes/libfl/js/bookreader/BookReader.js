@@ -4198,7 +4198,7 @@ BookReader.prototype.initToolbar = function(mode, ui) {
 
     $('#BRreturn a')
       .addClass('BRTitleLink')
-      .attr({'href': self.bookUrl, 'title': self.bookTitle})
+      .attr({'href': self.bookUrl, 'title': self.bookTitle, 'target':'_blank'})
       .html('<span class="BRreturnTitle">' + this.bookTitle + '</span>')
       ;
 
@@ -4311,7 +4311,7 @@ BookReader.prototype.initToolbar = function(mode, ui) {
 BookReader.prototype.blankInfoDiv = function() {
     return $([
         '<div class="BRfloat" id="BRinfo">',
-            '<div class="BRfloatHead">About this book',
+            '<div class="BRfloatHead">Информация о книге',
                 '<button class="floatShut" href="javascript:;" onclick="$.fn.colorbox.close();"><span class="shift">Close</span></a>',
             '</div>',
             '<div class="BRfloatBody">',
@@ -4324,7 +4324,7 @@ BookReader.prototype.blankInfoDiv = function() {
                 '</div>',
             '</div>',
             '<div class="BRfloatFoot">',
-                '<a href="https://openlibrary.org/dev/docs/bookreader">About the BookReader</a>',
+                '<a href="//libfl.ru">Библиотека иностранной литературы</a>',
             '</div>',
         '</div>'].join('\n')
     );

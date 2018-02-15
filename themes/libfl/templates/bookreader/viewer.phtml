@@ -26,6 +26,29 @@
     </p>
     </noscript>
 </div>-->
+
+<script type="text/JavaScript">
+    //var strGET = window.location.search.replace( '?', '').split('=');
+    //console.log(strGET[1]);
+</script>
+
+<?php
+    ini_set("soap.wsdl_cache_enabled", "0");
+    $client = new SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+    $bookID = filter_input(INPUT_GET, 'bookID');
+    try {
+        $getBookInfo = $client->GetBookInfoByID(array('id'=>$bookID));
+    } catch (Exception $e) {
+        echo $e->getMessage()."<br/><br/>";
+    }
+    $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
+    //echo '<pre>';
+    //print_r(json_decode($bookInfo->GetBookInfoByIDResult));
+    //print_r($bookInfo);
+    //echo $bookInfo->Title;
+    //echo '</pre>';
+?>
+
 <div id="IABookReaderWrapper">
     <div id="IABookReaderMessageWrapper" style="display: none;"></div>
     <div id="BookReader" class="ui-full mm-page mm-slideout">
@@ -40,7 +63,7 @@
 
 <!-- Disable mouse buttons -->
 <script type="text/javascript">
-    function clickIE() {
+    /*function clickIE() {
         if (document.all) {
             return false;
         }
@@ -59,7 +82,7 @@
         document.onmouseup = clickNS;
         document.oncontextmenu = clickIE;
     }
-    document.oncontextmenu = new Function("return false");
+    document.oncontextmenu = new Function("return false");*/
 </script>
 <!-- //Disable mouse buttons -->
 
@@ -108,7 +131,10 @@
         var re = new RegExp("0{"+imgStr.length+"}$");
         //var url = 'http://www.archive.org/download/BookReader/img/page'+leafStr.replace(re, imgStr) + '.jpg';
         //var url = 'http://angelyo.ru/iabr/images2/page'+leafStr.replace(re, imgStr) + '.jpg';
-        var url = '/books/bjvvv/88/page'+leafStr.replace(re, imgStr) + '.jpg';
+        var bookID = window.location.search.replace( '?', '').split('=')[1];
+        console.log(bookID);
+        var url = '/books/'+bookID.split("_")[0]+'/'+bookID.split("_")[1]+'/page'+leafStr.replace(re, imgStr) + '.jpg';
+        //var url = '//cdn.libfl.ru/bjvvv/88/page0001';
         return url;
     };
     br.getPageSide = function(index) {
@@ -154,15 +180,15 @@
         return index + 1;
     };
     br.numLeafs = 1470;
-    br.bookTitle = 'Здесь будет отображаться название книги';
-    br.bookUrl = 'http://catalog.libfl.ru/';
-    br.bookUrlText = 'И обратная ссылка на страницу ресурса';
+    br.bookTitle = "<?php echo $bookInfo->Title?>";
+    br.bookUrl = '//dev.libfl.ru/Record/'+window.location.search.replace( '?', '').split('=')[1];
+    br.bookUrlText = 'Вернуться к описанию издания';
     br.bookUrlTitle = 'Back to details on book';
-    br.thumbnail = 'http://angelyo.ru/iabr/images2/page0001.jpg';
+    br.thumbnail = '//angelyo.ru/iabr/images2/page0001.jpg';
     br.metadata = [
-        {label: 'Title', value: 'Здесь будет отображаться название книги'},
-        {label: 'Author', value: 'Автор книги'},
-        {label: 'Description', value: 'Краткое описание книги (о чем книга и т. п.)'},
+        {label: 'Название книги', value: "<?php echo $bookInfo->Title?>"},
+        {label: 'Автор', value: "<?php echo $bookInfo->Author?>"},
+        {label: 'Краткое описание', value: 'Краткое описание книги (о чем книга и т. п.)'},
     ];
     br.enableMobileNav = true;
     br.mobileNavTitle = 'Settings';
