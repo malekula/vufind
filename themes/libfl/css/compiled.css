@@ -10292,14 +10292,14 @@ textarea::placeholder {
     }
 }
 
-#groupPlaceHolder {    
+#groupPlaceHolder {
     display: block;
     float: right;
     padding: .3rem;
     opacity: .3;
 }
 span#groupPlaceHolder:hover {
-    opacity: 1; 
+    opacity: 1;
     transition: 2s;
 }
 span#groupPlaceHolder:not(:hover) {
@@ -10400,26 +10400,26 @@ span#groupPlaceHolder:not(:hover) {
     .solr-adv-facet {
         flex: 1 50%
     }
-    
+
     .MethodOfAccess {
         flex: 1 33%;
         margin-bottom: 15px;
     }
-    
+
     .fund {
         flex: 1 33%;
         margin-bottom: 15px;
     }
-    
+
     .Location {
         flex: 1 33%;
         margin-bottom: 15px;
     }
-    
+
     .language {
         flex: 1 33%;
     }
-    
+
     .topic_facet {
         flex: 1 67%;
     }
@@ -13763,7 +13763,7 @@ ul.random.image li img {
 .navbar-right, .navbar-header,
 /*.search.container.navbar,*/ .searchtools, .breadcrumb,
 #searchForm_type, .searchForm button, .searchForm a {
-    display: none !important;
+    /*display: none !important;*/
 }
 .main {
     background-color: #ecf1f5;
@@ -14311,8 +14311,8 @@ a.tag-record {
 }
 label.search_bool {
     width: 100px;
-    float: left;  
-    line-height: 1.2;  
+    float: left;
+    line-height: 1.2;
     margin-top: 8px;
 }
 select.adv-term-type,
@@ -14321,7 +14321,7 @@ select.boolean {
     -webkit-appearance: none;
     /* for FF */
     -moz-appearance: none;
-    text-indent: 0.01px; 
+    text-indent: 0.01px;
     text-overflow: '';
     /* for IE */
     -ms-appearance: none;
@@ -14347,8 +14347,8 @@ select#limit_language {
 .solr-adv-facet label {
     margin-bottom: 10px;
 }
-.solr-adv-facet { 
-    flex: 1 30%;   
+.solr-adv-facet {
+    flex: 1 30%;
     margin-right: 20px;
 }
 .solr-adv-facet .language {
@@ -14360,7 +14360,7 @@ select#limit_language {
 .help-link {
     display: block;
 }
-.clean {  
+.clean {
     position: absolute;
     top: 20px;
     right: 0;
@@ -14373,74 +14373,3 @@ select#limit_language {
     height: 44px;
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
