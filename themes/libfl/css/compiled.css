@@ -4807,7 +4807,7 @@ a.label:focus {
     min-width: 10px;
     padding: 3px 7px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 300;
     color: #fff;
     line-height: 1;
     vertical-align: middle;
@@ -13930,6 +13930,7 @@ span.about_label {
     border: none;
     border-bottom: 2px solid #000000;
     padding-left: 10px;
+    margin-bottom: 15px;
     font-family: 'Leto Sans';
     color: #242728;
 }
@@ -14364,7 +14365,6 @@ select#limit_language {
     position: absolute;
     top: 20px;
     right: 0;
-    height: 44px;
 }
 .clean-img {
     position: absolute;
