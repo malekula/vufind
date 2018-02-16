@@ -488,7 +488,7 @@ abstract class Results
         $paginator = new Paginator(new $nullAdapter($total));
         $paginator->setCurrentPageNumber($this->getParams()->getPage())
             ->setItemCountPerPage($this->getParams()->getLimit())
-            ->setPageRange(11);
+            ->setPageRange(7);
         return $paginator;
     }
 
