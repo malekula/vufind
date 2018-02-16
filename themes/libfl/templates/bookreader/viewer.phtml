@@ -132,9 +132,16 @@
         //var url = 'http://www.archive.org/download/BookReader/img/page'+leafStr.replace(re, imgStr) + '.jpg';
         //var url = 'http://angelyo.ru/iabr/images2/page'+leafStr.replace(re, imgStr) + '.jpg';
         var bookID = window.location.search.replace( '?', '').split('=')[1];
-        console.log(bookID);
-        var url = '/books/'+bookID.split("_")[0]+'/'+bookID.split("_")[1]+'/page'+leafStr.replace(re, imgStr) + '.jpg';
-        //var url = '//cdn.libfl.ru/bjvvv/88/page0001';
+        var fund = bookID.split("_")[0];
+
+        var pinFormat = '0000000';
+        var getPin = bookID.split("_")[1].toString();
+        var rePIN = new RegExp("0{"+getPin.length+"}$");
+        var pin = pinFormat.replace(rePIN, getPin);
+        console.log(pin);
+        //console.log(bookID);
+        //var url = '/books/'+bookID.split("_")[0]+'/'+bookID.split("_")[1]+'/page'+leafStr.replace(re, imgStr) + '.jpg';
+        var url = 'https://cdn.libfl.ru:6684/books/'+bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
         return url;
     };
     br.getPageSide = function(index) {
@@ -179,7 +186,7 @@
     br.getPageNum = function (index) {
         return index + 1;
     };
-    br.numLeafs = 1470;
+    br.numLeafs = 556;
     br.bookTitle = "<?php echo $bookInfo->Title?>";
     br.bookUrl = '//dev.libfl.ru/Record/'+window.location.search.replace( '?', '').split('=')[1];
     br.bookUrlText = 'Вернуться к описанию издания';
