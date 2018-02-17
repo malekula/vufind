@@ -2195,6 +2195,7 @@ BookReader.prototype.encrypt = function(hash, current_index) {
         xhr.open('POST', 'http://localhost/STATUS/JSON?method=encrypt', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
+        console.log(xhr.status)
         if (xhr.status == 200) {
             //console.log(xhr.responseText);
             var result = xhr.responseText;
@@ -2208,11 +2209,33 @@ BookReader.prototype.encrypt = function(hash, current_index) {
     }
 }
 
+// Encode URL()
+//______________________________________________________________________________
+// Encode the URL
+BookReader.prototype.encodeURL = function(encoded_url, url) {
+    if (encoded_url) {
+        return encoded_url;
+    } else if (url) {
+        var xhr = new XMLHttpRequest();
+        //var data = 'url=' + encodeURIComponent(url);
+        var data = 'url='+url;
+        xhr.open('POST', 'http://localhost/STATUS/JSON?method=encodeURL', false);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+        if (xhr.status == 200) {
+            var encoded_url = xhr.responseText.split(',')[0].split(':')[1].slice(1,-1);
+            return BookReader.prototype.encodeURL(encoded_url, url);
+        }
+    } else {
+        return 'Error encode URL...';
+    }
+}
+
 // Decrypt()
 //______________________________________________________________________________
 // Decrypt the page hash number
 BookReader.prototype.decrypt = function(hash=false, current_index) {
-    console.log('Hash: ' + hash + ' / Current index: ' + current_index);
+    //console.log('Hash: ' + hash + ' / Current index: ' + current_index);
     if (current_index) {
         return current_index;
     } else if (hash) {
