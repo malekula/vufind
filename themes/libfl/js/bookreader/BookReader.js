@@ -2192,7 +2192,7 @@ BookReader.prototype.encrypt = function(hash, current_index) {
     } else if (current_index >= 0) {
         var xhr = new XMLHttpRequest();
         var data = 'current_index=' + encodeURIComponent(current_index);
-        xhr.open('POST', '//STATUS/JSON?method=encrypt', false);
+        xhr.open('POST', '//localhost/STATUS/JSON?method=encrypt', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
         console.log(xhr.status)
@@ -2219,7 +2219,7 @@ BookReader.prototype.encodeURL = function(encoded_url, url) {
         var xhr = new XMLHttpRequest();
         //var data = 'url=' + encodeURIComponent(url);
         var data = 'url='+url;
-        xhr.open('POST', '//STATUS/JSON?method=encodeURL', false);
+        xhr.open('POST', '//dev.libfl.ru/STATUS/JSON?method=encodeURL', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
         if (xhr.status == 200) {

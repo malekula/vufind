@@ -152,7 +152,7 @@
         //var url = 'https://cdn.libfl.ru:6684/books/'+bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
         //console.log(BookReader.prototype.encodeURL('', bookPath));
         var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
-        var url = 'https://cdn.libfl.ru:6684'+encoded_url;
+        var url = 'https://cdn.libfl.ru:6684/cdn-books'+encoded_url;
         console.log(url);
         //console.log(BookReader.prototype.encodeURL(url));
         //console.log(url);

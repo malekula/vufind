@@ -209,7 +209,7 @@ class StatusController extends AbstractBase
         $secret = 'LiSopomotianfso2317wo';
         $time = time() + 300; //ссылка будет рабочей 10 минут
         $key = str_replace("=", "", strtr(base64_encode(md5($secret.'/cdn-books/'.$url.$time.'80.250.173.151', TRUE)), "+/", "-_"));
-        $encoded_url = "/cdn-books/$url?secl=$key&sect=$time";
+        $encoded_url = "$url?secl=$key&sect=$time";
         return $this->output($encoded_url, self::STATUS_OK);
     }
 
