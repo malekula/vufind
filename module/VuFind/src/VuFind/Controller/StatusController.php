@@ -197,22 +197,6 @@ class StatusController extends AbstractBase
         return $this->output($results, self::STATUS_OK);
     }
 
-
-
-
-
-    public function encodeURLAjax()
-    {
-        $this->disableSessionWrites();
-        $url = $this->params()->fromPost('url', $this->params()->fromQuery('url'));
-        $url = str_replace('\/', '/', $url);
-        $secret = 'LiSopomotianfso2317wo';
-        $time = time() + 300; //ссылка будет рабочей 10 минут
-        $key = str_replace("=", "", strtr(base64_encode(md5($secret.'/cdn-books/'.$url.$time.'80.250.173.151', TRUE)), "+/", "-_"));
-        $encoded_url = "$url?secl=$key&sect=$time";
-        return $this->output($encoded_url, self::STATUS_OK);
-    }
-
     /**
      * Crypt url bookreader page
      *

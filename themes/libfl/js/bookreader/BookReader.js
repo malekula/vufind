@@ -2219,10 +2219,11 @@ BookReader.prototype.encodeURL = function(encoded_url, url) {
         var xhr = new XMLHttpRequest();
         //var data = 'url=' + encodeURIComponent(url);
         var data = 'url='+url;
-        xhr.open('POST', '//dev.libfl.ru/STATUS/JSON?method=encodeURL', false);
+        xhr.open('POST', '//'+location.host+'/AJAX/JSON?method=encodeURL', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
         if (xhr.status == 200) {
+            //console.log(xhr.responseText);
             var encoded_url = xhr.responseText.split(',')[0].split(':')[1].slice(1,-1);
             return BookReader.prototype.encodeURL(encoded_url, url);
         }
@@ -2241,7 +2242,7 @@ BookReader.prototype.decrypt = function(hash=false, current_index) {
     } else if (hash) {
         var xhr = new XMLHttpRequest();
         var data = 'hash=' + encodeURIComponent(hash);
-        xhr.open('POST', 'http://localhost/STATUS/JSON?method=decrypt', false);
+        xhr.open('POST', '//'+location.host+'/STATUS/JSON?method=decrypt', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
         if (xhr.status == 200) {

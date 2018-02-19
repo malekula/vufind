@@ -125,12 +125,25 @@
     brConfig["mode"] = 2;
 </script>
 <script type="text/javascript">
+    img = new Image();
+    /*var img = new Image();
+    img.onload = function() {
+        var width = this.width;
+        var hight = this.height;
+    }
+    img.src = 'http://www.site.ru/img.png';*/
     br = new BookReader();
     br.getPageWidth = function(index) {
-        return 800;
+        return 1055;
     };
     br.getPageHeight = function(index) {
-        return 1200;
+        return 1600;
+    };
+    br.getBookFund = function () {
+        return window.location.search.replace( '?', '').split('=')[1].split('_')[0];
+    };
+    br.getBookPIN = function () {
+        return window.location.search.replace( '?', '').split('=')[1].split('_')[1];
     };
     br.getPageURI = function(index, reduce, rotate) {
         var leafStr = '0000';
@@ -146,16 +159,9 @@
         var rePIN = new RegExp("0{"+getPin.length+"}$");
         var pin = pinFormat.replace(rePIN, getPin);
         var page = leafStr.replace(re, imgStr)+'.jpg';
-        //var url = '/books/'+bookID.split("_")[0]+'/'+bookID.split("_")[1]+'/page'+leafStr.replace(re, imgStr) + '.jpg';
-        var bookPath = '/books/'+bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
-
-        //var url = 'https://cdn.libfl.ru:6684/books/'+bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
-        //console.log(BookReader.prototype.encodeURL('', bookPath));
+        var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/output/'+leafStr.replace(re, imgStr)+'.jpg';
         var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
-        var url = 'https://cdn.libfl.ru:6684/cdn-books'+encoded_url;
-        console.log(url);
-        //console.log(BookReader.prototype.encodeURL(url));
-        //console.log(url);
+        var url = 'https://cdn.libfl.ru:6684/cdn-books/'+encoded_url;
         return url;
     };
 
@@ -192,12 +198,20 @@
     br.getPageNum = function (index) {
         return index + 1;
     };
-    br.numLeafs = 556;
+    br.numLeafs = 525;
     br.bookTitle = "<?php echo $bookInfo->Title?>";
-    br.bookUrl = '//dev.libfl.ru/Record/'+window.location.search.replace( '?', '').split('=')[1];
+    br.bookUrl = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1];
     br.bookUrlText = 'Вернуться к описанию издания';
     br.bookUrlTitle = 'Back to details on book';
-    br.thumbnail = '//angelyo.ru/iabr/images2/page0001.jpg';
+    function UrlExists(coverURL)
+    {
+        var http = new XMLHttpRequest();
+        http.open('GET', coverURL, false);
+        http.send();
+        console.log(http);
+    }
+    //br.thumbnail = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/'+br.getBookPIN()+'/cover.jpg';
+    br.thumbnail = UrlExists('https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/7714/cover.jpg');
     br.metadata = [
         {label: 'Название книги', value: "<?php echo $bookInfo->Title?>"},
         {label: 'Автор', value: "<?php echo $bookInfo->Author?>"},
