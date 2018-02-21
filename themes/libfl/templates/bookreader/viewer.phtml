@@ -40,14 +40,19 @@
     $bookPIN = str_pad((string)explode('_', $bookID)[1], 7, "0", STR_PAD_LEFT);
     try {
         $getBookInfo = $client->GetBookInfoByID(array('id'=>$bookID));
+        $getImgInfo = $client->GetElectronicCopyInfo(array('id'=>$bookID));
     } catch (Exception $e) {
         echo $e->getMessage()."<br/><br/>";
     }
     $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
     $bookPath = "/books/".$fund."/".substr($bookPIN, 0, 1)."/".substr($bookPIN, 1, 3)."/".substr($bookPIN, 4, 3)."/";
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $imgInfo = json_decode($getImgInfo->GetElectronicCopyInfoResult);
+    $cntPages = $imgInfo->PageCount;
+    $imgWidth = $imgInfo->Width;
+    $imgHeight = $imgInfo->Height;
+    /*if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo $bookPath = "/books/".$fund."/".substr($bookPIN, 0, 1)."/".substr($bookPIN, 1, 3)."/".substr($bookPIN, 4, 3)."/".$page;
-    }
+    }*/
 
     //echo '<pre>';
     //print_r(json_decode($bookInfo->GetBookInfoByIDResult));
@@ -134,10 +139,12 @@
     img.src = 'http://www.site.ru/img.png';*/
     br = new BookReader();
     br.getPageWidth = function(index) {
-        return 1055;
+        //return 1055;
+        return <?php echo $imgWidth ?>;
     };
     br.getPageHeight = function(index) {
-        return 1600;
+        //return 1600;
+        return <?php echo $imgHeight ?>;
     };
     br.getBookFund = function () {
         return window.location.search.replace( '?', '').split('=')[1].split('_')[0];
@@ -159,7 +166,7 @@
         var rePIN = new RegExp("0{"+getPin.length+"}$");
         var pin = pinFormat.replace(rePIN, getPin);
         var page = leafStr.replace(re, imgStr)+'.jpg';
-        var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/output/'+leafStr.replace(re, imgStr)+'.jpg';
+        var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
         var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
         var url = 'https://cdn.libfl.ru:6684/cdn-books/'+encoded_url;
         return url;
@@ -198,7 +205,7 @@
     br.getPageNum = function (index) {
         return index + 1;
     };
-    br.numLeafs = 525;
+    br.numLeafs = <?php echo $cntPages ?>;
     br.bookTitle = "<?php echo $bookInfo->Title?>";
     br.bookUrl = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1];
     br.bookUrlText = 'Вернуться к описанию издания';
