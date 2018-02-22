@@ -126,12 +126,17 @@
 </script>
 <script>
     // Set some config variables -- $$$ NB: Config object format has not been finalized
-    var brConfig = {theme:"ia"};
-    brConfig["mode"] = 2;
+    var imgWidth = <?php echo $imgWidth ?>;
+    var $imgHeight = <?php echo $imgHeight ?>;
+    var brConfig = {
+        theme:"ia",
+        mode: (imgWidth > $imgHeight) ? 1 : 2,
+    };
+    //brConfig["mode"] = 2;
 </script>
 <script type="text/javascript">
-    img = new Image();
-    /*var img = new Image();
+    /*img = new Image();
+    var img = new Image();
     img.onload = function() {
         var width = this.width;
         var hight = this.height;

@@ -215,9 +215,11 @@ BookReader.prototype.init = function() {
     // Use params or browser width to set view mode
     var windowWidth = $(window).width();
     var nextMode;
+    console.log(params.mode);
+    console.log(brConfig.mode);
     if ('undefined' != typeof(params.mode)) {
         nextMode = params.mode;
-    } else if (this.ui == 'full' && windowWidth <= this.onePageMinBreakpoint) {
+    } else if ((this.ui == 'full' && windowWidth <= this.onePageMinBreakpoint) || brConfig.mode == 1) {
         // In full mode, we set the default based on width
         nextMode = this.constMode1up;
     } else {
