@@ -231,7 +231,7 @@
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
                 $locationCode = $accessCodes[1];
-                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1007','1010','1011','1012'),"strcasecmp")) {
+                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1005','1007','1010','1011','1012'),"strcasecmp")) {
                     echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
                     echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
                     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
@@ -255,6 +255,18 @@
                     switch ($accessCode) {
                         case '1003':
                             echo '<tr><th style="width:160px;"></th><td>Доступ к НЭБ (Данный вид доступа находится в разработке).</td></tr>';
+                            break;
+                        case '1005':
+                            //echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th><td>'.str_replace('.', ', ', $group_inv_number).'</td></tr>';
+                            /*echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
+                            echo '<td>';
+                            foreach (explode('.', $group_inv_number) as $inv_number) {
+                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
+                            }
+                            echo '</td></tr>';*/
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('')." </th><td>".$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()])."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
                             break;
                         case '1007':
                             echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
