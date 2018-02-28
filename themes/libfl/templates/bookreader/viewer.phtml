@@ -64,11 +64,11 @@
 <div id="IABookReaderWrapper">
     <div id="IABookReaderMessageWrapper" style="display: none;"></div>
     <div id="BookReader" class="ui-full mm-page mm-slideout">
-        Библиотека иностранной литературы<br/>
+        <h2>Библиотека иностранной литературы</h2>
         <noscript>
-        <p>
-            The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="http://www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
-        </p>
+            <p>
+                The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="http://www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
+            </p>
         </noscript>
     </div>
 </div>
@@ -163,7 +163,8 @@
         var re = new RegExp("0{"+imgStr.length+"}$");
         //var url = 'http://www.archive.org/download/BookReader/img/page'+leafStr.replace(re, imgStr) + '.jpg';
         //var url = 'http://angelyo.ru/iabr/images2/page'+leafStr.replace(re, imgStr) + '.jpg';
-        var bookID = window.location.search.replace( '?', '').split('=')[1];
+        var bookID = window.location.search.replace( '?', '').split('=')[1].split('&')[0];
+        var viewMode = window.location.search.replace('?','').split('&')[1].split('=')[1];
         var fund = bookID.split("_")[0];
 
         var pinFormat = '0000000';
@@ -171,7 +172,12 @@
         var rePIN = new RegExp("0{"+getPin.length+"}$");
         var pin = pinFormat.replace(rePIN, getPin);
         var page = leafStr.replace(re, imgStr)+'.jpg';
-        var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
+        if (viewMode == 'HQ') {
+            var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
+        } else {
+            var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/output/'+leafStr.replace(re, imgStr)+'.jpg';
+        }
+        //var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
         var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
         var url = 'https://cdn.libfl.ru:6684/cdn-books/'+encoded_url;
         return url;

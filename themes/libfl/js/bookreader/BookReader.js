@@ -4050,6 +4050,7 @@ BookReader.prototype.buildToolbarElement = function() {
     +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
     +         "<button class='BRicon info js-tooltip'></button>"
     +         "<button class='BRicon share js-tooltip'></button>"
+    +         "<button class='BRicon original js-tooltip'></button>"
     +         readIcon
     +       "</span>"
 
@@ -4534,6 +4535,25 @@ BookReader.prototype.bindNavigationHandlers = function() {
     jIcons.filter('.zoom_out').bind('click', function() {
         self.ttsStop();
         self.zoom(-1);
+        return false;
+    });
+
+    jIcons.filter('.original').bind('click', function() {
+        var uri = window.location.toString().split('?');
+        var urlPath = uri[0];
+        var params = uri[1];
+        var viewMode = params.split('#')[0].split('&')[1].split('=')[1];
+        var bookParams = params.split('#')[0].split('&')[0];
+        var BRParams = params.split('#')[1];
+        console.log(viewMode);
+        console.log(bookParams);
+        console.log(BRParams);
+        //window.location.href = urlPath + "?" + bookParams + "&view_mode=HQ#" + BRParams;
+        if (viewMode == 'LQ') {
+            window.location.href = urlPath + "?" + bookParams + "&view_mode=HQ#" + BRParams;
+        } else {
+            window.location.href = urlPath + "?" + bookParams + "&view_mode=LQ#" + BRParams;
+        }
         return false;
     });
 
@@ -6030,6 +6050,7 @@ BookReader.prototype.initUIStrings = function()
                    '.bookmark': 'Bookmark this page',
                    '.read': 'Read this book aloud',
                    '.share': 'Share this book',
+                   '.original': 'Open original image',
                    '.info': 'About this book',
                    '.full': 'Show fullscreen',
                    '.book_left': 'Flip left',

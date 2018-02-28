@@ -34,10 +34,10 @@
                 'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
             );
         }
-        /*echo '<pre>';
+        echo '<pre>';
         print_r($newExemplars);
         echo '</pre>';
-        echo $accessMethod;*/
+        echo $accessMethod;
         if (is_array($internetAccessTab) && !empty($internetAccessTab)) {
             echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
             foreach ($newExemplars as $access=>$exemplar):
@@ -64,7 +64,7 @@
                     }
                     switch ($accessCode) {
                         case '1001':
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a id='readonline' href='".$this->url('bookreader-viewer')."?bookID=".$this->driver->getUniqueId()."' rel='nofollow' target='_blank'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a id='readonline' href='".$this->url('bookreader-viewer')."?bookID=".$this->driver->getUniqueId()."&view_mode=LQ' rel='nofollow' target='_blank'>Читать книгу</a></td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         case '1002':
@@ -74,11 +74,12 @@
                         case '1004':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция для Litres</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://libfl.ru/static/litres_how_to.pdf' target='_blank'>Инструкция для Litres</a></td></tr>";
                             break;
                         case '1008':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='#' target='_blank'>Инструкция для Pearson</a></td></tr>";
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
@@ -367,7 +368,7 @@
                                 echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
                             }
                             echo '</td></tr>';*/
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
                             //echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
                             break;
                         default:

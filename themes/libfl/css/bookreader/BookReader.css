@@ -252,6 +252,7 @@ i.BRicon { display: inline-block; }
 .BRicon.read {background-position:-200px 0;}
 .BRicon.unread {background-position:-280px 0;}
 .BRicon.full {background-position:-360px 0;}
+.BRicon.original {background-position:-360px 0;}
 .BRicon.book_left {background-position:-440px 0;}
 .BRicon.book_right {background-position:-520px 0;}
 .BRicon.zoom_out {background-position:-600px 0;}
@@ -274,6 +275,7 @@ i.BRicon { display: inline-block; }
 .no-touch .BRicon.read:hover {background-position:-240px 0;}
 .no-touch .BRicon.unread:hover {background-position:-320px 0;}
 .no-touch .BRicon.full:hover {background-position:-400px 0;}
+.no-touch .BRicon.original:hover {background-position:-400px 0;}
 .no-touch .BRicon.book_left:hover {background-position:-480px 0;}
 .no-touch .BRicon.book_right:hover {background-position:-560px 0;}
 .no-touch .BRicon.zoom_out:hover {background-position:-640px 0;}
@@ -291,6 +293,7 @@ i.BRicon { display: inline-block; }
 .touch .BRicon.read:active {background-position:-240px 0;}
 .touch .BRicon.unread:active {background-position:-320px 0;}
 .touch .BRicon.full:active {background-position:-400px 0;}
+.touch .BRicon.original:active {background-position:-400px 0;}
 .touch .BRicon.book_left:active {background-position:-480px 0;}
 .touch .BRicon.book_right:active {background-position:-560px 0;}
 .touch .BRicon.zoom_out:active {background-position:-640px 0;}
