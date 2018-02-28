@@ -358,7 +358,6 @@ BookReader.prototype.init = function() {
     this.init.initComplete = true;
 }
 
-
 //______________________________________________________________________________
 
 /**
@@ -4002,6 +4001,10 @@ BookReader.prototype.addChapterFromEntry = function(tocEntryObject) {
  */
 BookReader.prototype.buildToolbarElement = function() {
   // $$$mang should be contained within the BookReader div instead of body
+  var uri = window.location.toString().split('?');
+  var params = uri[1];
+  var viewModeIcon = params.split('#')[0].split('&')[1].split('=')[1] + '-icon';
+
   var readIcon = '';
   if (this.isSoundManagerSupported) {
       readIcon = "<button class='BRicon read modal js-tooltip'></button>";
@@ -4050,7 +4053,7 @@ BookReader.prototype.buildToolbarElement = function() {
     +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
     +         "<button class='BRicon info js-tooltip'></button>"
     +         "<button class='BRicon share js-tooltip'></button>"
-    +         "<button class='BRicon original js-tooltip'></button>"
+    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip'></button>"
     +         readIcon
     +       "</span>"
 
@@ -4538,20 +4541,18 @@ BookReader.prototype.bindNavigationHandlers = function() {
         return false;
     });
 
-    jIcons.filter('.original').bind('click', function() {
+    jIcons.filter('.switch-view-mode').bind('click', function() {
         var uri = window.location.toString().split('?');
         var urlPath = uri[0];
         var params = uri[1];
         var viewMode = params.split('#')[0].split('&')[1].split('=')[1];
         var bookParams = params.split('#')[0].split('&')[0];
         var BRParams = params.split('#')[1];
-        console.log(viewMode);
-        console.log(bookParams);
-        console.log(BRParams);
-        //window.location.href = urlPath + "?" + bookParams + "&view_mode=HQ#" + BRParams;
         if (viewMode == 'LQ') {
+            //$('.switch-view-mode').removeClass('hq-icon').addClass('lq-icon');
             window.location.href = urlPath + "?" + bookParams + "&view_mode=HQ#" + BRParams;
         } else {
+            //$('.switch-view-mode').removeClass('lq-icon').addClass('hq-icon');
             window.location.href = urlPath + "?" + bookParams + "&view_mode=LQ#" + BRParams;
         }
         return false;
