@@ -5940,9 +5940,13 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
     var getShareUrl = function() {
       var shareThisPage = jForm.find('.thispage-social').prop('checked');
       if (shareThisPage) {
-        return window.location.href;
+          //console.log('Share this page: '+pageView);
+          //return window.location.href;
+          return pageView;
       } else {
-        return document.location.protocol + "//" + window.location.hostname + window.location.pathname;
+          //console.log('Share this book: '+bookView);
+          //return document.location.protocol + "//" + window.location.hostname + window.location.pathname;
+          return bookView;
       }
     };
     jForm.find('.facebook-share-button').click(function(){
