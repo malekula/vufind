@@ -6039,7 +6039,7 @@ BookReader.prototype.initUIStrings = function()
     // the toolbar and nav bar easier
 
     // Setup tooltips -- later we could load these from a file for i18n
-    var titles = { '.logo': 'Go to Archive.org', // $$$ update after getting OL record
+    var titles = { '.logo': 'Foreign Literature Library', // $$$ update after getting OL record
                    '.zoom_in': 'Zoom in',
                    '.zoom_out': 'Zoom out',
                    '.onepg': 'One-page view',
@@ -6051,7 +6051,7 @@ BookReader.prototype.initUIStrings = function()
                    '.bookmark': 'Bookmark this page',
                    '.read': 'Read this book aloud',
                    '.share': 'Share this book',
-                   '.original': 'Open original image',
+                   '.switch-view-mode': 'Switch view mode',
                    '.info': 'About this book',
                    '.full': 'Show fullscreen',
                    '.book_left': 'Flip left',

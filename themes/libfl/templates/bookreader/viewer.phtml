@@ -27,11 +27,6 @@
     </noscript>
 </div>-->
 
-<script type="text/JavaScript">
-    //var strGET = window.location.search.replace( '?', '').split('=');
-    //console.log(strGET[1]);
-</script>
-
 <?php
     ini_set("soap.wsdl_cache_enabled", "0");
     $client = new SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
@@ -67,7 +62,7 @@
         <h2>Библиотека иностранной литературы</h2>
         <noscript>
             <p>
-                The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.  You can also try one of the <a href="http://www.archive.org/details/goodytwoshoes00newyiala"> other formats of the book</a>.
+                The BookReader requires JavaScript to be enabled. Please check that your browser supports JavaScript and that it is enabled in the browser settings.
             </p>
         </noscript>
     </div>
@@ -135,13 +130,6 @@
     //brConfig["mode"] = 2;
 </script>
 <script type="text/javascript">
-    /*img = new Image();
-    var img = new Image();
-    img.onload = function() {
-        var width = this.width;
-        var hight = this.height;
-    }
-    img.src = 'http://www.site.ru/img.png';*/
     br = new BookReader();
     br.getPageWidth = function(index) {
         //return 1055;
@@ -177,9 +165,11 @@
         } else {
             var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/output/'+leafStr.replace(re, imgStr)+'.jpg';
         }
-        //var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
-        var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
-        var url = 'https://cdn.libfl.ru:6684/cdn-books/'+encoded_url;
+        ////var bookPath = bookID.split("_")[0]+'/'+pin[0]+'/'+pin[1]+pin[2]+pin[3]+'/'+pin[4]+pin[5]+pin[6]+'/'+leafStr.replace(re, imgStr)+'.jpg';
+
+        //var encoded_url = BookReader.prototype.encodeURL('', bookPath).replace(/\\/g,"/").replace(/\/\//g, "/");
+        //var url = 'https://cdn.libfl.ru:6684/cdn-books/'+encoded_url;
+        var url = 'https://cdn.libfl.ru:6684/books/'+bookPath;
         return url;
     };
 
@@ -223,9 +213,9 @@
     br.bookUrlTitle = 'Back to details on book';
     br.thumbnail = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/'+br.getBookPIN()+'/cover.jpg';
     br.metadata = [
-        {label: 'Название книги', value: "<?php echo $bookInfo->Title?>"},
-        {label: 'Автор', value: "<?php echo $bookInfo->Author?>"},
-        {label: 'Краткое описание', value: 'Краткое описание книги (о чем книга и т. п.)'},
+        {label: 'Название книги', value: "<?php echo $bookInfo->Title ?>"},
+        {label: 'Автор', value: "<?php echo $bookInfo->Author ?>"},
+        {label: 'Краткое описание', value: "<?php echo $bookInfo->Annotation ?>"},
     ];
     br.enableMobileNav = true;
     br.mobileNavTitle = 'Settings';
