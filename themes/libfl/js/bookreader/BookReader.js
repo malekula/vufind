@@ -5887,7 +5887,7 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
         '<div class="share-social">',
           '<div><button class="action share facebook-share-button"><i class="BRicon fb" /> Facebook</button></div>',
           '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /> Twitter</button></div>',
-          '<div><button class="action share email-share-button"><i class="BRicon email" /> Email</button></div>',
+          '<div><button class="action share email-share-button"><i class="BRicon vk" /> Вконтакте</button></div>',
           '<label class="sub open-to-this-page">',
               '<input class="thispage-social" type="checkbox" />',
               'Показать эту страницу?',
@@ -5910,7 +5910,7 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
           '</form>',
         '</div>',
         '<div class="BRfloatFoot center">',
-            '<button class="share-finished" type="button" onclick="$.fn.colorbox.close();">Finished</button>',
+            '<button class="share-finished" type="button" onclick="$.fn.colorbox.close();">Закрыть</button>',
         '</div>'
         ].join('\n'));
 
@@ -5950,7 +5950,7 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
       }
     };
     jForm.find('.facebook-share-button').click(function(){
-      var params = $.param({ u: getShareUrl() });
+      var params = $.param({ u: getShareUrl(), t:self.bookTitle });
       var url = 'https://www.facebook.com/sharer.php?' + params;
       self.createPopup(url, 600, 400, 'Share')
     });
@@ -5963,8 +5963,14 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
       self.createPopup(url, 600, 400, 'Share')
     });
     jForm.find('.email-share-button').click(function(){
-      var body = self.bookTitle + "\n\n" + getShareUrl();
-      window.location.href = 'mailto:?subject=' + encodeURI(self.bookTitle) + '&body=' + encodeURI(body);
+      //var body = self.bookTitle + "\n\n" + getShareUrl();
+      //window.location.href = 'mailto:?subject=' + encodeURI(self.bookTitle) + '&body=' + encodeURI(body);
+      var params = $.param({
+        url: getShareUrl(),
+        title: self.bookTitle
+      });
+      var url = 'https://vk.com/share.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
     });
 
     jForm.appendTo(jShareDiv);
