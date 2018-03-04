@@ -1,4 +1,5 @@
 <?php
+    $this->doctype(Zend\View\Helper\Doctype::XHTML1_RDFA);
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.css');
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.navbars.css');
     $this->headLink()->appendStylesheet('bookreader/BookReader.css');
@@ -45,6 +46,11 @@
     $cntPages = $imgInfo->PageCount;
     $imgWidth = $imgInfo->Width;
     $imgHeight = $imgInfo->Height;
+    if (!empty($bookInfo->Title))
+        $this->headMeta()->setProperty('og:title', $bookInfo->Title);
+    if (!empty($bookInfo->Annotation))
+        $this->headMeta()->setProperty('og:description', $bookInfo->Annotation);
+
     /*if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo $bookPath = "/books/".$fund."/".substr($bookPIN, 0, 1)."/".substr($bookPIN, 1, 3)."/".substr($bookPIN, 4, 3)."/".$page;
     }*/
@@ -208,10 +214,16 @@
     };
     br.numLeafs = <?php echo $cntPages ?>;
     br.bookTitle = "<?php echo $bookInfo->Title?>";
-    br.bookUrl = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1];
+    br.bookUrl = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0];
     br.bookUrlText = 'Вернуться к описанию издания';
     br.bookUrlTitle = 'Back to details on book';
-    br.thumbnail = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/'+br.getBookPIN()+'/cover.jpg';
+    var img = new Image();
+    img.src = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/'+br.getBookPIN()+'/cover.jpg';
+    if (img.onload == function() {return true}) {
+        br.thumbnail = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund()+'/'+br.getBookPIN()+'/cover.jpg';
+    } else {
+        br.thumbnail = 'https://cdn.libfl.ru:6684/images/no_cover.png';
+    }
     br.metadata = [
         {label: 'Название книги', value: "<?php echo $bookInfo->Title ?>"},
         {label: 'Автор', value: "<?php echo $bookInfo->Author ?>"},

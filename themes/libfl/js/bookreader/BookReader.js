@@ -4053,7 +4053,6 @@ BookReader.prototype.buildToolbarElement = function() {
     +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
     +         "<button class='BRicon info js-tooltip'></button>"
     +         "<button class='BRicon share js-tooltip'></button>"
-    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip'></button>"
     +         readIcon
     +       "</span>"
 
@@ -4061,6 +4060,10 @@ BookReader.prototype.buildToolbarElement = function() {
     +       "<span class='BRtoolbarSection BRtoolbarSectionZoom tc ph10'>"
     +         "<button class='BRicon zoom_out js-tooltip'></button>"
     +         "<button class='BRicon zoom_in js-tooltip'></button>"
+    +       "</span>"
+
+    +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
+    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip'></button>"
     +       "</span>"
 
     // Search
@@ -4095,6 +4098,9 @@ BookReader.prototype.buildToolbarElement = function() {
  * @return {jqueryElement}
  */
 BookReader.prototype.buildMobileDrawerElement = function() {
+    var uri = window.location.toString().split('?');
+    var params = uri[1];
+    var viewMode = params.split('#')[0].split('&')[1].split('=')[1];
     var experimentalHtml = '';
     if (this.enableExperimentalControls) {
       experimentalHtml += "<div class=\"DrawerSettingsTitle\">Experimental (may not work)</div>"
@@ -4134,6 +4140,16 @@ BookReader.prototype.buildMobileDrawerElement = function() {
         +"    </li>";
     }
 
+    if (viewMode == 'HQ') {
+        viewMode = "<div class=\"DrawerSettingsTitle\">View Mode</div>"
+        +"<button id='HQ' class='BRicon switch-view-mode HQ-icon-active'></button>"
+        +"<button id='LQ' class='BRicon switch-view-mode LQ-icon'></button>"
+    } else {
+        viewMode = "<div class=\"DrawerSettingsTitle\">View Mode</div>"
+        +"<button id='HQ' class='BRicon switch-view-mode HQ-icon'></button>"
+        +"<button id='LQ' class='BRicon switch-view-mode LQ-icon-active'></button>"
+    }
+
 
     return $(
       "<nav id=\"BRmobileMenu\" class=\"BRmobileMenu\">"
@@ -4156,6 +4172,8 @@ BookReader.prototype.buildMobileDrawerElement = function() {
       +"        <button class='BRicon zoom_in'></button>"
       +"        <br style='clear:both'><br><br>"
       +         experimentalHtml
+      +         viewMode
+      +"        <br style='clear:both'><br><br>"
       +"      </div>"
       +"    </li>"
       +"    <li>"
@@ -5885,9 +5903,10 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
     var jForm = $([
         '<div class="share-title">Поделиться этой книгой</div>',
         '<div class="share-social">',
-          '<div><button class="action share facebook-share-button"><i class="BRicon fb" /> Facebook</button></div>',
-          '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /> Twitter</button></div>',
-          '<div><button class="action share email-share-button"><i class="BRicon vk" /> Вконтакте</button></div>',
+          '<div><button class="action share facebook-share-button"><i class="BRicon fb" /></button></div>',
+          '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /></button></div>',
+          '<div><button class="action share vk-share-button"><i class="BRicon vk" /></button></div>',
+          '<div><button class="action share odnoklassniki-share-button"><i class="BRicon odnoklassniki" /></button></div>',
           '<label class="sub open-to-this-page">',
               '<input class="thispage-social" type="checkbox" />',
               'Показать эту страницу?',
@@ -5950,8 +5969,18 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
       }
     };
     jForm.find('.facebook-share-button').click(function(){
-      var params = $.param({ u: getShareUrl(), t:self.bookTitle });
+      var params = $.param({ u: getShareUrl() });
       var url = 'https://www.facebook.com/sharer.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
+    });
+    jForm.find('.vk-share-button').click(function(){
+      var params = $.param({ url: getShareUrl(), title:self.bookTitle });
+      var url = 'https://vk.com/share.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
+    });
+    jForm.find('.odnoklassniki-share-button').click(function(){
+      var params = $.param({ url: getShareUrl(), title:self.bookTitle });
+      var url = 'https://connect.ok.ru/offer?' + params;
       self.createPopup(url, 600, 400, 'Share')
     });
     jForm.find('.twitter-share-button').click(function(){
@@ -6019,8 +6048,8 @@ BookReader.prototype.buildInfoDiv = function(jInfoDiv)
     if (moreInfoText && this.bookUrl) {
       $rightCol.append($("<div class=\"BRinfoValueW\">"
         +"<div class=\"BRinfoMoreInfoW\">"
-        +"  <a class=\"BRinfoMoreInfo\" href=\""+this.bookUrl+"\">"
-        +   moreInfoText
+        +"  <a class=\"BRinfoMoreInfo\" href=\"//"+location.host+"/Record/"+window.location.search.replace( '?', '').split('=')[1].split('&')[0]+"\" target=\"_blank\">"
+        +   "Перейти к описанию книги"
         +"  </a>"
         +"</div>"
       +"</div>"));
@@ -6061,7 +6090,7 @@ BookReader.prototype.initUIStrings = function()
                    '.bookmark': 'Bookmark this page',
                    '.read': 'Read this book aloud',
                    '.share': 'Share this book',
-                   '.switch-view-mode': 'Switch view mode',
+                   '.switch-view-mode': 'View mode',
                    '.info': 'About this book',
                    '.full': 'Show fullscreen',
                    '.book_left': 'Flip left',
