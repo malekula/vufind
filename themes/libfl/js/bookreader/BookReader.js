@@ -4382,7 +4382,7 @@ BookReader.prototype.blankShareDiv = function() {
     return $([
         '<div class="BRfloat" id="BRshare">',
             '<div class="BRfloatHead">',
-                'Share',
+                'Поделиться книгой с друзьями',
                 '<button class="floatShut" href="javascript:;" onclick="$.fn.colorbox.close();"><span class="shift">Close</span></a>',
             '</div>',
         '</div>'].join('\n')
@@ -5901,7 +5901,7 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
     var self = this;
 
     var jForm = $([
-        '<div class="share-title">Поделиться этой книгой</div>',
+        '<div class="share-title">Поделиться этой книгой в соц. сетях</div>',
         '<div class="share-social">',
           '<div><button class="action share facebook-share-button"><i class="BRicon fb" /></button></div>',
           '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /></button></div>',
