@@ -65,7 +65,7 @@
                     switch ($accessCode) {
                         case '1001':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a id='readonline' href='".$this->url('bookreader-viewer')."?bookID=".$this->driver->getUniqueId()."&view_mode=LQ' rel='nofollow' target='_blank'>Читать книгу</a></td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            //echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         case '1002':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
