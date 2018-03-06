@@ -142,7 +142,7 @@
         if (viewMode == 'HQ') {
             var bookPath = exemplar.Path+exemplar.JPGFiles[imgStr];
         } else {
-            var bookPath = exemplar.Path+'output/'+exemplar.JPGFiles[imgStr];
+            var bookPath = exemplar.Path+exemplar.JPGFiles[imgStr];
         }
         var url = 'https://cdn.libfl.ru:6684/books/'+bookPath;
         return url;
