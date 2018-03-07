@@ -79,7 +79,7 @@ function BookReader() {
     this.lastDisplayableIndex2up = null;
 
     // Should be overriden (before init) by custom implmentations.
-    this.logoURL = 'https://catalog.libfl.ru';
+    this.logoURL = '//catalog.libfl.ru';
 
     // Base URL for UI images - should be overriden (before init) by
     // custom implementations.
@@ -217,7 +217,7 @@ BookReader.prototype.init = function() {
     var nextMode;
     if ('undefined' != typeof(params.mode)) {
         nextMode = params.mode;
-    } else if (this.ui == 'full' && windowWidth <= this.onePageMinBreakpoint) {
+    } else if ((this.ui == 'full' && windowWidth <= this.onePageMinBreakpoint) || brConfig.mode == 1) {
         // In full mode, we set the default based on width
         nextMode = this.constMode1up;
     } else {
@@ -355,7 +355,6 @@ BookReader.prototype.init = function() {
 
     this.init.initComplete = true;
 }
-
 
 //______________________________________________________________________________
 
@@ -2192,9 +2191,10 @@ BookReader.prototype.encrypt = function(hash, current_index) {
     } else if (current_index >= 0) {
         var xhr = new XMLHttpRequest();
         var data = 'current_index=' + encodeURIComponent(current_index);
-        xhr.open('POST', 'http://localhost/STATUS/JSON?method=encrypt', false);
+        xhr.open('POST', '//localhost/STATUS/JSON?method=encrypt', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
+        console.log(xhr.status)
         if (xhr.status == 200) {
             //console.log(xhr.responseText);
             var result = xhr.responseText;
@@ -2208,17 +2208,40 @@ BookReader.prototype.encrypt = function(hash, current_index) {
     }
 }
 
+// Encode URL()
+//______________________________________________________________________________
+// Encode the URL
+BookReader.prototype.encodeURL = function(encoded_url, url) {
+    if (encoded_url) {
+        return encoded_url;
+    } else if (url) {
+        var xhr = new XMLHttpRequest();
+        //var data = 'url=' + encodeURIComponent(url);
+        var data = 'url='+url;
+        xhr.open('POST', '//'+location.host+'/AJAX/JSON?method=encodeURL', false);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+        if (xhr.status == 200) {
+            //console.log(xhr.responseText);
+            var encoded_url = xhr.responseText.split(',')[0].split(':')[1].slice(1,-1);
+            return BookReader.prototype.encodeURL(encoded_url, url);
+        }
+    } else {
+        return 'Error encode URL...';
+    }
+}
+
 // Decrypt()
 //______________________________________________________________________________
 // Decrypt the page hash number
 BookReader.prototype.decrypt = function(hash=false, current_index) {
-    console.log('Hash: ' + hash + ' / Current index: ' + current_index);
+    //console.log('Hash: ' + hash + ' / Current index: ' + current_index);
     if (current_index) {
         return current_index;
     } else if (hash) {
         var xhr = new XMLHttpRequest();
         var data = 'hash=' + encodeURIComponent(hash);
-        xhr.open('POST', 'http://localhost/STATUS/JSON?method=decrypt', false);
+        xhr.open('POST', '//'+location.host+'/STATUS/JSON?method=decrypt', false);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
         if (xhr.status == 200) {
@@ -3976,6 +3999,10 @@ BookReader.prototype.addChapterFromEntry = function(tocEntryObject) {
  */
 BookReader.prototype.buildToolbarElement = function() {
   // $$$mang should be contained within the BookReader div instead of body
+  var uri = window.location.toString().split('?');
+  var params = uri[1];
+  var viewModeIcon = params.split('#')[0].split('&')[1].split('=')[1] + '-icon';
+
   var readIcon = '';
   if (this.isSoundManagerSupported) {
       readIcon = "<button class='BRicon read modal js-tooltip'></button>";
@@ -4029,8 +4056,12 @@ BookReader.prototype.buildToolbarElement = function() {
 
     // zoom
     +       "<span class='BRtoolbarSection BRtoolbarSectionZoom tc ph10'>"
-    +         "<button class='BRicon zoom_out js-tooltip'></button>"
     +         "<button class='BRicon zoom_in js-tooltip'></button>"
+    +         "<button class='BRicon zoom_out js-tooltip'></button>"
+    +       "</span>"
+
+    +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
+    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip'></button>"
     +       "</span>"
 
     // Search
@@ -4065,6 +4096,9 @@ BookReader.prototype.buildToolbarElement = function() {
  * @return {jqueryElement}
  */
 BookReader.prototype.buildMobileDrawerElement = function() {
+    var uri = window.location.toString().split('?');
+    var params = uri[1];
+    var viewMode = params.split('#')[0].split('&')[1].split('=')[1];
     var experimentalHtml = '';
     if (this.enableExperimentalControls) {
       experimentalHtml += "<div class=\"DrawerSettingsTitle\">Experimental (may not work)</div>"
@@ -4104,6 +4138,16 @@ BookReader.prototype.buildMobileDrawerElement = function() {
         +"    </li>";
     }
 
+    if (viewMode == 'HQ') {
+        viewMode = "<div class=\"DrawerSettingsTitle\">View Mode</div>"
+        +"<button id='HQ' class='BRicon switch-view-mode HQ-icon-active'></button>"
+        +"<button id='LQ' class='BRicon switch-view-mode LQ-icon'></button>"
+    } else {
+        viewMode = "<div class=\"DrawerSettingsTitle\">View Mode</div>"
+        +"<button id='HQ' class='BRicon switch-view-mode HQ-icon'></button>"
+        +"<button id='LQ' class='BRicon switch-view-mode LQ-icon-active'></button>"
+    }
+
 
     return $(
       "<nav id=\"BRmobileMenu\" class=\"BRmobileMenu\">"
@@ -4126,6 +4170,8 @@ BookReader.prototype.buildMobileDrawerElement = function() {
       +"        <button class='BRicon zoom_in'></button>"
       +"        <br style='clear:both'><br><br>"
       +         experimentalHtml
+      +         viewMode
+      +"        <br style='clear:both'><br><br>"
       +"      </div>"
       +"    </li>"
       +"    <li>"
@@ -4334,7 +4380,7 @@ BookReader.prototype.blankShareDiv = function() {
     return $([
         '<div class="BRfloat" id="BRshare">',
             '<div class="BRfloatHead">',
-                'Share',
+                'Поделиться книгой с друзьями',
                 '<button class="floatShut" href="javascript:;" onclick="$.fn.colorbox.close();"><span class="shift">Close</span></a>',
             '</div>',
         '</div>'].join('\n')
@@ -4508,6 +4554,23 @@ BookReader.prototype.bindNavigationHandlers = function() {
     jIcons.filter('.zoom_out').bind('click', function() {
         self.ttsStop();
         self.zoom(-1);
+        return false;
+    });
+
+    jIcons.filter('.switch-view-mode').bind('click', function() {
+        var uri = window.location.toString().split('?');
+        var urlPath = uri[0];
+        var params = uri[1];
+        var viewMode = params.split('#')[0].split('&')[1].split('=')[1];
+        var bookParams = params.split('#')[0].split('&')[0];
+        var BRParams = params.split('#')[1];
+        if (viewMode == 'LQ') {
+            //$('.switch-view-mode').removeClass('hq-icon').addClass('lq-icon');
+            window.location.href = urlPath + "?" + bookParams + "&view_mode=HQ#" + BRParams;
+        } else {
+            //$('.switch-view-mode').removeClass('lq-icon').addClass('hq-icon');
+            window.location.href = urlPath + "?" + bookParams + "&view_mode=LQ#" + BRParams;
+        }
         return false;
     });
 
@@ -5836,49 +5899,35 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
     var self = this;
 
     var jForm = $([
-        '<div class="share-title">Share this book</div>',
+        '<div class="share-title">Поделиться этой книгой в соц. сетях</div>',
         '<div class="share-social">',
-          '<div><button class="action share facebook-share-button"><i class="BRicon fb" /> Facebook</button></div>',
-          '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /> Twitter</button></div>',
-          '<div><button class="action share email-share-button"><i class="BRicon email" /> Email</button></div>',
+          '<div><button class="action share facebook-share-button"><i class="BRicon fb" /></button></div>',
+          '<div><button class="action share twitter-share-button"><i class="BRicon twitter" /></button></div>',
+          '<div><button class="action share vk-share-button"><i class="BRicon vk" /></button></div>',
+          '<div><button class="action share odnoklassniki-share-button"><i class="BRicon odnoklassniki" /></button></div>',
           '<label class="sub open-to-this-page">',
               '<input class="thispage-social" type="checkbox" />',
-              'Open to this page?',
+              'Показать эту страницу?',
           '</label>',
         '</div>',
         '<div class="share-embed">',
-          '<p class="share-embed-prompt">Copy and paste one of these options to share this book elsewhere.</p>',
+          '<p class="share-embed-prompt">Вы можете скопировать одну из этих ссылок чтобы поделиться книгой другим способом.</p>',
           '<form method="post" action="">',
               '<fieldset class="fieldset-share-pageview">',
-                  '<label for="pageview">Link to this page view</label>',
+                  '<label for="pageview">Ссылка на страницу</label>',
                   '<input type="text" name="pageview" class="BRpageviewValue" value="' + pageView + '"/>',
               '</fieldset>',
               '<fieldset class="fieldset-share-book-link">',
-                  '<label for="booklink">Link to the book</label>',
+                  '<label for="booklink">Ссылка на книгу</label>',
                   '<input type="text" name="booklink" id="booklink" value="' + bookView + '"/>',
               '</fieldset>',
-              '<fieldset class="fieldset-embed">',
-                  '<label for="iframe">Embed a mini Book Reader</label>',
-                  '<fieldset class="sub">',
-                      '<label class="sub">',
-                          '<input type="radio" name="pages" value="' + this.constMode1up + '" checked="checked"/>',
-                          '1 page',
-                      '</label>',
-                      '<label class="sub">',
-                          '<input type="radio" name="pages" value="' + this.constMode2up + '"/>',
-                          '2 pages',
-                      '</label>',
-                      '<label class="sub">',
-                          '<input type="checkbox" name="thispage" value="thispage"/>',
-                          'Open to this page?',
-                      '</label>',
-                  '</fieldset>',
-                  '<textarea cols="30" rows="4" name="iframe" class="BRframeEmbed"></textarea>',
+              '<fieldset class="copyright">',
+                  '<p>Здесь можно написать какой-то текст с правилами копирайта и шары...</p>',
               '</fieldset>',
           '</form>',
         '</div>',
         '<div class="BRfloatFoot center">',
-            '<button class="share-finished" type="button" onclick="$.fn.colorbox.close();">Finished</button>',
+            '<button class="share-finished" type="button" onclick="$.fn.colorbox.close();">Закрыть</button>',
         '</div>'
         ].join('\n'));
 
@@ -5908,14 +5957,28 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
     var getShareUrl = function() {
       var shareThisPage = jForm.find('.thispage-social').prop('checked');
       if (shareThisPage) {
-        return window.location.href;
+          //console.log('Share this page: '+pageView);
+          //return window.location.href;
+          return pageView;
       } else {
-        return document.location.protocol + "//" + window.location.hostname + window.location.pathname;
+          //console.log('Share this book: '+bookView);
+          //return document.location.protocol + "//" + window.location.hostname + window.location.pathname;
+          return bookView;
       }
     };
     jForm.find('.facebook-share-button').click(function(){
       var params = $.param({ u: getShareUrl() });
       var url = 'https://www.facebook.com/sharer.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
+    });
+    jForm.find('.vk-share-button').click(function(){
+      var params = $.param({ url: getShareUrl(), title:self.bookTitle });
+      var url = 'https://vk.com/share.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
+    });
+    jForm.find('.odnoklassniki-share-button').click(function(){
+      var params = $.param({ url: getShareUrl(), title:self.bookTitle });
+      var url = 'https://connect.ok.ru/offer?' + params;
       self.createPopup(url, 600, 400, 'Share')
     });
     jForm.find('.twitter-share-button').click(function(){
@@ -5927,8 +5990,14 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
       self.createPopup(url, 600, 400, 'Share')
     });
     jForm.find('.email-share-button').click(function(){
-      var body = self.bookTitle + "\n\n" + getShareUrl();
-      window.location.href = 'mailto:?subject=' + encodeURI(self.bookTitle) + '&body=' + encodeURI(body);
+      //var body = self.bookTitle + "\n\n" + getShareUrl();
+      //window.location.href = 'mailto:?subject=' + encodeURI(self.bookTitle) + '&body=' + encodeURI(body);
+      var params = $.param({
+        url: getShareUrl(),
+        title: self.bookTitle
+      });
+      var url = 'https://vk.com/share.php?' + params;
+      self.createPopup(url, 600, 400, 'Share')
     });
 
     jForm.appendTo(jShareDiv);
@@ -5977,8 +6046,8 @@ BookReader.prototype.buildInfoDiv = function(jInfoDiv)
     if (moreInfoText && this.bookUrl) {
       $rightCol.append($("<div class=\"BRinfoValueW\">"
         +"<div class=\"BRinfoMoreInfoW\">"
-        +"  <a class=\"BRinfoMoreInfo\" href=\""+this.bookUrl+"\">"
-        +   moreInfoText
+        +"  <a class=\"BRinfoMoreInfo\" href=\"//"+location.host+"/Record/"+window.location.search.replace( '?', '').split('=')[1].split('&')[0]+"\" target=\"_blank\">"
+        +   "Перейти к описанию книги"
         +"  </a>"
         +"</div>"
       +"</div>"));
@@ -6007,9 +6076,9 @@ BookReader.prototype.initUIStrings = function()
     // the toolbar and nav bar easier
 
     // Setup tooltips -- later we could load these from a file for i18n
-    var titles = { '.logo': 'Go to Archive.org', // $$$ update after getting OL record
-                   '.zoom_in': 'Zoom in',
-                   '.zoom_out': 'Zoom out',
+    var titles = { '.logo': 'Библиотека иностранной литературы', // $$$ update after getting OL record
+                   '.zoom_in': 'Увеличить',
+                   '.zoom_out': 'Уменьшить',
                    '.onepg': 'One-page view',
                    '.twopg': 'Two-page view',
                    '.thumb': 'Thumbnail view',
@@ -6018,8 +6087,9 @@ BookReader.prototype.initUIStrings = function()
                    '.link': 'Link to this book (and page)',
                    '.bookmark': 'Bookmark this page',
                    '.read': 'Read this book aloud',
-                   '.share': 'Share this book',
-                   '.info': 'About this book',
+                   '.share': 'Поделиться книгой',
+                   '.switch-view-mode': 'Качество изображения',
+                   '.info': 'Информация о книге',
                    '.full': 'Show fullscreen',
                    '.book_left': 'Flip left',
                    '.book_right': 'Flip right',

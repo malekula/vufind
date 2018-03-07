@@ -502,7 +502,7 @@ class Record extends AbstractHelper
         }
         return $details;
     }
-    
+
     public function getOtherCovers($record) {
         $fund = strtolower(explode('_', $record)[0]);
         $id = explode('_', $record)[1];
@@ -512,7 +512,6 @@ class Record extends AbstractHelper
             $allowed_types = array("jpg", "png", "gif", "jpeg");
             $file_parts = array();
             $ext = "";
-            $title = "";
             $i = 0;
             $dir_handle = @opendir($directory) or die("Ошибка при открытии папки !!!");
             while ($file = readdir($dir_handle)) {
@@ -716,7 +715,7 @@ class Record extends AbstractHelper
         return isset($this->config->OpenURL->replace_other_urls)
             && $this->config->OpenURL->replace_other_urls;
     }
-    
+
     /**
      * Render a list of record status.
      *
@@ -724,10 +723,10 @@ class Record extends AbstractHelper
      */
     public function getStatusList()
     {
-        //return $this->renderTemplate('access_method-list.phtml');        
+        //return $this->renderTemplate('access_method-list.phtml');
         return $this->renderTemplate('status-list.phtml');
     }
-    
+
     /**
      * Render a list of record access method.
      *
