@@ -79,7 +79,7 @@ function BookReader() {
     this.lastDisplayableIndex2up = null;
 
     // Should be overriden (before init) by custom implmentations.
-    this.logoURL = 'https://catalog.libfl.ru';
+    this.logoURL = '//catalog.libfl.ru';
 
     // Base URL for UI images - should be overriden (before init) by
     // custom implementations.
@@ -215,8 +215,6 @@ BookReader.prototype.init = function() {
     // Use params or browser width to set view mode
     var windowWidth = $(window).width();
     var nextMode;
-    console.log(params.mode);
-    console.log(brConfig.mode);
     if ('undefined' != typeof(params.mode)) {
         nextMode = params.mode;
     } else if ((this.ui == 'full' && windowWidth <= this.onePageMinBreakpoint) || brConfig.mode == 1) {
@@ -4058,8 +4056,8 @@ BookReader.prototype.buildToolbarElement = function() {
 
     // zoom
     +       "<span class='BRtoolbarSection BRtoolbarSectionZoom tc ph10'>"
-    +         "<button class='BRicon zoom_out js-tooltip'></button>"
     +         "<button class='BRicon zoom_in js-tooltip'></button>"
+    +         "<button class='BRicon zoom_out js-tooltip'></button>"
     +       "</span>"
 
     +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
@@ -6078,9 +6076,9 @@ BookReader.prototype.initUIStrings = function()
     // the toolbar and nav bar easier
 
     // Setup tooltips -- later we could load these from a file for i18n
-    var titles = { '.logo': 'Foreign Literature Library', // $$$ update after getting OL record
-                   '.zoom_in': 'Zoom in',
-                   '.zoom_out': 'Zoom out',
+    var titles = { '.logo': 'Библиотека иностранной литературы', // $$$ update after getting OL record
+                   '.zoom_in': 'Увеличить',
+                   '.zoom_out': 'Уменьшить',
                    '.onepg': 'One-page view',
                    '.twopg': 'Two-page view',
                    '.thumb': 'Thumbnail view',
@@ -6089,9 +6087,9 @@ BookReader.prototype.initUIStrings = function()
                    '.link': 'Link to this book (and page)',
                    '.bookmark': 'Bookmark this page',
                    '.read': 'Read this book aloud',
-                   '.share': 'Share this book',
-                   '.switch-view-mode': 'View mode',
-                   '.info': 'About this book',
+                   '.share': 'Поделиться книгой',
+                   '.switch-view-mode': 'Качество изображения',
+                   '.info': 'Информация о книге',
                    '.full': 'Show fullscreen',
                    '.book_left': 'Flip left',
                    '.book_right': 'Flip right',

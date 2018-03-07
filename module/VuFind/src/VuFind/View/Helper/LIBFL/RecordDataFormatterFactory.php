@@ -315,7 +315,7 @@ class RecordDataFormatterFactory
         $spec->setLine('Exemplar', 'getExemplars');
         return $spec->getArray();
     }
-    
+
     public function getLibflDescriptionSpecs()
     {
         $spec = new RecordDataFormatter\SpecBuilder();
@@ -360,10 +360,10 @@ class RecordDataFormatterFactory
                 $spec->setLine('topic', 'getTopic');
                 $spec->setLine('fund', 'getFund');
                 $spec->setTemplateLine('format', 'getFormat', 'format-list.phtml');
-                $spec->setTemplateLine('MethodOfAccess', 'getMethodOfAccess', 'access_method-record.phtml');
+                //$spec->setTemplateLine('MethodOfAccess', 'getMethodOfAccess', 'access_method-record.phtml');
 		return $spec->getArray();
     }
-    
+
     public function getDefaultLitresSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
@@ -387,7 +387,7 @@ class RecordDataFormatterFactory
                 $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
 		return $spec->getArray();
     }
-    
+
     public function getDefaultPeriodSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
@@ -410,7 +410,7 @@ class RecordDataFormatterFactory
                 $spec->setLine('format', 'getFormat');
                 $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
                 // Вид издания (period_ModeOfPublication)
-                $spec->setLine('period_mode_of_publication', 'period_getModeOfPublications'); 
+                $spec->setLine('period_mode_of_publication', 'period_getModeOfPublications');
                 // Язык (period_Language)
                 $spec->setLine('period_language', 'period_getLanguages');
                 // Периодичность (period_Periodicity)
@@ -419,7 +419,7 @@ class RecordDataFormatterFactory
                 $spec->setLine('period_years', 'period_getYears');
                 // Гиперссылки (period_HyperLink)
                 $spec->setLine('period_hyperlink', 'period_getHyperLinks');
-                
+
 		return $spec->getArray();
     }
 }

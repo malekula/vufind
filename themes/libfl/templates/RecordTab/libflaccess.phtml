@@ -34,10 +34,10 @@
                 'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
             );
         }
-        /*echo '<pre>';
+        echo '<pre>';
         print_r($newExemplars);
         echo '</pre>';
-        echo $accessMethod;*/
+        echo $accessMethod;
         if (is_array($internetAccessTab) && !empty($internetAccessTab)) {
             echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
             foreach ($newExemplars as $access=>$exemplar):
@@ -208,7 +208,11 @@
                                 echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_rack_location').": </th><td>".$this->transEsc($exemplar_rack_location)."</td></tr>";
                             if (!is_null($exemplar_placing_cipher))
                                 echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_placing_cipher').": </th><td>".$this->transEsc($exemplar_placing_cipher)."</td></tr>";*/
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            if ($locationCode == 2011) {
+                                echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">Зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            } else {
+                                echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            }
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
