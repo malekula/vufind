@@ -38,10 +38,8 @@
         echo $e->getMessage()."<br/><br/>";
     }
     $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
-    //if (!empty($bookInfo->Title))
-        $this->headMeta()->setProperty('og:title', $bookInfo->Title);
-    //if (!empty($bookInfo->Annotation))
-        $this->headMeta()->setProperty('og:description', 'Библиотека иностранной литературы');
+    $this->headMeta()->setProperty('og:title', $bookInfo->Title);
+    $this->headMeta()->setProperty('og:description', 'Из фондов Библиотеки иностранной литературы libfl.ru');
 
 ?>
 
