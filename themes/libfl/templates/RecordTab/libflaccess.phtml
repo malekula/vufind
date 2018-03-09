@@ -16,8 +16,8 @@
     $getAccessMethod = (string) $this->driver->getMethodOfAccess()[0];
     $accessMethod = (!empty($getAccessMethod)) ? strtolower($getAccessMethod) : '';
 
-    $internetAccessTab = array_uintersect($accessMethods, array('4002','4003'), "strcasecmp");
-    $libraryAccessTab = array_uintersect($accessMethods, array('4000','4006'), "strcasecmp");
+    $internetAccessTab = array_uintersect($accessMethods, array('4002'), "strcasecmp");
+    $libraryAccessTab = array_uintersect($accessMethods, array('4000','4006','4003'), "strcasecmp");
     $homeAccessTab = array_uintersect($accessMethods, array('4001'), "strcasecmp");
     $pearsonPrintAccessTab = array_uintersect($accessMethods, array('4004'), "strcasecmp");
     $deniedAccessTab = array_uintersect($accessMethods, array('4005'), "strcasecmp");
@@ -28,17 +28,17 @@
             $newExemplars[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location][$num] = array(
                 'exemplar_id' => $exemplar->exemplar_id,
                 'exemplar_location' => $exemplar->exemplar_location,
-                'exemplar_rack_location' => $exemplar->exemplar_rack_location,
-                'exemplar_placing_cipher' => $exemplar->exemplar_placing_cipher,
+                'exemplar_rack_location' => 'Стеллаж',
+                'exemplar_placing_cipher' => 'Шифр',
                 'exemplar_inventory_number' => $exemplar->exemplar_inventory_number,
                 'exemplar_inv_note' => $exemplar->exemplar_inv_note,
                 'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
             );
         }
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($newExemplars);
         echo '</pre>';
-        echo $accessMethod;
+        echo $accessMethod;*/
         if (is_array($internetAccessTab) && !empty($internetAccessTab)) {
             echo "<h2><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>Электронный удаленный доступ</h2>";
             foreach ($newExemplars as $access=>$exemplar):
@@ -65,22 +65,22 @@
                     }
                     switch ($accessCode) {
                         case '1001':
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a id='readonline' href='".$this->url('bookreader-viewer')."?bookID=".$this->driver->getUniqueId()."&view_mode=LQ' rel='nofollow' target='_blank'>Читать книгу</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a id='readonline' href='".$this->url('bookreader-viewer')."?bookID=".$this->driver->getUniqueId()."&view_mode=LQ' rel='nofollow' target='_blank'>Читать</a></td></tr>";
                             //echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         case '1002':
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Получить доступ</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx" target="_blank">зарегистрироваться</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         case '1004':
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://libfl.ru/static/litres_how_to.pdf' target='_blank'>Инструкция для Litres</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Получить доступ</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx" target="_blank">зарегистрироваться</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('additional_info').": </th><td><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>Описание проекта ЛитРес:Иностранка</a><br/><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>Инструкция для получения доступа</a><br/><a href='https://goo.gl/EYPcrC' target='_blank'>Инструкция по работе с ресурсами</a></td></tr>";
                             break;
                         case '1008':
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Читать книгу</a></td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="#" target="_blank">Читать книгу</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='#' target='_blank'>Инструкция для Pearson</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Получить доступ</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{link}}', '<a href="//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx" target="_blank">зарегистрироваться</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='//ebooks.libfl.ru/' target='_blank'>Описание проекта Pearson:Иностранка</a><br/><a href='//ebooks.libfl.ru/' target='_blank'>Инструкция по получению доступа и работе с ресурсами Pearson:Иностранка</a></td></tr>";
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
@@ -133,16 +133,9 @@
                     }
                     switch ($accessCode) {
                         case '1009':
-                            //echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th><td>'.str_replace('.', ', ', $group_inv_number).'</td></tr>';
-                            /*echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';*/
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('')." </th><td><button>Заказать печать</button></td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Оформить заявку</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="//libfl.ru/ru/item/contacts" target="_blank  ">Библиотеку иностранной литературы</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('additional_info').": </th><td><a href='//ebooks.libfl.ru' target='_blank'>Описание проекта Print-On-Demand:Иностранка</a></td></tr>";
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
@@ -159,7 +152,8 @@
             endforeach;
         }
         if (is_array($homeAccessTab) && !empty($homeAccessTab)) {
-            echo "<h2 style='margin-top: 30px;'><i class='fa fa-home' style='margin: 0px 5px 0px 0px;'></i>Взять на дом</h2>";
+            echo "<h2 style='margin-top: 30px;'><i class='fa fa-home' style='margin: 0px 5px 0px 0px;'></i>Взять на дом из Библиотеки иностранной литературы</h2>";
+            echo '<p style="padding: 0px 0px 0px 23px;"><a href="//libfl.ru/ru/item/contacts" target="_blank">Схема проезда</a>&nbsp;|&nbsp;<a href="//libfl.ru/ru/item/contacts" target="_blank">График работы</a></p>';
             foreach ($newExemplars as $access=>$exemplar):
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
@@ -196,7 +190,7 @@
                             echo '</td></tr>';*/
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('')." </th><td>".$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()])."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('additional_info').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу книг на дом через личный кабинет</a></td></tr>";
                             break;
                         case '1006':
                             echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
@@ -232,12 +226,12 @@
             endforeach;
         }
         if (is_array($libraryAccessTab) && !empty($libraryAccessTab)) {
-            echo "<h2 style='margin-top: 30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>Доступ в помещении библиотеки</h2>";
+            echo "<h2 style='margin-top: 30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>В помещении Библиотеки иностранной литературы</h2>";
             foreach ($newExemplars as $access=>$exemplar):
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
                 $locationCode = $accessCodes[1];
-                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1005','1007','1010','1011','1012'),"strcasecmp")) {
+                if ($accessExemplars = array_uintersect($accessCodes, array('1003','1005','1007','1011','1012'),"strcasecmp")) {
                     echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
                     echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
                     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
@@ -260,19 +254,13 @@
                     }
                     switch ($accessCode) {
                         case '1003':
-                            echo '<tr><th style="width:160px;"></th><td>Доступ к НЭБ (Данный вид доступа находится в разработке).</td></tr>';
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>Получить доступ</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>Нужно обсудить описание...</td></tr>";
                             break;
                         case '1005':
-                            //echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th><td>'.str_replace('.', ', ', $group_inv_number).'</td></tr>';
-                            /*echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';*/
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('')." </th><td>".$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()])."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('additional_info').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу книг для чтения в залах библиотеки</a></td></tr>";
                             break;
                         case '1007':
                             echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
@@ -287,39 +275,11 @@
                                 echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_placing_cipher').": </th><td>".$this->transEsc($exemplar_placing_cipher)."</td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
-                        case '1010':
-                            echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зала выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            break;
                         case '1011':
-                            echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{exemplar_location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            break;
+                            echo 'В процессе обсуждения...';
                             break;
                         case '1012':
-                            echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
-                            echo '<td>';
-                            foreach (explode('.', $group_inv_number) as $inv_number) {
-                                echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
-                            }
-                            echo '</td></tr>';
-                            if (!is_null($exemplar_carrier))
-                                echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_carrier').": </th><td>".$this->transEsc($exemplar_carrier)."</td></tr>";
-                            if (!is_null($exemplar_rack_location))
-                                echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_rack_location').": </th><td>".$this->transEsc($exemplar_rack_location)."</td></tr>";
-                            if (!is_null($exemplar_placing_cipher))
-                                echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_placing_cipher').": </th><td>".$this->transEsc($exemplar_placing_cipher)."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo 'В процессе обсуждения...';
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
@@ -343,7 +303,7 @@
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
                 $locationCode = $accessCodes[1];
-                if ($accessExemplars = array_uintersect($accessCodes, array('1999'),"strcasecmp")) {
+                if ($accessExemplars = array_uintersect($accessCodes, array('1999', '1010'),"strcasecmp")) {
                     echo '<div id="group_'.$access.'" class="exemplar" style="padding: 0px 0px 0px 26px;">';
                     echo '<h3 style="font-weight:bold;"><i class="fa fa-book" style="margin: 0px 5px 0px 0px;"></i>'.$this->translate($accessCode."_group").'</h3>';
                     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
@@ -375,6 +335,9 @@
                             echo '</td></tr>';*/
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('{{location}}', '<a href="https://libfl.ru/ru/item/contacts" target="_blank  ">зал выдачи документов (2 этаж)</a>', $this->transEsc($accessCode)))."</td></tr>";
                             //echo "<tr><th style='width:160px;'>".$this->transEsc('Инструкции').": </th><td><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>Инструкция по заказу в личном кабинете</a></td></tr>";
+                            break;
+                        case '1010':
+                            echo 'В процессе обсуждения...';
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
