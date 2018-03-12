@@ -317,6 +317,17 @@ JS;
         </div>
         <div role="main" class="main">
           <div id="content" class="container">
+            <!-- -->
+            <? $cart = $this->cart(); if ($cart->isActive()): ?>
+            <div id="cartSummary">
+              <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
+                <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'>
+                <!--<i class="fa fa-suitcase" aria-hidden="true"></i>--> <?=$this->transEsc('Book Bag')?>  <span class="quantity"><?=count($cart->getItems())?></span>
+                <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
+              </a>
+            </div>
+          <? endif; ?>
+          <!-- -->
             <?=$this->layout()->content ?>
           </div>
         </div>
@@ -327,7 +338,7 @@ JS;
       <div id="modal" class="modal fade hidden-print" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
           <div class="modal-dialog">
               <div class="modal-content">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                   <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
               </div>
           </div>

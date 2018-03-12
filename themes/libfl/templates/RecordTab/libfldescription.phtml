@@ -11,7 +11,7 @@
     echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
     foreach ($keys as $key) {
         if (!empty($fields->$key)) {
-            echo "<tr><th>".$this->transEsc(strtolower($key)).": </th><td>";
+            echo "<tr><th>".$this->transEsc(strtolower($key))."</th><td>";
             $cnt = 0;
             foreach (array_unique($fields->$key) as $value) {
                 echo ($cnt>0) ? ', '.$this->transEsc($value) : $this->transEsc($value);

@@ -120,7 +120,8 @@
       <span id="groupPlaceHolder" class="hidden">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
         <a href="#" onClick="addGroup();return false"><?= $this->transEsc('add_search_group') ?></a>
-      </span>
+      </span>      
+      <span style='color:#e6e6e6;'>|</span><input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">
       <? /* fallback to a fixed set of search groups/fields if JavaScript is turned off */ ?>
 
       <div class="no-js">
@@ -173,20 +174,21 @@
           <? endfor; ?>
         <? endif; ?>
       </div>
-      <div class="adv-submit">
-        
+
+
+      <div class="adv-submit">          
+        <!--<input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">-->
         <input class="btn btn-primary" type="submit" value="<?= $this->transEsc('Find')?>">
-        <div class='clean'>
-          <input class="clear-btn btn btn-default" type="button" value="">
-          <img class='clean-img' src='/themes/libfl/images/svg/brush.svg'>
-        </div>
+        
       </div>
+
       <? if (isset($this->extraAdvancedControls)): ?>
         <div class="clearfix">
           <?=$this->extraAdvancedControls ?>
         </div>
-        <div class="adv-submit">
-          <input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">
+        <div class='divider'></div>
+        <div class="adv-submit bottomed">
+          <!--<input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">-->
           <input class="btn btn-primary" type="submit" value="<?= $this->transEsc('Find')?>">
         </div>
       <? endif; ?>

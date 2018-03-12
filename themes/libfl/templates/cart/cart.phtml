@@ -12,10 +12,21 @@
   <? if (!$this->cart()->isEmpty()): ?>
     <div class="cart-controls clearfix">
       <div class="checkbox pull-left flip">
+        <!--<input type='checkbox' name='selectAll' id='select-all' style='opacity: 1;' class='checkbox-select-all'>
+        <label for='select-all' class='fake-label'></label>
+        <label><?=$this->transEsc('select_all')?></label>-->
         <label>
-          <input type="checkbox" name="selectAll" class="checkbox-select-all"/>
-          <?=$this->transEsc('select_page')?>
+          <label class='fakebox'>
+            <input type="checkbox" name="selectAll" class="checkbox-select-all"/>          
+            <div class='fake-checkbox'></div>
+          </label>
+          <?=$this->transEsc('select_all')?>
         </label>
+        <!-- END OF FAKE LABEL -->
+        <!--<label>
+          <input type="checkbox" name="selectAll" class="checkbox-select-all"/>
+          <?=$this->transEsc('select_all')?>
+        </label>-->
       </div>
       <? if ($this->userlist()->getMode() !== 'disabled'): ?>
         <button type="submit" class="btn btn-default" name="saveCart" title="<?=$this->transEsc('bookbag_save')?>" value="1">
@@ -32,13 +43,19 @@
           <i class="fa fa-list-alt" aria-hidden="true"></i>
           <?=$this->transEsc('Export')?>
         </button>-->
-      <? endif; ?>
-      <button type="submit" class="btn btn-default dropdown-toggle" name="print" title="<?=$this->transEsc('print_selected')?>" value="1">
-        <i class="fa fa-printer" aria-hidden="true"></i>
-        <?=$this->transEsc('Print')?>
+      <? endif; ?>       
+      <button type="submit" class="btn btn-default dropdown-toggle print-all" name="print" title="<?=$this->transEsc('print_selected')?>" value="1">
+        <!--<i class="fa fa-printer" aria-hidden="true"></i>
+        <?=$this->transEsc('Print')?>-->
       </button>
+      <!-- -->
       <div class="btn-group" id="cartDelete">
-        <button type="submit" name="delete" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="cart-delete-label" value="1">
+        <button type="submit" name="delete" class="btn btn-default dropdown-toggle delete-all" data-toggle="dropdown" id="cart-confirm-delete" onClick="submitFormWithButton(this, 'delete')" value="1">
+        </button>
+      </div>
+      <!-- -->
+      <!--<div class="btn-group" id="cartDelete">
+        <button type="submit" name="delete" class="btn btn-default dropdown-toggle delete-all" data-toggle="dropdown" id="cart-delete-label" value="1">
           <i class="fa fa-trash" aria-hidden="true"></i>
           <?=$this->transEsc('Delete')?>
         </button>
@@ -56,12 +73,15 @@
           <li><a id="cart-confirm-empty" onClick="submitFormWithButton(this, 'empty')" title="<?=$this->transEsc('bookbag_confirm_empty')?>"><?=$this->transEsc('confirm_dialog_yes')?></a></li>
           <li><a onClick="$('.fa.fa-spinner').remove()"><?=$this->transEsc('confirm_dialog_no')?></a></li>
         </ul>
-      </div>
+      </div>-->
     </div>
   <? endif; ?>
   <?=$this->render('cart/contents.phtml')?>
-  <hr style="margin: 18px 0px;">
-  <button type="submit" class="btn btn-success" name="addOrder" value="1" title="<?=$this->transEsc('cartCreateOrder')?>"><?=$this->transEsc('cartCreateOrder')?></button>
+  <!--<hr style="margin: 18px 0px;">-->
+  <div class='cart-buttons clearfix'>
+    <button type="submit" class="btn btn-continue left" name="" value="0" title="Продолжить поиск">Продолжить поиск</button>
+    <button type="submit" class="btn btn-success right" name="addOrder" value="1" title="<?=$this->transEsc('cartCreateOrder')?>"><?=$this->transEsc('cartCreateOrder')?></button>
+  </div>
 </form>
 
 <?

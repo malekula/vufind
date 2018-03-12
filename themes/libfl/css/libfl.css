@@ -4975,10 +4975,10 @@ img.contacts_image {
     margin-top: -1px;
 }
 .side_social_wrapper>ul>li:first-child {
-    border-radius: 3px 3px 0 0;
+    border-radius: 3px 0 0 0;
 }
 .side_social_wrapper>ul>li:last-child {
-    border-radius: 0 0 3px 3px;
+    border-radius: 0 0 0 3px;
 }
 .side_social_wrapper>ul>li>a {
     display: inline-block;
@@ -5010,6 +5010,10 @@ img.news_right_image {
     z-index: 0;
     top: -17px;
     right: -78px;
+}
+.access-value {
+    font-size: 14px;
+    padding-bottom: 10px;
 }
 /**/
 
@@ -5222,8 +5226,14 @@ img.news_right_image {
     .main {
         padding-top: 0;
         padding-bottom: 20px;
+    }    
+    #cartSummary {
+        float: none;
+        text-align: center;
+        padding: 10px 0;
+        border-left: none;
+        border-bottom: 1px solid #edeff1;
     }
-    
     .solr-adv-facet {
         margin-bottom: 20px;
     }
@@ -5314,6 +5324,32 @@ img.news_right_image {
     a.page-next, a.page-prev {
         background-size: 28px;
     }
+    .modal.in .modal-dialog {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        transform: none;
+    }    
+    .modal-body {
+        padding: 40px 10px;
+    }
+    .modal-content {
+        background-clip: content-box;
+    }
+    .cart-buttons .btn-success, .cart-buttons .btn-continue {
+        width: 100%;
+        font-size: 14px;
+    }
+    .radio label, .checkbox label {
+        padding-left: 10px;
+    }
+    .checkbox.pull-left.flip {
+        border-bottom: 0;
+    }
     /* ? */
     .wide_content {
         width: 100%;
@@ -5362,6 +5398,14 @@ img.news_right_image {
     }
     .inner_page #mobile_menu_wrapper, .inner_page #nav {
         position: absolute;
+    }
+    .search_tools {
+        padding: 0;
+    }
+    .alert,
+    .savedLists {
+        margin: 20px 0;
+        padding: 25px
     }
     /*.switch_language {
         position: absolute;
@@ -5558,8 +5602,11 @@ img.news_right_image {
         display: block;
         width: 100%;
         margin-left: 0;
-    }   
-
+    }      
+    .nav-tabs>li>a {
+        font-size: 14px;
+        margin-right: 15px;
+    } 
     
     .ui-selectmenu-button, .filters_wrapper .ui-selectmenu-button, .filters_wrapper .date_wrapper, .input-daterange {
         width: 100% !important;
