@@ -147,8 +147,6 @@ class LIBFL extends AbstractBase
             $groupStatus->availability = 'available';
         } else if (in_array('unavailable', $statuses)) {
             $groupStatus->availability = 'unavailable';
-        } else if (in_array('busy', $statuses)) {
-            $groupStatus->availability = 'busy';
         } else {
             $groupStatus->availability = 'unknown';
         }

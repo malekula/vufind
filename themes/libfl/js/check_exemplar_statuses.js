@@ -82,14 +82,12 @@ function checkExemplarStatuses() {
     $(".ajax-availability").removeClass('hidden');
     $.each(data, function(index, exemplarGroupID) {
         getExemplarStatus(exemplarGroupID, fund).done(function (exemplar) {
-            //console.log(exemplar);
             $.each(exemplar, function checkItemDoneEach(i, result) {
                 var item = elements[result.id];
                 if (!item) {
                     return;
                 }
                 $.each(result.exemplar, function(exemplarId, exemplarStatus){
-                    console.log('.exemplar'+exemplarId);
                     item.find('.exemplar'+exemplarId).addClass('exemplar-status-'+exemplarStatus);
                 });
                 //item.find('.status').empty().append('Статус: '+result.availability_message);
