@@ -325,7 +325,7 @@
                                 echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
                             }
                             echo '</td></tr>';
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('%%exemplar_location%%', '<a href="https://libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('%%location_2007%%', '<a href="https://libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc(2007).'</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         case '1999':
                             echo '<tr><th style="width:160px;">'.$this->transEsc('exemplar_inventory_number').': </th>';
@@ -334,7 +334,7 @@
                                 echo '<span class="exemplar'.$exemplarID.'">'.$inv_number.'</span>&nbsp;&nbsp;&nbsp;';
                             }
                             echo '</td></tr>';
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('%%exemplar_location%%', '<a href="https://libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc($locationCode).'</a>', $this->transEsc($accessCode)))."</td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('%%location_2007%%', '<a href="https://libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc(2007).'</a>', $this->transEsc($accessCode)))."</td></tr>";
                             break;
                         default:
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access_unknown').": </th><td>".$this->transEsc('exemplar_access_unknown')."</td></tr>";
