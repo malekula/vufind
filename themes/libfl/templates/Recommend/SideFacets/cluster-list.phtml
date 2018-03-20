@@ -5,6 +5,9 @@
     if(empty($thisFacet['displayText'])) {
       $thisFacet['displayText'] = "-";
     }
+    if ($thisFacet['displayText'] == 4999) {
+        continue;
+    }
   ?>
   <? /* MORE link */ ?>
   <? if ($i == $this->facets_before_more): ?>
