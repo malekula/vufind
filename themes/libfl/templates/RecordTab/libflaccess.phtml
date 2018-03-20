@@ -80,7 +80,7 @@
                         case '1004':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>".$this->transEsc('access_gainAccess')."</a></td></tr>";
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_access').": </th><td>".$this->translate(str_replace('%%link%%', '<a href="//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx" target="_blank">'.$this->transEsc('access_toRegister').'</a>', $this->transEsc($accessCode)))."</td></tr>";
-                            echo "<tr><th style='width:160px;'>".$this->transEsc('access_additionalInfo').": </th><td><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a><br/><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>".$this->transEsc('access_instructionsForAccessing')."</a><br/><a href='https://goo.gl/EYPcrC' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkLitres')."</a></td></tr>";
+                            echo "<tr><th style='width:160px;'>".$this->transEsc('access_additionalInfo').": </th><td><a href='//libfl.ru/static/litres' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a><br/><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>".$this->transEsc('access_instructionsForAccessing')."</a><br/><a href='https://goo.gl/EYPcrC' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkLitres')."</a></td></tr>";
                             break;
                         case '1008':
                             echo "<tr><th style='width:160px;'>".$this->transEsc('exemplar_hyperlink').": </th><td><a href='".$exemplar_hyperlink."'>".$this->transEsc('access_gainAccess')."</a></td></tr>";
@@ -205,6 +205,7 @@
         // В помещении Библиотеки иностранной литературы
         if (is_array($libraryAccess) && !empty($libraryAccess)) {
             echo "<h2 style='margin-top: 30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_libraryAccess')."</h2>";
+            echo '<p style="padding: 0px 0px 0px 23px;"><a href="//libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc('access_drivingDirections').'</a>&nbsp;|&nbsp;<a href="//libfl.ru/ru/item/contacts" target="_blank">'.$this->transEsc('access_schedule').'</a></p>';
             foreach ($newExemplars as $access=>$exemplar):
                 $accessCodes = explode('.', $access);
                 $accessCode = $accessCodes[0];
