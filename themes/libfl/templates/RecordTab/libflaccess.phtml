@@ -14,9 +14,9 @@
     $accessMethods = $this->driver->getMethodOfAccess();
     $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
 
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';
+    echo '</pre>';*/
 
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
         echo "<div class='".$accessMethod."'>";
@@ -62,18 +62,54 @@
                 case '6':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='fa fa-book' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
                     echo "<p style='padding: 0px 0px 0px 23px;'><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>".$this->transEsc('access_instructionsForOrderingBooksAtLibrary')."</a></p>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Экземпляры имеют одинаковый способ доступа, но находятся в разных местах/залах.<br>
+                        <ul>
+                            <li>а11111 - access: 1005 (заказать через личный кабинет); location: 2000</li>
+                            <li>а22222 - access: 1005 (заказать через личный кабинет); location: 2032</li>
+                            <li>а33333 - access: 1005 (заказать через личный кабинет); location: 2001</li>
+                            <li>а44444 - access: 1005 (заказать через личный кабинет); location: 2000</li>
+                            <li>b44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                        </ul>
+                        Если два или более экземпляров имеют одинаковое местонахождение (location), то группируем их.
+                        </div>";
                     break;
                 case '7':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
                     break;
                 case '8':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Электронные экземпляры, доступные исключительно в помещении библиотеки (микрофиши, ресурсы НЭБ и пр.)
+                        <ul>
+                            <li>с44444 - access: 1003 (электронный доступ в помещении библиотеки); location: 2030</li>
+                        </ul>
+                        </div>";
                     break;
                 case '9':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Экземпляры имеют разный способ доступа и находятся в разных местах/залах.<br>
+                        <ul>
+                            <li>2325727, 2271976, 1536326 - access: 1014 (Доступ в залах библиотеки)); location: 2011</li>
+                            <li>b33333 - access: 1007 (Доступ в залах библиотеки); location: 2032</li>
+                            <li>c11111 - access: 1007 (Доступ в залах библиотеки)); location: 2003</li>
+                        </ul>
+                        Если экземпляр находится в книгохренении, при присваиваем ему отдельный статус доступа (1014).
+                        </div>";
                     break;
                 case '10':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Книги находятся на выставке.<br>
+                        <ul>
+                            <li>с33333 - access: 1011 (книга на выставке); location: 2003</li>
+                        </ul>
+                        </div>";
                     break;
                 case '11':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc('access_group_'.$accessGroup)."</h3>";
@@ -170,7 +206,13 @@
                         echo"</div>";
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
-                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        if ($exemplar['exemplar_access_code'] == 1007) :
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        elseif ($exemplar['exemplar_access_code'] == 1014):
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc(2007)."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        else:
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
+                        endif;
                         echo "</div>";
                         break;
                     case '10':
