@@ -22,7 +22,7 @@
         echo "<div class='".$accessMethod."'>";
         switch ($accessMethod) {
             case 'access_remoteAccess':
-                echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
+                echo "<h2 style='margin-top:30px;'><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             case 'access_printAccess':
                 echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
@@ -71,6 +71,7 @@
                             <li>а33333 - access: 1005 (заказать через личный кабинет); location: 2001</li>
                             <li>а44444 - access: 1005 (заказать через личный кабинет); location: 2000</li>
                             <li>b44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                            <li>c22222 - access: 1005 (заказать через личный кабинет); location: 2003</li>
                         </ul>
                         Если два или более экземпляров имеют одинаковое местонахождение (location), то группируем их.
                         </div>";
@@ -128,20 +129,48 @@
                 echo "<div id='group_".$access."' class='exemplar' style='padding: 0px 0px 0px 23px;'>";
                 switch ($exemplar['exemplar_access_group']) {
                     case '1':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_read')."</a></div>";
+                        echo "</div>";
                         break;
                     case '2':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a></div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
                         break;
                     case '3':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a></div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('access_additionalInfo').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='//libfl.ru/static/litres' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a></div>";
+                        echo "</div>";
                         break;
                     case '4':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a></div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('access_additionalInfo').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPearson')."</a></div>";
+                        echo "</div>";
                         break;
                     case '5':
                         echo "<div></div>";
