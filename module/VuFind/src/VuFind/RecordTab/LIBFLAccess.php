@@ -53,44 +53,6 @@ class LIBFLAccess extends AbstractBase {
             }
 
             foreach ($exemplars as $num => $exemplar) {
-                /*$sortExemplars[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location][$num] = array(
-                    'exemplar_id' => $exemplar->exemplar_id,
-                    'exemplar_access_code' => $exemplar->exemplar_access,
-                    'exemplar_access_group' => $exemplar->exemplar_access_group,
-                    'exemplar_location' => $exemplar->exemplar_location,
-                    'exemplar_rack_location' => $exemplar->exemplar_rack_location,
-                    'exemplar_placing_cipher' => $exemplar->exemplar_placing_cipher,
-                    'exemplar_inventory_number' => $exemplar->exemplar_inventory_number,
-                    'exemplar_inv_note' => $exemplar->exemplar_inv_note,
-                    'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
-                );*/
-                //$arr1[$access][$exemplar->exemplar_access_group] = $exemplar->exemplar_access.'.'.$exemplar->exemplar_location;
-
-                /*if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($arr[$access][$exemplar->exemplar_access_group]))) {
-                    $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
-                        'exemplar_id' => $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'].'|'.$exemplar->exemplar_id,
-                        'exemplar_access_code' => $exemplar->exemplar_access,
-                        'exemplar_access_group' => $exemplar->exemplar_access_group,
-                        'exemplar_location' => $exemplar->exemplar_location,
-                        'exemplar_rack_location' => $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_rack_location'].'|'.$exemplar->exemplar_rack_location,
-                        'exemplar_placing_cipher' => $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_placing_cipher'].'|'.$exemplar->exemplar_placing_cipher,
-                        'exemplar_inventory_number' => $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inventory_number'].'|'.$exemplar->exemplar_inventory_number,
-                        //'exemplar_inv_note' => $arr[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inv_note'].'|'.$exemplar->exemplar_inv_note,
-                        'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
-                    );
-                } else {
-                    $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
-                        'exemplar_id' => $exemplar->exemplar_id,
-                        'exemplar_access_code' => $exemplar->exemplar_access,
-                        'exemplar_access_group' => $exemplar->exemplar_access_group,
-                        'exemplar_location' => $exemplar->exemplar_location,
-                        'exemplar_rack_location' => $exemplar->exemplar_rack_location,
-                        'exemplar_placing_cipher' => $exemplar->exemplar_placing_cipher,
-                        'exemplar_inventory_number' => $exemplar->exemplar_inventory_number,
-                        //'exemplar_inv_note' => $exemplar->exemplar_inv_note,
-                        'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
-                    );
-                }*/
                 if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($arr[$access][$exemplar->exemplar_access_group]))) {
                     $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
                         'exemplar_id' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'], array($exemplar->exemplar_id)),
@@ -118,15 +80,6 @@ class LIBFLAccess extends AbstractBase {
                 }
             }
         }
-
-        /*ksort($sortExemplars); // Сортируем ключи 'MethodOfAccess' (4000-е коды)
-        foreach ($sortExemplars as $key => $value) {
-            $new_key = preg_replace('/.*_/','access_',$key);
-            $cleanExemplars[$new_key] = $value; // Создаем новый массив, удалив информацию для сортировки ключей 'MethodOfAccess'
-            ksort($cleanExemplars[$new_key]); // Сортируем ключи 'GroupAccess'
-        }
-        return $cleanExemplars;*/
-
         ksort($arr);
         foreach ($arr as $key => $value) {
             $new_key = preg_replace('/.*_/','access_',$key);

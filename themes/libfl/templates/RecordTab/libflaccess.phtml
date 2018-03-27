@@ -14,9 +14,9 @@
     $accessMethods = $this->driver->getMethodOfAccess();
     $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
 
-    /*echo '<pre>';
+    echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';*/
+    echo '</pre>';
 
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
         echo "<div class='".$accessMethod."'>";
@@ -25,7 +25,7 @@
                 echo "<h2 style='margin-top:30px;'><i class='fa fa-laptop' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             case 'access_printAccess':
-                echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
+                echo "<h2 style='margin-top:30px;'><i class='fa fa-print' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             case 'access_homeAccess':
                 echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
@@ -64,16 +64,16 @@
                     echo "<p style='padding: 0px 0px 0px 23px;'><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>".$this->transEsc('access_instructionsForOrderingBooksAtLibrary')."</a></p>";
                     echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
-                        Экземпляры имеют одинаковый способ доступа, но находятся в разных местах/залах.<br>
+                        Все экзмепляры находяться исключительно в книгохранении (<u>другие варианты невозможны</u>  ).<br>
+                        Читатель добавляет книгу в корзину, оформляет заказ и получает книгу в зале выдачи докуементов (2 этаж)
                         <ul>
-                            <li>а11111 - access: 1005 (заказать через личный кабинет); location: 2000</li>
-                            <li>а22222 - access: 1005 (заказать через личный кабинет); location: 2032</li>
-                            <li>а33333 - access: 1005 (заказать через личный кабинет); location: 2001</li>
-                            <li>а44444 - access: 1005 (заказать через личный кабинет); location: 2000</li>
+                            <li>а11111 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                            <li>а22222 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                            <li>а33333 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                            <li>а44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
                             <li>b44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>c22222 - access: 1005 (заказать через личный кабинет); location: 2003</li>
+                            <li>c22222 - access: 1005 (заказать через личный кабинет); location: 2011</li>
                         </ul>
-                        Если два или более экземпляров имеют одинаковое местонахождение (location), то группируем их.
                         </div>";
                     break;
                 case '7':
@@ -173,13 +173,30 @@
                         echo "</div>";
                         break;
                     case '5':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_makeRequest')."</a></div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%access_LIBFL%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_LIBFL')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('access_additionalInfo').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPrintOnDemand')."</a></div>";
+                        echo "</div>";
                         break;
                     case '6':
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
-                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        //echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        if ($exemplar['exemplar_access_code'] == 1000) :
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_staticLocation_2006')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        elseif ($exemplar['exemplar_access_code'] == 1005):
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        else:
+                            echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
+                        endif;
                         echo "</div>";
                         break;
                     case '7':
