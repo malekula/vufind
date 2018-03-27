@@ -14,9 +14,9 @@
     $accessMethods = $this->driver->getMethodOfAccess();
     $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
 
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';
+    echo '</pre>';*/
 
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
         echo "<div class='".$accessMethod."'>";
@@ -175,7 +175,7 @@
                     case '5':
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
-                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exempalr_hyperlink']."'>".$this->transEsc('access_makeRequest')."</a></div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a></div>";
                         echo "</div>";
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
@@ -219,7 +219,7 @@
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_inventory_number'])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -231,7 +231,7 @@
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_rack_location'])):
                             foreach ($exemplar['exemplar_rack_location'] as $rack_location):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$rack_location."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$rack_location."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -243,7 +243,7 @@
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_placing_cipher'])):
                             foreach ($exemplar['exemplar_placing_cipher'] as $placing_cipher):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$placing_cipher."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$placing_cipher."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
