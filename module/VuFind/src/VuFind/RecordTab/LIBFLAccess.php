@@ -29,7 +29,7 @@ class LIBFLAccess extends AbstractBase {
     }
 
     public function sortExemplars($accessMethods = array(), $exemplars = array()) {
-        $sortExemplars = array();
+
         foreach ($accessMethods as $accessMethodCode) {
             switch ($accessMethodCode) {
                 case '4000':
@@ -53,8 +53,52 @@ class LIBFLAccess extends AbstractBase {
             }
 
             foreach ($exemplars as $num => $exemplar) {
+                switch ($exemplar->exemplar_access_group) {
+                    case '1':
+                        $access_group = '1_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '2':
+                        $access_group = '2_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '3':
+                        $access_group = '3_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '4':
+                        $access_group = '4_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '5':
+                        $access_group = '5_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '6':
+                        $access_group = '8_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '7':
+                        $access_group = '9_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '8':
+                        $access_group = '6_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '9':
+                        $access_group = '7_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '10':
+                        $access_group = '10_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '11':
+                        $access_group = '11_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '12':
+                        $access_group = '12_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    case '13':
+                        $access_group = '13_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                    default:
+                        $access_group = '14_access_group_'.$exemplar->exemplar_access_group;
+                        break;
+                }
                 if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($arr[$access][$exemplar->exemplar_access_group]))) {
-                    $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
+                    $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
                         'exemplar_id' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'], array($exemplar->exemplar_id)),
                         'exemplar_access_code' => $exemplar->exemplar_access,
                         'exemplar_access_group' => $exemplar->exemplar_access_group,
@@ -66,7 +110,7 @@ class LIBFLAccess extends AbstractBase {
                         'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
                     );
                 } else {
-                    $arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
+                    $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
                         'exemplar_id' => [$num=>$exemplar->exemplar_id],
                         'exemplar_access_code' => $exemplar->exemplar_access,
                         'exemplar_access_group' => $exemplar->exemplar_access_group,
@@ -80,13 +124,17 @@ class LIBFLAccess extends AbstractBase {
                 }
             }
         }
-        ksort($arr);
-        foreach ($arr as $key => $value) {
-            $new_key = preg_replace('/.*_/','access_',$key);
-            $cleanExemplars[$new_key] = $value; // Создаем новый массив, удалив информацию для сортировки ключей 'MethodOfAccess'
-            ksort($cleanExemplars[$new_key]); // Сортируем ключи 'GroupAccess'
+        ksort($accessExemplars);
+        foreach ($accessExemplars as $key => $value) {
+            $access_method = preg_replace('/^\d{1,2}_/', 'access_', $key);
+            $sortAccessMethod[$access_method] = $value; // Создаем новый массив, удалив информацию для сортировки ключей 'MethodOfAccess'
+            ksort($cleanExemplars[$access_method], SORT_NUMERIC); // Сортируем ключи 'GroupAccess'
+            foreach ($sortAccessMethod[$access_method] as $key => $value) {
+                $access_group = preg_replace('/^\d{1,2}_/', '', $key);
+                $ce2[$access_method][$access_group] = $value;
+            }
         }
-        return $cleanExemplars;
+        return $ce2;
     }
 
 }
