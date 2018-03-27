@@ -97,16 +97,16 @@ class LIBFLAccess extends AbstractBase {
                         $access_group = '14_access_group_'.$exemplar->exemplar_access_group;
                         break;
                 }
-                if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($arr[$access][$exemplar->exemplar_access_group]))) {
+                if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($accessExemplars[$access][$access_group]))) {
                     $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
-                        'exemplar_id' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'], array($exemplar->exemplar_id)),
+                        'exemplar_id' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'], array($exemplar->exemplar_id)),
                         'exemplar_access_code' => $exemplar->exemplar_access,
                         'exemplar_access_group' => $exemplar->exemplar_access_group,
                         'exemplar_location' => $exemplar->exemplar_location,
-                        'exemplar_rack_location' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_rack_location'], array($exemplar->exemplar_rack_location)),
-                        'exemplar_placing_cipher' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_placing_cipher'], array($exemplar->exemplar_placing_cipher)),
-                        'exemplar_inventory_number' => array_merge($arr[$access][$exemplar->exemplar_access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inventory_number'], array($exemplar->exemplar_inventory_number)),
-                        //'exemplar_inv_note' => array_merge($arr[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inv_note'], array($exemplar->exemplar_inv_note)),
+                        'exemplar_rack_location' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_rack_location'], array($exemplar->exemplar_rack_location)),
+                        'exemplar_placing_cipher' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_placing_cipher'], array($exemplar->exemplar_placing_cipher)),
+                        'exemplar_inventory_number' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inventory_number'], array($exemplar->exemplar_inventory_number)),
+                        //'exemplar_inv_note' => array_merge($accessExemplars[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inv_note'], array($exemplar->exemplar_inv_note)),
                         'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
                     );
                 } else {
@@ -128,13 +128,13 @@ class LIBFLAccess extends AbstractBase {
         foreach ($accessExemplars as $key => $value) {
             $access_method = preg_replace('/^\d{1,2}_/', 'access_', $key);
             $sortAccessMethod[$access_method] = $value; // Создаем новый массив, удалив информацию для сортировки ключей 'MethodOfAccess'
-            ksort($cleanExemplars[$access_method], SORT_NUMERIC); // Сортируем ключи 'GroupAccess'
+            ksort($sortAccessMethod[$access_method], SORT_NUMERIC); // Сортируем ключи 'GroupAccess'
             foreach ($sortAccessMethod[$access_method] as $key => $value) {
                 $access_group = preg_replace('/^\d{1,2}_/', '', $key);
-                $ce2[$access_method][$access_group] = $value;
+                $exemplarsWithAccess[$access_method][$access_group] = $value;
             }
         }
-        return $ce2;
+        return $exemplarsWithAccess;
     }
 
 }
