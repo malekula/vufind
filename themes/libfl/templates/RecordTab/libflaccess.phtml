@@ -65,19 +65,20 @@
                     echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Все экзмепляры находяться исключительно в книгохранении (<u>другие варианты невозможны</u>  ).<br>
-                        Читатель добавляет книгу в корзину, оформляет заказ и получает книгу в зале выдачи докуементов (2 этаж)
+                        Читатель добавляет книгу в корзину, оформляет заказ и получает книгу
                         <ul>
-                            <li>а11111 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>а22222 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>а33333 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>а44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>b44444 - access: 1005 (заказать через личный кабинет); location: 2011</li>
-                            <li>c22222 - access: 1005 (заказать через личный кабинет); location: 2011</li>
+                            <li>в зале выдачи докуементов (2 этаж), в случае, если книга доступна только в библиотеке</li>
+                            <li>в зале выдачи докуементов (2 этаж), в случае, если книгу можно взять на дом.</li>
                         </ul>
                         </div>";
                     break;
                 case 'access_group_7':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Читателю необходимо пройти в разные залы (в зависимости от того, где находится книга). Сообщить сотруднику инвентарный номер
+                        книги и попросить выдать эту книгу на дом.
+                        </div>";
                     break;
                 case 'access_group_8':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
@@ -114,12 +115,24 @@
                     break;
                 case 'access_group_11':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Книги, у которых способ доступа плохо формализован или источник книг - партнеры, например ДЕК или ЦФРИ
+                        </div>";
                     break;
                 case 'access_group_12':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Книги, которые находятся в служебном пользовании (например, на оцифровке или на реставрации)<br>
+                        </div>";
                     break;
                 case 'access_group_13':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                        <strong>ПРИМЕЧАНИЕ:</strong><br>
+                        Книга имеет статус 'Э' - находится в списке запрещенной литературы. Все такие книги находятся в книгохранении (или могут быть другие варианты?)<br>
+                        </div>";
                     break;
                 default:
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
@@ -200,8 +213,22 @@
                         echo "</div>";
                         break;
                     case '7':
-                        echo "<div></div>";
-                        echo "<div></div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
+                        if (is_array($exemplar['exemplar_inventory_number'])):
+                            foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        else:
+                            echo $this->transEsc('access_not_inventory_number');
+                        endif;
+                        echo "</div>";
+                        echo"</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
                         break;
                     case '8':
                     echo "<div class='row'>";
@@ -280,20 +307,9 @@
                         echo "</div>";
                         break;
                     case '11':
-                        echo "<div></div>";
-                        echo "<div></div>";
-                        break;
-                    case '12':
-                        echo "<div></div>";
-                        echo "<div></div>";
-                        break;
-                    case '13':
-                        echo "<div></div>";
-                        echo "<div></div>";
-                        break;
-                    default:
-                        /*echo "<div><div style='display:inline-block; width:30%; vertical-align:top; font-weight:bold; padding-right:10px;'>".$this->transEsc('exemplar_inventory_number').": </div>";
-                        echo "<div style='display:inline-block; width:70%'>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_inventory_number'])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -301,60 +317,70 @@
                         else:
                             echo $this->transEsc('access_not_inventory_number');
                         endif;
-                        echo "</div></div>";
-                        echo "<div><div style='display:inline-block; width:30%; vertical-align:top; font-weight:bold; padding-right:10px;'>".$this->transEsc('access_additionalInfo').": </div>";
-                        echo "<div style='display:inline-block; width:70%; padding: 0px 0px 20px 0px;'>".$this->transEsc($exemplar['exemplar_access_code'])."</div></div>";*/
+                        echo "</div>";
+                        echo"</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        break;
+                    case '12':
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
+                        if (is_array($exemplar['exemplar_inventory_number'])):
+                            foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
+                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                            endforeach;
+                        else:
+                            echo $this->transEsc('access_not_inventory_number');
+                        endif;
+                        echo "</div>";
+                        echo"</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        break;
+                    case '13':
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
+                        if (is_array($exemplar['exemplar_inventory_number'])):
+                            foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
+                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                            endforeach;
+                        else:
+                            echo $this->transEsc('access_not_inventory_number');
+                        endif;
+                        echo "</div>";
+                        echo"</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
+                        break;
+                    default:
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
+                        if (is_array($exemplar['exemplar_inventory_number'])):
+                            foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
+                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                            endforeach;
+                        else:
+                            echo $this->transEsc('access_not_inventory_number');
+                        endif;
+                        echo "</div>";
+                        echo"</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
                         break;
                 }
                 echo "</div>";
             }
-
-            /*foreach ($accessCodes as $access_location_codes => $exemplar) {
-                $codes = explode('.', $access_location_codes);
-                $accessCode = $codes[0];
-                $locationCode = $codes[1];
-                echo "<div id='group_".$access_location_codes."' class='exemplar' style='padding: 0px 0px 0px 23px;'>";
-                //echo "<table class='table table-striped' summary='".$this->transEsc('Exemplars')."' style='margin-bottom:40px;'>";
-                switch ($accessCode) {
-                    case '1000':
-                        break;
-                    case '1001':
-                        break;
-                    case '1002':
-                        break;
-                    case '1003':
-                        break;
-                    case '1004':
-                        break;
-                    case '1005':
-                        echo '<tr><td>1005</td></tr>';
-                        break;
-                    case '1006':
-                        break;
-                    case '1007':
-                        break;
-                    case '1008':
-                        break;
-                    case '1009':
-                        break;
-                    case '1010':
-                        break;
-                    case '1011':
-                        break;
-                    case '1012':
-                        break;
-                    case '1013':
-                        break;
-                    case '1014':
-                        break;
-                    case '1999':
-                        break;
-                    default:
-                        break;
-                }
-                //echo "</table>";
-                echo "</div>";
-            }*/
             echo "</div>";
         }
         echo "</div>";
