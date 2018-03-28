@@ -28,17 +28,17 @@
                 echo "<h2 style='margin-top:30px;'><i class='fa fa-print' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             case 'access_homeAccess':
-                echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
+                echo "<h2 style='margin-top:30px;'><i class='fa fa-home' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             case 'access_libraryAccess':
                 echo "<h2 style='margin-top:30px;'><i class='fa fa-bank' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 echo "<p style='padding: 0px 0px 0px 23px;'><a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_drivingDirections')."</a>&nbsp;|&nbsp;<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_schedule')."</a></p>";
                 break;
             case 'access_clarifyAccess':
-                echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
+                echo "<h2 style='margin-top:30px;'><i class='fa fa-question-circle' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
             default:
-                echo "<h2 style='margin-top:30px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
+                echo "<h2 style='margin-top:30px;'><i class='fa fa-question-circle' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessMethod)."</h2>";
                 break;
         }
         foreach ($accessGroups as $accessGroup => $accessCodes) {
