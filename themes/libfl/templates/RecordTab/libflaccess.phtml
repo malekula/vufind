@@ -11,7 +11,7 @@
         $exemplars = json_decode($getExemplarsData[1][0]);
     }
 
-    $accessMethods = $this->driver->getMethodOfAccess();
+    $accessMethods = array_unique($this->driver->getMethodOfAccess());
     $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
 
     /*echo '<pre>';
