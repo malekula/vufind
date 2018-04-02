@@ -48,12 +48,12 @@ class ReporterrorController extends AbstractBase
         $view->name = $this->params()->fromPost('name');
         $view->email = $this->params()->fromPost('email');
         $view->comments = $this->params()->fromPost('comments');
-        
+
         $view->url = $this->params()->fromPost('url');
         $view->scrResolution = $this->params()->fromPost('scrResolution');
         $view->browser = $this->params()->fromPost('browser');
         $view->os = $this->params()->fromPost('os');
-        
+
         if ($this->formWasSubmitted('submit', $view->useRecaptcha)) {
 
             if (empty($view->email) || empty($view->comments)) {
@@ -68,22 +68,21 @@ class ReporterrorController extends AbstractBase
             $sender_email = isset($reportError->sender_email) ? $reportError->sender_email : 'vufind-noreply@libfl.ru';
             $sender_name = isset($reportError->sender_name) ? $reportError->sender_name : 'VuFind Report Error!';
 
-            $email_message = empty($view->name) ? '' : $this->translate('re_name') . ': ' . $view->name . "\n";
-            $email_message .= empty($view->email) ? '' : $this->translate('re_email') . ': ' . $view->email . "\n";
-            $email_message .= empty($view->comments) ? '' : $this->translate('re_comments') . ': ' . $view->comments . "\n\n";
-            $email_message .= mb_strtoupper($this->translate('re_additional_info')) . ":\n";
-            $email_message .= empty($view->date) ? '' : $this->translate('re_date') . ": " . date('d.m.Y H:i')."\n";
-            $email_message .= empty($view->os) ? '' : $this->translate('re_os') . ": " . $view->os."\n";
-            $email_message .= empty($view->browser) ? '' : $this->translate('re_browser') . ": " . $view->browser."\n";
-            $email_message .= empty($view->scrResolution) ? '' : $this->translate('re_screen_resolution') . ": " . $view->scrResolution."\n";
-            $email_message .= empty($view->url) ? '' : $this->translate('re_page_url') . ": " . $view->url."\n";
-            $email_message .= "\n";
-            $email_message .= "User agent: " . filter_input(INPUT_SERVER, 'HTTP_USER_AGENT');
+            $email_message = empty($view->name) ? "" : "<b>" . $this->translate('re_name') . ":</b> " . $view->name . "<br/>";
+            $email_message .= empty($view->email) ? '' : "<b>" . $this->translate('re_email') . ":</b> " . $view->email . "<br/>";
+            $email_message .= empty($view->comments) ? '' : "<b>" . $this->translate('re_comments') . ":</b><br/> " . $view->comments . "<br/><br/>";
+            $email_message .= "<b><u>" . mb_strtoupper($this->translate('re_additional_info')) . ":</u></b><br/>";
+            $email_message .= empty($view->date) ? '' : "<b>" . $this->translate('re_date') . ":</b> " . date('d.m.Y H:i')."<br/>";
+            $email_message .= empty($view->os) ? '' : "<b>" . $this->translate('re_os') . ":</b> " . $view->os."<br/>";
+            $email_message .= empty($view->browser) ? '' : "<b>" . $this->translate('re_browser') . ":</b> " . $view->browser."<br/>";
+            $email_message .= empty($view->scrResolution) ? '' : "<b>" . $this->translate('re_screen_resolution') . ":</b> " . $view->scrResolution."<br/>";
+            $email_message .= empty($view->url) ? '' : "<b>" . $this->translate('re_page_url') . ":</b> " . $view->url . "<br/>";
+            $email_message .= "<br/>";
+            $email_message .= "<b>User agent:</b> " . filter_input(INPUT_SERVER, 'HTTP_USER_AGENT');
 
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
             try {
                 $mailer = $this->serviceLocator->get('VuFind\Mailer');
+                //$mailer->addHeader('Content-Type', 'text/html');
                 $mailer->send(
                     new Address($recipient_email, $recipient_name),
                     new Address($sender_email, $sender_name),
@@ -96,7 +95,7 @@ class ReporterrorController extends AbstractBase
                 $this->flashMessenger()->addMessage($e->getMessage(), 'error');
             }
         }
-        
+
         return $view;
     }
 }

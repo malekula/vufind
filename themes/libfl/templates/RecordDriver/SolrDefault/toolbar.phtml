@@ -42,6 +42,6 @@
   <?=$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]); ?>
 
   <? if ($this->reporterror()->tabEnabled()): ?>
-        <li><a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->url() . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?></a></li>
+        <li><a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->serverUrl(true) ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?></a></li>
   <? endif; ?>
 </ul>
