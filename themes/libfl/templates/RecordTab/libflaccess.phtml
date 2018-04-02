@@ -77,7 +77,8 @@
                     echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Читателю необходимо пройти в разные залы (в зависимости от того, где находится книга). Сообщить сотруднику инвентарный номер
-                        книги и попросить выдать эту книгу на дом.
+                        книги и попросить выдать эту книгу на дом.<br/><br/>
+                        Если инв. номер у экземпляра отсутствует - выводится его штрихкод.
                         </div>";
                     break;
                 case 'access_group_8':
@@ -216,9 +217,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
                                 echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -231,22 +236,26 @@
                         echo "</div>";
                         break;
                     case '8':
-                    echo "<div class='row'>";
-                    echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
-                    echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a></div>";
-                    echo "</div>";
-                    echo "<div class='row'>";
-                    echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
-                    echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
-                    echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_hyperlink').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'><a href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a></div>";
+                        echo "</div>";
+                        echo "<div class='row'>";
+                        echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_access').": </div>";
+                        echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->translate(str_replace("%%exemplar_location%%", "<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
+                        echo "</div>";
                         break;
                     case '9':
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
                                 echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -256,19 +265,19 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_rack_location').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_rack_location'])):
+                        if (is_array($exemplar['exemplar_rack_location']) && !empty($exemplar['exemplar_rack_location'][0])):
                             foreach ($exemplar['exemplar_rack_location'] as $rack_location):
                                 echo "<span style='padding: 0px 0px 0px 0px;'>".$rack_location."</span><br>";
                             endforeach;
                         else:
-                            echo $this->transEsc('access_not_inventory_number');
+                            echo $this->transEsc('access_not_rack_location');
                         endif;
                         echo "</div>";
                         echo"</div>";
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_placing_cipher').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_placing_cipher'])):
+                        if (is_array($exemplar['exemplar_placing_cipher']) && !empty($exemplar['exemplar_placing_cipher'][0])):
                             foreach ($exemplar['exemplar_placing_cipher'] as $placing_cipher):
                                 echo "<span style='padding: 0px 0px 0px 0px;'>".$placing_cipher."</span><br>";
                             endforeach;
@@ -292,9 +301,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -310,9 +323,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -328,9 +345,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -346,9 +367,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -364,9 +389,13 @@
                         echo "<div class='row'>";
                         echo "<div class='col-sm-12 col-md-3 col-lg-3' style='font-weight: bold;'>".$this->transEsc('exemplar_inventory_number').": </div>";
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
-                        if (is_array($exemplar['exemplar_inventory_number'])):
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                            endforeach;
+                        elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
+                            foreach ($exemplar['exemplar_barcode'] as $barcode_number):
+                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');

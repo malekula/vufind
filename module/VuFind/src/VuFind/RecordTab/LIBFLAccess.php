@@ -107,6 +107,7 @@ class LIBFLAccess extends AbstractBase {
                         'exemplar_rack_location' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_rack_location'], array($exemplar->exemplar_rack_location)),
                         'exemplar_placing_cipher' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_placing_cipher'], array($exemplar->exemplar_placing_cipher)),
                         'exemplar_inventory_number' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inventory_number'], array($exemplar->exemplar_inventory_number)),
+                        'exemplar_barcode' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_barcode'], array($exemplar->exemplar_barcode)),
                         //'exemplar_inv_note' => array_merge($accessExemplars[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inv_note'], array($exemplar->exemplar_inv_note)),
                         'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
                     );
@@ -125,6 +126,7 @@ class LIBFLAccess extends AbstractBase {
                             'exemplar_rack_location' => [$exemplar->exemplar_rack_location],
                             'exemplar_placing_cipher' => [$exemplar->exemplar_placing_cipher],
                             'exemplar_inventory_number' => [$exemplar->exemplar_inventory_number],
+                            'exemplar_barcode' => [$exemplar->exemplar_barcode],
                             //'exemplar_inv_note' => $exemplar->exemplar_inv_note,
                             'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
                         );
