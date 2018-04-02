@@ -44,7 +44,7 @@
             <? if (!empty($coreFields)): ?>
                 <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
                     <? foreach ($coreFields as $key => $current): ?>
-                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $this->translate($current['value']) ?></td></tr>
+                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $current['value'] ?></td></tr>
                 <? endforeach; ?>
                 </table>
             <? endif; ?>
