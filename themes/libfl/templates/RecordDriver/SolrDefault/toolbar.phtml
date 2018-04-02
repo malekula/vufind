@@ -6,7 +6,7 @@
 ?>
 <ul class="record-nav nav nav-pills hidden-print">
     <? if (count($this->driver->getCitationFormats()) > 0): ?>
-        <li><a class="cite-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'Cite')?>" rel="nofollow"><i class="fa fa-asterisk" aria-hidden="true"></i> <?=$this->transEsc('Cite this')?></a></li>
+        <li><a class="cite-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'Cite')?>" rel="nofollow"><?=$this->transEsc('Cite this')?></a></li>
     <? endif; ?>
     <!--<? if ($this->reporterror()->tabEnabled()): ?>
         <li><a id="reportErrorLink" data-lightbox href="<?= $this->url('reporterror-home') . '?page_url=' . $this->url() . $this->driver->getUniqueId(); ?>" rel="nofollow"><?= $this->transEsc("re_report_error") ?>111</a></li>
@@ -19,7 +19,7 @@
   <? endif; ?>
   <li><a class="mail-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'Email')?>" rel="nofollow"><i class="fa fa-envelope" aria-hidden="true"></i> <?=$this->transEsc('Email this')?></a></li>
 -->
-  <li class="digitization_btn">Заказать оцифровку</li>
+  <!--<li class="digitization_btn">Заказать оцифровку</li>
   <? $exportFormats = $this->export()->getFormatsForRecord($this->driver); ?>
   <? if(count($exportFormats) > 0): ?>
     <li class="dropdown">
@@ -30,7 +30,7 @@
         <? endforeach; ?>
       </ul>
     </li>
-  <? endif; ?>
+  <? endif; ?>-->
 
   <? if ($this->userlist()->getMode() !== 'disabled'): ?>
     <li><a class="save-record" data-lightbox href="<?=$this->recordLink()->getActionUrl($this->driver, 'Save')?>" rel="nofollow"><i class="fa fa-star" aria-hidden="true"></i> <?=$this->transEsc('Add to favorites')?></a></li>

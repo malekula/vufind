@@ -75,7 +75,7 @@
       <? if (!empty($lastSort)): ?>
         <input type="hidden" name="sort" value="<?=$this->escapeHtmlAttr($lastSort)?>" />
       <? endif; ?>
-      <div class="clearfix">
+      <div class="clearfix adv_header">
         <!-- -->
       <!--<div class="<?=$this->layoutClass('sidebar')?>">-->
       <? if ($hasDefaultsApplied): ?>
@@ -117,11 +117,14 @@
             <option value="OR"<? if($searchDetails && $searchDetails->getOperator()=='OR'):?> selected<?endif?>><?= $this->transEsc('group_OR') ?></option>
           </select>
         </div>
+     
+
       <span id="groupPlaceHolder" class="hidden">
         <i class="fa fa-plus-circle" aria-hidden="true"></i>
         <a href="#" onClick="addGroup();return false"><?= $this->transEsc('add_search_group') ?></a>
       </span>      
-      <span style='color:#e6e6e6;'>|</span><input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">
+      <!--<span style='color:#e6e6e6;'>|</span><input class="clear-btn btn btn-default" type="button" value="<?= $this->transEsc('Clear')?>">-->
+
       <? /* fallback to a fixed set of search groups/fields if JavaScript is turned off */ ?>
 
       <div class="no-js">
@@ -168,12 +171,14 @@
               <a href="#" class="adv-group-close hidden"><i class="fa fa-close"></i> <!--<?=$this->transEsc("del_search")?>--></a>
               
             </div>
+
             <? if($group == 0): ?>
               </div>
             <? endif; ?>
           <? endfor; ?>
         <? endif; ?>
       </div>
+      <button type='button' class="clear-btn btn btn-default">&nbsp;<?= $this->transEsc('Clear')?></button>
 
 
       <div class="adv-submit">          
