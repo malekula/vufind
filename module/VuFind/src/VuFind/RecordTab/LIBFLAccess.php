@@ -101,6 +101,7 @@ class LIBFLAccess extends AbstractBase {
                 if (in_array($exemplar->exemplar_access.'.'.$exemplar->exemplar_location, array_keys($accessExemplars[$access][$access_group]))) {
                     $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
                         'exemplar_id' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_id'], array($exemplar->exemplar_id)),
+                        'exemplar_ids' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_ids'], array($exemplar->exemplar_id)),
                         'exemplar_access_code' => $exemplar->exemplar_access,
                         'exemplar_access_group' => $exemplar->exemplar_access_group,
                         'exemplar_location' => $exemplar->exemplar_location,
@@ -115,11 +116,12 @@ class LIBFLAccess extends AbstractBase {
                     if (($accessMethodCode == 4000 && in_array($exemplar->exemplar_access_group, array('6','8','9','10')) && in_array($exemplar->exemplar_access, array('1003','1005','1007','1011','1012','1014')))
                         OR ($accessMethodCode == 4001 && in_array($exemplar->exemplar_access_group, array('6','7')) && in_array($exemplar->exemplar_access, array('1000','1006','1017')))
                         OR ($accessMethodCode == 4002 && in_array($exemplar->exemplar_access_group, array('1','2','3','4')) && in_array($exemplar->exemplar_access, array('1001','1002','1004','1008')))
-                        OR ($accessMethodCode == 4003 && in_array($exemplar->exemplar_access_group, array('5')) && in_array($exemplar->exemplar_access, array('1003')))
+                        OR ($accessMethodCode == 4003 && in_array($exemplar->exemplar_access_group, array('5')) && in_array($exemplar->exemplar_access, array('1009')))
                         OR ($accessMethodCode == 4005 && in_array($exemplar->exemplar_access_group, array('11','12','13','99')) && in_array($exemplar->exemplar_access, array('1010','1013','1016','1999'))))
                     {
                         $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
                             'exemplar_id' => [$num=>$exemplar->exemplar_id],
+                            'exemplar_ids' => [$num=>$exemplar->exemplar_id],
                             'exemplar_access_code' => $exemplar->exemplar_access,
                             'exemplar_access_group' => $exemplar->exemplar_access_group,
                             'exemplar_location' => $exemplar->exemplar_location,

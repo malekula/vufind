@@ -16,6 +16,10 @@
 
     /*echo '<pre>';
     print_r($sortExemplars);
+    echo '</pre>';
+
+    echo '<pre>';
+    print_r($accessMethods);
     echo '</pre>';*/
 
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
@@ -62,7 +66,7 @@
                 case 'access_group_6':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='fa fa-book' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
                     echo "<p style='padding: 0px 0px 0px 23px;'><a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>".$this->transEsc('access_instructionsForOrderingBooksAtLibrary')."</a></p>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Все экзмепляры находяться исключительно в книгохранении (<u>другие варианты невозможны</u>  ).<br>
                         Читатель добавляет книгу в корзину, оформляет заказ и получает книгу
@@ -70,30 +74,30 @@
                             <li>в зале выдачи докуементов (2 этаж), в случае, если книга доступна только в библиотеке</li>
                             <li>в зале выдачи докуементов (2 этаж), в случае, если книгу можно взять на дом.</li>
                         </ul>
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_7':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Читателю необходимо пройти в разные залы (в зависимости от того, где находится книга). Сообщить сотруднику инвентарный номер
                         книги и попросить выдать эту книгу на дом.<br/><br/>
                         Если инв. номер у экземпляра отсутствует - выводится его штрихкод.
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_8':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Электронные экземпляры, доступные исключительно в помещении библиотеки (микрофиши, ресурсы НЭБ и пр.)
                         <ul>
                             <li>с44444 - access: 1003 (электронный доступ в помещении библиотеки); location: 2030</li>
                         </ul>
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_9':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Экземпляры имеют разный способ доступа и находятся в разных местах/залах.<br>
                         <ul>
@@ -102,38 +106,38 @@
                             <li>c11111 - access: 1007 (Доступ в залах библиотеки)); location: 2003</li>
                         </ul>
                         Если экземпляр находится в книгохренении, при присваиваем ему отдельный статус доступа (1014).
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_10':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Книги находятся на выставке.<br>
                         <ul>
                             <li>с33333 - access: 1011 (книга на выставке); location: 2003</li>
                         </ul>
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_11':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Книги, у которых способ доступа плохо формализован или источник книг - партнеры, например ДЕК или ЦФРИ
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_12':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Книги, которые находятся в служебном пользовании (например, на оцифровке или на реставрации)<br>
-                        </div>";
+                        </div>";*/
                     break;
                 case 'access_group_13':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
+                    /*echo "<div style='padding: 10px 0px 10px 35px; color:#d44848;'>
                         <strong>ПРИМЕЧАНИЕ:</strong><br>
                         Книга имеет статус 'Э' - находится в списке запрещенной литературы. Все такие книги находятся в книгохранении (или могут быть другие варианты?)<br>
-                        </div>";
+                        </div>";*/
                     break;
                 default:
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'><i class='' style='margin: 0px 5px 0px 0px;'></i>".$this->transEsc($accessGroup)."</h3>";
@@ -141,6 +145,7 @@
             }
             foreach ($accessCodes as $access => $exemplar) {
                 echo "<div id='group_".$access."' class='exemplar' style='padding: 0px 0px 0px 23px;'>";
+                echo "<input type='hidden' name='exemplarGroupID' value='".implode('.', $exemplar['exemplar_id'])."' class='exemplarGroupID'>";
                 switch ($exemplar['exemplar_access_group']) {
                     case '1':
                         echo "<div class='row'>";
@@ -219,11 +224,11 @@
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                                echo "<span class='exemplar".$exemplar['exemplar_id']."' style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
                             endforeach;
                         elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
                             foreach ($exemplar['exemplar_barcode'] as $barcode_number):
-                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
+                                echo "<span class='exemplar".$exemplar['exemplar_id']."' style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
@@ -251,11 +256,11 @@
                         echo "<div class='col-sm-12 col-md-9 col-lg-9'>";
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
                             foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
-                                echo "<span style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
+                                echo "<span class='exemplar".$exemplar['exemplar_id']."'  style='padding: 0px 0px 0px 0px;'>".$inv_number."</span><br>";
                             endforeach;
                         elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
                             foreach ($exemplar['exemplar_barcode'] as $barcode_number):
-                                echo "<span style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
+                                echo "<span class='exemplar".$exemplar['exemplar_id']."'  style='padding: 0px 0px 0px 0px;'>".$barcode_number."</span><br>";
                             endforeach;
                         else:
                             echo $this->transEsc('access_not_inventory_number');
