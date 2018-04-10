@@ -113,25 +113,25 @@ echo "<div class='".$accessMethod."'>";
             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
             break;
             case '3':
-            echo "<p>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+            echo "<p>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
             echo "<div class='marginal_note'><span>Не знаете, как сделать заказ?</span><a href='//libfl.ru/static/litres' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a><br/><a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>".$this->transEsc('access_instructionsForAccessing')."</a><br/><a href='https://goo.gl/EYPcrC' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkLitres')."</a></div>";
             break;
             case '4':
-            echo "<p>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+            echo "<p>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
             echo "<div class='marginal_note'><span>Не знаете, как сделать заказ?</span><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPearson')."</a><br/><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkPearson')."</a></div>";
             break;
             case '5':
-            echo "<div><a href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a></div>";
-            echo "<div>".$this->translate(str_replace("%%access_LIBFL%%", "<strong>".$this->transEsc('access_LIBFL')."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."</div>";
-            echo "<div><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPrintOnDemand')."</a></div>";
+            echo "<p>".$this->translate(str_replace("%%access_LIBFL%%", "<strong>".$this->transEsc('access_LIBFL')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
+            echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
+            echo "<div class='marginal_note'><span>Не знаете, как сделать заказ?</span><a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPrintOnDemand')."</a></div>";
             break;
             case '6':
             if ($exemplar['exemplar_access_code'] == 1000) :
-            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2006')."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2006')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
             elseif ($exemplar['exemplar_access_code'] == 1005):
-            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
             else:
             echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
             endif;
@@ -153,7 +153,7 @@ echo "<div class='".$accessMethod."'>";
             echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."&nbsp;<strong>".$inv_number."</strong></p>";
             break;
             case '8':
-            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+            echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</p>";
             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
             break;
             case '9':
@@ -190,9 +190,9 @@ echo "<div class='".$accessMethod."'>";
                 echo "</div>";
             echo "<p>";
                 if ($exemplar['exemplar_access_code'] == 1007) :
-                echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'])));
+                echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", "<p>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_3')))."</p>";
                 elseif ($exemplar['exemplar_access_code'] == 1014):
-                echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc(2007)."</strong>", $this->transEsc($exemplar['exemplar_access_code'])));
+                echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc(2007)."</strong>", "<p>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_3')))."</p>";
                 else:
                 echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
             endif;
@@ -235,9 +235,9 @@ echo "<div class='".$accessMethod."'>";
     case '12':
     echo "<div>";
         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])):
-        foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
+        /*foreach ($exemplar['exemplar_inventory_number'] as $inv_number):
         echo "<span>".$inv_number."</span><br>";
-        endforeach;
+        endforeach;*/
         elseif (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])):
         foreach ($exemplar['exemplar_barcode'] as $barcode_number):
         echo "<span>".$barcode_number."</span><br>";
@@ -263,7 +263,7 @@ echo "<div>";
     echo $this->transEsc('access_not_inventory_number');
     endif;
     echo "</div>";
-echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'])))."</p>";
+echo "<p>".$this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</p>"."<p>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."<strong>&nbsp;".$inv_number."</strong></p>";
 echo "</div>";
 break;
 default:
