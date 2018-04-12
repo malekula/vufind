@@ -102,6 +102,19 @@
     <? endif; ?>
 
     <?=$this->driver->supportsCoinsOpenURL()?'<span class="Z3988" title="'.$this->escapeHtmlAttr($this->driver->getCoinsOpenURL()).'"></span>':''?>
+
+    <div class='access_info clearfix'>
+      <div class='left'>
+        <span>Информация о доступе</span>
+        <a href>Распечатать информацию о доступе</a><br>
+        <a href>Отправить на эл. почту</a>
+      </div>
+      <div class='right'>
+        <span>Сервис</span>
+        <a href>Заказать оцифровку книги</a>
+      </div>
+    </div>
+
   </div>
 
   <!--<div class="<?=$this->layoutClass('sidebar')?>">

@@ -6260,8 +6260,9 @@ div#tooltip a:hover {
 .access_info {
     display: block;
     padding-top: 15px;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
     border-top: 1px solid #ddd;
+    margin-top: 85px;
 }
 .access_info span {
     display: block;
@@ -6317,13 +6318,6 @@ a.cta_btn {
     display: inline-block;
     padding-bottom: 10px;
 }
-.access_group h3 {
-    font-family: 'Open Sans';
-    text-transform: uppercase;
-    font-size: 16px !important;
-    font-weight: bold !important;
-    margin: 55px 0 30px;
-}
 .exemplar p {
     color: #787878;
     line-height: 20px;
@@ -6339,21 +6333,17 @@ a.cta_btn {
     color: #787878;
 }
 .access_status {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 3px;
-    color: #fff;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 5px;
 }
 
 .access_denied {
-    background-color: #ccd9e1;
+    color: #787878;
 }
 .access_accept {
-    background-color: #14c59d;    
+    color: #14c59d;    
 }
 
 @media (min-width:768px) {
@@ -10637,6 +10627,33 @@ span#groupPlaceHolder:not(:hover) {
         padding-right: 1rem
     }
 }
+@media (max-width:768px) {
+    .access_status {
+        font-size: 12px;
+    }
+    .access_method {
+        font-size: 14px;
+        display: inline;
+    }
+    .marginal_note {
+        position: relative;
+        right: 0;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .marginal_note span {
+        margin-bottom: 10px;
+    }
+    .access_info .right {
+        float: left;
+    }
+    .access_info span {
+        margin-bottom: 10px;
+    }
+    .tab-content h3 {
+        margin: 40px 0 15px;
+    }
+}
 
 .adv-term-input,
 .adv-term-op {
@@ -11419,7 +11436,8 @@ body.rtl .modal-loading {
         margin-right: 75vw
     }
     body.offcanvas.offcanvas-right.active .sidebar {
-        right: 0
+        top: 85px;
+        right: 0;
     }
     body.offcanvas.offcanvas-right.active .offcanvas-overlay {
         left: -75vw
@@ -12534,9 +12552,12 @@ img {
 }
 
 .tab-content h3 {
-    /*font-size: 21px;
-    font-weight: normal !important;*/
-    padding-bottom: 15px;
+    /*padding-bottom: 15px;*/
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin: 55px 0 30px;
 }
 
 @media (min-width:768px) {
@@ -12684,8 +12705,8 @@ footer {
     background: #0000f3;
     color: #fff;
     font-weight: 500 !important;
-    border-radius: 1px;
-    padding: 14px 18px !important;
+    border-radius: 3px;
+    padding: 14px 20px !important;
     box-shadow: 0px 6px 24px 0 rgba(42, 42, 183, 0.14);
     /*margin: 0 10px;*/
 }
@@ -14122,10 +14143,11 @@ div#footer {
     box-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 #cartSummary {
-    position: absolute;
-    height: 45px;
+    /*position: absolute;
     top: 0;
-    right: 0;
+    right: 0;*/
+    float: right;
+    height: 45px;
     text-align: right;
     padding: 12px 20px;
     border-left: 1px solid #edeff1;
@@ -14135,7 +14157,7 @@ div#footer {
     font-family: 'Leto Sans';
     font-size: 13px;
     font-weight: bold;
-    /*padding: 14px 18px;*/
+    padding: 14px 18px;
 }
 .search_tools {
     height: 45px;
@@ -14315,9 +14337,9 @@ span.about_label {
     text-align: left;
 }
 .sidebar .facet.active, .sidebar .facet.active:hover, .sidebar .active-filters .facet {
-    color: inherit;
+    color: #000;
     background-color: #edeff1;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 .fa-remove:before, .fa-close:before, .fa-times:before {
     content: " ";
