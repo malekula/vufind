@@ -290,6 +290,7 @@
    <field name="AdditionalBibRecord" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="Exemplar" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="HyperLink" type="text" indexed="true" stored="true" multiValued="true"/>
+   <field name="HyperLinkNewViewer" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerPerson_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerPerson" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerOrganization_AF_All" type="text" indexed="true" stored="true" multiValued="true"/>
