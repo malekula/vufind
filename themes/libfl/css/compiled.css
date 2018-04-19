@@ -3967,7 +3967,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 }
 
 .nav-pills>li {
-    float: right;
+    /*float: right;*/
+    float: left;
 }
 
 .nav-pills>li>a {
@@ -11641,7 +11642,9 @@ span.cart-link-label {
     }
     .record-nav>li>a,
     .btn-bookbag-toggle {
-        text-align: left
+        text-align: left;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
     }
 }
 
@@ -12775,7 +12778,8 @@ footer {
 }
 
 .nav .btn-bookbag-toggle {
-    float: left
+    display: none;
+    /*float: left*/
 }
 
 .nav .btn-bookbag-toggle a {
