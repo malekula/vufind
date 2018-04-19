@@ -245,6 +245,19 @@
     background-image: url(../../images/bookreader/BRicons.png);
     background-repeat: no-repeat;
 }
+.BRicon-disabled {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url(../../images/bookreader/BRicons.png);
+    background-repeat: no-repeat;
+    cursor: default;
+}
 i.BRicon { display: inline-block; }
 .BRicon.logo {background-position:0 0;}
 .BRicon.info {background-position:-40px 0;}
@@ -254,8 +267,12 @@ i.BRicon { display: inline-block; }
 .BRicon.full {background-position:-360px 0;}
 .BRicon.HQ-icon {background-position:-1840px 0;}
 .BRicon.LQ-icon {background-position:-1920px 0;}
+.BRicon-disabled.HQ-icon {background-position:-1840px 0;}
+.BRicon-disabled.LQ-icon {background-position:-1920px 0;}
 .BRicon.HQ-icon-active {background-position:-1880px 0;}
 .BRicon.LQ-icon-active {background-position:-1960px 0;}
+.BRicon-disabled.HQ-icon-active {background-position:-1840px 0;}
+.BRicon-disabled.LQ-icon-active {background-position:-1920px 0;}
 .BRicon.book_left {background-position:-440px 0;}
 .BRicon.book_right {background-position:-520px 0;}
 .BRicon.zoom_out {background-position:-600px 0;}
@@ -1189,6 +1206,10 @@ body.high-contrast #BRtwopageview img {
   border-right:none;
 }
 .BRtoolbarSection .BRicon {
+  position: relative;
+  top: 5px;
+}
+.BRtoolbarSection .BRicon-disabled {
   position: relative;
   top: 5px;
 }

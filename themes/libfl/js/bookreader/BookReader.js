@@ -4061,7 +4061,7 @@ BookReader.prototype.buildToolbarElement = function() {
     +       "</span>"
 
     +       "<span class='BRtoolbarSection BRtoolbarSectionInfo tc ph10'>"
-    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip' disabled></button>"
+    +         "<button class='BRicon switch-view-mode " + viewModeIcon + " js-tooltip'></button>"
     +       "</span>"
 
     // Search
