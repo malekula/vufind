@@ -111,6 +111,7 @@ class LIBFLAccess extends AbstractBase {
                         'exemplar_barcode' => array_merge($accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_barcode'], array($exemplar->exemplar_barcode)),
                         //'exemplar_inv_note' => array_merge($accessExemplars[$exemplar->exemplar_access.'.'.$exemplar->exemplar_location]['exemplar_inv_note'], array($exemplar->exemplar_inv_note)),
                         'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
+                        'exemplar_hyperlink_newviewer' => $exemplar->exemplar_hyperlink_newviewer,
                     );
                 } else {
                     if (($accessMethodCode == 4000 && in_array($exemplar->exemplar_access_group, array('6','8','9','10')) && in_array($exemplar->exemplar_access, array('1003','1005','1007','1011','1012','1014')))
@@ -131,6 +132,7 @@ class LIBFLAccess extends AbstractBase {
                             'exemplar_barcode' => [$exemplar->exemplar_barcode],
                             //'exemplar_inv_note' => $exemplar->exemplar_inv_note,
                             'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
+                            'exemplar_hyperlink_newviewer' => $exemplar->exemplar_hyperlink_newviewer,
                         );
                     }
                 }

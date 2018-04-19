@@ -40,7 +40,22 @@
     $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
     $this->headMeta()->setProperty('og:title', $bookInfo->Title);
     $this->headMeta()->setProperty('og:description', 'Из фондов Библиотеки иностранной литературы libfl.ru');
+    /*echo "<pre>";
+    print_r($getBookInfo);
+    echo "</pre>";*/
 
+
+    /*ini_set("soap.wsdl_cache_enabled", "0");
+    $client = new SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+    $bookID = filter_input(INPUT_GET, 'bookID');
+    try {
+        $getBookInfo = $client->GetBookInfoByID(array('id'=>$bookID));
+    } catch (Exception $e) {
+        echo $e->getMessage()."<br/><br/>";
+    }
+    $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
+    $this->headMeta()->setProperty('og:title', $bookInfo->Title);
+    $this->headMeta()->setProperty('og:description', 'Из фондов Библиотеки иностранной литературы libfl.ru');*/
 ?>
 
 <div id="IABookReaderWrapper">
@@ -143,9 +158,9 @@
         //var re = new RegExp("0{"+imgStr.length+"}$");
         var viewMode = window.location.search.replace('?','').split('&')[1].split('=')[1];
         if (viewMode == 'HQ') {
-            var bookPath = exemplar.Path+exemplar.JPGFiles[index];
+            var bookPath = exemplar.Path_HQ+exemplar.JPGFiles[index];
         } else {
-            var bookPath = exemplar.Path+exemplar.JPGFiles[index];
+            var bookPath = exemplar.Path_LQ+exemplar.JPGFiles[index];
         }
         var url = 'https://cdn.libfl.ru:6684/books/'+bookPath;
         return url;
