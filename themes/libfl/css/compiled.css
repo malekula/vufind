@@ -6390,6 +6390,7 @@ a.cta_btn {
     margin-bottom: 10px;
 }
 .back-to-search {
+    display: none;
     position: absolute;
     left: -170px;
     top: 32px;
@@ -10735,8 +10736,33 @@ span#groupPlaceHolder:not(:hover) {
     .delete-all:before {
         content: none;
     }
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
 }
 
+.inventory table {
+    max-width: 400px;
+    width: 200px;
+    display: table;
+    border-collapse: collapse;
+    margin: 35px 0;
+    /*float: none;*/
+}
+.inventory>tbody>tr:nth-of-type(odd) {
+    background-color: #f6f7f7;
+}
+.inventory tr {
+    display: table-row;
+    background: #e6e6e6;
+}
+.inventory td {
+    padding: 8px;
+    max-width: 100%;
+}
+.inventory td:nth-of-type(odd) {
+    max-width: 300px;
+}
 .adv-term-input,
 .adv-term-op {
     margin-bottom: .20rem
