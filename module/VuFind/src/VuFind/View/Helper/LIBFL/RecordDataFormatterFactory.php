@@ -344,22 +344,22 @@ class RecordDataFormatterFactory
 				]
 			]
 		);*/
-                $spec->setLine('author', 'getAuthor');
-                $spec->setLine('author2', 'getAuthor2');
-                $spec->setLine('author_corporate', 'getAuthorCorporate');
-                $spec->setLine('level', 'getLevel');
-                $spec->setLine('title_another_chart', 'getTitleAnotherChart');
-                $spec->setLine('title_alt', 'getTitleAlt');
-                $spec->setLine('country', 'getCountry');
-                $spec->setLine('placeofpublication', 'getPlacesOfPublication');
-                $spec->setLine('publisher', 'getPublishers');
-                $spec->setLine('publishdate', 'getPublicationDates');
-                $spec->setLine('language', 'getLanguages');
-                $spec->setLine('Volume', 'getVolume');
-                $spec->setLine('genre', 'getGenres');
-                $spec->setLine('topic', 'getTopic');
-                $spec->setLine('fund', 'getFund');
-                $spec->setTemplateLine('format', 'getFormat', 'format-list.phtml');
+                $spec->setLine('author', 'getAuthor'); // Автор
+                $spec->setLine('author2', 'getAuthor2'); // Другой автор
+                $spec->setLine('author_corporate', 'getAuthorCorporate'); // Организация
+                $spec->setLine('level', 'getLevel'); // Вид издания
+                $spec->setLine('title_another_chart', 'getTitleAnotherChart'); //Оригинальное заглавие
+                $spec->setLine('title_alt', 'getTitleAlt'); // Альтернативное заглавие
+                $spec->setLine('country', 'getCountry'); // Страна издания
+                $spec->setLine('placeofpublication', 'getPlacesOfPublication'); // Место издания
+                $spec->setLine('publisher', 'getPublishers'); // Издательство
+                $spec->setLine('publishdate', 'getPublicationDates'); // Дата издания
+                $spec->setLine('language', 'getLanguages'); // Язык
+                $spec->setLine('Volume', 'getVolume'); // Объём
+                $spec->setLine('genre', 'getGenres'); // Тематика
+                $spec->setLine('topic', 'getTopic'); // Предметная рубрика
+                $spec->setLine('fund', 'getFund'); // Фонд
+                $spec->setTemplateLine('format', 'getFormat', 'format-list.phtml'); //Носитель
                 //$spec->setTemplateLine('MethodOfAccess', 'getMethodOfAccess', 'access_method-record.phtml');
 		return $spec->getArray();
     }
