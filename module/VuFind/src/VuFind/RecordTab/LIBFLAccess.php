@@ -134,6 +134,37 @@ class LIBFLAccess extends AbstractBase {
                             'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
                             'exemplar_hyperlink_newviewer' => $exemplar->exemplar_hyperlink_newviewer,
                         );
+                        /*if ($exemplar->exemplar_access == 1013) {
+                            $accessExemplars[$access][$access_group][$exemplar->exemplar_access] = array(
+                                'exemplar_id' => [$num=>$exemplar->exemplar_id],
+                                'exemplar_ids' => [$num=>$exemplar->exemplar_id],
+                                'exemplar_access_code' => $exemplar->exemplar_access,
+                                'exemplar_access_group' => $exemplar->exemplar_access_group,
+                                'exemplar_location' => $exemplar->exemplar_location,
+                                'exemplar_rack_location' => [$exemplar->exemplar_rack_location],
+                                'exemplar_placing_cipher' => [$exemplar->exemplar_placing_cipher],
+                                'exemplar_inventory_number' => [$exemplar->exemplar_inventory_number],
+                                'exemplar_barcode' => [$exemplar->exemplar_barcode],
+                                //'exemplar_inv_note' => $exemplar->exemplar_inv_note,
+                                'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
+                                'exemplar_hyperlink_newviewer' => $exemplar->exemplar_hyperlink_newviewer,
+                            );
+                        } else {
+                            $accessExemplars[$access][$access_group][$exemplar->exemplar_access.'.'.$exemplar->exemplar_location] = array(
+                                'exemplar_id' => [$num=>$exemplar->exemplar_id],
+                                'exemplar_ids' => [$num=>$exemplar->exemplar_id],
+                                'exemplar_access_code' => $exemplar->exemplar_access,
+                                'exemplar_access_group' => $exemplar->exemplar_access_group,
+                                'exemplar_location' => $exemplar->exemplar_location,
+                                'exemplar_rack_location' => [$exemplar->exemplar_rack_location],
+                                'exemplar_placing_cipher' => [$exemplar->exemplar_placing_cipher],
+                                'exemplar_inventory_number' => [$exemplar->exemplar_inventory_number],
+                                'exemplar_barcode' => [$exemplar->exemplar_barcode],
+                                //'exemplar_inv_note' => $exemplar->exemplar_inv_note,
+                                'exemplar_hyperlink' => $exemplar->exemplar_hyperlink,
+                                'exemplar_hyperlink_newviewer' => $exemplar->exemplar_hyperlink_newviewer,
+                            );
+                        }*/
                     }
                 }
             }
