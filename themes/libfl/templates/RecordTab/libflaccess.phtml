@@ -171,10 +171,12 @@
                             echo "<li>".str_replace("%%account%%", "<a href='#' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                             echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                             echo "</ol>";
-                            echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
+                            echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+                            //echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
                         else:
                             echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
-                            echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
+                            //echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
+                            echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         endif;
                         break;
                     case '7':
