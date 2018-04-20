@@ -14,6 +14,10 @@
     $accessMethods = array_unique($this->driver->getMethodOfAccess());
     $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
 
+    // links
+    $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
+    $link_registration = "//libfl.ru/ru/item/contacts";
+
     /*echo '<pre>';
     print_r($sortExemplars);
     echo '</pre>';*/
@@ -129,22 +133,22 @@
                         break;
                     case '2':
                         echo "<ol>"
-                            ."<li>".str_replace("%%link%%", "<a href='#' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '3':
                         echo "<ol>"
-                            ."<li>".str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
-                            ."<li>".str_replace("%%signin%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_sigIn')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%signin%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_sigIn')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
                             ."</ol>";
                         //echo "<ol><li>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))."</li></ol>";
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '4':
                         echo "<ol>"
-                            ."<li>".str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
@@ -152,7 +156,7 @@
                     case '5':
                         //echo "<ol><li>".$this->translate(str_replace("%%link%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_0')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"."<li>"."<strong>".$rack_location."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_3')))))."</li></ol>";
                         echo "<ol>"
-                            ."<li>".str_replace("%%link%%", "<a href=''>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_0')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
                             ."</ol>";
@@ -162,14 +166,14 @@
                         if ($exemplar['exemplar_access_code'] == 1000) :
                             //echo "<ol><li>".$this->translate(str_replace("%%account%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_account')."</a>", $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2006')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))))."</li></ol>";
                             echo "<ol>";
-                            echo "<li>".str_replace("%%account%%", "<a href='#' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                            echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                             echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                             echo "</ol>";
                             echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         elseif ($exemplar['exemplar_access_code'] == 1005):
                             //echo "<ol><li>".$this->translate(str_replace("%%account%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_account')."</a>", $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))))."</li></ol>";
                             echo "<ol>";
-                            echo "<li>".str_replace("%%account%%", "<a href='#' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                            echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                             echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                             echo "</ol>";
                             echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
