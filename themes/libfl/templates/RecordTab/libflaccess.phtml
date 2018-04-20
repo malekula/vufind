@@ -165,6 +165,7 @@
                             echo "<li>".str_replace("%%account%%", "<a href='#' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                             echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                             echo "</ol>";
+                            echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         elseif ($exemplar['exemplar_access_code'] == 1005):
                             //echo "<ol><li>".$this->translate(str_replace("%%account%%", "<a href='//opac.libfl.ru/WebReaderT/(S(ev5t1wja0rchxr20r5gnvh55))/Default.aspx' target='_blank'>".$this->transEsc('access_account')."</a>", $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')))))."</li></ol>";
                             echo "<ol>";
