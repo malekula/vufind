@@ -359,7 +359,7 @@ class RecordDataFormatterFactory
         $spec->setLine('genre', 'getGenres'); // Тематика
         $spec->setLine('topic', 'getTopic'); // Предметная рубрика
         $spec->setLine('fund', 'getFund'); // Фонд
-        $spec->setTemplateLine('format', 'getFormat', 'format-list.phtml'); //Носитель
+        //$spec->setTemplateLine('format', 'getFormat', 'format-list.phtml'); //Носитель
         //$spec->setTemplateLine('MethodOfAccess', 'getMethodOfAccess', 'access_method-record.phtml');
 		return $spec->getArray();
     }
@@ -391,24 +391,24 @@ class RecordDataFormatterFactory
     public function getDefaultPeriodSpecs()
     {
 		$spec = new RecordDataFormatter\SpecBuilder();
-        $spec->setLine('title_short', 'getTitleShort');
-        $spec->setLine('author', 'getAuthor');
+        //$spec->setLine('title_short', 'getTitleShort');
+        //$spec->setLine('author', 'getAuthor');
         $spec->setLine('author2', 'getAuthor2');
         $spec->setLine('author_corporate', 'getAuthorCorporate');
-        $spec->setLine('level', 'getLevel');
+        //$spec->setLine('level', 'getLevel');
         $spec->setLine('title_another_chart', 'getTitleAnotherChart');
         $spec->setLine('title_alt', 'getTitleAlt');
-        $spec->setLine('country', 'getCountry');
+        //$spec->setLine('country', 'getCountry');
         $spec->setLine('placeofpublication', 'getPlacesOfPublication');
         $spec->setLine('publisher', 'getPublishers');
         $spec->setLine('publishdate', 'getPublicationDates');
         $spec->setLine('language', 'getLanguages');
-        $spec->setLine('Volume', 'getVolume');
+        //$spec->setLine('Volume', 'getVolume');
         $spec->setLine('genre', 'getGenres');
         $spec->setLine('topic', 'getTopic');
         $spec->setLine('fund', 'getFund');
-        $spec->setLine('format', 'getFormat');
-        $spec->setLine('MethodOfAccess', 'getMethodOfAccess');
+        //$spec->setLine('format', 'getFormat');
+        //$spec->setLine('MethodOfAccess', 'getMethodOfAccess');
         // Вид издания (period_ModeOfPublication)
         $spec->setLine('period_mode_of_publication', 'period_getModeOfPublications');
         // Язык (period_Language)
