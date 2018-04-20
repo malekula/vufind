@@ -72,18 +72,18 @@
                     break;
                 case 'access_group_4':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div class='marginal_note'>"
+                    /*echo "<div class='marginal_note'>"
                         ."<span>Информация по проекту</span><br>"
                         ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPearson')."</a><br/>"
                         ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkPearson')."</a>"
-                        ."</div>";
+                        ."</div>";*/
                     break;
                 case 'access_group_5':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
-                    echo "<div class='marginal_note'>"
+                    /*echo "<div class='marginal_note'>"
                         ."<span>Не знаете, как сделать заказ?</span><br>"
                         ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPrintOnDemand')."</a>"
-                        ."</div>";
+                        ."</div>";*/
                     break;
                 case 'access_group_6':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
@@ -124,7 +124,7 @@
                     case '1':
                         echo "<div class='clearfix'>"
                             ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
-                            ."<span class='special-note'>Книга находится в свободном доступе</span>"
+                            //."<span class='special-note'>Книга находится в свободном доступе</span>"
                             ."</div>";
                         break;
                     case '2':
@@ -171,7 +171,7 @@
                             echo "<li>".str_replace("%%account%%", "<a href='#' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                             echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                             echo "</ol>";
-                            //echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
+                            echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
                         else:
                             echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
                             echo "<a class='cta_btn' href=''>".$this->transEsc('Add to Book Bag')."</a>";
@@ -198,7 +198,7 @@
                             ."</ol>"
                             ."<table class='inventory'><tbody>"
                             ."<tr>"
-                            ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"                            
+                            ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"
                             ."</tr>"
                             ."</tbody></table>";
 
