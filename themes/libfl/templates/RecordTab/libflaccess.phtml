@@ -213,7 +213,12 @@
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-                            ."</ol>";
+                            ."</ol>"
+                            ."<table class='inventory'><tbody>"
+                            ."<tr>"
+                            ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"
+                            ."</tr>"
+                            ."</tbody></table>";
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '9':
@@ -250,11 +255,21 @@
                         echo "</div>";
                         //echo "<ol><li>";
                         if ($exemplar['exemplar_access_code'] == 1007) :
-                            echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", "<ol><li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."<strong>".$rack_location."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_4')))."</li></ol>";
+                            echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", "<ol><li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."<strong>".$rack_location."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_4')))."</li></ol>"
+                                ."<table class='inventory'><tbody>"
+                                ."<tr>"
+                                ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"
+                                ."</tr>"
+                                ."</tbody></table>";
                             echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         elseif ($exemplar['exemplar_access_code'] == 1014):
                             //echo "<span>111</span>";
-                            echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc(2009)."</strong>", "<ol><li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."<strong>".$rack_location."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_4')))."</li></ol>";
+                            echo $this->translate(str_replace("%%exemplar_location%%", "<strong>".$this->transEsc(2009)."</strong>", "<ol><li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."<strong>".$inv_number."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."<strong>".$rack_location."</strong>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_4')))."</li></ol>"
+                                ."<table class='inventory'><tbody>"
+                                ."<tr>"
+                                ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"
+                                ."</tr>"
+                                ."</tbody></table>";
                             echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         else:
                             echo "<div class='col-sm-12 col-md-9 col-lg-9'>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
@@ -293,7 +308,12 @@
                         endif;
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
-                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."&nbsp;<strong>".$inv_number."</strong></li></ol>";
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."&nbsp;<strong>".$inv_number."</strong></li></ol>"
+                            ."<table class='inventory'><tbody>"
+                            ."<tr>"
+                            ."<td><strong>".$this->transEsc($exemplar['exemplar_location'])."</strong></td>"."<td><span>".$inv_number."</span></td>"
+                            ."</tr>"
+                            ."</tbody></table>";
                         echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         echo "</div>";
                     break;

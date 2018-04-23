@@ -10745,9 +10745,8 @@ span#groupPlaceHolder:not(:hover) {
     }
 }
 
-.inventory table {
-    max-width: 400px;
-    width: 200px;
+table.inventory {
+    width: 500px;
     display: table;
     border-collapse: collapse;
     margin: 35px 0;
@@ -10765,7 +10764,7 @@ span#groupPlaceHolder:not(:hover) {
     max-width: 100%;
 }
 .inventory td:nth-of-type(odd) {
-    max-width: 300px;
+    width: 75%;
 }
 .adv-term-input,
 .adv-term-op {
