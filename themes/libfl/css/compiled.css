@@ -2104,8 +2104,7 @@ fieldset[disabled] .form-control {
 }
 
 textarea.form-control {
-    height: auto;
-    min-height: 100px;
+    height: auto
 }
 
 input[type="search"] {
@@ -2142,7 +2141,7 @@ input[type="search"] {
 }
 
 .form-group {
-    margin-bottom: 20px
+    margin-bottom: 15px
 }
 
 .radio,
@@ -12689,7 +12688,7 @@ img {
         /*max-width: 400px*/
     }
     #modal .form-control {
-        max-width: 548px;
+        max-width: none
     }
 }
 
@@ -14507,18 +14506,11 @@ span.about_label {
     font-size: 13px;
     line-height: 1.42857143;
     color: inherit;
-    background-color: #f9f9f9;
+    background-color: #fff;
     /*background-image: none;*/
-    border: 1px solid #E6E6E6;
-    border-radius: 4px;
-    /*box-shadow: 0 1px 5px rgba(42, 42, 183, 0.18);*/
-}
-input.form-control::placeholder,
-textarea.form-control::placeholder {
-    font-family: 'Open Sans';
-    font-size: 14px;
-    /*font-weight: 300;*/
-    color: #9B9B9B;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(42, 42, 183, 0.18);
 }
 input#publishDatefrom,
 input#publishDateto {
@@ -14784,12 +14776,12 @@ a, .btn-link {
 .btn.btn-primary,
 .btn-success {
     background-color: #0000f3;
-    color: #fff;
     font-family: "Leto Sans";
     font-size: 16px;
     font-weight: normal;
     text-transform: uppercase;
-    padding: 13px 28px; 
+    line-height: 40px;
+    color: #fff; 
     border: none;
     outline: none;
 }
