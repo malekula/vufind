@@ -28,6 +28,14 @@ class LIBFLAccess extends AbstractBase {
         return 'tabAccess';
     }
 
+    public function combine($keys, $values) {
+        $result = array();
+        foreach ($keys as $i => $k) {
+            $result[$k][] = $values[$i];
+        }
+        return    $result;
+    }
+
     public function sortExemplars($accessMethods = array(), $exemplars = array()) {
 
         foreach ($accessMethods as $accessMethodCode) {

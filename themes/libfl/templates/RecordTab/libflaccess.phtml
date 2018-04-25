@@ -182,64 +182,70 @@
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<table class='inventory'>"
-                            ."<tr>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                                foreach ($exemplar['exemplar_location'] as $location) {
-                                    echo "<span><strong>".$this->transEsc($location)."</strong></span><br>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                    echo "<tr>"
+                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
                             }
-                        echo "</td>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span>".$inv_number."</span><br>";
-                                }
-                            } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                            }
-                        echo "</td>"
-                            ."</tr>"
-                            ."</table>";
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
                         break;
                     case '8':
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<table class='inventory'>"
-                            ."<tr>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                                foreach ($exemplar['exemplar_location'] as $location) {
-                                    echo "<span><strong>".$this->transEsc($location)."</strong></span><br>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                    echo "<tr>"
+                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
                             }
-                        echo "</td>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span>".$inv_number."</span><br>";
-                                }
-                            } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                            }
-                        echo "</td>"
-                            ."</tr>"
-                            ."</table>";
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '9':
@@ -249,70 +255,77 @@
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                                     ."</ol>";
-                                echo "<table class='inventory'>"
-                                    ."<tr>"
-                                    ."<td>";
-                                    if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                                        foreach ($exemplar['exemplar_location'] as $location) {
-                                            echo "<span><strong>".$this->transEsc($location)."</strong></span><br>";
-                                        }
-                                    } else {
-                                        // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                                    $exemplarLocations = $exemplar['exemplar_location'];
+                                } else {
+                                    $exemplarLocations = ['access_unavailableLocation'];
+                                }
+                                if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                                } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                } else {
+                                    $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                                }
+                                $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                                if (is_array($locations) && !empty($locations)) {
+                                    echo "<table class='inventory'>";
+                                    foreach ($locations as $location=>$inv_numbers) {
+                                        echo "<tr>"
+                                            ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                            ."<td>";
+                                            foreach ($inv_numbers as $inv_number) {
+                                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                            }
+                                        echo "</td>"
+                                            ."</tr>";
                                     }
-                                echo "</td>"
-                                    ."<td>";
-                                    if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                                        foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                            echo "<span>".$inv_number."</span><br>";
-                                        }
-                                    } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                        foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                            echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                        }
-                                    } else {
-                                        // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                                    }
-                                echo "</td>"
-                                    ."</tr>"
-                                    ."</table>";
+                                    echo "</table>";
+                                } else {
+                                    // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                }
                                 break;
                             case '1014':
                                 echo "<ol>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                                     ."</ol>";
-                                echo "<table class='inventory'>"
-                                    ."<tr>"
-                                    ."<td>";
-                                    if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                                        foreach ($exemplar['exemplar_location'] as $location) {
-                                            echo "<span><strong>".$this->transEsc($location)."</strong></span><br>";
-                                        }
-                                    } else {
-                                        // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                                    $exemplarLocations = $exemplar['exemplar_location'];
+                                } else {
+                                    $exemplarLocations = ['access_unavailableLocation'];
+                                }
+                                if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                                } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                } else {
+                                    $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                                }
+                                $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                                if (is_array($locations) && !empty($locations)) {
+                                    echo "<table class='inventory'>";
+                                    foreach ($locations as $location=>$inv_numbers) {
+                                            echo "<tr>"
+                                            ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                            ."<td>";
+                                            foreach ($inv_numbers as $inv_number) {
+                                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                            }
+                                        echo "</td>"
+                                            ."</tr>";
                                     }
-                                echo "</td>"
-                                    ."<td>";
-                                    if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                                        foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                            echo "<span>".$inv_number."</span><br>";
-                                        }
-                                    } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                        foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                            echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                        }
-                                    } else {
-                                        // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                                    }
-                                echo "</td>"
-                                    ."</tr>"
-                                    ."</table>";
+                                    echo "</table>";
+                                } else {
+                                    // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                }
                                 break;
                             default:
                                 # code...
                                 break;
                         }
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "--> <a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '10':
                         echo "<ol>"
@@ -326,32 +339,35 @@
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<table class='inventory'>"
-                            ."<tr>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                                foreach ($exemplar['exemplar_location'] as $location) {
-                                    echo "<span><strong>".$this->transEsc($location)."</strong></span><br>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                    echo "<tr>"
+                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
                             }
-                        echo "</td>"
-                            ."<td>";
-                            if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span>".$inv_number."</span><br>";
-                                }
-                            } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                foreach ($exemplar['exemplar_inventory_number'] as $inv_number) {
-                                    echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                }
-                            } else {
-                                // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                            }
-                        echo "</td>"
-                            ."</tr>"
-                            ."</table>";
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
                         echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         break;
                     case '12':
