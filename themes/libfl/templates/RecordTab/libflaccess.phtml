@@ -325,15 +325,16 @@
                                 # code...
                                 break;
                         }
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
-                        //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '10':
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '11':
                         echo "<ol>"
@@ -369,7 +370,8 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '12':
                         echo "<ol>"
@@ -381,7 +383,8 @@
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         echo "</div>";
                         break;
                     default:
@@ -389,7 +392,8 @@
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                 }
                 echo "</div>";
