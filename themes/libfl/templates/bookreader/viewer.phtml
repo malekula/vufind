@@ -1,6 +1,6 @@
 <?php
     session_start();
-    setcookie("usernmae","Maksim");
+    setcookie("personal_reader_login", $_COOKIE['personal_reader_login'], time()+60*60, "/", ".libfl.ru");
     $this->doctype(Zend\View\Helper\Doctype::XHTML1_RDFA);
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.css');
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.navbars.css');
@@ -141,12 +141,28 @@
             exemplar = data;
         }
     });
+
     if (!exemplar.ForAllReader) {
-        console.log(document.cookie);
+        var user_loggedIn = getCookie('personal_reader_login');
+        if (exemplar.Status === 'available') {
+            //console.log('Книга доступна на 30 дней и никем не занята. Делаем редирект на заказ.');
+                var bookPIN = window.location.search.replace('?','').split('&')[0].split('=')[1].split('_')[1];
+                window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1';
+        } else {
+            //console.log('Книга занята. Идентифицируем пользователя.');
+            if (user_loggedIn && user_loggedIn !== exemplar.IDReaderTooked) {
+                //console.log('Если пользователь авторизован, но книга занята другим юзером, сообщаем об этом!');
+                alert('Книга занята другим пользователем. Книга освободиться ' + exemplar.DateReturn);
+            } else {
+                //console.log('Пользователь не авторизован. Перенаправляем его на страницу авторизации...');
+                alert('Пользователь незалогинен. Редирект на страницу авторизации');
+            }
+        }
+        //console.log(getCookie('personal_reader_login'));
     } else {
-        alert(exempplar.ForAllReader);
+        alert(exemplar.ForAllReader);
     }
-    console.log(bookInfo);
+    //console.log(bookInfo);
     var imgWidth = exemplar.WidthFirstFile;
     var imgHeight = exemplar.HeightFirstFile;
     var brConfig = {
