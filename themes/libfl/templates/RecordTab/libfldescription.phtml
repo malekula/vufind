@@ -14,7 +14,11 @@
             echo "<tr><th>".$this->transEsc(strtolower($key))."</th><td>";
             $cnt = 0;
             foreach (array_unique($fields->$key) as $value) {
-                echo ($cnt>0) ? ', '.$this->transEsc($value) : $this->transEsc($value);
+                if (in_array($key, array('genre', 'location', 'fund', 'format'))):
+                    echo ($cnt>0) ? ', '.$this->transEsc($value) : $this->transEsc($value);
+                else:
+                    echo ($cnt>0) ? ', '.$value : $value;
+                endif;
                 $cnt++;
             }
             echo "</td></tr>";
