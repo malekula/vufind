@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    setcookie("usernmae","Maksim");
     $this->doctype(Zend\View\Helper\Doctype::XHTML1_RDFA);
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.css');
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.navbars.css');
@@ -14,6 +16,7 @@
     $this->headScript()->appendFile('bookreader/jquery.bt.min.js');
     $this->headScript()->appendFile('mmenu/jquery.mmenu.min.js');
     $this->headScript()->appendFile('mmenu/jquery.mmenu.navbars.min.js');
+    //$this->headScript()->appendFile('CryptoJS/sha256.min.js');
     //$this->headScript()->appendFile('bookreader/excanvas.compiled.js');
     $this->headScript()->appendFile('bookreader/BookReader-common.js');
     $this->headScript()->appendFile('bookreader/BookReader.js');
@@ -122,6 +125,14 @@
     }
 </script>
 <script>
+
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
     // Set some config variables -- $$$ NB: Config object format has not been finalized
     var bookInfo = <?php echo $getBookInfo->GetBookInfoByIDResult ?>;
     var exemplar = [];
@@ -131,7 +142,9 @@
         }
     });
     if (!exemplar.ForAllReader) {
-        alert('You dont access this book!');
+        console.log(document.cookie);
+    } else {
+        alert(exempplar.ForAllReader);
     }
     console.log(bookInfo);
     var imgWidth = exemplar.WidthFirstFile;
