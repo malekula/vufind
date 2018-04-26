@@ -7,8 +7,8 @@
     $exemplars = array();
     $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
     if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
-    $getExemplarsData = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
-    $exemplars = json_decode($getExemplarsData[1][0]);
+        $getExemplarsData = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
+        $exemplars = json_decode($getExemplarsData[1][0]);
     }
 
     $accessMethods = array_unique($this->driver->getMethodOfAccess());
@@ -16,9 +16,9 @@
 
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
-    /*echo '<pre>';
+    echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';*/
+    echo '</pre>';
 
     /*echo '<pre>';
     print_r($accessMethods);
@@ -246,7 +246,8 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        if (isset($exemplar['exemplar_hyperlink'])) 
+                            echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '9':
                         switch ($exemplar['exemplar_access_code']) {
