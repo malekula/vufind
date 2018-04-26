@@ -19,7 +19,7 @@
         <div class="result-formats">
             <?//=$this->record($this->driver)->getFormatList() ?>
             <?=$this->record($this->driver)->getFormatList();?>
-            <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
+            <? if (isset($openUrlActive) && !$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
                 <span class="status ajax-availability hidden">
                     <span class="label label-default"><?=$this->transEsc('status_loading')?>...</span>
                 </span>

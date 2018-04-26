@@ -16,9 +16,9 @@
 
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
-    echo '<pre>';
-    print_r($sortExemplars);
-    echo '</pre>';
+    /*echo '<pre>';
+    print_r($exemplars);
+    echo '</pre>';*/
 
     /*echo '<pre>';
     print_r($accessMethods);
@@ -122,7 +122,7 @@
             foreach ($accessCodes as $access => $exemplar) {
                 echo "<div id='group_".$access."' class='exemplar'>";
                 echo "<input type='hidden' name='exemplarGroupID' value='".implode('.', $exemplar['exemplar_id'])."' class='exemplarGroupID'>";
-                switch ($exemplar['exemplar_access_group']) {
+                switch ($exemplar['exemplar_group_access']) {
                     case '1':
                         echo "<div class='clearfix'>"
                             ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
@@ -246,7 +246,7 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        if (isset($exemplar['exemplar_hyperlink'])) 
+                        if (isset($exemplar['exemplar_hyperlink']))
                             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '9':
