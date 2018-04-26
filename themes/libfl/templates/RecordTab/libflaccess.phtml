@@ -16,6 +16,7 @@
 
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
+    $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
     /*echo '<pre>';
     print_r($exemplars);
     echo '</pre>';*/
@@ -147,15 +148,17 @@
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        //echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '5':
                         echo "<ol>"
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_0')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_0')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
+                        //echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
                     case '6':
                         switch ($exemplar['exemplar_access_code']) {
@@ -211,6 +214,7 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '8':
                         echo "<ol>"
@@ -377,6 +381,36 @@
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
                             ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                echo "<tr>"
+                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '13':
                         echo "<ol>"
@@ -392,6 +426,34 @@
                             ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                echo "<tr>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
