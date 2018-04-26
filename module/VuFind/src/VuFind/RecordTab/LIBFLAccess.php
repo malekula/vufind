@@ -117,7 +117,7 @@ class LIBFLAccess extends AbstractBase {
                     if (isset($exemplar->exemplar_access))
                         $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_access_code'] = $exemplar->exemplar_access;
                     if (isset($exemplar->exemplar_access_group))
-                        $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_group_access'] = $exemplar->exemplar_access_group;
+                        $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_access_group'] = $exemplar->exemplar_access_group;
                     if (isset($exemplar->exemplar_location))
                         $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_location'] = array_merge($this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_location'], array($exemplar->exemplar_location));
                     if (isset($exemplar->exemplar_rack_location))
@@ -144,7 +144,7 @@ class LIBFLAccess extends AbstractBase {
                         if (isset($exemplar->exemplar_access))
                             $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_access_code'] = $exemplar->exemplar_access;
                         if (isset($exemplar->exemplar_access_group))
-                            $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_group_access'] = $exemplar->exemplar_access_group;
+                            $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_access_group'] = $exemplar->exemplar_access_group;
                         if (isset($exemplar->exemplar_location))
                             $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_location'] = [$exemplar->exemplar_location];
                         if (isset($exemplar->exemplar_rack_location))

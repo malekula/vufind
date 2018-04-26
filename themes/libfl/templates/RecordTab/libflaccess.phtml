@@ -122,7 +122,7 @@
             foreach ($accessCodes as $access => $exemplar) {
                 echo "<div id='group_".$access."' class='exemplar'>";
                 echo "<input type='hidden' name='exemplarGroupID' value='".implode('.', $exemplar['exemplar_id'])."' class='exemplarGroupID'>";
-                switch ($exemplar['exemplar_group_access']) {
+                switch ($exemplar['exemplar_access_group']) {
                     case '1':
                         echo "<div class='clearfix'>"
                             ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
@@ -325,8 +325,8 @@
                                 # code...
                                 break;
                         }
-                        //echo "--> <a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '10':
                         echo "<ol>"
