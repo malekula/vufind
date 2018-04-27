@@ -6307,6 +6307,9 @@ a.cta_btn {
     font-weight: bold;
     letter-spacing: 0.01em;
 }
+.exemplar {
+    margin-bottom: 40px;
+}
 .exemplar>.cta_btn {    
     margin-top: 15px;
 }
@@ -10666,6 +10669,9 @@ span#groupPlaceHolder:not(:hover) {
     transition: 2s;
 }
 
+button.print-all {
+    display: none;
+}
 @media (min-width:768px) {
     fieldset,
     .fieldset {
@@ -10687,6 +10693,16 @@ span#groupPlaceHolder:not(:hover) {
     }
 }
 @media (max-width:768px) {
+
+    table.inventory {
+        width: 100% !important;
+    }
+    table.inventory tr {
+        vertical-align: top;
+    }
+    table.inventory span {
+        display: inline-block;
+    }
     .access_status {
         font-size: 12px;
     }
@@ -10727,9 +10743,6 @@ span#groupPlaceHolder:not(:hover) {
     .cart_select_all {
         color: #7e8487;
     }
-    button.print-all {
-        display: none;
-    }
     #modal .cart-controls .checkbox {
         margin-top: 25px;
         padding-bottom: 0 !important;
@@ -10740,9 +10753,9 @@ span#groupPlaceHolder:not(:hover) {
     .delete-all:before {
         content: none;
     }
-    table, thead, tbody, th, td, tr { 
+    /*table, thead, tbody, th, td, tr { 
         display: block; 
-    }
+    }*/
 }
 
 table.inventory {
@@ -10753,18 +10766,18 @@ table.inventory {
     /*float: none;*/
 }
 .inventory>tbody>tr:nth-of-type(odd) {
-    background-color: #f6f7f7;
+    background-color: #f4f4f4;
 }
-.inventory tr {
+/*.inventory tr {
     display: table-row;
     background: #e6e6e6;
-}
+}*/
 .inventory td {
-    padding: 8px;
+    padding: 8px 20px;
     max-width: 100%;
 }
 .inventory td:nth-of-type(odd) {
-    width: 75%;
+    width: 50%;
 }
 .adv-term-input,
 .adv-term-op {
@@ -14721,7 +14734,7 @@ ul.record-nav.nav.nav-pills.hidden-print li.dropdown a {
 }
 .tab-content table.table tr:nth-child(odd) td,
 .tab-content table.table tr:nth-child(odd) th {
-    background-color: #f6f7f7 !important;
+    background-color: #f4f4f4 !important;
 }
 i.fa-minus, i.fa-minus-circle {
     background-image: url('../images/svg/plus-icon.svg');
