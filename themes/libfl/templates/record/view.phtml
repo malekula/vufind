@@ -114,7 +114,7 @@
         <?php
             $fund = $this->driver->getFund()[0];
             if (in_array($fund, array('5000','5001','5003','5004','5005'))) {
-                echo "<a class='digitizingBook' data-lightbox href='http://opac.libfl.ru/TurnDigBooks' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";
+                echo "<a class='digitizingBook' href='http://opac.libfl.ru/TurnDigBooks' target='_blank' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";
                 echo "<a class='digitizingBook-disabled' style='color:grey; display:none;'>".$this->transEsc('digitizingBook')."</a>";
             } else {
                 echo "<span class='digitizingBook-disabled' style='color:#787878;font-size: 12px;font-weight: bold;text-transform: uppercase;'>".$this->transEsc('digitizingBook')."</span>";
