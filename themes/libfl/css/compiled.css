@@ -10759,7 +10759,7 @@ button.print-all {
 }
 
 table.inventory {
-    width: 500px;
+    width: 100%;
     display: table;
     border-collapse: collapse;
     margin: 35px 0;
@@ -10773,7 +10773,7 @@ table.inventory {
     background: #e6e6e6;
 }*/
 .inventory td {
-    padding: 8px 20px;
+    padding: 8px;
     max-width: 100%;
 }
 .inventory td:nth-of-type(odd) {
@@ -10789,6 +10789,9 @@ table.inventory {
 }
 
 @media (min-width:768px) {
+    .inventory td:nth-of-type(odd) {
+        width: 75%;
+    }
     .eds-adv .adv-term-op {
         float: left;
         width: 16%;
