@@ -152,10 +152,11 @@
             //console.log('Книга занята. Идентифицируем пользователя.');
             if (user_loggedIn && user_loggedIn !== exemplar.IDReaderTooked) {
                 //console.log('Если пользователь авторизован, но книга занята другим юзером, сообщаем об этом!');
-                alert('Книга занята другим пользователем. Книга освободиться ' + exemplar.DateReturn);
+                //alert('Книга занята другим пользователем. Книга освободиться ' + exemplar.DateReturn);
+                window.location.href = '//libfl.ru';
             } else {
                 //console.log('Пользователь не авторизован. Перенаправляем его на страницу авторизации...');
-                alert('Пользователь незалогинен. Редирект на страницу авторизации');
+                window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1';
             }
         }
         //console.log(getCookie('personal_reader_login'));
