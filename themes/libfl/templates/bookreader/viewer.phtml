@@ -149,7 +149,7 @@
             var bookPIN = window.location.search.replace('?','').split('&')[0].split('=')[1].split('_')[1]; // Получаем PIN книги
             window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1'; // Направляем юзера на страницу с информацией о 30-дневном доступе
         } else { // Если книга уже "на руках"
-            if (user_loggedIn && ) { // Проверяем авторизован ли пользователь?
+            if (user_loggedIn) { // Проверяем авторизован ли пользователь?
                 if (user_loggedIn !== exemplar.IDReaderTooked) { // Если книга закреплена за другим пользователем - сообщаем об этом
                     console.log('Книгу читает другой пользователь!');
                     //window.location.href = '//libfl.ru'; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
