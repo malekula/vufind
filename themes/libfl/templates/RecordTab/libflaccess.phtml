@@ -290,7 +290,7 @@
                                     echo "<table class='inventory'>";
                                     foreach ($locations as $location=>$inv_numbers) {
                                             echo "<tr>"
-                                            ."<td><span><strong>".$this->transEsc('access_staticLocation_2007')."</strong></span></td>"
+                                            ."<td><span><strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></strong></span></td>"
                                             ."<td>";
                                             foreach ($inv_numbers as $inv_number) {
                                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
