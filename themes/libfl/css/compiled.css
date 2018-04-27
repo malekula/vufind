@@ -2049,7 +2049,21 @@ output {
     line-height: 1.42857143;
     color: #555
 }
-
+#modal input.form-control,
+#modal textarea.form-control {
+    background: #f9f9f9;
+    border: 1px solid #e6e6e6 !important;
+    border-radius: 4px;
+}
+#modal input.form-control::placeholder,
+#modal textarea.form-control::placeholder {
+    font-family: 'Open Sans';
+    font-size: 14px;
+    color: #9b9b9b;
+}
+#modal textarea.form-control {
+    min-height: 120px;
+}
 .form-control {
     display: block;
     width: 100%;
@@ -2141,7 +2155,7 @@ input[type="search"] {
 }
 
 .form-group {
-    margin-bottom: 15px
+    margin-bottom: 20px
 }
 
 .radio,
@@ -14796,7 +14810,7 @@ a, .btn-link {
     font-size: 16px;
     font-weight: normal;
     text-transform: uppercase;
-    line-height: 40px;
+    padding: 13px 25px;
     color: #fff; 
     border: none;
     outline: none;
