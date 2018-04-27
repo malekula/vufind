@@ -1,15 +1,35 @@
 .status-available {
-    color: #008000;
+    color: #09a435;
 }
 
 .status-unavailable {
-    color: #FF0000;
+    color: #a40918;
 }
 
-.status-booked {
+.status-busy {
     color: #ff9100;
 }
 
 .status-unknown {
     color: #909698;
 }
+
+/*.exemplar-status-available {
+    color: #09a435;
+    font-weight: bold;
+}
+
+.exemplar-status-unavailable {
+    color: #a40918;
+    font-weight: bold;
+}
+
+.exemplar-status-busy {
+    color: #ff9100;
+    font-weight: bold;
+}
+
+.exemplar-status-unknown {
+    color: #909698;
+    font-weight: bold;
+}*/

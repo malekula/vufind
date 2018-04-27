@@ -1,44 +1,67 @@
 <?
   // Set page title.
-  $this->headTitle($this->translate('Book Bag'));
+$this->headTitle($this->translate('Book Bag'));
 
   // Set up breadcrumbs:
-  $this->layout()->breadcrumbs = '<li>' . $this->searchMemory()->getLastSearchLink($this->transEsc('Search'), '', '</li> ')
+$this->layout()->breadcrumbs = '<li>' . $this->searchMemory()->getLastSearchLink($this->transEsc('Search'), '', '</li> ')
 ?>
-<h2><?=$this->transEsc('Book Bag') ?></h2>
+<h2><?=$this->transEsc('My Books') ?></h2>
 <?=$this->flashmessages()?>
 <form class="form-inline" action="<?=$this->url('cart-processor')?>" method="post"  name="cartForm" data-lightbox-onsubmit="cartFormHandler">
   <input type="hidden" id="dropdown_value"/>
   <? if (!$this->cart()->isEmpty()): ?>
-    <div class="cart-controls clearfix">
-      <div class="checkbox pull-left flip">
+  <div class="cart-controls clearfix">
+    <!-- test -->
+    <div class="checkbox pull-left flip"> 
+      <label class="cart_select_all">
+        <input type="checkbox" name="selectAll" class="checkbox-select-all" style="display: none;"/><?=$this->transEsc('adv_search_select_all')?>
+      </label>
+    </div>
+      <!-- <div class="checkbox pull-left flip">
+        <input type='checkbox' name='selectAll' id='select-all' style='opacity: 1;' class='checkbox-select-all'>
+        <label for='select-all' class='fake-label'></label>
+        <label><?=$this->transEsc('select_all')?></label>
         <label>
+          <label class='fakebox'>
+            <input type="checkbox" name="selectAll" class="checkbox-select-all"/>
+          </label>
+          <?=$this->transEsc('adv_search_select_all')?>
+        </label> -->
+        <!--<label>
           <input type="checkbox" name="selectAll" class="checkbox-select-all"/>
-          <?=$this->transEsc('select_page')?>
+          <?=$this->transEsc('select_all')?>
         </label>
-      </div>
+      </div>-->
       <? if ($this->userlist()->getMode() !== 'disabled'): ?>
-        <button type="submit" class="btn btn-default" name="saveCart" title="<?=$this->transEsc('bookbag_save')?>" value="1">
-          <i class="fa fa-save" aria-hidden="true"></i>
-          <?=$this->transEsc('Save')?>
-        </button>
-      <? endif; ?>
+      <button type="submit" class="btn btn-default" name="saveCart" title="<?=$this->transEsc('bookbag_save')?>" value="1">
+        <i class="fa fa-save" aria-hidden="true"></i>
+        <?=$this->transEsc('Save')?>
+      </button>
+    <? endif; ?>
       <!--<button type="submit" class="btn btn-default" name="email" title="<?=$this->transEsc('bookbag_email')?>" value="1">
         <i class="fa fa-envelope-o" aria-hidden="true"></i>
         <?=$this->transEsc('Email')?>
       </button>-->
-      <? $exportOptions = $this->export()->getActiveFormats('bulk'); if (count($exportOptions) > 0): ?>
-        <!--<button type="submit" class="btn btn-default" name="export" title="<?=$this->transEsc('bookbag_export')?>" value="1">
+      <!--<? $exportOptions = $this->export()->getActiveFormats('bulk'); if (count($exportOptions) > 0): ?>
+        <button type="submit" class="btn btn-default" name="export" title="<?=$this->transEsc('bookbag_export')?>" value="1">
           <i class="fa fa-list-alt" aria-hidden="true"></i>
           <?=$this->transEsc('Export')?>
-        </button>-->
-      <? endif; ?>
-      <button type="submit" class="btn btn-default dropdown-toggle" name="print" title="<?=$this->transEsc('print_selected')?>" value="1">
-        <i class="fa fa-printer" aria-hidden="true"></i>
-        <?=$this->transEsc('Print')?>
+        </button>
+      <? endif; ?>-->
+
+      <div class='right'>
+        <button type="submit" name="print" class="btn btn-default print-all" title="<?=$this->transEsc('print_selected')?>" value="1">
+        <!--
+        <?=$this->transEsc('Print')?>-->На печать
       </button>
-      <div class="btn-group" id="cartDelete">
-        <button type="submit" name="delete" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="cart-delete-label" value="1">
+
+      <button type="submit" name="delete" class="btn btn-default delete-all" data-toggle="dropdown" id="cart-confirm-delete" onClick="submitFormWithButton(this, 'delete')" >Удалить
+      </button>
+
+    </div>
+
+      <!--<div class="btn-group" id="cartDelete">
+        <button type="submit" name="delete" class="btn btn-default dropdown-toggle delete-all" data-toggle="dropdown" id="cart-delete-label" value="1">
           <i class="fa fa-trash" aria-hidden="true"></i>
           <?=$this->transEsc('Delete')?>
         </button>
@@ -56,20 +79,23 @@
           <li><a id="cart-confirm-empty" onClick="submitFormWithButton(this, 'empty')" title="<?=$this->transEsc('bookbag_confirm_empty')?>"><?=$this->transEsc('confirm_dialog_yes')?></a></li>
           <li><a onClick="$('.fa.fa-spinner').remove()"><?=$this->transEsc('confirm_dialog_no')?></a></li>
         </ul>
-      </div>
+      </div>-->
     </div>
   <? endif; ?>
   <?=$this->render('cart/contents.phtml')?>
-  <hr style="margin: 18px 0px;">
-  <button type="submit" class="btn btn-success" name="addOrder" value="1" title="<?=$this->transEsc('cartCreateOrder')?>"><?=$this->transEsc('cartCreateOrder')?></button>
+  <!--<hr style="margin: 18px 0px;">-->
+  <div class='cart-buttons clearfix'>
+    <button type="submit" class="btn btn-success left" name="addOrder" value="1" title="<?=$this->transEsc('cartCreateOrder')?>"><?=$this->transEsc('cartCreateOrder')?></button>
+    <button class="btn btn-continue right" data-dismiss="modal" title="Продолжить поиск">Продолжить поиск</button>
+  </div>
 </form>
 
 <?
-  $script = <<<JS
-  function submitFormWithButton(link, name) {
-    $('#dropdown_value').attr('name', name).val(1);
-    $(link).closest('form').submit();
-  }
+$script = <<<JS
+function submitFormWithButton(link, name) {
+  $('#dropdown_value').attr('name', name).val(1);
+  $(link).closest('form').submit();
+}
 JS;
 ?>
 <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, $script, 'SET') ?>

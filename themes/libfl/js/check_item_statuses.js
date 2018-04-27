@@ -28,7 +28,7 @@ function checkItemStatuses(_container) {
     if (!data.length) {
         return;
     }
-    console.log(data);
+    
     $(".ajax-availability").removeClass('hidden');
     $.ajax({
         dataType: 'json',

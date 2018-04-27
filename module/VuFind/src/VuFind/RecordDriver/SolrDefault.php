@@ -1964,7 +1964,7 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['long_lat_label'])
             ? $this->fields['long_lat_label'] : [];
     }
-    
+
     /**
      * Get publication information for search result-list.
      *
@@ -1987,63 +1987,63 @@ class SolrDefault extends AbstractBase
     {
         return isset($this->fields['Level']) ? $this->fields['Level'] : [];
     }
-    
+
     public function getGenres()
     {
         return isset($this->fields['genre']) ? $this->fields['genre'] : [];
     }
-    
+
     public function getMethodOfAccess()
     {
         return isset($this->fields['MethodOfAccess']) ? $this->fields['MethodOfAccess'] : [''];
     }
-    
+
     public function getPaginations()
     {
         return isset($this->fields['Pagination']) ? $this->fields['Pagination'] : [];
     }
-    
+
     public function getDescriptions()
     {
         return isset($this->fields['description']) ? $this->fields['description'] : [];
     }
-    
+
     public function period_getModeOfPublications()
     {
         return isset($this->fields['period_ModeOfPublication']) ? $this->fields['period_ModeOfPublication'] : [];
     }
-    
+
     public function period_getLanguages()
     {
         return isset($this->fields['period_Language']) ? $this->fields['period_Language'] : [];
     }
-    
+
     public function period_getPeriodicity()
     {
         return isset($this->fields['period_Periodicity']) ? $this->fields['period_Periodicity'] : [];
     }
-    
+
     public function period_getYears()
     {
         return isset($this->fields['period_Years']) ? $this->fields['period_Years'] : [];
     }
-    
+
     public function period_getHyperLinks()
     {
         return isset($this->fields['period_HyperLink']) ? $this->fields['period_HyperLink'] : [];
     }
-    
+
     public function getExemplars()
     {
         $fields = explode(",", $this->mainConfig->RecordTabs->exemplar_fields);
         return isset($this->fields['Exemplar']) ? [json_encode(array($fields, $this->fields['Exemplar']), JSON_UNESCAPED_UNICODE)] : [];
     }
-    
+
     public function getFundRecordUID($recordUID)
     {
         return strtolower(substr($recordUID, 0, strrpos($recordUID, '_')));
     }
-    
+
     public function getAccessStatus($exemplar_id, $recordUID)
     {
         $fund = $this->getFundRecordUID($recordUID);
@@ -2103,7 +2103,7 @@ class SolrDefault extends AbstractBase
         }
         return $result->GetExemplarStatusResult;
     }
-    
+
     public function getAllFields()
     {
         $fields = explode(",", $this->mainConfig->RecordTabs->description_fields);
@@ -2114,10 +2114,10 @@ class SolrDefault extends AbstractBase
             } else {
                 $description[$field] = [];
             }
-        }      
+        }
         return json_encode($description, JSON_UNESCAPED_UNICODE);
     }
-    
+
     /**
      * Get the short title of the record.
      *
@@ -2127,7 +2127,7 @@ class SolrDefault extends AbstractBase
     {
         return isset($this->fields['title_short']) ? $this->fields['title_short'] : [];
     }
-    
+
     /**
      * Get the author of the record.
      *
@@ -2137,7 +2137,7 @@ class SolrDefault extends AbstractBase
     {
         return isset($this->fields['author']) ? $this->fields['author'] : [];
     }
-    
+
     /**
      * Get the another author of the record.
      *
@@ -2147,57 +2147,57 @@ class SolrDefault extends AbstractBase
     {
         return isset($this->fields['author2']) ? $this->fields['author2'] : [];
     }
-    
+
     public function getAuthorCorporate()
     {
         return isset($this->fields['author_corporate']) ? $this->fields['author_corporate'] : [];
     }
-    
+
     public function getLevel()
     {
         return isset($this->fields['Level']) ? $this->fields['Level'] : [];
     }
-    
+
     public function getTitleAnotherChart()
     {
         return isset($this->fields['Title_another_chart']) ? $this->fields['Title_another_chart'] : [];
     }
-    
+
     public function getTitleAlt()
     {
         return isset($this->fields['title_alt']) ? $this->fields['title_alt'] : [];
     }
-    
+
     public function getAnnotation()
     {
         return isset($this->fields['Annotation']) ? $this->fields['Annotation'] : [];
     }
-    
+
     public function getCountry()
     {
         return isset($this->fields['Country']) ? $this->fields['Country'] : [];
     }
-    
+
     public function getVolume()
     {
         return isset($this->fields['Volume']) ? $this->fields['Volume'] : [];
     }
-    
+
     public function getTopic()
     {
         return isset($this->fields['topic']) ? $this->fields['topic'] : [];
     }
-    
+
     public function getFund()
     {
         return isset($this->fields['fund']) ? $this->fields['fund'] : [];
     }
-    
+
     public function getFormat()
     {
         return isset($this->fields['format']) ? $this->fields['format'] : [];
     }
-    
+
     public function supportsAjaxStatus()
     {
         return true;

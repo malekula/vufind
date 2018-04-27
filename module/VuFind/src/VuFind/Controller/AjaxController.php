@@ -1485,4 +1485,27 @@ class AjaxController extends AbstractBase
         }
         return $this->output('', self::STATUS_OK);
     }
+
+    /**
+     * Encode url bookreader page
+     *
+     * @return \Zend\Http\Response
+     * @author Maksim Kuleba <maksim.kuleba@gmail.com>
+     */
+    public function encodeURLAjax()
+    {
+        $this->disableSessionWrites();
+        $url = $this->params()->fromPost('url', $this->params()->fromQuery('url'));
+        $secret = 'LiSopomotianfso2317wo';
+        $time = time() + 300; //ссылка будет рабочей 5 минут
+
+        //$key = str_replace("=", "", strtr(base64_encode(md5($secret.'/cdn-books/'.$url.$time.'80.250.173.151', TRUE)), "+/", "-_"));
+        //str_replace("=", "", strtr(base64_encode(md5($secret.$url.$time, TRUE)), "+/", "-_"));
+        //$encoded_url = "$url?secl=$key&sect=$time";
+
+        $link = base64_encode(md5($secret.'/books/'.$url.$time, TRUE));
+        $key = str_replace("=", "", strtr($link, "+/", "-_"));
+        $encoded_url = "$key/$time/$url";
+        return $this->output($encoded_url, self::STATUS_OK);
+    }
 }

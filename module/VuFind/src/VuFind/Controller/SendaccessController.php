@@ -1,6 +1,6 @@
 <?php
 /**
- * Report Error Controller
+ * Send Access Controller
  *
  * PHP version 5
  *
@@ -14,9 +14,9 @@ namespace VuFind\Controller;
 use Zend\Mail\Address;
 
 /**
- * Report Error Class
+ * Send Access Class
  *
- * Controls the report error
+ * Controls the send access to e-mail
  *
  * @category VuFind
  * @package  Controller
@@ -24,7 +24,7 @@ use Zend\Mail\Address;
  * @license  http://opensource.org/licenses/gpl-2.0.php GNU General Public License
  * @link     https://vufind.org/wiki/development Wiki
  */
-class ReporterrorController extends AbstractBase
+class SendaccessController extends AbstractBase
 {
     /**
      * Display Report Error home form.
@@ -33,7 +33,7 @@ class ReporterrorController extends AbstractBase
      */
     public function homeAction()
     {
-        return $this->forwardTo('Reporterror', 'Email');
+        return $this->forwardTo('Sendaccess', 'Email');
     }
 
     /**

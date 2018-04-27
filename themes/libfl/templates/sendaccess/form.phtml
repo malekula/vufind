@@ -1,17 +1,19 @@
-<h2><?= $this->transEsc("Send us your error report!") ?></h2>
+Функционал находится в разработке
+
+<!--<h2><?= $this->transEsc("access_sendAccessToEmail") ?></h2>
 <?= $this->flashmessages() ?>
 <form name="reportError" method="post" action="<?= $this->url('reporterror-email') ?>">
     <div class="form-group">
-        <!--<label class="control-label" for="name"><?= $this->transEsc("re_name") ?></label>-->
-        <input placeholder="<?= $this->transEsc("re_name") ?>" type="text" id="name" name="name" value="<?= $this->escapeHtmlAttr(isset($name) ? $name : '') ?>" class="form-control"/>
+        <label class="control-label" for="name"><?= $this->transEsc("re_name") ?></label>
+        <input type="text" id="name" name="name" value="<?= $this->escapeHtmlAttr(isset($name) ? $name : '') ?>" class="form-control"/>
     </div>
     <div class="form-group">
-        <!--<label class="control-label" for="email"><?= $this->transEsc("re_email") ?></label>-->
-        <input placeholder="<?= $this->transEsc("re_email") ?>" type="email" id="email" name="email" value="<?= $this->escapeHtmlAttr(isset($email) ? $email : '') ?>" class="form-control" required/>
+        <label class="control-label" for="email"><?= $this->transEsc("re_email") ?></label>
+        <input type="email" id="email" name="email" value="<?= $this->escapeHtmlAttr(isset($email) ? $email : '') ?>" class="form-control" required/>
     </div>
     <div class="form-group">
-        <!--<label class="control-label" for="comments"><?= $this->transEsc("re_comments") ?></label>-->
-        <textarea placeholder="<?= $this->transEsc("re_comments") ?>"  id="comments" name="comments" class="form-control" required><?= $this->escapeHtml(isset($comments) ? $comments : '') ?></textarea>
+        <label class="control-label" for="comments"><?= $this->transEsc("re_comments") ?></label>
+        <textarea id="comments" name="comments" class="form-control" required><?= $this->escapeHtml(isset($comments) ? $comments : '') ?></textarea>
     </div>
     <div id="sysinfo" class="form-group">
         <input type="hidden" name="url" value="<?php echo filter_input(INPUT_GET, 'page_url')?>">
@@ -34,3 +36,4 @@
     $("input[name='browser']").val(browserName+' v.'+browserVersion);
     $("input[name='os']").val(os);
 </script>
+-->

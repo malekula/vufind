@@ -224,6 +224,7 @@ function bulkFormHandler(event, data) {
 function setupOffcanvas() {
   if ($('.sidebar').length > 0) {
     $('[data-toggle="offcanvas"]').click(function offcanvasClick() {
+      console.log(1);
       $('body.offcanvas').toggleClass('active');
       var active = $('body.offcanvas').hasClass('active');
       var right = $('body.offcanvas').hasClass('offcanvas-right');
@@ -234,7 +235,7 @@ function setupOffcanvas() {
       }
       $('.offcanvas-toggle .fa').attr('title', VuFind.translate(active ? 'sidebar_close' : 'sidebar_expand'));
     });
-    $('[data-toggle="offcanvas"]').click().click();
+    $('[data-toggle="offcanvas"]').click();
   } else {
     $('[data-toggle="offcanvas"]').addClass('hidden');
   }

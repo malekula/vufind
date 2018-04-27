@@ -1,4 +1,5 @@
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?= $this->driver->getSchemaOrgFormats() ?> Product">
+
     <?
         $this->headScript()->appendFile("check_exemplar_statuses.js");
         $QRCode = $this->record($this->driver)->getQRCode("core");
@@ -11,12 +12,14 @@
         <div class="record-info">
             <input type="hidden" name="recordID" value="<?=$this->driver->getFundRecordUID($this->driver->getUniqueId())?>" class="recordID">
         </div>
+        <a class="back-to-search" href='javascript:history.back()'>Вернуться к поиску</a>
+        <span class='author'><?= $this->driver->tryMethod('getPrimaryAuthor') ?></span>
         <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
         <?
             $annotation = $this->driver->getAnnotation();
             $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
         ?>
-        <? if ($annotation): ?>
+        <p><? if ($annotation): ?>
             <?= $this->truncate($annotation, 10000) ?>
         <!--
             <p><?= $this->truncate($annotation, 300) ?></p>
@@ -25,7 +28,7 @@
                 <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
             <? endif; ?>
         -->
-        <? endif; ?>
+        <? endif; ?></p>
 
         <? if ($this->userlist()->getMode() !== 'disabled'): ?>
         <? /* Display the lists that this record is saved to */ ?>
@@ -44,7 +47,11 @@
             <? if (!empty($coreFields)): ?>
                 <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
                     <? foreach ($coreFields as $key => $current): ?>
-                        <tr><th><?= $this->transEsc($key) ?>:</th><td><?= $current['value'] ?></td></tr>
+                        <? if (in_array($key, array('genre', 'location', 'fund', 'format'))): ?>
+                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $this->translate($current['value']) ?></td></tr>
+                        <? else: ?>
+                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $current['value'] ?></td></tr>
+                        <? endif; ?>
                 <? endforeach; ?>
                 </table>
             <? endif; ?>
@@ -56,7 +63,7 @@
             <? if ($cover): ?>
                 <?=$cover ?>
             <? endif; ?>
-            
+
             <? /* Display qrcode if appropriate: */ ?>
             <? if ($QRCode): ?>
                 <span class="hidden-xs">
@@ -68,7 +75,7 @@
             // if you have a preview tab but want to move or remove the preview link
             // from this area of the record view, this can be split into
             // getPreviewData() (should stay here) and
-            // getPreviewLink() (can go in your desired tab) 
+            // getPreviewLink() (can go in your desired tab)
             ?>
             <? if ($preview): ?>
                 <div class="record-previews">

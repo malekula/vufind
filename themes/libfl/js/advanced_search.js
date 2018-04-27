@@ -128,3 +128,11 @@ $(document).ready(function advSearchReady() {
     $("#illustrated_-1").click();
   });
 });
+
+/*$(document).ready(function advSearchReady() {
+  $('.clean-img').click(function clearBtnClick() {
+    $('input[type="text"]').val('');
+    $("option:selected").removeAttr("selected");
+    $("#illustrated_-1").click();
+  });
+});*/

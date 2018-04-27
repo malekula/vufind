@@ -1,1 +1,12 @@
-<svg id="plus-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><defs><style>.cls-1{fill:#fff;fill-rule:evenodd;}</style></defs><title>plus-icon</title><path class="cls-1" d="M20,10a2.73,2.73,0,0,1-2.73,2.73H12.73v4.55a2.73,2.73,0,0,1-5.45,0V12.73H2.73a2.73,2.73,0,1,1,0-5.45H7.27V2.73a2.73,2.73,0,0,1,5.45,0V7.27h4.55A2.73,2.73,0,0,1,20,10Z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="plus-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#0000F3;}
+</style>
+<title>plus-icon</title>
+<path class="st0" d="M20,10c0,1.5-1.2,2.7-2.7,2.7h-4.5v4.5c-0.1,1.5-1.4,2.7-2.9,2.6c-1.4-0.1-2.5-1.2-2.6-2.6v-4.5H2.7
+	c-1.5,0.1-2.8-1.1-2.9-2.6s1.1-2.8,2.6-2.9c0.1,0,0.2,0,0.3,0h4.5V2.7c0.1-1.5,1.4-2.7,2.9-2.6c1.4,0.1,2.5,1.2,2.6,2.6v4.5h4.6
+	C18.8,7.3,20,8.5,20,10z"/>
+</svg>

@@ -1,0 +1,454 @@
+<?php
+
+    // Set page title.
+    $this->headTitle($this->translate('tabAccess') . ': ' . $this->driver->getBreadcrumb());
+    $formatter = $this->recordDataFormatter();
+
+    $exemplars = array();
+    $getExemplars = $formatter->getData($driver, $formatter->getDefaults('libfl_exemplar'));
+    if (isset($getExemplars['Exemplar']['value']) && !empty($getExemplars['Exemplar']['value'])) {
+        $getExemplarsData = json_decode(htmlspecialchars_decode($getExemplars['Exemplar']['value']));
+        $exemplars = json_decode($getExemplarsData[1][0]);
+    }
+
+    $accessMethods = array_unique($this->driver->getMethodOfAccess());
+    $sortExemplars = $this->tab->sortExemplars($accessMethods, $exemplars);
+
+    $link_registration = "//opac.libfl.ru/WebReaderT";
+    $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
+    $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
+    /*echo '<pre>';
+    print_r($exemplars);
+    echo '</pre>';*/
+
+    /*echo '<pre>';
+    print_r($accessMethods);
+    echo '</pre>';*/
+
+    foreach ($sortExemplars as $accessMethod=>$accessGroups) {
+        echo "<div class='".$accessMethod."'>";
+        switch ($accessMethod) {
+            // Книга может быть доступна только в помещении или для выдачи на дом (в этом случае доступ не уточняется)
+            case 'access_remoteAccess':
+                echo "<span class='access_status access_accept'>Доступно</span>";
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                break;
+            case 'access_printAccess':
+                echo "<span class='access_status access_accept'>Доступно</span>";
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                break;
+            case 'access_homeAccess':
+                echo "<span class='access_status access_accept'>Доступно</span>";
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                break;
+            case 'access_libraryAccess':
+                echo "<span class='access_status access_accept'>Доступно</span>";
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                // Раскомментировать
+                //echo "<p><a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_drivingDirections')."</a>&nbsp;|&nbsp;<a href='//libfl.ru/ru/item/contacts' target='_blank'>".$this->transEsc('access_schedule')."</a></p>";
+                break;
+            case 'access_clarifyAccess':
+                echo "<span class='access_status access_denied'>Недоступно</span>";
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                break;
+            default:
+                echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
+                break;
+        }
+        foreach ($accessGroups as $accessGroup => $accessCodes) {
+            echo "<div class='access_group ".$accessGroup."'>";
+            switch ($accessGroup) {
+                case 'access_group_1':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    //echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_2':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_3':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div class='marginal_note'>"
+                        ."<span>Информация по проекту</span><br>"
+                        ."<a href='//libfl.ru/static/litres' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a><br/>"
+                        ."<a href='//libfl.ru/static/litres_how_to.pdf' target='_blank'>".$this->transEsc('access_instructionsForAccessing')."</a><br/>"
+                        ."<a href='//goo.gl/EYPcrC' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkLitres')."</a>"
+                        ."</div>";
+                    break;
+                case 'access_group_4':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    /*echo "<div class='marginal_note'>"
+                        ."<span>Информация по проекту</span><br>"
+                        ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPearson')."</a><br/>"
+                        ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkPearson')."</a>"
+                        ."</div>";*/
+                    break;
+                case 'access_group_5':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    /*echo "<div class='marginal_note'>"
+                        ."<span>Не знаете, как сделать заказ?</span><br>"
+                        ."<a href='//ebooks.libfl.ru/' target='_blank'>".$this->transEsc('access_descriptionPrintOnDemand')."</a>"
+                        ."</div>";*/
+                    break;
+                case 'access_group_6':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div class='marginal_note'>"
+                        ."<span>Не знаете, как сделать заказ?</span><br>"
+                        ."<a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>".$this->transEsc('access_instructionsForOrderingBooksAtLibrary')."</a>"
+                        ."</div>";
+                    break;
+                case 'access_group_7':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_8':
+                    echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_9':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_10':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_11':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_12':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                case 'access_group_13':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+                default:
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    break;
+            }
+            foreach ($accessCodes as $access => $exemplar) {
+                echo "<div id='group_".$access."' class='exemplar'>";
+                echo "<input type='hidden' name='exemplarGroupID' value='".implode('.', $exemplar['exemplar_id'])."' class='exemplarGroupID'>";
+                switch ($exemplar['exemplar_access_group']) {
+                    case '1':
+                        echo "<div class='clearfix'>"
+                            ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
+                            ."</div>";
+                        break;
+                    case '2':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        break;
+                    case '3':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%signin%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_sigIn')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
+                            ."</ol>";
+                        echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        break;
+                    case '4':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        //echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
+                        break;
+                    case '5':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_0')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
+                            ."</ol>";
+                        //echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
+                        break;
+                    case '6':
+                        switch ($exemplar['exemplar_access_code']) {
+                            case '1000':
+                                echo "<ol>";
+                                echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "</ol>";
+                                break;
+                            case '1005':
+                                echo "<ol>";
+                                echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "</ol>";
+                                break;
+                            default:
+                                echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
+                                break;
+                        }
+                        echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+                        break;
+                    case '7':
+                        echo "<ol>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                    echo "<tr>"
+                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                    case '8':
+                        echo "<ol>"
+                            //."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1').str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2037')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"
+                            ."</ol>";
+                        if (isset($exemplar['exemplar_hyperlink']))
+                            echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+                        break;
+                    case '9':
+                        switch ($exemplar['exemplar_access_code']) {
+                            case '1007':
+                                echo "<ol>"
+                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
+                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                                    ."</ol>";
+                                if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                                    $exemplarLocations = $exemplar['exemplar_location'];
+                                } else {
+                                    $exemplarLocations = ['access_unavailableLocation'];
+                                }
+                                if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                                } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                } else {
+                                    $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                                }
+                                $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                                if (is_array($locations) && !empty($locations)) {
+                                    echo "<table class='inventory'>";
+                                    echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                                    foreach ($locations as $location=>$inv_numbers) {
+                                        echo "<tr>"
+                                            ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
+                                            ."<td>";
+                                            foreach ($inv_numbers as $inv_number) {
+                                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                            }
+                                        echo "</td>"
+                                            ."</tr>";
+                                    }
+                                    echo "</table>";
+                                } else {
+                                    // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                }
+                                break;
+                            case '1014':
+                                echo "<ol>"
+                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
+                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                                    ."</ol>";
+                                if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                                    $exemplarLocations = $exemplar['exemplar_location'];
+                                } else {
+                                    $exemplarLocations = ['access_unavailableLocation'];
+                                }
+                                if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                                } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                } else {
+                                    $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                                }
+                                $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                                if (is_array($locations) && !empty($locations)) {
+                                    echo "<table class='inventory'>";
+                                    echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                                    foreach ($locations as $location=>$inv_numbers) {
+                                            echo "<tr>"
+                                            ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></span></td>"
+                                            ."<td>";
+                                            foreach ($inv_numbers as $inv_number) {
+                                                echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                            }
+                                        echo "</td>"
+                                            ."</tr>";
+                                    }
+                                    echo "</table>";
+                                } else {
+                                    // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                                }
+                                break;
+                            default:
+                                # code...
+                                break;
+                        }
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                    case '10':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                    case '11':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                    echo "<tr>"
+                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                    case '12':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                echo "<tr>"
+                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                    case '13':
+                        echo "<ol>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        echo "</div>";
+                        break;
+                    default:
+                        echo "<ol>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            ."</ol>";
+                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
+                            $exemplarLocations = $exemplar['exemplar_location'];
+                        } else {
+                            $exemplarLocations = ['access_unavailableLocation'];
+                        }
+                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
+                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
+                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
+                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                        } else {
+                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
+                        }
+                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        if (is_array($locations) && !empty($locations)) {
+                            echo "<table class='inventory'>";
+                            echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
+                            foreach ($locations as $location=>$inv_numbers) {
+                                echo "<tr>"
+                                    ."<td>".$this->transEsc('access_locationClarify')."</td>"
+                                    ."<td>";
+                                    foreach ($inv_numbers as $inv_number) {
+                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
+                                    }
+                                echo "</td>"
+                                    ."</tr>";
+                            }
+                            echo "</table>";
+                        } else {
+                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
+                        }
+                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
+                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        break;
+                }
+                echo "</div>";
+
+            }
+            echo "</div>";
+        }
+        echo "</div>";
+    }
+?>

@@ -74,14 +74,15 @@ VuFind.register('cart', function Cart() {
   }
 
   function updateCount() {
-    var items = VuFind.cart.getFullItems();
-    $('#cartItems strong').html(items.length);
-    if (items.length === parseInt(VuFind.translate('bookbagMax'), 10)) {
+    var items = VuFind.cart.getFullItems();    
+    $('#cartItems .quantity').html(items.length);
+    /*if (items.length === parseInt(VuFind.translate('bookbagMax'), 10)) {
       $('#cartItems .full').removeClass('hidden');
     } else {
       $('#cartItems .full').addClass('hidden');
-    }
+    }*/
     _refreshToggles();
+    console.log(items);
   }
 
   function addItem(id, _source) {

@@ -184,12 +184,6 @@ class StatusController extends AbstractBase
             case 'unavailable':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
-            case 'booked':
-                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
-                break;
-            case 'unknown':
-                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
-                break;
             default:
                 $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
                 break;
@@ -203,7 +197,7 @@ class StatusController extends AbstractBase
      * @return \Zend\Http\Response
      * @author Maksim Kuleba <maksim.kuleba@gmail.com>
      */
-    protected function encryptAjax()
+    /*protected function encryptAjax()
     {
         $this->disableSessionWrites();  // avoid session write timing bug
         $current_index = $this->params()->fromPost('current_index', $this->params()->fromQuery('current_index'));
@@ -232,7 +226,7 @@ class StatusController extends AbstractBase
     {
         $str = base64_decode(strrev(base64_decode(strrev($hash))));
         return $str;
-    }
+    }*/
 
     /**
      * Get Exemplar Statuses
@@ -259,10 +253,40 @@ class StatusController extends AbstractBase
             case 'unavailable':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
-            case 'booked':
+            default:
+                $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
+                break;
+        }
+        return $this->output($results, self::STATUS_OK);
+    }
+
+    /**
+     * Get Group Exemplar Statuses
+     *
+     * This is responsible for printing the holdings information for a
+     * collection of records in JSON format.
+     *
+     * @return \Zend\Http\Response
+     * @author Chris Delis <cedelis@uillinois.edu>
+     * @author Tuan Nguyen <tuan@yorku.ca>
+     */
+    protected function getGroupExemplarStatusesAjax()
+    {
+        $this->disableSessionWrites();  // avoid session write timing bug
+        $ILS = $this->getILS();
+        $exemplarGroupID = $this->params()->fromPost('group_id', $this->params()->fromQuery('group_id'));
+        $fund = $this->params()->fromPost('fund', $this->params()->fromQuery('fund'));
+        $getStatuses = $ILS->getGroupExemplarStatuses($exemplarGroupID, $fund);
+        //$results = json_decode($getStatuses->GetExemplarStatusResult);
+        $statuses = $getStatuses;//json_decode($getStatuses);
+        //$obj = (object)$statuses;
+        //$results = json_decode($getStatuses->GetExemplarStatusResult);//$obj;
+        $results = $getStatuses;
+        switch ($results->availability) {
+            case 'available':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
-            case 'unknown':
+            case 'unavailable':
                 $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
                 break;
             default:

@@ -1,7 +1,7 @@
 <?php
 /**
  * Access tab
- * 
+ *
  * @category VuFind
  * @package RecordTabs
  * @author Maksim Kuleba <maksim.a.kuleba@libfl.ru>
@@ -11,7 +11,7 @@ namespace VuFind\RecordTab;
 
 /**
  * Access tab
- * 
+ *
  * @category VuFind
  * @package RecordTabs
  * @author Maksim Kuleba <maksim.a.kuleba@libfl.ru>
@@ -19,12 +19,12 @@ namespace VuFind\RecordTab;
  */
 class Exemplar extends AbstractBase {
     /**
-     * 
+     *
      * @return string
      */
     public function getDescription()
     {
         return 'Exemplars';
     }
-    
+
 }

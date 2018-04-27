@@ -5,6 +5,9 @@
     if(empty($thisFacet['displayText'])) {
       $thisFacet['displayText'] = "-";
     }
+    if ($thisFacet['displayText'] == 4999) {
+        continue;
+    }
   ?>
   <? /* MORE link */ ?>
   <? if ($i == $this->facets_before_more): ?>
@@ -52,7 +55,7 @@
     <i class="fa <?=$thisFacet['isApplied'] ? 'fa-check-square-o' : 'fa-square-o' ?>" aria-hidden="true"></i>
   <? endif; ?>
 
-  <?=$this->escapeHtml($thisFacet['displayText'])?>
+  <?=str_replace('facet_','',$this->translate('facet_' . $this->escapeHtml($thisFacet['displayText'])))?>
 
   <? if (!$thisFacet['isApplied'] && $this->allowExclude): ?>
       </a>

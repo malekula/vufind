@@ -29,7 +29,7 @@
   if (isset($this->overrideTitle)) {
     $this->layout()->breadcrumbs .= '<li class="active">' . $this->escapeHtml($this->overrideTitle) . '</li>';
   } else {
-    $this->layout()->breadcrumbs .= '<li class="active">' . $this->transEsc('Search') . ': ' . $this->escapeHtml($lookfor) . '</li>';
+    $this->layout()->breadcrumbs .= '<li class="active">' . $this->transEsc('Search') .  $this->escapeHtml($lookfor) . '</li>';
   }
 
   // Enable cart if appropriate:
@@ -54,12 +54,10 @@
 
 <div class="search_tools">
     <? if (($recordTotal = $this->results->getResultTotal()) > 0): // only display these at very top if we have results ?>
-        <? foreach ($this->results->getRecommendations('top') as $current): ?>
-            <?=$this->recommend($current)?>
-        <? endforeach; ?>
     <? endif; ?>
     <? if ($recordTotal > 0): ?>
         <div class="search-controls">
+
             <?=$this->render('search/controls/limit.phtml')?>
             <?=$this->render('search/controls/sort.phtml')?>
             <?=$this->render('search/controls/view.phtml')?>
@@ -67,13 +65,19 @@
     <? endif; ?>
 </div>
 <div class="<?=$this->layoutClass('mainbody')?>">
+    <? if ($recordTotal > 0): // only display these at very top if we have results ?>
+        <? foreach ($this->results->getRecommendations('top') as $current): ?>
+            <?=$this->recommend($current)?>
+        <? endforeach; ?>
+    <? endif; ?>
 
   <?=$this->flashmessages()?>
-  <nav class="search-header hidden-print">
+  <nav class="search-header hidden-print">    
     <div class="search-stats">
       <? if ($recordTotal > 0): ?>
         <?=$this->context()->renderInContext('search/controls/showing.phtml', ['lookfor' => $lookfor, 'recordTotal' => $recordTotal]) ?>
       <? else: ?>
+        <img src='/themes/libfl/images/svg/sad-book.svg' class='sad-book'>
         <h2><?=$this->transEsc('nohit_heading')?></h2>
       <? endif; ?>
     </div>

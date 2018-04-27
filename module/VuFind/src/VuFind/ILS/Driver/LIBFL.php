@@ -86,13 +86,13 @@ class LIBFL extends AbstractBase
     public function getStatuses($bookID)
     {
         try {
-            $status = $this->soap->GetBookStatus(array("book"=>$bookID));
+            $status = $this->soap->GetBookStatus(array("id"=>$bookID));
         } catch (Exception $e) {
             $status = $e->getMessage();
         }
         return $status;
     }
-    
+
     /**
      * Get Exemplar Statuses
      *
@@ -111,6 +111,46 @@ class LIBFL extends AbstractBase
             $status = $e->getMessage();
         }
         return $status;
+    }
+
+    /**
+     * Get Group Exemplar Statuses
+     *
+     * This is responsible for retrieving the status information for a
+     * exemplars of records.
+     *
+     * @param array $ids The array of record ids to retrieve the status for
+     *
+     * @return mixed     An array of getStatus() return values on success.
+     */
+    public function getGroupExemplarStatuses($exemplarGroupID, $fund)
+    {
+        $exemplarIDs = explode('.', $exemplarGroupID);
+        $groupStatus = (object)[];
+        $statuses = array();
+        foreach ($exemplarIDs as $id=>$exemplarID) {
+            try {
+                $status = $this->soap->GetExemplarStatus(array("IDDATA"=>$exemplarID, "BaseName"=>strtoupper($fund)));
+                $result = json_decode($status->GetExemplarStatusResult);
+                if (!in_array($result->availability, $statuses)) {
+                    $statuses[] = $result->availability;
+                }
+                $exemplar_id = 'exemplar';
+                $groupStatus->$exemplar_id[$exemplarID] = $result->availability;
+            } catch (Exception $e) {
+                $status = $e->getMessage();
+            }
+        }
+        $groupStatus->id = $exemplarGroupID;
+        //$groupStatus->availability = (in_array('available', $statuses)) ? 'available' : (in_array('busy', $statuses)) ? 'busy' : 'unavailable';
+        if (in_array('available', $statuses)) {
+            $groupStatus->availability = 'available';
+        } else if (in_array('unavailable', $statuses)) {
+            $groupStatus->availability = 'unavailable';
+        } else {
+            $groupStatus->availability = 'unknown';
+        }
+        return $groupStatus;
     }
 
     /**
@@ -150,6 +190,3 @@ class LIBFL extends AbstractBase
         return [];
     }
 }
-
-
-

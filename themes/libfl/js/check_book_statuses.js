@@ -11,7 +11,7 @@ function getBookStatus(bookID) {
 }
 
 function checkBookStatuses() {
-    
+
     var container = $('body');
 
     var elements = {};

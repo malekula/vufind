@@ -7,7 +7,7 @@
     <div class="solr-facet-container">
       <? foreach ($this->facetList as $field => $list): ?>
         <div class="solr-adv-facet <?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>">
-          <label for="limit_<?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>"><?=$this->transEsc($list['label'])?>:</label>
+          <label for="limit_<?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>"><?=$this->transEsc($list['label'])?></label>
           <select class="form-control" id="limit_<?=$this->escapeHtmlAttr(str_replace(' ', '', $field))?>" name="filter[]" multiple="multiple" size="10">
             <? if (is_array($this->hierarchicalFacets) && in_array($field, $this->hierarchicalFacets)): ?>
               <? foreach ($list['list'] as $value): ?>
@@ -29,7 +29,9 @@
               ?>
               <? foreach ($sorted as $i => $display): ?>
                 <? $value = $list['list'][$i]; ?>
-                <option value="<?=$this->escapeHtmlAttr(($value['operator'] == 'OR' ? '~' : '') . $field . ':"' . $value['value'] . '"')?>"<?=(isset($value['selected']) && $value['selected'])?' selected="selected"':''?>><?=$this->escapeHtml($display)?></option>
+                <? if ($display !== '4999'): ?>
+                    <option value="<?=$this->escapeHtmlAttr(($value['operator'] == 'OR' ? '~' : '') . $field . ':"' . $value['value'] . '"')?>"<?=(isset($value['selected']) && $value['selected'])?' selected="selected"':''?>><?=$this->escapeHtml($this->translate($display))?></option>
+                <? endif; ?>
               <? endforeach; ?>
             <? endif; ?>
           </select>
