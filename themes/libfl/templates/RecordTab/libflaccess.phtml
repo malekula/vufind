@@ -357,7 +357,8 @@
                         break;
                     case '12':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];

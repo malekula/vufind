@@ -118,7 +118,7 @@
                 echo "<a class='digitizingBook' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true)))."' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";
                 echo "<a class='digitizingBook-disabled' style='color:grey; display:none;'>".$this->transEsc('digitizingBook')."</a>";
             } else {
-                echo "<a class='digitizingBook-disabled' style='color:grey;'>".$this->transEsc('digitizingBook')."</a>";
+                echo "<span class='digitizingBook-disabled' style='color:#787878;font-size: 12px;font-weight: bold;text-transform: uppercase;'>".$this->transEsc('digitizingBook')."</span>";
             }
         ?>
       </div>
