@@ -120,7 +120,7 @@
             } else if ($fund == 5001) {
                 $baza = 2;
             }
-            if (in_array($fund, array('5000','5001','5003','5004','5005'))) {
+            if (in_array($fund, array('5000','5001'))) {
                 echo "<a class='digitizingBook' href='//opac.libfl.ru/TurnDigBooks/default.aspx?pin=".$pin."&baza=".$baza."' target='_blank' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";
                 echo "<a class='digitizingBook-disabled' style='color:grey; display:none;'>".$this->transEsc('digitizingBook')."</a>";
             } else {
