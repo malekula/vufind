@@ -111,7 +111,16 @@
       </div>
       <div class='right'>
         <span>Сервис</span>
-        <?php echo "<a data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true)))."' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";?>
+        <?php
+            $fund = $this->driver->getFund()[0];
+            //echo $methodOfAccess = $this->driver->getMethodOfAccess()[0];
+            if (in_array($fund, array('5000','5001','5003','5004','5005'))) {
+                echo "<a class='digitizingBook' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true)))."' rel='nofollow'>".$this->transEsc('digitizingBook')."</a>";
+                echo "<a class='digitizingBook-disabled' style='color:grey; display:none;'>".$this->transEsc('digitizingBook')."</a>";
+            } else {
+                echo "<a class='digitizingBook-disabled' style='color:grey;'>".$this->transEsc('digitizingBook')."</a>";
+            }
+        ?>
       </div>
     </div>
 
