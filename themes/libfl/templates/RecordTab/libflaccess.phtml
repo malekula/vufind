@@ -428,6 +428,7 @@
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                             foreach ($locations as $location=>$inv_numbers) {
                                 echo "<tr>"
+                                    ."<td>".$this->transEsc('access_locationClarify')."</td>"
                                     ."<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
