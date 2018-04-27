@@ -165,13 +165,13 @@
                             case '1000':
                                 echo "<ol>";
                                 echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
-                                echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                                 echo "</ol>";
                                 break;
                             case '1005':
                                 echo "<ol>";
                                 echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
-                                echo "<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                                 echo "</ol>";
                                 break;
                             default:
@@ -202,7 +202,7 @@
                             echo "<table class='inventory'>";
                             foreach ($locations as $location=>$inv_numbers) {
                                     echo "<tr>"
-                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td><span><strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></strong></span></td>"
                                     ."<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -218,38 +218,10 @@
                         break;
                     case '8':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
-                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+                            //."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1').str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2037')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
+                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"
                             ."</ol>";
-                        if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
-                            $exemplarLocations = $exemplar['exemplar_location'];
-                        } else {
-                            $exemplarLocations = ['access_unavailableLocation'];
-                        }
-                        if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
-                            $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
-                        } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
-                        } else {
-                            $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
-                        }
-                        $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
-                        if (is_array($locations) && !empty($locations)) {
-                            echo "<table class='inventory'>";
-                            foreach ($locations as $location=>$inv_numbers) {
-                                    echo "<tr>"
-                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
-                                    ."<td>";
-                                    foreach ($inv_numbers as $inv_number) {
-                                        echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
-                                    }
-                                echo "</td>"
-                                    ."</tr>";
-                            }
-                            echo "</table>";
-                        } else {
-                            // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
-                        }
                         if (isset($exemplar['exemplar_hyperlink']))
                             echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
@@ -277,7 +249,7 @@
                                     echo "<table class='inventory'>";
                                     foreach ($locations as $location=>$inv_numbers) {
                                         echo "<tr>"
-                                            ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                            ."<td><span><strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></strong></span></td>"
                                             ."<td>";
                                             foreach ($inv_numbers as $inv_number) {
                                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -312,7 +284,7 @@
                                     echo "<table class='inventory'>";
                                     foreach ($locations as $location=>$inv_numbers) {
                                             echo "<tr>"
-                                            ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                            ."<td><span><strong>".$this->transEsc('access_staticLocation_2007')."</strong></span></td>"
                                             ."<td>";
                                             foreach ($inv_numbers as $inv_number) {
                                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -334,7 +306,7 @@
                         break;
                     case '10':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
@@ -342,7 +314,7 @@
                         break;
                     case '11':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
@@ -362,7 +334,7 @@
                             echo "<table class='inventory'>";
                             foreach ($locations as $location=>$inv_numbers) {
                                     echo "<tr>"
-                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td><span><strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></strong></span></td>"
                                     ."<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -379,7 +351,7 @@
                         break;
                     case '12':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc($exemplar['exemplar_location'])."</strong>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a></strong>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
                             ."</ol>";
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
@@ -398,7 +370,7 @@
                             echo "<table class='inventory'>";
                             foreach ($locations as $location=>$inv_numbers) {
                                 echo "<tr>"
-                                    ."<td><span><strong>".$this->transEsc($location)."</strong></span></td>"
+                                    ."<td><span><strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></strong></span></td>"
                                     ."<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
@@ -414,7 +386,7 @@
                         break;
                     case '13':
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
@@ -423,7 +395,7 @@
                         break;
                     default:
                         echo "<ol>"
-                            ."<li>".str_replace("%%exemplar_location%%", "<strong>".$this->transEsc('access_staticLocation_2007')."</strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
+                            ."<li>".str_replace("%%exemplar_location%%", "<strong><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></strong>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {

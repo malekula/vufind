@@ -142,21 +142,21 @@
         }
     });
 
-    if (!exemplar.ForAllReader) {
+    if (!exemplar.ForAllReader) { // Если книга выдается на 30 дней
         var user_loggedIn = getCookie('personal_reader_login');
-        if (exemplar.Status === 'available') {
+        if (exemplar.Status === 'available') { // Если книга свободна
             //console.log('Книга доступна на 30 дней и никем не занята. Делаем редирект на заказ.');
-                var bookPIN = window.location.search.replace('?','').split('&')[0].split('=')[1].split('_')[1];
-                window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1';
-        } else {
-            //console.log('Книга занята. Идентифицируем пользователя.');
-            if (user_loggedIn && user_loggedIn !== exemplar.IDReaderTooked) {
-                //console.log('Если пользователь авторизован, но книга занята другим юзером, сообщаем об этом!');
-                //alert('Книга занята другим пользователем. Книга освободиться ' + exemplar.DateReturn);
-                window.location.href = '//libfl.ru';
-            } else {
-                //console.log('Пользователь не авторизован. Перенаправляем его на страницу авторизации...');
-                window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1';
+            var bookPIN = window.location.search.replace('?','').split('&')[0].split('=')[1].split('_')[1]; // Получаем PIN книги
+            window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1'; // Направляем юзера на страницу с информацией о 30-дневном доступе
+        } else { // Если книга уже "на руках"
+            if (user_loggedIn && ) { // Проверяем авторизован ли пользователь?
+                if (user_loggedIn !== exemplar.IDReaderTooked) { // Если книга закреплена за другим пользователем - сообщаем об этом
+                    console.log('Книгу читает другой пользователь!');
+                    //window.location.href = '//libfl.ru'; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
+                }
+            } else { // Если пользователь не авторизован - отправляем его на авторизацию
+                console.log('Пользователь не авторизован. Перенаправляем его на страницу авторизации...');
+                //window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1';
             }
         }
         //console.log(getCookie('personal_reader_login'));
