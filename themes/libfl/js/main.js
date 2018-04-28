@@ -72,6 +72,8 @@ $(document).ready(function() {
         var placeholders = ['Charlotte Bronte', 'Пётр Великий', 'Kaze no uta o kike', 'Атлант расправил плечи'];
         $("#search").attr('placeholder', placeholders[Math.floor(Math.random()*placeholders.length)]);
     }
+    changeSearchPlaceholder();
+    
     $("#search").keypress(function(e){
         var q = $(this).val();
         if (q.length && e.which==13) {

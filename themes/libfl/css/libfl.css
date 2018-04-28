@@ -5261,7 +5261,7 @@ img.news_right_image {
         margin-top: 30px;
     }
     .adv-submit {
-        margin: 60px 0 20px 0;
+        margin: 60px 0 40px !important;
     }
     .adv-submit .btn-primary {
         width: 100%;
