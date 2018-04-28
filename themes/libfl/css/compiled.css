@@ -10837,14 +10837,6 @@ table.inventory {
         width: 6%;
         text-align: center
     }
-    select#limit_MethodOfAccess,
-    select#limit_fund,
-    select#limit_Location,
-    select#limit_language,
-    select#limit_format,
-    select#limit_topic_facet {
-        height: 170px;
-    }
 }
 
 .primo-adv-search .search {
@@ -15008,6 +15000,16 @@ select#limit_topic_facet {
 }
 .right {
     float: right;
+}
+@media (min-width:768px) {
+    select#limit_MethodOfAccess,
+    select#limit_fund,
+    select#limit_Location,
+    select#limit_language,
+    select#limit_format,
+    select#limit_topic_facet {
+        height: auto !important;
+    }
 }
 
 

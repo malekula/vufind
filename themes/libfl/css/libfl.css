@@ -5227,6 +5227,14 @@ img.news_right_image {
         padding-top: 0;
         padding-bottom: 20px;
     }    
+    select#limit_MethodOfAccess,
+    select#limit_fund,
+    select#limit_Location,
+    select#limit_language,
+    select#limit_format,
+    select#limit_topic_facet {
+        height: auto !important;
+    }
     #cartSummary {
         float: none;
         text-align: center;
