@@ -3,7 +3,6 @@ $(document).ready(function() {
         var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '19:00', '19:00'];
         $('#workday_end').text(time[moment().day()]);
     })();
-
     /* Placeholder */
 
     function changeCatalogueSearchPlaceholder() {
@@ -18,6 +17,19 @@ $(document).ready(function() {
             $("#index_search_form").submit();
         }
     })*/
+
+    function resizeSelectForIphone() {
+        if(navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
+            $('#limit_MethodOfAccess').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_fund').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_Location').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_language').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_format').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_topic_facet').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+        }
+        console.log('It works!');
+    }
+    resizeSelectForIphone();
 
     /* Random quote */
 
