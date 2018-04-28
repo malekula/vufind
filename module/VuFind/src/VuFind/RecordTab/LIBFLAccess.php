@@ -83,7 +83,7 @@ class LIBFLAccess extends AbstractBase {
                         $this->access_group = '5_access_group_'.$exemplar->exemplar_access_group;
                         break;
                     case '6':
-                        $this->access_group = '8_access_group_'.$exemplar->exemplar_access_group;
+                        $this->access_group = '14_access_group_'.$exemplar->exemplar_access_group;
                         break;
                     case '7':
                         $this->access_group = '9_access_group_'.$exemplar->exemplar_access_group;
@@ -106,8 +106,11 @@ class LIBFLAccess extends AbstractBase {
                     case '13':
                         $this->access_group = '13_access_group_'.$exemplar->exemplar_access_group;
                         break;
+                    case '14':
+                        $this->access_group = '8_access_group_'.$exemplar->exemplar_access_group;
+                        break;
                     default:
-                        $this->access_group = '14_access_group_'.$exemplar->exemplar_access_group;
+                        //$this->access_group = '14_access_group_'.$exemplar->exemplar_access_group;
                         break;
                 }
 
@@ -134,7 +137,7 @@ class LIBFLAccess extends AbstractBase {
                         $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_hyperlink_newviewer'] = $exemplar->exemplar_hyperlink_newviewer;
                 } else {
                     if (($accessMethodCode == 4000 && in_array($exemplar->exemplar_access_group, array('6','8','9','10')) && in_array($exemplar->exemplar_access, array('1003','1005','1007','1011','1012','1014')))
-                        OR ($accessMethodCode == 4001 && in_array($exemplar->exemplar_access_group, array('6','7')) && in_array($exemplar->exemplar_access, array('1000','1006','1017')))
+                        OR ($accessMethodCode == 4001 && in_array($exemplar->exemplar_access_group, array('14','7')) && in_array($exemplar->exemplar_access, array('1000','1006','1017')))
                         OR ($accessMethodCode == 4002 && in_array($exemplar->exemplar_access_group, array('1','2','3','4')) && in_array($exemplar->exemplar_access, array('1001','1002','1004','1008')))
                         OR ($accessMethodCode == 4003 && in_array($exemplar->exemplar_access_group, array('5')) && in_array($exemplar->exemplar_access, array('1009')))
                         OR ($accessMethodCode == 4005 && in_array($exemplar->exemplar_access_group, array('11','12','13','99')) && in_array($exemplar->exemplar_access, array('1010','1013','1016','1999'))))
