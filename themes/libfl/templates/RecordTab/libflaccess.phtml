@@ -199,7 +199,7 @@
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
