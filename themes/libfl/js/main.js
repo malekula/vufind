@@ -333,7 +333,7 @@ $(document).ready(function() {
             }
         });
     }
-    var Host = new RegExp(window.location.hostname, 'g');
+    /*var Host = new RegExp(window.location.hostname, 'g');
     $('a').each(function(i,e) {
         var href = $(e).attr('href');
         var is_url = /http/.test(href);
@@ -341,7 +341,7 @@ $(document).ready(function() {
         if (is_url && !is_inner) {
             $(e).attr('target', '_blank');
         }
-    });
+    });*/
 
 
     var pins_html = '';
