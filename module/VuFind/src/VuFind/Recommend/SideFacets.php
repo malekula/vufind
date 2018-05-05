@@ -71,6 +71,13 @@ class SideFacets extends AbstractFacets
     protected $numericRangeFacets = [];
 
     /**
+     * Arrival range facet configuration
+     *
+     * @var array
+     */
+    protected $arrivalRangeFacets = [];
+
+    /**
      * Main facet configuration
      *
      * @var array
@@ -181,6 +188,10 @@ class SideFacets extends AbstractFacets
         if (isset($config->SpecialFacets->numericRange)) {
             $this->numericRangeFacets
                 = $config->SpecialFacets->numericRange->toArray();
+        }
+        if (isset($config->SpecialFacets->arrivalRange)) {
+            $this->arrivalRangeFacets
+                = $config->SpecialFacets->arrivalRange->toArray();
         }
 
         // Checkbox facets:
@@ -321,6 +332,17 @@ class SideFacets extends AbstractFacets
     }
 
     /**
+     * Return arrival range facet information in a format processed for use in the
+     * view.
+     *
+     * @return array Array of from/to value arrays keyed by field.
+     */
+    public function getArrivalRangeFacets()
+    {
+        return $this->getRangeFacets('arrivalRangeFacets');
+    }
+
+    /**
      * Get combined range details.
      *
      * @return array
@@ -331,7 +353,8 @@ class SideFacets extends AbstractFacets
             'date' => $this->getDateFacets(),
             'fulldate' => $this->getFullDateFacets(),
             'generic' => $this->getGenericRangeFacets(),
-            'numeric' => $this->getNumericRangeFacets()
+            'numeric' => $this->getNumericRangeFacets(),
+            'arrival' => $this->getArrivalRangeFacets()
         ];
         $processed = [];
         foreach ($raw as $type => $values) {

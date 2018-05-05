@@ -1135,6 +1135,7 @@ class Params
         $this->initFullDateFilters($request);
         $this->initGenericRangeFilters($request);
         $this->initNumericRangeFilters($request);
+        $this->initArrivalRangeFilters($request);
     }
 
     /**
@@ -1169,6 +1170,21 @@ class Params
      * @return string      Formatted date.
      */
     protected function formatDateForFullDateRange($date)
+    {
+        // Make sure date is valid; default to wildcard otherwise:
+        $date = SolrUtils::sanitizeDate($date);
+        return $date === null ? '*' : $date;
+    }
+
+    /**
+     * Support method for initArrivalRangeFilters() -- normalize a date for use in a
+     * year/month/day date range.
+     *
+     * @param string $date Value to check for valid date.
+     *
+     * @return string      Formatted date.
+     */
+    protected function formatArrivalDateRange($date)
     {
         // Make sure date is valid; default to wildcard otherwise:
         $date = SolrUtils::sanitizeDate($date);
@@ -1328,6 +1344,28 @@ class Params
     }
 
     /**
+     * Support method for initFullDateFilters() -- build a filter query based on a
+     * range of dates.
+     *
+     * @param string $field field to use for filtering.
+     * @param string $from  year for start of range.
+     * @param string $to    year for end of range.
+     *
+     * @return string       filter query.
+     */
+    protected function buildArrivalRangeFilter($field, $from, $to)
+    {
+        // Make sure that $to is less than $from:
+        if ($to != '*' && $from != '*' && strtotime($to) < strtotime($from)) {
+            $tmp = $to;
+            $to = $from;
+            $from = $tmp;
+        }
+
+        return $this->buildGenericRangeFilter($field, $from, $to);
+    }
+
+    /**
      * Support method for initFilters() -- initialize year-based date filters.
      * Factored out as a separate method so that it can be more easily overridden
      * by child classes.
@@ -1378,6 +1416,24 @@ class Params
         return $this->initGenericRangeFilters(
             $request, 'numericrange', [$this, 'formatValueForNumericRange'],
             [$this, 'buildNumericRangeFilter']
+        );
+    }
+
+    /**
+     * Support method for initFilters() -- initialize arrival range filters. Factored
+     * out as a separate method so that it can be more easily overridden by child
+     * classes.
+     *
+     * @param \Zend\StdLib\Parameters $request Parameter object representing user
+     * request.
+     *
+     * @return void
+     */
+    protected function initArrivalRangeFilters($request)
+    {
+        return $this->initGenericRangeFilters(
+            $request, 'arrivalrange', [$this, 'formatArrivalDateRange'],
+            [$this, 'buildArrivalRangeFilter']
         );
     }
 

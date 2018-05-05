@@ -2198,6 +2198,11 @@ class SolrDefault extends AbstractBase
         return isset($this->fields['format']) ? $this->fields['format'] : [];
     }
 
+    public function getNewArrivals()
+    {
+        return isset($this->fields['NewArrivals']) ? $this->fields['NewArrivals'] : [];
+    }
+
     public function supportsAjaxStatus()
     {
         return true;

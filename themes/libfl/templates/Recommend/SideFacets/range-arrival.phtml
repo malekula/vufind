@@ -1,0 +1,62 @@
+<div class="facet_arrivals">
+    <form name="<?=$this->escapeHtmlAttr($this->title)?>Filter" id="<?=$this->escapeHtmlAttr($this->title)?>Filter">
+        <?=$results->getUrlQuery()->asHiddenFields(['page' => "/./", 'filter' => "/^{$this->title}:.*/"])?>
+        <input type="hidden" name="<?=$this->escapeHtmlAttr($this->facet['type'])?>range[]" value="<?=$this->escapeHtmlAttr($this->title)?>"/>
+
+        <!--<div style="padding: 0px 0px 6px"><span class="week"><?=$this->transEsc('arrivals_week')?></span></div>
+        <div style="padding: 0px 0px 6px"><span class="month"><?=$this->transEsc('arrivals_month')?></span></div>
+        <div style="padding: 0px 0px 6px"><span class="quarter"><?=$this->transEsc('arrivals_quarter')?></span></div>
+        <div style="padding: 0px 0px 6px"><span class="year"><?=$this->transEsc('arrivals_year')?></span></div>-->
+        <div class="facet"><a class="text week"><?=$this->transEsc('arrivals_week')?></a></div>
+        <div class="facet"><a class="text month"><?=$this->transEsc('arrivals_month')?></a></div>
+        <div class="facet"><a class="text quarter"><?=$this->transEsc('arrivals_quarter')?></a></div>
+        <div class="facet"><a class="text year"><?=$this->transEsc('arrivals_year')?></a></div>
+
+        <div class="date-fields" style="display:none">
+            <div class="date-from">
+                <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>from" id="<?=$this->escapeHtmlAttr($this->title)?>from" value="<?=isset($this->facet['values'][0])?$this->escapeHtmlAttr($this->facet['values'][0]):''?>" />
+            </div>
+            <span class="datepicker_mdash"></span>
+            <div class="date-to">
+                <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" />
+            </div>
+            <input class="btn btn-default" type="submit" value="Принять"/>
+        </div>
+    </form>
+</div>
+<?php
+$script_arrival = <<<JS
+$(document).ready(function() {
+    var today = new Date;
+    var week = new Date;
+    var month = new Date;
+    var quarter = new Date;
+    var year = new Date;
+    $('.week').click(function(){
+        week.setDate(today.getDate()-7);
+        $('#NewArrivalsto').val(today.toISOString());
+        $('#NewArrivalsfrom').val(week.toISOString());
+        $('#NewArrivalsFilter').submit();
+    });
+    $('.month').click(function(){
+        month.setDate(today.getDate()-31);
+        $('#NewArrivalsto').val(today.toISOString());
+        $('#NewArrivalsfrom').val(month.toISOString());
+        $('#NewArrivalsFilter').submit();
+    });
+    $('.quarter').click(function(){
+        quarter.setDate(today.getDate()-93);
+        $('#NewArrivalsto').val(today.toISOString());
+        $('#NewArrivalsfrom').val(quarter.toISOString());
+        $('#NewArrivalsFilter').submit();
+    });
+    $('.year').click(function(){
+        year.setDate(today.getDate()-365);
+        $('#NewArrivalsto').val(today.toISOString());
+        $('#NewArrivalsfrom').val(year.toISOString());
+        $('#NewArrivalsFilter').submit();
+    });
+});
+JS;
+echo $this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, $script_arrival, 'SET');
+?>
