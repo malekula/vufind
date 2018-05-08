@@ -17,18 +17,21 @@
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
     $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
-    /*echo '<pre>';
+    echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';*/
+    echo '</pre>';
 
-    /*echo '<pre>';
+    echo '<pre>';
     print_r($accessMethods);
-    echo '</pre>';*/
-
+    echo '</pre>';
+    $sendAccessData = array(
+        'title'     => $this->driver->getTitle(),
+        'author'    => $this->driver->getAuthor(),
+        'url'       => $this->serverUrl(true),
+    );
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
         echo "<div class='".$accessMethod."'>";
         switch ($accessMethod) {
-            // Книга может быть доступна только в помещении или для выдачи на дом (в этом случае доступ не уточняется)
             case 'access_remoteAccess':
                 echo "<span class='access_status access_accept'>Доступно</span>";
                 echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
@@ -232,7 +235,8 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        $accessDescription = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                        echo "--><a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('title'=>$this->driver->getTitle(),'author'=>$this->driver->getAuthor(),'accessMethod'=>$this->translate($accessMethod),'accessGroup'=>$this->translate($accessGroup),'accessDescription'=>$accessDescription,'url'=>$this->serverUrl(true),'location'=>$locations))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '8':
                         echo "<ol>"
@@ -258,7 +262,7 @@
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
@@ -298,7 +302,7 @@
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
@@ -353,7 +357,7 @@
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
@@ -395,11 +399,12 @@
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+                        print_r($locations);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
@@ -465,7 +470,7 @@
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }

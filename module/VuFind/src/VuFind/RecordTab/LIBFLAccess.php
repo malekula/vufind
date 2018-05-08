@@ -140,7 +140,7 @@ class LIBFLAccess extends AbstractBase {
                         OR ($accessMethodCode == 4001 && in_array($exemplar->exemplar_access_group, array('14','7')) && in_array($exemplar->exemplar_access, array('1000','1006','1017')))
                         OR ($accessMethodCode == 4002 && in_array($exemplar->exemplar_access_group, array('1','2','3','4')) && in_array($exemplar->exemplar_access, array('1001','1002','1004','1008')))
                         OR ($accessMethodCode == 4003 && in_array($exemplar->exemplar_access_group, array('5')) && in_array($exemplar->exemplar_access, array('1009')))
-                        OR ($accessMethodCode == 4005 && in_array($exemplar->exemplar_access_group, array('11','12','13','99')) && in_array($exemplar->exemplar_access, array('1010','1013','1016','1999'))))
+                        OR ($accessMethodCode == 4005 && in_array($exemplar->exemplar_access_group, array('11','12','99')) && in_array($exemplar->exemplar_access, array('1010','1013','1016','1999'))))
                     {
                         if (isset($exemplar->exemplar_id))
                             $this->accessExemplars[$this->access][$this->access_group][$exemplar->exemplar_access]['exemplar_id'] = [$num=>$exemplar->exemplar_id];
