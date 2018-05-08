@@ -17,13 +17,13 @@
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
     $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($sortExemplars);
-    echo '</pre>';
+    echo '</pre>';*/
 
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($accessMethods);
-    echo '</pre>';
+    echo '</pre>';*/
     $sendAccessData = array(
         'title'     => $this->driver->getTitle(),
         'author'    => $this->driver->getAuthor(),
@@ -404,7 +404,6 @@
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
-                        print_r($locations);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
