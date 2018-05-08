@@ -10,6 +10,7 @@
         <div class="facet"><a class="text week"><?=$this->transEsc('arrivals_week')?></a></div>
         <div class="facet"><a class="text month"><?=$this->transEsc('arrivals_month')?></a></div>
         <div class="facet"><a class="text quarter"><?=$this->transEsc('arrivals_quarter')?></a></div>
+        <div class="facet"><a class="text halfyear"><?=$this->transEsc('arrivals_halfyear')?></a></div>
         <div class="facet"><a class="text year"><?=$this->transEsc('arrivals_year')?></a></div>
 
         <div class="date-fields" style="display:none">
@@ -46,6 +47,12 @@ $(document).ready(function() {
     });
     $('.quarter').click(function(){
         quarter.setDate(today.getDate()-93);
+        $('#NewArrivalsto').val(today.toISOString());
+        $('#NewArrivalsfrom').val(quarter.toISOString());
+        $('#NewArrivalsFilter').submit();
+    });
+    $('.halfyear').click(function(){
+        quarter.setDate(today.getDate()-183);
         $('#NewArrivalsto').val(today.toISOString());
         $('#NewArrivalsfrom').val(quarter.toISOString());
         $('#NewArrivalsFilter').submit();
