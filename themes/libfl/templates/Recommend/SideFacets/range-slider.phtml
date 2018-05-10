@@ -8,11 +8,11 @@
       <div class="date-fields">
           <? $extraInputAttribs = ($this->facet['type'] == 'date') ? 'maxlength="4" ' : ''; ?>
           <div class="date-from">
-              <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>from" id="<?=$this->escapeHtmlAttr($this->title)?>from" value="<?=isset($this->facet['values'][0])?$this->escapeHtmlAttr($this->facet['values'][0]):''?>" <?=$extraInputAttribs?>/>
+              <input type="text" placeholder="1400" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>from" id="<?=$this->escapeHtmlAttr($this->title)?>from" value="<?=isset($this->facet['values'][0])?$this->escapeHtmlAttr($this->facet['values'][0]):''?>" <?=$extraInputAttribs?>/>
           </div>
           <span class="datepicker_mdash"></span>
           <div class="date-to">
-              <input type="text" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" <?=$extraInputAttribs?>/>
+              <input type="text" placeholder="2019" class="form-control" name="<?=$this->escapeHtmlAttr($this->title)?>to" id="<?=$this->escapeHtmlAttr($this->title)?>to" value="<?=isset($this->facet['values'][1])?$this->escapeHtmlAttr($this->facet['values'][1]):''?>" <?=$extraInputAttribs?>/>
           </div>
           <input class="btn btn-default" type="submit" value="Принять"/>
       </div>
