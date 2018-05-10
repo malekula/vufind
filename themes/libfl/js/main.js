@@ -1,6 +1,6 @@
 $(document).ready(function() {
     (function setWorkdayEnd() {
-        var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '19:00', '19:00'];
+        var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '21:00', '19:00'];
         $('#workday_end').text(time[moment().day()]);
     })();
     /* Placeholder */
@@ -17,6 +17,7 @@ $(document).ready(function() {
             $("#index_search_form").submit();
         }
     })*/
+
 
     function resizeSelectForIphone() {
         if(navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
@@ -241,12 +242,8 @@ $(document).ready(function() {
         }
     });
 
-    /*$('.input-daterange').datepicker({
-        format: "dd.mm.yy",
-        weekStart: 1,
-        language: "ru"
-    });
-    $('#events_date_start').datepicker({
+
+    $('#datetimepicker').datepicker({
         format: "dd.mm.yy",
         weekStart: 1,
         language: "ru",
@@ -256,12 +253,12 @@ $(document).ready(function() {
         if ($(this).val()) {
             $('#show_more_btn').data('s', 0);
             $('#picker-container').hide();
-            $('.events_today_btn').removeClass('active');
             $('.events_cal_btn').addClass('active');
             $('.clear_events_date').show();
             $('.datepicker.dropdown-menu').hide();
         }
-    });*/
+    });
+
     $('.events_cal_btn').on('click', function(e) {
         if ($(e.target).hasClass('clear_events_date')) return;
         $('#picker-container').show();

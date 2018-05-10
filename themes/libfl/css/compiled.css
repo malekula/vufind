@@ -14638,8 +14638,8 @@ input#publishDateto {
 .pagination>li>a.page-next {
     background: url("../images/new/page_next.png") center no-repeat;
     background-size: contain;
-    width: 41px;
-    height: 41px;
+    width: 40px;
+    height: 40px;
     margin: 5px 0 0 10px;
 }
 .pagination>li>a.page-prev {
@@ -14795,11 +14795,13 @@ i.fa-add {
 }
 .facet.narrow-toggle {
     padding-left: 20px;
-    background: url('../images/new/plus.png') no-repeat left center;
+    background: url('../images/new/plus.svg') no-repeat left center;
+    background-size: 12px;
     margin-left: 10px;
 }
-.facet.narrow-toggle.hidden {
-    background: url('../images/new/minus.png') no-repeat left center;
+.facet.narrow-toggle.degrade {
+    background: url('../images/new/minus.svg') no-repeat left center;
+    background-size: 12px;
 }
 i.fa-sign-in {
     display: none;
