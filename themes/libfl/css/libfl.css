@@ -5297,7 +5297,22 @@ img.news_right_image {
         font-size: 21px;
     }
     .mainbody.left {
-        padding: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 40px;
+    }
+    .pagination {
+        margin-top: 40px;
+    }
+    .pagination>li>a, .pagination>li>span {
+        width: 43px;
+        height: 43px;
+        font-size: 16px;
+        line-height: 43px;
+    }
+    .pagination>li>a.page-next,
+    .pagination>li>a.page-prev {
+        margin-top: 0;
     }
     .result {
         margin-left: 0;

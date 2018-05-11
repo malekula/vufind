@@ -10793,9 +10793,6 @@ table.inventory {
     padding: 8px;
     /*max-width: 100%;*/
 }
-.inventory td:nth-of-type(odd) {
-    width: 50%;
-}
 .inventory th {
     font-size: 12px;
     font-weight: 300;
@@ -11530,7 +11527,8 @@ body.rtl .modal-loading {
         width: 75vw;
         padding-left: 0;
         padding-right: 0;
-        overflow-y: auto
+        overflow-y: auto;
+        padding-top: 85px;
     }
     body.offcanvas .sidebar h4 {
         padding-left: 5px
@@ -11586,7 +11584,7 @@ body.rtl .modal-loading {
         margin-right: 75vw
     }
     body.offcanvas.offcanvas-right.active .sidebar {
-        top: 85px;
+        top: 0;
         right: 0;
     }
     body.offcanvas.offcanvas-right.active .offcanvas-overlay {
