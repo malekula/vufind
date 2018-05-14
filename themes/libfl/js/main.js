@@ -1,9 +1,8 @@
 $(document).ready(function() {
     (function setWorkdayEnd() {
-        var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '19:00', '19:00'];
+        var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '21:00', '19:00'];
         $('#workday_end').text(time[moment().day()]);
     })();
-
     /* Placeholder */
 
     function changeCatalogueSearchPlaceholder() {
@@ -18,6 +17,20 @@ $(document).ready(function() {
             $("#index_search_form").submit();
         }
     })*/
+
+
+    function resizeSelectForIphone() {
+        if(navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
+            $('#limit_MethodOfAccess').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_fund').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_Location').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_language').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_format').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+            $('#limit_topic_facet').prepend('<option value="" selected="selected" disabled="disabled">Не выбрано</option>');
+        }
+        console.log('It works!');
+    }
+    resizeSelectForIphone();
 
     /* Random quote */
 
@@ -72,6 +85,8 @@ $(document).ready(function() {
         var placeholders = ['Charlotte Bronte', 'Пётр Великий', 'Kaze no uta o kike', 'Атлант расправил плечи'];
         $("#search").attr('placeholder', placeholders[Math.floor(Math.random()*placeholders.length)]);
     }
+    changeSearchPlaceholder();
+    
     $("#search").keypress(function(e){
         var q = $(this).val();
         if (q.length && e.which==13) {
@@ -227,12 +242,8 @@ $(document).ready(function() {
         }
     });
 
-    /*$('.input-daterange').datepicker({
-        format: "dd.mm.yy",
-        weekStart: 1,
-        language: "ru"
-    });
-    $('#events_date_start').datepicker({
+
+    $('#datetimepicker').datepicker({
         format: "dd.mm.yy",
         weekStart: 1,
         language: "ru",
@@ -242,12 +253,12 @@ $(document).ready(function() {
         if ($(this).val()) {
             $('#show_more_btn').data('s', 0);
             $('#picker-container').hide();
-            $('.events_today_btn').removeClass('active');
             $('.events_cal_btn').addClass('active');
             $('.clear_events_date').show();
             $('.datepicker.dropdown-menu').hide();
         }
-    });*/
+    });
+
     $('.events_cal_btn').on('click', function(e) {
         if ($(e.target).hasClass('clear_events_date')) return;
         $('#picker-container').show();
@@ -319,7 +330,7 @@ $(document).ready(function() {
             }
         });
     }
-    var Host = new RegExp(window.location.hostname, 'g');
+    /*var Host = new RegExp(window.location.hostname, 'g');
     $('a').each(function(i,e) {
         var href = $(e).attr('href');
         var is_url = /http/.test(href);
@@ -327,7 +338,7 @@ $(document).ready(function() {
         if (is_url && !is_inner) {
             $(e).attr('target', '_blank');
         }
-    });
+    });*/
 
 
     var pins_html = '';

@@ -18,17 +18,20 @@
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
     $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
     /*echo '<pre>';
-    print_r($exemplars);
+    print_r($sortExemplars);
     echo '</pre>';*/
 
     /*echo '<pre>';
     print_r($accessMethods);
     echo '</pre>';*/
-
+    $sendAccessData = array(
+        'title'     => $this->driver->getTitle(),
+        'author'    => $this->driver->getAuthor(),
+        'url'       => $this->serverUrl(true),
+    );
     foreach ($sortExemplars as $accessMethod=>$accessGroups) {
         echo "<div class='".$accessMethod."'>";
         switch ($accessMethod) {
-            // Книга может быть доступна только в помещении или для выдачи на дом (в этом случае доступ не уточняется)
             case 'access_remoteAccess':
                 echo "<span class='access_status access_accept'>Доступно</span>";
                 echo "<span class='access_method'>".$this->transEsc($accessMethod)."</span>";
@@ -122,6 +125,13 @@
                 case 'access_group_13':
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
                     break;
+                case 'access_group_14':
+                    echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    echo "<div class='marginal_note'>"
+                        ."<span>Не знаете, как сделать заказ?</span><br>"
+                        ."<a href='http://opac.libfl.ru/personal/help.aspx' target='_blank'>".$this->transEsc('access_instructionsForOrderingBooksAtLibrary')."</a>"
+                        ."</div>";
+                    break;
                 default:
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
                     break;
@@ -194,7 +204,7 @@
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
-                            $exemplarLocations = ['access_unavailableLocation'];
+                            $exemplarLocations = ['access_locationClarify'];
                         }
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
@@ -208,9 +218,13 @@
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                             foreach ($locations as $location=>$inv_numbers) {
-                                    echo "<tr>"
-                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
-                                    ."<td>";
+                                echo "<tr>";
+                                    if ($exemplarLocations[0] == 'access_locationClarify') {
+                                        echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                    } else {
+                                        echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                    }
+                                    echo "<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                     }
@@ -221,7 +235,8 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        $accessDescription = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                        echo "--><a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('title'=>$this->driver->getTitle(),'author'=>$this->driver->getAuthor(),'accessMethod'=>$this->translate($accessMethod),'accessGroup'=>$this->translate($accessGroup),'accessDescription'=>$accessDescription,'url'=>$this->serverUrl(true),'location'=>$locations))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '8':
                         echo "<ol>"
@@ -242,12 +257,12 @@
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
-                                    $exemplarLocations = ['access_unavailableLocation'];
+                                    $exemplarLocations = ['access_locationClarify'];
                                 }
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
@@ -256,9 +271,13 @@
                                     echo "<table class='inventory'>";
                                     echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                                     foreach ($locations as $location=>$inv_numbers) {
-                                        echo "<tr>"
-                                            ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
-                                            ."<td>";
+                                        echo "<tr>";
+                                            if ($exemplarLocations[0] == 'access_locationClarify') {
+                                                echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                            } else {
+                                                echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                            }
+                                            echo "<td>";
                                             foreach ($inv_numbers as $inv_number) {
                                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                             }
@@ -278,12 +297,12 @@
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
-                                    $exemplarLocations = ['access_unavailableLocation'];
+                                    $exemplarLocations = ['access_locationClarify'];
                                 }
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                                    $exemplarInventoryNumbers = ['exemplar_barcode'];
+                                    $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
@@ -292,9 +311,13 @@
                                     echo "<table class='inventory'>";
                                     echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                                     foreach ($locations as $location=>$inv_numbers) {
-                                            echo "<tr>"
-                                            ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a></span></td>"
-                                            ."<td>";
+                                        echo "<tr>";
+                                            if ($exemplarLocations[0] == 'access_locationClarify') {
+                                                echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                            } else {
+                                                echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                            }
+                                            echo "<td>";
                                             foreach ($inv_numbers as $inv_number) {
                                                 echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                             }
@@ -329,12 +352,12 @@
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
-                            $exemplarLocations = ['access_unavailableLocation'];
+                            $exemplarLocations = ['access_locationClarify'];
                         }
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
@@ -343,9 +366,13 @@
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                             foreach ($locations as $location=>$inv_numbers) {
-                                    echo "<tr>"
-                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
-                                    ."<td>";
+                                echo "<tr>";
+                                    if ($exemplarLocations[0] == 'access_locationClarify') {
+                                        echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                    } else {
+                                        echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                    }
+                                    echo "<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                     }
@@ -367,12 +394,12 @@
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
-                            $exemplarLocations = ['access_unavailableLocation'];
+                            $exemplarLocations = ['access_locationClarify'];
                         }
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
@@ -381,9 +408,13 @@
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                             foreach ($locations as $location=>$inv_numbers) {
-                                echo "<tr>"
-                                    ."<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>"
-                                    ."<td>";
+                                echo "<tr>";
+                                    if ($exemplarLocations[0] == 'access_locationClarify') {
+                                        echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                    } else {
+                                        echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                    }
+                                    echo "<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                     }
@@ -405,6 +436,26 @@
                         echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         echo "</div>";
                         break;
+                    case '14':
+                        switch ($exemplar['exemplar_access_code']) {
+                            case '1000':
+                                echo "<ol>";
+                                echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "</ol>";
+                                break;
+                            case '1005':
+                                echo "<ol>";
+                                echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
+                                echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                                echo "</ol>";
+                                break;
+                            default:
+                                echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
+                                break;
+                        }
+                        echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+                        break;
                     default:
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
@@ -413,12 +464,12 @@
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
-                            $exemplarLocations = ['access_unavailableLocation'];
+                            $exemplarLocations = ['access_locationClarify'];
                         }
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
-                            $exemplarInventoryNumbers = ['exemplar_barcode'];
+                            $exemplarInventoryNumbers = $exemplar['exemplar_barcode'];
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
@@ -427,9 +478,13 @@
                             echo "<table class='inventory'>";
                             echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
                             foreach ($locations as $location=>$inv_numbers) {
-                                echo "<tr>"
-                                    ."<td>".$this->transEsc('access_locationClarify')."</td>"
-                                    ."<td>";
+                                echo "<tr>";
+                                    if ($exemplarLocations[0] == 'access_locationClarify') {
+                                        echo "<td><span>".$this->transEsc($location)."</span></td>";
+                                    } else {
+                                        echo "<td><span><a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($location)."</a></span></td>";
+                                    }
+                                    echo "<td>";
                                     foreach ($inv_numbers as $inv_number) {
                                         echo "<span style='padding: 0px 7px 0px 0px;'>".$inv_number."</span>";
                                     }

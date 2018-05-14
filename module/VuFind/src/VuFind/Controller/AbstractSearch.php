@@ -571,6 +571,22 @@ class AbstractSearch extends AbstractBase
     }
 
     /**
+     * Get the current settings for the arrival range facets, if set:
+     *
+     * @param object $savedSearch Saved search object (false if none)
+     * @param string $config      Name of config file
+     * @param array  $filter      Whitelist of fields to include (if empty, all
+     * fields will be returned)
+     *
+     * @return array
+     */
+    protected function getArrivalRangeSettings($savedSearch = false, $config = 'facets', $filter = [])
+    {
+        $fields = $this->getRangeFieldList($config, 'arrivalRange', $filter);
+        return $this->getRangeSettings($fields, 'arrival', $savedSearch);
+    }
+
+    /**
      * Get all active range facets:
      *
      * @param array  $specialFacets Special facet setting (in parsed format)
@@ -604,6 +620,12 @@ class AbstractSearch extends AbstractBase
         if (isset($specialFacets['numericrange'])) {
             $numeric = $this->getNumericRangeSettings(
                 $savedSearch, $config, $specialFacets['numericrange']
+            );
+            $result = array_merge($result, $numeric);
+        }
+        if (isset($specialFacets['arrivalrange'])) {
+            $numeric = $this->getArrivalRangeSettings(
+                $savedSearch, $config, $specialFacets['arrivalrange']
             );
             $result = array_merge($result, $numeric);
         }

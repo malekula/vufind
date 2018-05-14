@@ -299,11 +299,13 @@
    <field name="NoteOwner" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="OwnerExemplar" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="IllustrationMaterial" type="text" indexed="true" stored="true" multiValued="true"/>
-
+	
    <field name="MethodOfAccess" type="textFacet" indexed="true" stored="true" multiValued="true" termVectors="true"/>
    
    <field name="Location" type="textFacet" indexed="true" stored="true" multiValued="true"/>
    <field name="PlacingCipher" type = "string" indexed="true" stored="true" multiValued = "true"/>
+   <field name="NewArrivals" type = "date" indexed="true" stored="true" multiValued = "false"/>
+   
 
   <!-- Пример для фасетов -->
   <!--      
