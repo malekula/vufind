@@ -870,7 +870,7 @@ $staticRoutes = [
     'Web/Home', 'Web/FacetList', 'Web/Results',
     'Worldcat/Advanced', 'Worldcat/Home', 'Worldcat/Search',
     'Reporterror/Home', 'Reporterror/Email',
-    'Sendaccess/Home','Sendaccess/Email',
+    'Sendaccess/Home', 'Sendaccess/Email', 'Sendaccess/Access', 'SendAccess/Info',
     'Bookreader/Viewer', 'Bookreader/Crypt',
 ];
 

@@ -235,8 +235,20 @@
                         } else {
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
-                        $accessDescription = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
-                        echo "--><a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('title'=>$this->driver->getTitle(),'author'=>$this->driver->getAuthor(),'accessMethod'=>$this->translate($accessMethod),'accessGroup'=>$this->translate($accessGroup),'accessDescription'=>$accessDescription,'url'=>$this->serverUrl(true),'location'=>$locations))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+                        //$accessDescription = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                        //echo "--><a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('title'=>$this->driver->getTitle(),'author'=>$this->driver->getAuthor(),'accessMethod'=>$this->translate($accessMethod),'accessGroup'=>$this->translate($accessGroup),'accessDescription'=>$accessDescription,'url'=>$this->serverUrl(true),'location'=>$locations))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+
+                        $sendAccessData['exemplarLocations'] = $exemplarLocations;
+                        //$sendAccessData['access_description'] = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                        $sendAccessData['access_method'] = str_replace('%%book_title%%', $sendAccessData['title'], $this->translate($exemplar['exemplar_access_code'].'_email'));
+                        $sendAccessData['locations'] = $locations;
+                        $sendAccessData['access_group'] = $this->translate($accessGroup);
+                        echo $exemplar['exemplar_access_code']." --> <a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info')."?bookinfo=".json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
+
+                        echo "<pre>";
+                        print_r($sendAccessData);
+                        echo "</pre>";
+
                         break;
                     case '8':
                         echo "<ol>"
@@ -288,6 +300,12 @@
                                 } else {
                                     // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                                 }
+                                $sendAccessData['exemplarLocations'] = $exemplarLocations;
+                                //$sendAccessData['access_description'] = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                                $sendAccessData['access_method'] = str_replace('%%book_title%%', $sendAccessData['title'], $this->translate($exemplar['exemplar_access_code'].'_email'));
+                                $sendAccessData['locations'] = $locations;
+                                $sendAccessData['access_group'] = $this->translate($accessGroup);
+                                echo $exemplar['exemplar_access_code']." --> <a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info')."?bookinfo=".json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
                                 break;
                             case '1014':
                                 echo "<ol>"
@@ -328,13 +346,17 @@
                                 } else {
                                     // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                                 }
+                                $sendAccessData['exemplarLocations'] = $exemplarLocations;
+                                //$sendAccessData['access_description'] = "<ol><li>".$this->transEsc($exemplar['exemplar_access_code']."_1")."</li><li>".$this->transEsc($exemplar['exemplar_access_code']."_2")."</li></ol>";
+                                $sendAccessData['access_method'] = str_replace('%%book_title%%', $sendAccessData['title'], $this->translate($exemplar['exemplar_access_code'].'_email'));
+                                $sendAccessData['locations'] = $locations;
+                                $sendAccessData['access_group'] = $this->translate($accessGroup);
+                                echo $exemplar['exemplar_access_code']." --> <a class='cta_btn' data-lightbox href='".$this->url('sendaccess-access')."?bookinfo=".json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
                                 break;
                             default:
                                 # code...
                                 break;
                         }
-                        //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         break;
                     case '10':
                         echo "<ol>"
