@@ -527,8 +527,6 @@ class Record extends AbstractHelper
                 }
             }
             closedir($dir_handle);
-        } else {
-            echo " File not found!";
         }
         return $covers;
     }
