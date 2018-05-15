@@ -507,7 +507,7 @@ class Record extends AbstractHelper
         $fund = strtoupper(explode('_', $record)[0]);
         $id = sprintf('%09d', explode('_', $record)[1]);
         $covers = array();
-        if (file_exists($_SERVER['VUFIND_LOCAL_COVERS'] . '/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) , '/' . substr($id, 6, 3) . '/JPEG_AB')) {
+        if (file_exists($_SERVER['VUFIND_LOCAL_COVERS'] . '/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) . '/' . substr($id, 6, 3) . '/JPEG_AB')) {
             $directory = filter_input(INPUT_SERVER, 'VUFIND_LOCAL_COVERS') . '/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) . '/' . substr($id, 6, 3) . '/JPEG_AB';
             $allowed_types = array("jpg", "png", "gif", "jpeg");
             $file_parts = array();
