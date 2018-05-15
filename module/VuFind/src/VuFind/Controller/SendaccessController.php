@@ -591,61 +591,70 @@ class SendaccessController extends AbstractBase
                                     ."</td>"
                                 ."</tr>"
                             ."</table>";*/
-            $reader_email_message = "<table cellpadding='0' cellspacing='0' style='width:100%; background-color:#DFE7EE'>"
-                                        ."<tr>"
-                                            ."<td style='height:100%; padding:20px 0px 20px 0px'>"
-                                                ."<table cellpadding='0' cellspacing='0' style='max-width:600px; margin:0px auto; background-color:#FFFFFF'>"
-                                                    ."<tr>"
-                                                        ."<td style='padding:50px 0px 50px 0px'>"
-                                                            ."<a href='https://libfl.ru/ru' target='_blank'>"
-                                                                ."<img src='https://cdn.libfl.ru:6684/images/email/libfl-animated-logo.gif' alt='Библиотека иностранной литературы' width='120' height='201' style='display:block; margin:0px auto'>"
-                                                            ."</a>"
-                                                        ."</td>"
-                                                    ."</tr>"
-                                                    ."<tr>"
-                                                        ."<td style='padding:30px 20px 0px 20px; text-align:center'>"
-                                                            ."<p><b>Название книги: </b>" . $bookInfo['title'] . "</p>"
-                                                            ."<p><b>Автор: </b>" . $bookInfo['author'][0] . "</p>"
-                                                            //."<p><b>URL: </b>" . $bookInfo['url'] . "</p><br/>"
-                                                            ."<p><b>Вы можете получить книгу:</b></p>"
-                                                        ."</td>"
-                                                    ."</tr>"
-                                                    ."<tr>"
-                                                        ."<td>"
-                                                            ."<table cellpadding='0' cellspacing='0' style='width:70%; margin:30px auto'>"
-                                                                    ."<tr style='margin:0px 50px'>"
-                                                                        ."<th style='color:#d0cfcf'>Местонахождение в библиотеке</th>"
-                                                                        ."<th style='text-align:left; color:#D0CFCF; font-size:12px; font-weight:300; padding:8px'>Инвентарный номер</th>"
-                                                                    ."</tr>"
-                                                                    ."<tr>"
-                                                                        ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD'></td>"
-                                                                        ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD'></td>"
-                                                                    ."</tr>"
-                                                                    /*foreach ($bookInfo['locations'] as $location => $inv_numbers) {
-                                                                        $reader_email_message .= "<tr style='margin: 0px 50px 0px 50px;'>";
-                                                                        if ($location == 'access_locationClarify') {
-                                                                            $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px;'>".$this->translate($location)."</td>";
-                                                                        } else {
-                                                                            $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px;'><a href='".$link_contactsLibrary."' target='_blank' style='color:#0000F3; text-decoration:none;'>".$this->translate($location)."</a></td>";
-                                                                        }
-                                                                        $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px; text-align:center;'>";
-                                                                            foreach ($inv_numbers as $inv_number) {
-                                                                                $reader_email_message .= "<span style='padding:0px 7px 0px 0px;'>".$inv_number."</span>";
+
+            $reader_email_message .= "<!DOCTYPE html>"
+                                    ."<html>"
+                                        ."<head>"
+                                        ."</head>"
+                                        ."<body>"
+                                            ."<table cellpadding='0' cellspacing='0' style='width:100%; background-color:#DFE7EE'>"
+                                                ."<tr>"
+                                                    ."<td style='height:100%; padding:20px 0px 20px 0px'>"
+                                                        ."<table cellpadding='0' cellspacing='0' style='max-width:600px; margin:0px auto; background-color:#FFFFFF'>"
+                                                            ."<tr>"
+                                                                ."<td style='padding:50px 0px 50px 0px'>"
+                                                                    ."<a href='https://libfl.ru/ru' target='_blank'>"
+                                                                        ."<img src='https://cdn.libfl.ru:6684/images/email/libfl-animated-logo.gif' alt='Библиотека иностранной литературы' width='120' height='201' style='display:block; margin:0px auto'>"
+                                                                    ."</a>"
+                                                                ."</td>"
+                                                            ."</tr>"
+                                                            ."<tr>"
+                                                                ."<td style='padding:30px 20px 0px 20px; text-align:center'>"
+                                                                    ."<p><b>Название книги: </b>" . $bookInfo['title'] . "</p>"
+                                                                    ."<p><b>Автор: </b>" . $bookInfo['author'][0] . "</p>"
+                                                                    //."<p><b>URL: </b>" . $bookInfo['url'] . "</p><br/>"
+                                                                    ."<p><b>Вы можете получить книгу:</b></p>"
+                                                                ."</td>"
+                                                            ."</tr>"
+                                                            ."<tr>"
+                                                                ."<td>"
+                                                                    ."<table cellpadding='0' cellspacing='0' style='width:70%; margin:30px auto'>"
+                                                                        ."<tr style='margin:0px 50px'>"
+                                                                            ."<th style='color:#d0cfcf'>Местонахождение в библиотеке</th>"
+                                                                            ."<th style='text-align:left; color:#D0CFCF; font-size:12px; font-weight:300; padding:8px'>Инвентарный номер</th>"
+                                                                        ."</tr>"
+                                                                        ."<tr>"
+                                                                            ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD'></td>"
+                                                                            ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD'></td>"
+                                                                        ."</tr>"
+                                                                        /*foreach ($bookInfo['locations'] as $location => $inv_numbers) {
+                                                                            $reader_email_message .= "<tr style='margin: 0px 50px 0px 50px;'>";
+                                                                            if ($location == 'access_locationClarify') {
+                                                                                $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px;'>".$this->translate($location)."</td>";
+                                                                            } else {
+                                                                                $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px;'><a href='".$link_contactsLibrary."' target='_blank' style='color:#0000F3; text-decoration:none;'>".$this->translate($location)."</a></td>";
                                                                             }
-                                                                        $reader_email_message .= "</td>";
-                                                                        $reader_email_message .= "</tr>";
-                                                                        $reader_email_message .= "<tr>"
-                                                                        ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD;'></td>"
-                                                                        ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD;'></td>"
-                                                                        ."</tr>";
-                                                                    }*/
-                                                                ."</table>"
-                                                        ."</td>"
-                                                    ."</tr>"
-                                                ."</table>"
-                                            ."</td>"
-                                        ."</tr>"
-                                    ."</table>";
+                                                                            $reader_email_message .= "<td style='font-size:14px; padding:8px 8px 8px 8px; text-align:center;'>";
+                                                                                foreach ($inv_numbers as $inv_number) {
+                                                                                    $reader_email_message .= "<span style='padding:0px 7px 0px 0px;'>".$inv_number."</span>";
+                                                                                }
+                                                                            $reader_email_message .= "</td>";
+                                                                            $reader_email_message .= "</tr>";
+                                                                            $reader_email_message .= "<tr>"
+                                                                            ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD;'></td>"
+                                                                            ."<td style='margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; height:1px; background-color:#DDDDDD;'></td>"
+                                                                            ."</tr>";
+                                                                        }*/
+                                                                    ."</table>"
+                                                                ."</td>"
+                                                            ."</tr>"
+                                                        ."</table>"
+                                                    ."</td>"
+                                                ."</tr>"
+                                            ."</table>"
+                                        ."</body>"
+                                    ."</html>";
+
 
             try {
                 $mailer = $this->serviceLocator->get('VuFind\Mailer');
