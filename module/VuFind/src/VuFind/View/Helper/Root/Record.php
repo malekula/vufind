@@ -527,7 +527,11 @@ class Record extends AbstractHelper
                 }
             }
             closedir($dir_handle);
+        } else {
+            //echo "Image not found!";
         }
+        asort($covers);
+        array_unshift($covers, array_pop($covers));
         return $covers;
     }
 
