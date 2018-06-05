@@ -22,3 +22,6 @@ root/
 /books
 /public/robots.txt
 /local/httpd-vufind.conf
+/covers-bak20180515-001/
+covers.txt
+/covers_tmp/
