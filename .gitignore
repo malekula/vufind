@@ -21,3 +21,4 @@ root/
 /covers
 /books
 /public/robots.txt
+/local/httpd-vufind.conf
