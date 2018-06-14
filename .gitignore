@@ -5,6 +5,8 @@ ChangeLog
 .\#*
 TAGS
 *~
+robots.txt
+/local/config/vufind/config.ini
 /downloads
 /solr/vendor
 /vendor
