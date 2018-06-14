@@ -504,11 +504,11 @@ class Record extends AbstractHelper
     }
 
     public function getOtherCovers($record) {
-        $fund = strtolower(explode('_', $record)[0]);
-        $id = explode('_', $record)[1];
+        $fund = strtoupper(explode('_', $record)[0]);
+        $id = sprintf('%09d', explode('_', $record)[1]);
         $covers = array();
-        if (file_exists($_SERVER['VUFIND_LOCAL_COVERS'] . '/' . $fund . '/' . $id)) {
-            $directory = filter_input(INPUT_SERVER, 'VUFIND_LOCAL_COVERS') . '/' . $fund . '/' . $id;
+        if (file_exists($_SERVER['VUFIND_LOCAL_COVERS'] . '/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) . '/' . substr($id, 6, 3) . '/JPEG_AB')) {
+            $directory = filter_input(INPUT_SERVER, 'VUFIND_LOCAL_COVERS') . '/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) . '/' . substr($id, 6, 3) . '/JPEG_AB';
             $allowed_types = array("jpg", "png", "gif", "jpeg");
             $file_parts = array();
             $ext = "";
@@ -522,12 +522,16 @@ class Record extends AbstractHelper
 
 
                 if (in_array($ext, $allowed_types)) {
-                    $covers[$i] = '/covers/' . $fund . '/' . $id . '/' . $file;
+                    $covers[$i] = '/covers/' . $fund . '/' . substr($id, 0, 3) . '/' . substr($id, 3, 3) . '/' . substr($id, 6, 3) . '/JPEG_AB' . '/' . $file;
                     $i++;
                 }
             }
             closedir($dir_handle);
+        } else {
+            //echo "Image not found!";
         }
+        asort($covers);
+        array_unshift($covers, array_pop($covers));
         return $covers;
     }
 

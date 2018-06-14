@@ -243,7 +243,7 @@ $(document).ready(function() {
     });
 
 
-    $('#datetimepicker').datepicker({
+    /*$('#datetimepicker').datepicker({
         format: "dd.mm.yy",
         weekStart: 1,
         language: "ru",
@@ -257,7 +257,7 @@ $(document).ready(function() {
             $('.clear_events_date').show();
             $('.datepicker.dropdown-menu').hide();
         }
-    });
+    });*/
 
     $('.events_cal_btn').on('click', function(e) {
         if ($(e.target).hasClass('clear_events_date')) return;
