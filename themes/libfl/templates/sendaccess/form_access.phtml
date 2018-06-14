@@ -1,0 +1,25 @@
+<h2><?= $this->transEsc("access_sendAccessToEmail") ?></h2>
+<?= $this->flashmessages() ?>
+<p>Заинтересовала книга? Отправьте запрос сотрудникам библиотеки для уточнения возможностей доступа!</p>
+<form name="sendAccess" method="post" action="<?= $this->url('sendaccess-access') ?>">
+    <div class="form-group">
+        <label class="control-label" for="name"><?= $this->transEsc("sa_name") ?></label>
+        <input type="text" id="name" name="name" value="<?= $this->escapeHtmlAttr(isset($name) ? $name : '') ?>" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="email"><?= $this->transEsc("sa_email") ?></label>
+        <input type="email" id="email" name="email" value="<?= $this->escapeHtmlAttr(isset($email) ? $email : '') ?>" class="form-control" required/>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="question"><?= $this->transEsc("sa_question") ?></label>
+        <textarea id="question" name="question" class="form-control" required><?= $this->escapeHtml(isset($question) ? $question : '') ?></textarea>
+    </div>
+    <div id="bookInfo" class="form-group">
+        <?php $bookInfo = filter_input(INPUT_GET, 'bookinfo'); ?>
+        <input type="hidden" name="bookinfo" value="<?= $bookInfo ?>">
+    </div>
+    <?= $this->recaptcha()->html($this->useRecaptcha) ?>
+    <div class="form-group">
+        <input type="submit" name="submit" class="btn btn-primary" value="<?= $this->transEsc("Send") ?>" />
+    </div>
+</form>
