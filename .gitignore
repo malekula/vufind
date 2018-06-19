@@ -5,8 +5,9 @@ ChangeLog
 .\#*
 TAGS
 *~
-/public/yandex_40a6d4d7fbf2d51e.html
-/local/config/vufind/config.ini
+/public
+public/yandex_40a6d4d7fbf2d51e.html
+/local/config/vufind
 /downloads
 /solr/vendor
 /vendor
@@ -22,7 +23,8 @@ mail.php
 root/
 /covers
 /books
-/public/robots.txt
+# /public/robots.txt
+# public/robots.txt
 /local/httpd-vufind.conf
 /covers-bak20180515-001/
 covers.txt
