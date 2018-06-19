@@ -6,6 +6,7 @@ ChangeLog
 TAGS
 *~
 public
+public/robots.txt
 local/config/vufind/config.ini
 downloads
 solr/vendor
