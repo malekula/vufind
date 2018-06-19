@@ -8,6 +8,7 @@ TAGS
 public
 public/robots.txt
 local/config/vufind/config.ini
+config/vufind/permissions.ini
 downloads
 solr/vendor
 vendor
