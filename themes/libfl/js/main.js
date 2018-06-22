@@ -1,6 +1,6 @@
 $(document).ready(function() {
     (function setWorkdayEnd() {
-        var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '21:00', '19:00'];
+        var time = ['у Иностранки выходной', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 19:00'];
         $('#workday_end').text(time[moment().day()]);
     })();
     /* Placeholder */
@@ -844,11 +844,11 @@ $(document).ready(function() {
         var wrap = $('#search_wrapper');
         if (wrap.hasClass('catalogue')) {
             wrap.removeClass('catalogue');
-            $(this).text('Поиск по сайту');
+            $(this).html('Поиск <b>по сайту</b>');
             $('#search').attr('placeholder', 'Поиск по сайту');
         } else {
             wrap.addClass('catalogue');
-            $(this).text('Поиск по каталогу');
+            $(this).html('Поиск <b>по каталогу</b>');
             $('#search').attr('placeholder', 'Поиск по каталогу');
         }
         changeSearchPlaceholder();
