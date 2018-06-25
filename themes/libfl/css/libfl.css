@@ -589,7 +589,7 @@ h1 {
 .menu li {
     float: left;
     margin-right: 26px;
-    padding: 19px 0 17px;
+    padding: 18px 0 18px;
     line-height: 16px;
     height: 52px;
 }
@@ -4988,7 +4988,7 @@ img.contacts_image {
     fill: #a4a4a4;
     opacity: 1;
 }
-.navbar {
+.infobar {
     height: 33px;
     color: #ffffff;
     background-color: #232325;
@@ -4997,19 +4997,19 @@ img.contacts_image {
     font-weight: 300;
     line-height: 33px;
 }
-.navbar_left {
+.infobar_left {
     float: left;
 }
-.navbar_left a {
+.infobar_left a {
     display: block;
     float: left;
     margin-left: 5px;
 }
-.navbar_right a:hover {
+.infobar_right a:hover {
     opacity: 1;
     color: #ffffff;
 }
-.navbar_left span {
+.infobar_left span {
     margin-right: 20px;
     font-weight: 600;
 }
@@ -5037,15 +5037,15 @@ a.youtube__element {
     background: url("/images/svg/yt-icon.svg") no-repeat center;
     background-size: 20px;
 }
-.navbar_right {
+.infobar_right {
     float: right;
     position: relative;
 }
-.navbar_right a {
+.infobar_right a {
     color: #ababab;
     text-decoration: underline;
 }
-.navbar_right a:before {
+.infobar_right a:before {
     content: '';
     position: absolute;
     display: block;
