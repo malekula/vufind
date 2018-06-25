@@ -12,114 +12,113 @@
 
   gtag('config', 'UA-74053759-9');
   </script>
-
-<?$this->headThemeResources()?>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<?=$this->headMeta()?>
-<?=$this->headTitle()?>
-<?
-// Set up OpenSearch link:
-$this->headLink(
+  <?$this->headThemeResources()?>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <?=$this->headMeta()?>
+  <?=$this->headTitle()?>
+  <?
+      // Set up OpenSearch link:
+  $this->headLink(
     [
-        'href' => $this->url('search-opensearch') . '?method=describe',
-        'type' => 'application/opensearchdescription+xml',
-        'title' => $this->transEsc('Library Catalog Search'),
-        'rel' => 'search'
+    'href' => $this->url('search-opensearch') . '?method=describe',
+    'type' => 'application/opensearchdescription+xml',
+    'title' => $this->transEsc('Library Catalog Search'),
+    'rel' => 'search'
     ]
-);
-?>
-<!-- RTL styling -->
-<? if ($this->layout()->rtl) {
-    $this->headLink()->appendStylesheet('vendor/bootstrap-rtl.min.css');
-} ?>
-<?=$this->headLink()?>
-<?=$this->headStyle()?>
-<link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon.png" sizes="16x16">
-<link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon2x.png" sizes="32x32">
-<?
-if (!isset($this->renderingError)) {
-    // Add translation strings
-                $this->jsTranslations()->addStrings(
-                    [
-                        'add_tag_success' => 'add_tag_success',
-                        'bulk_email_success' => 'bulk_email_success',
-                        'bulk_noitems_advice' => 'bulk_noitems_advice',
-                        'bulk_save_success' => 'bulk_save_success',
-                        'close' => 'close',
-                        'collection_empty' => 'collection_empty',
-                        'error_occurred' => 'An error has occurred',
-                        'go_to_list' => 'go_to_list',
-                        'libphonenumber_invalid' => 'libphonenumber_invalid',
-                        'libphonenumber_invalidcountry' => 'libphonenumber_invalidcountry',
-                        'libphonenumber_invalidregion' => 'libphonenumber_invalidregion',
-                        'libphonenumber_notanumber' => 'libphonenumber_notanumber',
-                        'libphonenumber_toolong' => 'libphonenumber_toolong',
-                        'libphonenumber_tooshort' => 'libphonenumber_tooshort',
-                        'libphonenumber_tooshortidd' => 'libphonenumber_tooshortidd',
-                        'loading' => 'Loading',
-                        'more' => 'more',
-                        'number_thousands_separator' => [
-                            'number_thousands_separator', null, ','
-                        ],
-                        'sms_success' => 'sms_success'
-                    ]
-                );
-    // Add libphonenumber.js strings
-                $this->jsTranslations()->addStrings(
-                    [
-                        "Phone number invalid" => 'libphonenumber_invalid',
-                        "Invalid country calling code" => 'libphonenumber_invalidcountry',
-                        "Invalid region code" => 'libphonenumber_invalidregion',
-                        "The string supplied did not seem to be a phone number" => 'libphonenumber_notanumber',
-                        "The string supplied is too long to be a phone number" => 'libphonenumber_toolong',
-                        "The string supplied is too short to be a phone number" => 'libphonenumber_tooshort',
-                        "Phone number too short after IDD" => 'libphonenumber_tooshortidd'
-                    ]
-                );
-    // Deal with cart stuff:
-    $cart = $this->cart();
-    if ($cart->isActive()) {
-        $this->headScript()->appendFile("vendor/cookies.js");
-        $this->headScript()->appendFile("cart.js");
-        $domain = $cart->getCookieDomain();
-        if (!empty($domain)) {
-            $this->headScript()->appendScript(
-                'VuFind.cart.setDomain("' . $domain . '");'
-            );
-        }
-        $cookiePath = $cart->getCookiePath();
-        if (!empty($cookiePath)) {
-            $this->headScript()->appendScript(
-                'VuFind.cart.setCookiePath("' . $cookiePath . '");'
-            );
-        }
-        $this->jsTranslations()->addStrings(
-            [
-                'addBookBag' => 'Add to Book Bag',
-                'bookbagFull' => 'bookbag_full_msg',
-                'bookbagMax' => $cart->getMaxSize(),
-                'bookbagStatusFull' => 'bookbag_full',
-                'confirmDelete' => 'confirm_delete',
-                'confirmEmpty' => 'bookbag_confirm_empty',
-                'itemsAddBag' => 'items_added_to_bookbag',
-                'itemsInBag' => 'items_already_in_bookbag',
-                'removeBookBag' => 'Remove from Book Bag',
-                'viewBookBag' => 'View Book Bag'
-            ]
+    );
+    ?>
+    <!-- RTL styling -->
+    <? if ($this->layout()->rtl) {
+      $this->headLink()->appendStylesheet('vendor/bootstrap-rtl.min.css');
+    } ?>
+    <?=$this->headLink()?>
+    <?=$this->headStyle()?>
+    <link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon.png" sizes="16x16">
+    <link rel="shortcut icon" type="image/png" href="/themes/bootstrap3/images/favicon/favicon2x.png" sizes="32x32">
+    <?
+    if (!isset($this->renderingError)) {
+        // Add translation strings
+      $this->jsTranslations()->addStrings(
+        [
+        'add_tag_success' => 'add_tag_success',
+        'bulk_email_success' => 'bulk_email_success',
+        'bulk_noitems_advice' => 'bulk_noitems_advice',
+        'bulk_save_success' => 'bulk_save_success',
+        'close' => 'close',
+        'collection_empty' => 'collection_empty',
+        'error_occurred' => 'An error has occurred',
+        'go_to_list' => 'go_to_list',
+        'libphonenumber_invalid' => 'libphonenumber_invalid',
+        'libphonenumber_invalidcountry' => 'libphonenumber_invalidcountry',
+        'libphonenumber_invalidregion' => 'libphonenumber_invalidregion',
+        'libphonenumber_notanumber' => 'libphonenumber_notanumber',
+        'libphonenumber_toolong' => 'libphonenumber_toolong',
+        'libphonenumber_tooshort' => 'libphonenumber_tooshort',
+        'libphonenumber_tooshortidd' => 'libphonenumber_tooshortidd',
+        'loading' => 'Loading',
+        'more' => 'more',
+        'number_thousands_separator' => [
+        'number_thousands_separator', null, ','
+        ],
+        'sms_success' => 'sms_success'
+        ]
         );
-    }
+        // Add libphonenumber.js strings
+$this->jsTranslations()->addStrings(
+  [
+  "Phone number invalid" => 'libphonenumber_invalid',
+  "Invalid country calling code" => 'libphonenumber_invalidcountry',
+  "Invalid region code" => 'libphonenumber_invalidregion',
+  "The string supplied did not seem to be a phone number" => 'libphonenumber_notanumber',
+  "The string supplied is too long to be a phone number" => 'libphonenumber_toolong',
+  "The string supplied is too short to be a phone number" => 'libphonenumber_tooshort',
+  "Phone number too short after IDD" => 'libphonenumber_tooshortidd'
+  ]
+  );
+        // Deal with cart stuff:
+$cart = $this->cart();
+if ($cart->isActive()) {
+  $this->headScript()->appendFile("vendor/cookies.js");
+  $this->headScript()->appendFile("cart.js");
+  $domain = $cart->getCookieDomain();
+  if (!empty($domain)) {
     $this->headScript()->appendScript(
-        'var userIsLoggedIn = ' . ($this->auth()->isLoggedIn() ? 'true' : 'false') . ';'
+      'VuFind.cart.setDomain("' . $domain . '");'
+      );
+  }
+  $cookiePath = $cart->getCookiePath();
+  if (!empty($cookiePath)) {
+    $this->headScript()->appendScript(
+      'VuFind.cart.setCookiePath("' . $cookiePath . '");'
+      );
+  }
+  $this->jsTranslations()->addStrings(
+    [
+    'addBookBag' => 'Add to Book Bag',
+    'bookbagFull' => 'bookbag_full_msg',
+    'bookbagMax' => $cart->getMaxSize(),
+    'bookbagStatusFull' => 'bookbag_full',
+    'confirmDelete' => 'confirm_delete',
+    'confirmEmpty' => 'bookbag_confirm_empty',
+    'itemsAddBag' => 'items_added_to_bookbag',
+    'itemsInBag' => 'items_already_in_bookbag',
+    'removeBookBag' => 'Remove from Book Bag',
+    'viewBookBag' => 'View Book Bag'
+    ]
     );
 }
+$this->headScript()->appendScript(
+  'var userIsLoggedIn = ' . ($this->auth()->isLoggedIn() ? 'true' : 'false') . ';'
+  );
+}
 
-// Session keep-alive
+      // Session keep-alive
 if ($this->KeepAlive()) {
-    $this->headScript()->appendScript('var keepAliveInterval = '
-        . $this->KeepAlive());
-    $this->headScript()->appendFile("keep_alive.js");
+  $this->headScript()->appendScript('var keepAliveInterval = '
+    . $this->KeepAlive());
+  $this->headScript()->appendFile("keep_alive.js");
 }
 ?>
 <?
@@ -135,7 +134,7 @@ $this->headScript()->appendScript($setupJS);
 ?>
 <?=$this->headScript()?>
 <!--<link href="/themes/bootprint3/css/libfl.css?_=1499547038" rel="stylesheet" type="text/css">-->
-<link href="/themes/libfl/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css">
+<!--<link href="/themes/libfl/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" type="text/css">-->
 </head>
 <!--<body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> <?=$this->layoutClass('offcanvas-row')?><? if ($this->layout()->rtl): ?> rtl<? endif; ?>">-->
 <body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> offcanvas offcanvas-right flip <? if ($this->layout()->rtl): ?> rtl<? endif; ?>">
@@ -196,185 +195,184 @@ $this->headScript()->appendScript($setupJS);
                       </div>
                     </div>
                   </nav>
-<? // Set up the search box -- there are three possible cases:
-// 1. No search box was set; we should default to the normal box
-                // 2. It was set to false; we should display nothing
-                // 3. It is set to a custom string; we should display the provided version
-                    // Set up default search box if no data was provided from the template;
-// this covers case 1.  Cases 2 and 3 are then covered by logic below.
-if (!isset($this->layout()->searchbox)) {
-    $this->layout()->searchbox = $this->render('search/searchbox.phtml');
-}
-?>
-<header>
-  <div id="header">
-    <div class="side_social_wrapper">
-      <ul>
-        <li><a href="https://vk.com/public59877134" target="_blank">
-          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 9.01">
-            <path d="M8.56,0a1.07,1.07,0,0,1,.57.14A.52.52,0,0,1,9.4.65c0,1.14,0,2.13,0,3.29a.33.33,0,0,0,.33.34.7.7,0,0,0,.45-.22,13.73,13.73,0,0,0,2-3.38c.18-.4.48-.37.81-.37l2.6,0A.51.51,0,0,1,16,.62a.93.93,0,0,1-.17.8C15,2.68,14.3,3.7,13.43,4.9a.45.45,0,0,0-.1.26.36.36,0,0,0,.1.23C14.21,6.21,15,7,15.8,7.92a.74.74,0,0,1,0,.78c0,.09-.27.31-.41.31H12.62A.75.75,0,0,1,12,8.73L10.44,7.09a.5.5,0,0,0-.54-.17c-.18.08-.51.2-.51.53V8.6c0,.21-.33.36-.52.36H7.34a4.11,4.11,0,0,1-1.69-.34A7.49,7.49,0,0,1,2.3,5.21C1.48,3.78.76,2.37,0,.89,0,.73-.09.36.5.36H2.66a.94.94,0,0,1,.57.14A.82.82,0,0,1,3.47.8a18.51,18.51,0,0,0,2,3.43.33.33,0,0,0,.28.12.42.42,0,0,0,.28-.08.56.56,0,0,0,.22-.5V1.54A1,1,0,0,0,5.91.79C5.71.67,5.38.56,5.39.42S5.76,0,6.4,0H8.56Z"></path>
-          </svg></a></li>
-          <li><a href="https://www.facebook.com/LIBFL.RU/" target="_blank">
-            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16">
-              <path d="M11.6,8.53l.53-2.67H9.47V3.73c0-.82.42-1.07,1.6-1.07h1.07V0H10A3.46,3.46,0,0,0,6.27,3.73V5.87H3.6V8.53H6.27V16h3.2V8.53Z"></path>
-            </svg></a></li>
-            <li><a href="https://www.instagram.com/libfl/" target="_blank">
-              <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16">
-                <path d="M12.91,0H3.09A3.1,3.1,0,0,0,0,3.09v9.82A3.1,3.1,0,0,0,3.09,16h9.82A3.1,3.1,0,0,0,16,12.91V3.09A3.1,3.1,0,0,0,12.91,0Zm.89,1.84h.35V4.55h-2.7V1.85ZM5.72,6.36A2.81,2.81,0,1,1,5.18,8,2.82,2.82,0,0,1,5.72,6.36Zm8.72,6.55a1.53,1.53,0,0,1-1.53,1.53H3.09a1.53,1.53,0,0,1-1.53-1.53V6.36H3.95a4.38,4.38,0,1,0,8.1,0h2.39Z"></path>
-              </svg></a></li>
-              <li><a href="https://www.youtube.com/channel/UCyK_Z9yBQCcFzUZePsR5W4w" target="_blank">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 15.65">
-                  <path d="M15.38,3.47c-.58-.69-1.64-1-3.68-1H4.3c-2.08,0-3.17.3-3.74,1S0,5.29,0,6.75V9.52c0,2.82.67,4.25,4.3,4.25H11.7c1.77,0,2.74-.25,3.38-.85S16,11.27,16,9.52V6.75C16,5.21,16,4.16,15.38,3.47Zm-5.1,5L6.92,10.27a.52.52,0,0,1-.76-.46V6.31a.52.52,0,0,1,.75-.46L10.27,7.6a.52.52,0,0,1,0,.92Z"></path>
-                </svg></a></li>
+        <? // Set up the search box -- there are three possible cases:
+          // 1. No search box was set; we should default to the normal box
+          // 2. It was set to false; we should display nothing
+          // 3. It is set to a custom string; we should display the provided version
+          // Set up default search box if no data was provided from the template;
+          // this covers case 1.  Cases 2 and 3 are then covered by logic below.
+        if (!isset($this->layout()->searchbox)) {
+          $this->layout()->searchbox = $this->render('search/searchbox.phtml');
+        }
+        ?>
+        <header>
+          <div id="header">
+            <div class="side_social_wrapper">
+              <ul>
+                <li><a href="https://vk.com/public59877134" target="_blank">
+                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 9.01">
+                    <path d="M8.56,0a1.07,1.07,0,0,1,.57.14A.52.52,0,0,1,9.4.65c0,1.14,0,2.13,0,3.29a.33.33,0,0,0,.33.34.7.7,0,0,0,.45-.22,13.73,13.73,0,0,0,2-3.38c.18-.4.48-.37.81-.37l2.6,0A.51.51,0,0,1,16,.62a.93.93,0,0,1-.17.8C15,2.68,14.3,3.7,13.43,4.9a.45.45,0,0,0-.1.26.36.36,0,0,0,.1.23C14.21,6.21,15,7,15.8,7.92a.74.74,0,0,1,0,.78c0,.09-.27.31-.41.31H12.62A.75.75,0,0,1,12,8.73L10.44,7.09a.5.5,0,0,0-.54-.17c-.18.08-.51.2-.51.53V8.6c0,.21-.33.36-.52.36H7.34a4.11,4.11,0,0,1-1.69-.34A7.49,7.49,0,0,1,2.3,5.21C1.48,3.78.76,2.37,0,.89,0,.73-.09.36.5.36H2.66a.94.94,0,0,1,.57.14A.82.82,0,0,1,3.47.8a18.51,18.51,0,0,0,2,3.43.33.33,0,0,0,.28.12.42.42,0,0,0,.28-.08.56.56,0,0,0,.22-.5V1.54A1,1,0,0,0,5.91.79C5.71.67,5.38.56,5.39.42S5.76,0,6.4,0H8.56Z"></path>
+                  </svg></a></li>
+                  <li><a href="https://www.facebook.com/LIBFL.RU/" target="_blank">
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16">
+                      <path d="M11.6,8.53l.53-2.67H9.47V3.73c0-.82.42-1.07,1.6-1.07h1.07V0H10A3.46,3.46,0,0,0,6.27,3.73V5.87H3.6V8.53H6.27V16h3.2V8.53Z"></path>
+                    </svg></a></li>
+                    <li><a href="https://www.instagram.com/libfl/" target="_blank">
+                      <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 16">
+                        <path d="M12.91,0H3.09A3.1,3.1,0,0,0,0,3.09v9.82A3.1,3.1,0,0,0,3.09,16h9.82A3.1,3.1,0,0,0,16,12.91V3.09A3.1,3.1,0,0,0,12.91,0Zm.89,1.84h.35V4.55h-2.7V1.85ZM5.72,6.36A2.81,2.81,0,1,1,5.18,8,2.82,2.82,0,0,1,5.72,6.36Zm8.72,6.55a1.53,1.53,0,0,1-1.53,1.53H3.09a1.53,1.53,0,0,1-1.53-1.53V6.36H3.95a4.38,4.38,0,1,0,8.1,0h2.39Z"></path>
+                      </svg></a></li>
+                      <li><a href="https://www.youtube.com/channel/UCyK_Z9yBQCcFzUZePsR5W4w" target="_blank">
+                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 16 15.65">
+                          <path d="M15.38,3.47c-.58-.69-1.64-1-3.68-1H4.3c-2.08,0-3.17.3-3.74,1S0,5.29,0,6.75V9.52c0,2.82.67,4.25,4.3,4.25H11.7c1.77,0,2.74-.25,3.38-.85S16,11.27,16,9.52V6.75C16,5.21,16,4.16,15.38,3.47Zm-5.1,5L6.92,10.27a.52.52,0,0,1-.76-.46V6.31a.52.52,0,0,1,.75-.46L10.27,7.6a.52.52,0,0,1,0,.92Z"></path>
+                        </svg></a></li>
+                      </ul>
+                    </div>
+                    <div class="content_big clear"><a href="http://libfl.ru/" class="logo_wrapper desktop_version"><img id="random" src="" alt="">
+                      <!--span!=__("Библиотека<br>Иностранной<br>Литературы")--></a>
+                      <!--.split_line-->
+                      <!--.logo_95-->
+                      <div class="quick_links_wrapper">
+                        <div class="blue_quick_links desktop_version"><a href="http://libfl.ru/static/online_resources" target="_blank">Online-Ресурсы</a><br><a href="http://profi.libfl.ru/" target="_blank">Академия Рудомино</a><br><a href="http://libfl.ru/ru/item/projects">Проекты библиотеки </a>
+                          <!--br-->
+                          <!--a(href='/static/litres')=__("Litres.Библиотека")-->
+                        </div>
+                        <div class="quick_links desktop_version"><a href="http://libfl.ru/ru/item/contacts">Контактная информация</a><br><a href="http://libfl.ru/ru/item/contacts#time_anchor" class="work_hours_hover">Часы работы</a><br><small>Сегодня работает до&nbsp;<span id="workday_end">21:00</span></small>
+                          <!--a.work_hours_hover(href='/' + lang + '/item/contacts#time_anchor')=__("Часы работы")-->
+                        </div>
+                      </div>
+                      <div id="search_wrapper" class="vf_search_wrapper catalogue">
+                        <span class="search_switch">Поиск по каталогу&nbsp;</span>
+                        <div class="vf_search_form desktop_version">
+                          <input id="search" name="search" type="text" value=""><img src="/themes/bootstrap3/images/svg/caron-icon.svg">
+                          <div class="vf_search_select site_search">
+                            <div data-text="Поиск по сайту" data-action="" class="vf_search_option">весь сайт</div>
+                            <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option">мероприятия</div>
+                            <div data-text="Поиск по статьям" data-action="articles" class="vf_search_option">статьи</div>
+                            <div data-text="Поиск по документам" data-action="documents" class="vf_search_option">документы</div>
+                            <div data-text="Поиск по подборкам" data-action="books_collections" class="vf_search_option">подборки</div>
+                          </div>
+                          <div class="vf_search_select catalogue_search">
+                            <div data-text="Поиск по каталогу" data-action="" class="vf_search_option">весь каталог</div>
+                            <div data-text="Поиск по автору" data-action="author" class="vf_search_option">автор</div>
+                            <div data-text="Поиск по названию" data-action="title" class="vf_search_option">название</div>
+                            <div data-text="Поиск по предметной области" data-action="subject" class="vf_search_option">предметная область</div>
+                            <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISNN</div><a href="http://catalog.libfl.ru/Search/Advanced" class="advanced_search" target="_blank">расширенный поиск</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="random_quote1" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/marquez.png" alt="Габриэль Гарсиа Маркез" title="Габриэль Гарсиа Маркез расставит все точки над и и а.">
+                        <div class="random_quote_block"><span><b>Gabriel García Márquez<br>will dot the í's and á's.</b></span></div>
+                        <clear></clear>
+                      </div>
+                      <div id="random_quote2" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/plato.png" alt="Платон" title="Вуаля! Теперь я понимаю Платона.">
+                        <div class="random_quote_block"><span><b>Voilá!<br>Plato is not greek for you.</b></span></div>
+                        <clear>				</clear>
+                      </div>
+                      <div id="random_quote3" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/capek.png" alt="Карел Чапек" title="Дочитали книгу Карела Чапека? Поставьте сверху галочку.">
+                        <div class="random_quote_block"><span><b>Just finished Karel Čapek's<br>book? Put a tick above.</b></span></div>
+                        <clear></clear>
+                      </div>
+                      <div id="random_quote4" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/sartr.png" alt="Жан-Поль Сартр" title="Потерял смысл жизни? Попробуй французских экзистенциалистов.">
+                        <div class="random_quote_block"><span><b>Lost your raison d'être?<br>Try French existentialists.</b></span></div>
+                        <clear>		</clear>
+                      </div>
+
+                    <!--.search_wrapper.desktop_version
+                    img(src='/themes/bootstrap3/images/svg/caron-icon.svg', alt='', enctype="multipart/form-data")
+
+                    //input#search(name='search', type='text', placeholder=__("Поиск по сайту"), value=(search ? search : ""))
+
+                    .random_quote_block
+                        span!=__("<b>Voila!<br>Plato is not<br>greek for you.</b>")
+                      -->
+                      <div class="work_hours_block">
+                        <div class="work_hours_row"><b>Будние дни</b>&nbsp;—&nbsp;с 11.00 до 21.00</div>
+                        <div class="work_hours_row work_hours_border"><b>Сб, вс и предпраздничные дни</b>&nbsp;—&nbsp;с 11.00 до 19.00</div>
+                        <!--.work_hours_row.work_hours_border
+                        b Воскресенье
+                        | &nbsp;&mdash;&nbsp;выходной
+                      -->
+                      <div class="work_hours_row"><b>Санитарный день</b>&nbsp;—&nbsp;последний четверг месяца</div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+              <div class="hidden-print">
+                <? if (isset($this->layout()->srmessage)): // message for benefit of screen-reader users ?>
+                <span class="sr-only"><?=$this->layout()->srmessage ?></span>
+              <? endif; ?>
+              <a class="sr-only" href="#content"><?=$this->transEsc('Skip to content') ?></a>
+              <?=$this->render('header.phtml')?>
+            </div>
+            <div class="breadcrumbs">
+              <div class="container">
+                <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
+                  && !empty($this->layout()->breadcrumbs)
+                  && $this->layout()->breadcrumbs !== false
+                  ): ?>
+                  <ul class="breadcrumb hidden-print">
+                    <? if(is_array($this->layout()->breadcrumbs)): ?>
+                    <? if(count($this->layout()->breadcrumbs) > 1): ?>
+                    <?=$this->render('breadcrumbs/multi.phtml', [
+                      'parents' => $this->layout()->breadcrumbs,
+                      'title'   => $this->layout()->title,
+                      'from'    => $this->layout()->from
+                      ]) ?>
+                    <? else: ?>
+                    <?=$this->render('breadcrumbs/default.phtml', [
+                      'parents' => $this->layout()->breadcrumbs,
+                      'title'   => $this->layout()->title
+                      ]) ?>
+                    <? endif; ?>
+                  <? else: ?>
+                  <?=$this->layout()->breadcrumbs ?>
+                <? endif; ?>
               </ul>
-            </div>
-            <div class="content_big clear"><a href="http://libfl.ru/" class="logo_wrapper desktop_version"><img id="random" src="" alt="">
-              <!--span!=__("Библиотека<br>Иностранной<br>Литературы")--></a>
-              <!--.split_line-->
-              <!--.logo_95-->
-              <div class="quick_links_wrapper">
-                <div class="blue_quick_links desktop_version"><a href="http://profi.libfl.ru/" target="_blank">Академия Рудомино</a><br><a href="http://libfl.ru/static/online_resources" target="_blank">Online-Ресурсы</a><br><a href="http://libfl.ru/ru/item/projects">Проекты библиотеки </a>
-                  <!--br-->
-                  <!--a(href='/static/litres')=__("Litres.Библиотека")-->
-                </div>
-                <div class="quick_links desktop_version"><a href="http://libfl.ru/ru/item/contacts">Контактная информация</a><br><a href="http://libfl.ru/ru/item/contacts#time_anchor" class="work_hours_hover">Часы работы</a><br><small>Сегодня&nbsp;<span id="workday_end"></span></small>
-                  <!--a.work_hours_hover(href='/' + lang + '/item/contacts#time_anchor')=__("Часы работы")-->
-                </div>
-              </div>
-              <div id="search_wrapper" class="vf_search_wrapper catalogue">
-                <span class="search_switch">Поиск <b>по каталогу</b> </span>
-                <div class="vf_search_form desktop_version">
-                  <input id="search" name="search" type="text" value=""><img src="/themes/libfl/images/svg/options.svg">
-                  <div class="vf_search_select site_search">
-                    <div data-text="Поиск по сайту" data-action="" class="vf_search_option">весь сайт</div>
-                    <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option">мероприятия</div>
-                    <div data-text="Поиск по статьям" data-action="articles" class="vf_search_option">статьи</div>
-                    <div data-text="Поиск по документам" data-action="documents" class="vf_search_option">документы</div>
-                    <div data-text="Поиск по подборкам" data-action="books_collections" class="vf_search_option">подборки</div>
-                  </div>
-                  <div class="vf_search_select catalogue_search">
-                    <div data-text="Поиск по каталогу" data-action="" class="vf_search_option">весь каталог</div>
-                    <div data-text="Поиск по автору" data-action="author" class="vf_search_option">автор</div>
-                    <div data-text="Поиск по названию" data-action="title" class="vf_search_option">название</div>
-                    <div data-text="Поиск по предметной области" data-action="subject" class="vf_search_option">предметная область</div>
-                    <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISNN</div><a href="http://catalog.libfl.ru/Search/Advanced" class="advanced_search" target="_blank">расширенный поиск</a>
-                  </div>
-                </div>
-              </div>
-              <div id="random_quote1" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/marquez.png" alt="Габриэль Гарсиа Маркез" title="Габриэль Гарсиа Маркез расставит все точки над и и а.">
-                <div class="random_quote_block"><span><b>Gabriel García Márquez<br>will dot the í's and á's.</b></span></div>
-                <clear></clear>
-              </div>
-              <div id="random_quote2" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/plato.png" alt="Платон" title="Вуаля! Теперь я понимаю Платона.">
-                <div class="random_quote_block"><span><b>Voilà!<br>Plato is not Greek for you.</b></span></div>
-                <clear>				</clear>
-              </div>
-              <div id="random_quote3" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/capek.png" alt="Карел Чапек" title="Дочитали книгу Карела Чапека? Поставьте сверху галочку.">
-                <div class="random_quote_block"><span><b>Just finished Karel Čapek's<br>book? Put a tick above.</b></span></div>
-                <clear></clear>
-              </div>
-              <div id="random_quote4" style="display:none;" class="wisemen_block desktop_version"><img class="random_wiseman" src="/themes/libfl/images/wisemen/sartr.png" alt="Жан-Поль Сартр" title="Потерял смысл жизни? Попробуй французских экзистенциалистов.">
-                <div class="random_quote_block"><span><b>Lost your raison d'être?<br>Try French existentialists.</b></span></div>
-                <clear>		</clear>
-              </div>
-
-            <!--.search_wrapper.desktop_version
-            img(src='/themes/bootstrap3/images/svg/caron-icon.svg', alt='', enctype="multipart/form-data")
-
-            //input#search(name='search', type='text', placeholder=__("Поиск по сайту"), value=(search ? search : ""))
-
-            .random_quote_block
-                span!=__("<b>Voila!<br>Plato is not<br>greek for you.</b>")
-              -->
-              <div class="work_hours_block">
-                <div class="work_hours_row"><b>Будние дни</b>&nbsp;—&nbsp;с 11.00 до 21.00</div>
-                <div class="work_hours_row work_hours_border"><b>Суббота и предпраздничные дни</b>&nbsp;&mdash;&nbsp;с 11.00 до 19.00</div>
-                <div class="work_hours_row work_hours_border"><b>Воскресенье</b>&nbsp;&mdash;&nbsp;выходной</div>
-                <!--.work_hours_row.work_hours_border
-                b Воскресенье
-                | &nbsp;&mdash;&nbsp;выходной
-              -->
-              <div class="work_hours_row"><b>Санитарный день</b>&nbsp;—&nbsp;последний четверг месяца</div>
-            </div>
+            <? endif; ?>
           </div>
         </div>
-      </header>
-      <div class="hidden-print">
-<? if (isset($this->layout()->srmessage)): // message for benefit of screen-reader users ?>
-                    <span class="sr-only"><?=$this->layout()->srmessage ?></span>
-                    <? endif; ?>
-<a class="sr-only" href="#content"><?=$this->transEsc('Skip to content') ?></a>
-<?=$this->render('header.phtml')?>
-</div>
-<div class="breadcrumbs">
-<div class="container">
-<? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
-    && !empty($this->layout()->breadcrumbs)
-    && $this->layout()->breadcrumbs !== false
-): ?>
-<ul class="breadcrumb hidden-print">
-<? if(is_array($this->layout()->breadcrumbs)): ?>
-<? if(count($this->layout()->breadcrumbs) > 1): ?>
-<?=$this->render('breadcrumbs/multi.phtml', [
-  'parents' => $this->layout()->breadcrumbs,
-  'title'   => $this->layout()->title,
-  'from'    => $this->layout()->from
-  ]) ?>
-<? else: ?>
-<?=$this->render('breadcrumbs/default.phtml', [
-  'parents' => $this->layout()->breadcrumbs,
-  'title'   => $this->layout()->title
-  ]) ?>
-<? endif; ?>
-<? else: ?>
-<?=$this->layout()->breadcrumbs ?>
-<? endif; ?>
-</ul>
-<? endif; ?>
-</div>
-</div>
-<div role="main" class="main">
-<div id="content" class="container">
-  <!-- -->
-<? $cart = $this->cart(); if ($cart->isActive()): ?>
-<div id="cartSummary">
-  <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
-    <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
-    <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
-  </a>
-</div>
-<? endif; ?>
-<!-- -->
-<?=$this->layout()->content ?>
-</div>
-</div>
+        <div role="main" class="main">
+          <div id="content" class="container">
+            <!-- -->
+            <? $cart = $this->cart(); if ($cart->isActive()): ?>
+            <div id="cartSummary">
+              <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
+                <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
+                <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
+              </a>
+            </div>
+          <? endif; ?>
+          <!-- -->
+          <?=$this->layout()->content ?>
+        </div>
+      </div>
 
-<?=$this->render('footer.phtml')?>
-</div>
-<!-- MODAL IN CASE WE NEED ONE -->
-<div id="modal" class="modal fade hidden-print" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
-  </div>
-</div>
-</div>
-<div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc('sidebar_expand') ?>"></i></div>
-<div class="offcanvas-overlay" data-toggle="offcanvas"></div>
-<?=$this->googleanalytics()?>
-<?=$this->piwik()?>
-<? if ($this->recaptcha()->active()): ?>
-<?=$this->inlineScript(\Zend\View\Helper\HeadScript::FILE, "https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit&hl=" . $this->layout()->userLang, 'SET')?>
-<? endif; ?>
-<!-- Begin Me-Talk {literal} --> <script type='text/javascript'> (function(d, w, m) { window.supportAPIMethod = m; var s = d.createElement('script'); s.type ='text/javascript'; s.id = 'supportScript'; s.charset = 'utf-8'; s.async = true; var id = '83d66cc8637fc0056e8995dfec63b74d'; s.src = '//me-talk.ru/support/support.js?h='+id; var sc = d.getElementsByTagName('script')[0]; w[m] = w[m] || function() { (w[m].q = w[m].q || []).push(arguments); }; if (sc) sc.parentNode.insertBefore(s, sc); else d.documentElement.firstChild.appendChild(s); })(document, window, 'MeTalk'); </script> <!-- {/literal} End Me-Talk -->
+      <?=$this->render('footer.phtml')?>
+    </div>
+    <!-- MODAL IN CASE WE NEED ONE -->
+    <div id="modal" class="modal fade hidden-print" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+          <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
+        </div>
+      </div>
+    </div>
+    <div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc('sidebar_expand') ?>"></i></div>
+    <div class="offcanvas-overlay" data-toggle="offcanvas"></div>
+    <?=$this->googleanalytics()?>
+    <?=$this->piwik()?>
+    <? if ($this->recaptcha()->active()): ?>
+    <?=$this->inlineScript(\Zend\View\Helper\HeadScript::FILE, "https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit&hl=" . $this->layout()->userLang, 'SET')?>
+  <? endif; ?>
+  <!-- Begin Me-Talk {literal} --> <script type='text/javascript'> (function(d, w, m) { window.supportAPIMethod = m; var s = d.createElement('script'); s.type ='text/javascript'; s.id = 'supportScript'; s.charset = 'utf-8'; s.async = true; var id = '83d66cc8637fc0056e8995dfec63b74d'; s.src = '//me-talk.ru/support/support.js?h='+id; var sc = d.getElementsByTagName('script')[0]; w[m] = w[m] || function() { (w[m].q = w[m].q || []).push(arguments); }; if (sc) sc.parentNode.insertBefore(s, sc); else d.documentElement.firstChild.appendChild(s); })(document, window, 'MeTalk'); </script> <!-- {/literal} End Me-Talk -->
 </body>
 <script src="/themes/libfl/js/moment-with-locales.min.js"></script>
 <script src="/themes/libfl/js/moment-timezone-with-data-2010-2020.min.js"></script>
 <!--<script src="/themes/libfl/js/jquery-ui.all.min.js"></script>-->
 <script src="/themes/libfl/js/jquery.form.js"></script>
 <script src="/themes/libfl/js/main.js?_=1499547038"></script>
-<script src="/themes/libfl/js/bootstrap-datepicker.min.js"></script>
-<script src="/themes/libfl/js/bootstrap-datepicker.ru.min.js"></script>
+<!--<script src="/themes/libfl/js/bootstrap-datepicker.min.js"></script>
+<script src="/themes/libfl/js/bootstrap-datepicker.ru.min.js"></script>-->
 <script src="/themes/libfl/js/moment-with-locales.min.js"></script>
 </html>
