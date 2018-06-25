@@ -13,7 +13,7 @@
             from = $( "#from" ).datepicker({
                 dateFormat: "dd.mm.yy",
                 changeMonth: true,
-                numberOfMonths: 1,
+                numberOfMonths: 2,
             }).on( "change", function() {
               to.datepicker( "option", "minDate", getDate( this ) );
               $("#<?=$escField?>from").val(dateISO(this));
