@@ -12,7 +12,10 @@
         var dateFormat = "dd.mm.yy",
             from = $( "#from" ).datepicker({
                 dateFormat: "dd.mm.yy",
-                changeMonth: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                showAnim: 'fadeIn',
                 numberOfMonths: 2,
             }).on( "change", function() {
               to.datepicker( "option", "minDate", getDate( this ) );
@@ -20,7 +23,10 @@
             }),
             to = $( "#to" ).datepicker({
                 dateFormat: "dd.mm.yy",
-                changeMonth: true,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                showAnim: 'fadeIn',
                 numberOfMonths: 2
             }).on( "change", function() {
                 from.datepicker( "option", "maxDate", getDate( this ) );
