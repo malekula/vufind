@@ -8,35 +8,35 @@
   <? foreach ($this->ranges as $current): $escField = $this->escapeHtmlAttr($current['field']); ?>
   <? if ($current['type'] == 'arrival') :?>
     <script type="text/javascript">
-    $( function() {
+    $(function() {
         var dateFormat = "dd.mm.yy",
-            from = $( "#from" ).datepicker({
+            from = $("#from").datepicker({
                 dateFormat: "dd.mm.yy",
                 showOtherMonths: true,
                 selectOtherMonths: true,
                 showButtonPanel: true,
                 showAnim: 'fadeIn',
                 numberOfMonths: 2,
-            }).on( "change", function() {
-              to.datepicker( "option", "minDate", getDate( this ) );
+            }).on("change", function() {
+              to.datepicker("option", "minDate", getDate(this));
               $("#<?=$escField?>from").val(dateISO(this));
             }),
-            to = $( "#to" ).datepicker({
+            to = $("#to").datepicker({
                 dateFormat: "dd.mm.yy",
                 showOtherMonths: true,
                 selectOtherMonths: true,
                 showButtonPanel: true,
                 showAnim: 'fadeIn',
                 numberOfMonths: 2
-            }).on( "change", function() {
-                from.datepicker( "option", "maxDate", getDate( this ) );
+            }).on("change", function() {
+                from.datepicker("option", "maxDate", getDate(this));
                 $("#<?=$escField?>to").val(dateISO(this));
             });
-        function getDate( element ) {
+        function getDate(element) {
             var date;
             try {
-                date = $.datepicker.parseDate( dateFormat, element.value );
-            } catch( error ) {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch(error) {
                 date = null;
             }
             return date;
@@ -44,6 +44,16 @@
         function dateISO(element) {
             var date = element.value;
             return new Date(date.replace(/(\d+)\.(\d+)\.(\d+)/, '$3-$2-$1')).toISOString();
+        }
+        function dateRU(dateISO) {
+            //if (!(dateISO = $.parse(dateISO))) return '';
+            return (dateISO.getDate() < 10 ? '0' + dateISO.getDate() : '' + dateISO.getDate()) + '.' + (dateISO.getMonth() + 1 < 10 ? '0' + (dateISO.getMonth() + 1) : '' + (dateISO.getMonth() + 1)) + '.' + dateISO.getFullYear();
+        }
+        if ($("#<?=$escField?>from").val() !== '') {
+            $("#from").val(dateRU(new Date($("#<?=$escField?>from").val())));
+        }
+        if ($("#<?=$escField?>to").val() !== '') {
+            $("#to").val(dateRU(new Date($("#<?=$escField?>to").val())));
         }
     });
     </script>
