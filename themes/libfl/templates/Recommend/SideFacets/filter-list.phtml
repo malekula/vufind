@@ -45,9 +45,11 @@
                             $filter['displayText'] = 'arrivals_year';
                             break;
                         default:
-                            # code...
+                            $filter['displayText'] = date("d.m.Y", strtotime($fromDate)) . ' - ' . date("d.m.Y", strtotime($toDate));
                             break;
                     }
+                } else {
+                    $filter['displayText'] = date("d.m.Y", strtotime($fromDate));
                 }
                 echo $this->transEsc($field) ?>: <?=$this->translate($this->escapeHtml($filter['displayText']));
             else:
