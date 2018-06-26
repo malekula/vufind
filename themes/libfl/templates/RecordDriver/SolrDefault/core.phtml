@@ -1,6 +1,8 @@
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?= $this->driver->getSchemaOrgFormats() ?> Product">
 
     <?
+        $this->headMeta()->appendName('description', $this->driver->getTitle().' | Библиотека иностранной литературы');
+        $this->headMeta()->appendName('keywords', 'Библиотека иностранной литературы ' . $this->driver->getTitle());
         $this->headScript()->appendFile("check_exemplar_statuses.js");
         $QRCode = $this->record($this->driver)->getQRCode("core");
         $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));

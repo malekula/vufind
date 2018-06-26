@@ -1,11 +1,61 @@
 <? if (isset($this->ranges) && !empty($this->ranges)): ?>
+<? $this->headLink()->appendStylesheet("datepicker/jquery-ui.css"); ?>
+<? $this->headScript()->appendFile("datepicker/jquery-ui.js"); ?>
+<? $this->headScript()->appendFile("moment-with-locales.min.js")?>
+<? $this->headScript()->appendFile("moment-timezone-with-data-2010-2020.min.js"); ?>
+
   <? $params = $this->searchParams($this->searchClassId); $params->activateAllFacets(); ?>
   <? foreach ($this->ranges as $current): $escField = $this->escapeHtmlAttr($current['field']); ?>
   <? if ($current['type'] == 'arrival') :?>
     <script type="text/javascript">
-        $(".datepicker").datepicker({
-            changeYear: true
-        });
+    $(function() {
+        var dateFormat = "dd.mm.yy",
+            from = $("#from").datepicker({
+                dateFormat: "dd.mm.yy",
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                showAnim: 'fadeIn',
+                numberOfMonths: 2,
+            }).on("change", function() {
+              to.datepicker("option", "minDate", getDate(this));
+              $("#<?=$escField?>from").val(dateISO(this));
+            }),
+            to = $("#to").datepicker({
+                dateFormat: "dd.mm.yy",
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                showAnim: 'fadeIn',
+                numberOfMonths: 2
+            }).on("change", function() {
+                from.datepicker("option", "maxDate", getDate(this));
+                $("#<?=$escField?>to").val(dateISO(this));
+            });
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch(error) {
+                date = null;
+            }
+            return date;
+        }
+        function dateISO(element) {
+            var date = element.value;
+            return new Date(date.replace(/(\d+)\.(\d+)\.(\d+)/, '$3-$2-$1')).toISOString();
+        }
+        function dateRU(dateISO) {
+            //if (!(dateISO = $.parse(dateISO))) return '';
+            return (dateISO.getDate() < 10 ? '0' + dateISO.getDate() : '' + dateISO.getDate()) + '.' + (dateISO.getMonth() + 1 < 10 ? '0' + (dateISO.getMonth() + 1) : '' + (dateISO.getMonth() + 1)) + '.' + dateISO.getFullYear();
+        }
+        if ($("#<?=$escField?>from").val() !== '') {
+            $("#from").val(dateRU(new Date($("#<?=$escField?>from").val())));
+        }
+        if ($("#<?=$escField?>to").val() !== '') {
+            $("#to").val(dateRU(new Date($("#<?=$escField?>to").val())));
+        }
+    });
     </script>
     <fieldset class="range">
         <legend><?=$this->transEsc($params->getFacetLabel($current['field']))?></legend>
@@ -13,13 +63,13 @@
         <div class="date-fields">
             <div class="date-fields" id="datetimepicker">
                 <div class="date-from">
-                    <!-- datepicker -->
-                    <input type="text" name="<?=$escField?>from" id="<?=$escField?>from" placeholder="1400" value="<?=isset($current['values'][0])?$this->escapeHtmlAttr($current['values'][0]):''?>" class="form-control" />
+                    <input type="text" id="from" class="form-control" />
+                    <input type="text" name="<?=$escField?>from" id="<?=$escField?>from" placeholder="1400" value="<?=isset($current['values'][0])?$this->escapeHtmlAttr($current['values'][0]):''?>" class="form-control" style="display:none" />
                 </div>
                 <span>&mdash;</span>
                 <div class="date-to">
-                    <!-- datepicker -->
-                    <input type="text" name="<?=$escField?>to" id="<?=$escField?>to" placeholder="2019" value="<?=isset($current['values'][1])?$this->escapeHtmlAttr($current['values'][1]):''?>" class="form-control" />
+                    <input type="text" id="to" class="form-control">
+                    <input type="text" name="<?=$escField?>to" id="<?=$escField?>to" placeholder="2019" value="<?=isset($current['values'][1])?$this->escapeHtmlAttr($current['values'][1]):''?>" class="form-control" style="display:none" />
                 </div>
             </div>
         </div>
