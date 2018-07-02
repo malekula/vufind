@@ -414,7 +414,7 @@ class Record extends AbstractHelper
      *
      * @return string
      */
-    public function getCheckbox($idPrefix = '', $formAttr = false)
+    public function getCheckbox($idPrefix = '', $formAttr = false, $checked = false)
     {
         static $checkboxCount = 0;
         $id = $this->driver->getSourceIdentifier() . '|'
@@ -423,6 +423,9 @@ class Record extends AbstractHelper
             = ['id' => $id, 'count' => $checkboxCount++, 'prefix' => $idPrefix];
         if ($formAttr) {
             $context['formAttr'] = $formAttr;
+        }
+        if ($checked) {
+            $context['checked'] = 'checked';
         }
         return $this->contextHelper->renderInContext(
             'record/checkbox.phtml', $context

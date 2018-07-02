@@ -5,10 +5,10 @@
     <li>
       <div class="checkbox">
         <label>
-          <?=$this->record($record)->getCheckbox('cart')?>
+          <?=$this->record($record)->getCheckbox('cart', false, true)?>
           <!--<a title="<?=$this->transEsc('View Record')?>" href="<?=$this->recordLink()->getUrl($record)?>" data-lightbox-ignore><?=$this->escapeHtml($record->getBreadcrumb())?></a>-->
 	  <a title="<?=$this->transEsc('View Record')?>" href="<?=$this->recordLink()->getUrl($record)?>" data-lightbox-ignore><?=$this->escapeHtml($record->getTitle())?></a>
-	  <?php if ($record->getPrimaryAuthor() != '') echo "<span>".$record->getPrimaryAuthor()."</span>";?> 
+	  <?php if ($record->getPrimaryAuthor() != '') echo "<span>".$record->getPrimaryAuthor()."</span>";?>
         </label>
       </div>
     </li>
