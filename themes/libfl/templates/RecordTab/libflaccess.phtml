@@ -259,10 +259,11 @@
                     case '9':
                         switch ($exemplar['exemplar_access_code']) {
                             case '1007':
-                                echo "<ol>"
+                                /*echo "<ol>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-                                    ."</ol>";
+                                    ."</ol>";*/
+                                echo "<p>1." . $this->transEsc($exemplar['exemplar_access_code']."_1") . "</p>";
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
@@ -294,6 +295,7 @@
                                             ."</tr>";
                                     }
                                     echo "</table>";
+                                    echo "<p>2. " . $this->transEsc($exemplar['exemplar_access_code']."_2") . "</p>";
                                 } else {
                                     // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                                 }
