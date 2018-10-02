@@ -150,9 +150,9 @@
             window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1'; // Направляем юзера на страницу с информацией о 30-дневном доступе
         } else { // Если книга уже "на руках"
             if (user_loggedIn) { // Проверяем авторизован ли пользователь?
-                if (exemplar.IDReadersTooked.indexOf(user_loggedIn) !== 1) { // Если книга закреплена за другим пользователем - сообщаем об этом
-                    console.log('Книгу читает другой пользователь!');
-                    window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
+                if (exemplar.IDReadersTooked.indexOf(user_loggedIn) < 0) { // Если книга закреплена за другим пользователем - сообщаем об этом
+                    // window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
+                    window.location.href = '//opac.libfl.ru/personal/OrderElCopy.aspx?pin='+window.location.search.replace( '?', '').split('=')[1].split('_')[1].split('&')[0]+'&idbase=1'; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
                 }
             } else { // Если пользователь не авторизован - отправляем его на авторизацию
                 window.location.href = '//opac.libfl.ru/personal/loginemployee.aspx?ReturnUrl='+encodeURIComponent(window.location);
@@ -195,7 +195,7 @@
         } else {
             var bookPath = exemplar.Path_LQ+exemplar.JPGFiles[index];
         }
-        var url = 'https://cdn.libfl.ru:6684/books/'+bookPath;
+        var url = 'https://cdn.libfl.ru/books/'+bookPath;
         return url;
     };
 
@@ -238,7 +238,7 @@
     var img = new Image();
     //img.src = 'https://cdn.libfl.ru:6684/covers/'+br.getBookFund().toLowerCase()+'/'+br.getBookPIN()+'/cover.jpg';
     if (exemplar.Path_Cover !== '') {
-        br.thumbnail = 'https://cdn.libfl.ru:6684/books/'+exemplar.Path_Cover;
+        br.thumbnail = 'https://cdn.libfl.ru/books/'+exemplar.Path_Cover;
     } else {
         br.thumbnail = '';
     }
