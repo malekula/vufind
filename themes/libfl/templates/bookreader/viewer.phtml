@@ -152,13 +152,15 @@
             if (user_loggedIn) { // Проверяем авторизован ли пользователь?
                 if (user_loggedIn !== exemplar.IDReaderTooked) { // Если книга закреплена за другим пользователем - сообщаем об этом
                     //console.log('Книгу читает другой пользователь!');
-                    window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
+			window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
+			//alert('user_loggedIn: ' + user_loggedIn + ' | IDReaderTooked: ' + exemplar.IDReaderTooked);
                 }
             } else { // Если пользователь не авторизован - отправляем его на авторизацию
                 window.location.href = '//opac.libfl.ru/personal/loginemployee.aspx?ReturnUrl='+encodeURIComponent(window.location);
             }
         }
-        //console.log(getCookie('personal_reader_login'));
+	//console.log('personal_reader_login: ' + getCookie('personal_reader_login'));
+	//console.log('IDReaderTooked: ' + exemplar.IDReaderTooked);
     } else {
         //alert(exemplar.ForAllReader);
     }

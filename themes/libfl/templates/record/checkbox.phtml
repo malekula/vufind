@@ -1,6 +1,6 @@
 <!--<label class="record-checkbox hidden-print">-->
 <label class="fakebox hidden-print">
-  <input class="checkbox-select-item" type="checkbox" name="ids[]" value="<?=$this->escapeHtmlAttr($this->id) ?>"<? if(isset($this->formAttr)): ?> form="<?=$this->formAttr ?>"<? endif; ?>/>
+  <input class="checkbox-select-item" type="checkbox" name="ids[]" value="<?=$this->escapeHtmlAttr($this->id) ?>"<? if(isset($this->formAttr)): ?> form="<?=$this->formAttr ?>"<? endif; ?> <?php if ($this->checked):?>checked<?php endif;?>/>
 
   <div class='fake-checkbox'></div>
 </label>
