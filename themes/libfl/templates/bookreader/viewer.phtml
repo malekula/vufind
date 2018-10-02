@@ -150,8 +150,8 @@
             window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1'; // Направляем юзера на страницу с информацией о 30-дневном доступе
         } else { // Если книга уже "на руках"
             if (user_loggedIn) { // Проверяем авторизован ли пользователь?
-                if (user_loggedIn !== exemplar.IDReaderTooked) { // Если книга закреплена за другим пользователем - сообщаем об этом
-                    //console.log('Книгу читает другой пользователь!');
+                if (exemplar.IDReadersTooked.indexOf(user_loggedIn)) { // Если книга закреплена за другим пользователем - сообщаем об этом
+                    console.log('Книгу читает другой пользователь!');
                     window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
                 }
             } else { // Если пользователь не авторизован - отправляем его на авторизацию
