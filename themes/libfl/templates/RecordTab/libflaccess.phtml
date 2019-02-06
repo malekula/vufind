@@ -143,14 +143,16 @@
                     case '1':
                         echo "<div class='clearfix'>"
                             ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
-                            ."</div>";
+			    ."</div>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '2':
                         echo "<ol>"
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-                        echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+			echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '3':
                         echo "<ol>"
@@ -174,7 +176,8 @@
                             ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_0')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
                             ."</ol>";
                         //echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '6':
                         switch ($exemplar['exemplar_access_code']) {
@@ -245,7 +248,8 @@
                         $sendAccessData['access_group'] = $this->translate($accessGroup);
                         //echo $exemplar['exemplar_access_code']." --> <a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info')."?bookinfo=".json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
                         ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '8':
                         echo "<ol>"
@@ -254,7 +258,8 @@
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"
                             ."</ol>";
                         if (isset($exemplar['exemplar_hyperlink']))
-                            echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+				echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '9':
                         switch ($exemplar['exemplar_access_code']) {
@@ -362,7 +367,8 @@
                             default:
                                 # code...
                                 break;
-                        }
+			}
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '10':
                         echo "<ol>"
@@ -371,7 +377,8 @@
                             ."</ol>";
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '11':
                         echo "<ol>"
@@ -414,7 +421,8 @@
                         }
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '12':
                         echo "<ol>"
@@ -456,7 +464,8 @@
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '13':
                         echo "<ol>"
@@ -466,7 +475,8 @@
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-                        echo "</div>";
+			echo "</div>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '14':
                         switch ($exemplar['exemplar_access_code']) {
@@ -537,7 +547,7 @@
                                 //$sendAccessData['access_group'] = $this->translate($accessGroup);
                                 ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-access', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                                 //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-                                echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+				echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
                                 break;
                             case '1017':
                                 echo "<ol>"
@@ -590,7 +600,8 @@
                                 break;
                             default:
                                 break;
-                        }
+			}
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     default:
                         echo "<ol>"
@@ -639,7 +650,8 @@
                         //$sendAccessData['access_group'] = $this->translate($accessGroup);
                         ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-access', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-                        echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                 }
                 echo "</div>";
