@@ -19,7 +19,19 @@ This file is part of BookReader.
     The BookReader source is hosted at http://github.com/internetarchive/bookreader/
 
 */
-
+var get = window
+    .location
+    .search
+    .replace('?','')
+    .split('&')
+    .reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
 // BookReader()
 //______________________________________________________________________________
 // After you instantiate this object, you must supply the following
@@ -170,8 +182,13 @@ function BookReader() {
     // Experimental Controls (eg b/w)
     this.enableExperimentalControls = false;
 
+    this.book_id = get['bookID'];
+    this.order_id = get['orderID'];
+
     return this;
 };
+
+
 
 (function ($) {
 // init()
@@ -187,6 +204,10 @@ BookReader.prototype.init = function() {
     if (window.location.hash) {
         // params explicitly set in URL
         params = this.paramsFromFragment(window.location.hash);
+    } else if (window.localStorage.getItem(this.book_id)) {
+        params = this.paramsFromFragment(window.localStorage.getItem(this.book_id));
+    } else if (window.localStorage.getItem(get['orderID'])) {
+        params = this.paramsFromFragment(window.localStorage.getItem(this.order_id));
     } else if ('defaults' in this) {
         // params not explicitly set, use defaults if we have them
         params = this.paramsFromFragment(this.defaults);
@@ -5215,6 +5236,11 @@ BookReader.prototype.updateLocationHash = function(skipAnalytics) {
     var newHash = '#' + this.fragmentFromParams(params);
     if (window.location.hash != newHash) {
         window.location.replace(newHash);
+        if (get['orderID']) {
+            window.localStorage.setItem(get['orderID'], newHash);
+        } else if (get['bookID']) {
+            window.localStorage.setItem(get['bookID'], newHash);
+        }
     }
 
     // Send an analytics event if the location hash is changed (page flip or mode change),
