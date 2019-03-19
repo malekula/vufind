@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    setcookie("personal_reader_login", $_COOKIE['personal_reader_login'], time()+60*60, "/", ".libfl.ru");
+    // session_start();
+    // setcookie("personal_reader_login", $_COOKIE['personal_reader_login'], time()+60*60, "/", ".libfl.ru");
     $this->doctype(Zend\View\Helper\Doctype::XHTML1_RDFA);
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.css');
     $this->headLink()->appendStylesheet('mmenu/jquery.mmenu.navbars.css');
@@ -31,36 +31,6 @@
     </noscript>
 </div>-->
 
-<?php
-    ini_set("soap.wsdl_cache_enabled", "0");
-    $client = new SoapClient("https://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
-    $bookID = filter_input(INPUT_GET, 'bookID');
-    try {
-        $getBookInfo = $client->GetBookInfoByID(array('id'=>$bookID));
-    } catch (Exception $e) {
-        echo $e->getMessage()."<br/><br/>";
-    }
-    $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
-    $this->headMeta()->setProperty('og:title', $bookInfo->Title);
-    $this->headMeta()->setProperty('og:description', 'Из фондов Библиотеки иностранной литературы libfl.ru');
-    /*echo "<pre>";
-    print_r($getBookInfo);
-    echo "</pre>";*/
-
-
-    /*ini_set("soap.wsdl_cache_enabled", "0");
-    $client = new SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
-    $bookID = filter_input(INPUT_GET, 'bookID');
-    try {
-        $getBookInfo = $client->GetBookInfoByID(array('id'=>$bookID));
-    } catch (Exception $e) {
-        echo $e->getMessage()."<br/><br/>";
-    }
-    $bookInfo = json_decode($getBookInfo->GetBookInfoByIDResult);
-    $this->headMeta()->setProperty('og:title', $bookInfo->Title);
-    $this->headMeta()->setProperty('og:description', 'Из фондов Библиотеки иностранной литературы libfl.ru');*/
-?>
-
 <div id="IABookReaderWrapper">
     <div id="IABookReaderMessageWrapper" style="display: none;"></div>
     <div id="BookReader" class="ui-full mm-page mm-slideout">
@@ -75,26 +45,26 @@
 
 <!-- Disable mouse buttons -->
 <script type="text/javascript">
-    function clickIE() {
-        if (document.all) {
-            return false;
-        }
-    }
-    function clickNS(e) {
-        if (document.layers || (document.getElementById && !document.all)) {
-            if (e.which == 2 || e.which == 3) {
-                return false;
-            }
-        }
-    }
-    if (document.layers) {
-        document.captureEvents(Event.MOUSEDOWN);
-        document.onmousedown = clickNS;
-    } else {
-        document.onmouseup = clickNS;
-        document.oncontextmenu = clickIE;
-    }
-    document.oncontextmenu = new Function("return false");
+    // function clickIE() {
+    //     if (document.all) {
+    //         return false;
+    //     }
+    // }
+    // function clickNS(e) {
+    //     if (document.layers || (document.getElementById && !document.all)) {
+    //         if (e.which == 2 || e.which == 3) {
+    //             return false;
+    //         }
+    //     }
+    // }
+    // if (document.layers) {
+    //     document.captureEvents(Event.MOUSEDOWN);
+    //     document.onmousedown = clickNS;
+    // } else {
+    //     document.onmouseup = clickNS;
+    //     document.oncontextmenu = clickIE;
+    // }
+    // document.oncontextmenu = new Function("return false");
 </script>
 <!-- //Disable mouse buttons -->
 
@@ -134,36 +104,8 @@
     }
 
     // Set some config variables -- $$$ NB: Config object format has not been finalized
-    var bookInfo = <?php echo $getBookInfo->GetBookInfoByIDResult ?>;
-    var exemplar = [];
-    $.each(bookInfo.Exemplars, function(i, data) {
-        if (data.IsElectronicCopy) {
-            exemplar = data;
-        }
-    });
-
-    if (!exemplar.ForAllReader) { // Если книга выдается на 30 дней
-        var user_loggedIn = getCookie('personal_reader_login');
-        if (exemplar.Status === 'available') { // Если книга свободна
-            //console.log('Книга доступна на 30 дней и никем не занята. Делаем редирект на заказ.');
-            var bookPIN = window.location.search.replace('?','').split('&')[0].split('=')[1].split('_')[1]; // Получаем PIN книги
-            window.location.href = '//opac.libfl.ru/elcir/default.aspx?pin='+bookPIN+'&idbase=1'; // Направляем юзера на страницу с информацией о 30-дневном доступе
-        } else { // Если книга уже "на руках"
-            if (user_loggedIn) { // Проверяем авторизован ли пользователь?
-                if (exemplar.IDReadersTooked.indexOf(user_loggedIn) < 0) { // Если книга закреплена за другим пользователем - сообщаем об этом
-                    // window.location.href = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0]; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
-                    window.location.href = '//opac.libfl.ru/personal/OrderElCopy.aspx?pin='+window.location.search.replace( '?', '').split('=')[1].split('_')[1].split('&')[0]+'&idbase=1'; // Если книга закреплена за другим юзером - перенаправляем на страницу с соответствующим сообщением.
-                }
-            } else { // Если пользователь не авторизован - отправляем его на авторизацию
-                window.location.href = '//opac.libfl.ru/personal/loginemployee.aspx?ReturnUrl='+encodeURIComponent(window.location);
-            }
-        }
-	//console.log('personal_reader_login: ' + getCookie('personal_reader_login'));
-	//console.log('IDReaderTooked: ' + exemplar.IDReaderTooked);
-    } else {
-        //alert(exemplar.ForAllReader);
-    }
-    //console.log(bookInfo);
+    var bookInfo = <?php echo $bookInfo ?>;
+    var exemplar = <?php echo $exemplar ?>;
     var imgWidth = exemplar.WidthFirstFile;
     var imgHeight = exemplar.HeightFirstFile;
     var brConfig = {
