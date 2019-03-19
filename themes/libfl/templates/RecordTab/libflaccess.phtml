@@ -261,7 +261,7 @@
 				echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
 			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
-                    case '9':
+		    case '9':
                         switch ($exemplar['exemplar_access_code']) {
                             case '1007':
                                 /*echo "<ol>"
