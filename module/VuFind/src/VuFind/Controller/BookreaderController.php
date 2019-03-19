@@ -92,6 +92,7 @@ class BookreaderController extends AbstractBase
             $layout->setTemplate('layout/layout');
             $view->setTemplate('bookreader/error.phtml');
             $view->setVariable('error_code', 'E001');
+            $view->setVariable('error_msg', 'isSuccess failed');
             return $view;
         }
 
@@ -141,6 +142,7 @@ class BookreaderController extends AbstractBase
                     $layout->setTemplate('layout/layout');
                     $view->setTemplate('bookreader/error.phtml');
                     $view->setVariable('error_code', 'E001');
+                    $view->setVariable('error_msg', 'isSuccess failed 2');
                     return $view;
                 }
                 // echo '<pre>';
@@ -153,6 +155,7 @@ class BookreaderController extends AbstractBase
                 $layout->setTemplate('layout/layout');
                 $view->setTemplate('bookreader/error.phtml');
                 $view->setVariable('error_code', 'E001');
+                $view->setVariable('error_msg', 'isSuccess failed 3');
                 return $view;
             }
         } else {
@@ -172,6 +175,7 @@ class BookreaderController extends AbstractBase
             $layout->setTemplate('layout/layout');
             $view->setTemplate('bookreader/error.phtml');
             $view->setVariable('error_code', 'E001');
+            $view->setVariable('error_msg', 'isSuccess failed 4');
             return $view;
         }
 
