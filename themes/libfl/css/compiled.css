@@ -171,8 +171,8 @@ input::-moz-focus-inner {
     padding: 0
 }
 
-button, 
-button:active, 
+button,
+button:active,
 button:focus {
     outline: none !important;
 }
@@ -2529,7 +2529,7 @@ select[multiple].input-lg {
         border-bottom: 1px solid #eee;
         vertical-align: middle
     }*/
-    
+
     .form-inline .radio label,
     .form-inline .checkbox label {
         padding-left: 0;
@@ -2568,7 +2568,7 @@ select[multiple].input-lg {
     padding: 0 !important;
     margin-top: 0 !important;
     border-bottom: none;
-}    
+}
 .checkbox>label>a {
     display: block;
     color: #000;
@@ -2581,7 +2581,7 @@ select[multiple].input-lg {
     color: #888a8b;
     font-family: 'Open Sans';
     margin-left: 30px;
-}    
+}
 label .fakebox {
     position: absolute;
     left: 0;
@@ -3216,7 +3216,7 @@ input[type="button"].btn-block {
     border: 3px solid #0000f3;
     border-radius: 4px;
     margin-right: 5px;
-    top: 2px; 
+    top: 2px;
 }
 input[type="checkbox"]:checked + .fake-label {
     background: #0000f3 url('../images/svg/caron-white-icon.svg') center no-repeat;
@@ -3255,7 +3255,7 @@ input[type="checkbox"]:checked + span.checkbox-icon:after {
   height: 11px;
   left: 1px;
   background-color: #0000f3;
-  opacity: 1;  
+  opacity: 1;
 }*/
 .fade {
     opacity: 0;
@@ -4122,7 +4122,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
         display: block !important;
         height: auto !important;
         padding-bottom: 0;
-        overflow: visible !important       
+        overflow: visible !important
     }
     .navbar-collapse.in {
         overflow-y: visible
@@ -5086,7 +5086,7 @@ a.thumbnail.active {
     color: #333
 }
 .alert:first-of-type {
-    margin-top: 35px;    
+    margin-top: 35px;
 }
 .alert,
 .savedLists {
@@ -6242,15 +6242,15 @@ div#tooltip a span {
 }
 div#tooltip a:hover span {
     display: block;
-    position: relative; 
+    position: relative;
     width: 250px;
-    padding: 10px 20px; 
-    margin: 10px; 
+    padding: 10px 20px;
+    margin: 10px;
     z-index: 100;
-    color: black; 
-    background-color: #fff; 
+    color: black;
+    background-color: #fff;
     border: 1px solid #ccc;
-    font-size: 12px; 
+    font-size: 12px;
     text-align: left;
     opacity: none;
 }
@@ -6259,10 +6259,10 @@ div#tooltip a {
 }
 div#tooltip a:hover span {
     display: block;
-    position: absolute; 
+    position: absolute;
     width: 300px;
-    color: #000; 
-    background-color: #fff; 
+    color: #000;
+    background-color: #fff;
     z-index: 100;
     border: 1px solid #d8dbdd;
     font-size: 12px;
@@ -6273,7 +6273,7 @@ div#tooltip a:hover {
     text-indent: 0;
     opacity: 1;
 }
-#tooltip button { 
+#tooltip button {
     cursor: pointer;
     background: #ccd9e1;
     border: 0;
@@ -6311,8 +6311,8 @@ div#tooltip a:hover {
     display: inline-block;
     cursor: pointer;
     padding: 12px 18px;
-    background: #fff;  
-    border-radius: 3px;  
+    background: #fff;
+    border-radius: 3px;
     box-shadow: 0 6px 24px rgba(42, 42, 183, 0.14);
 }
 a.cta_btn {
@@ -6326,7 +6326,7 @@ a.cta_btn {
 .exemplar {
     margin-bottom: 40px;
 }
-.exemplar>.cta_btn {    
+.exemplar>.cta_btn {
     margin-top: 15px;
 }
 /*.access_libraryAccess,
@@ -6398,8 +6398,8 @@ a.cta_btn {
     border: 1px solid #ddd;
 }
 .access_accept {
-    color: #14c59d;  
-    border: 1px solid #b0fbe2;  
+    color: #14c59d;
+    border: 1px solid #b0fbe2;
 }
 .special-note {
     color: #787878;
@@ -6422,7 +6422,7 @@ a.cta_btn {
 .back-to-search:before {
     content: '← ';
     width: 12px;
-    height: 12px;    
+    height: 12px;
 }
 @media (min-width:768px) {
     .modal-dialog {
@@ -10743,11 +10743,11 @@ button.print-all {
     }
     .tab-content h3 {
         margin: 40px 0 15px;
-    }    
+    }
     .cta_btn {
         width: 100%;
         text-align: center;
-    }    
+    }
     .special-note {
         float: left;
     }
@@ -10769,8 +10769,8 @@ button.print-all {
     .delete-all:before {
         content: none;
     }
-    /*table, thead, tbody, th, td, tr { 
-        display: block; 
+    /*table, thead, tbody, th, td, tr {
+        display: block;
     }*/
 }
 
@@ -11690,7 +11690,7 @@ body.rtl .modal-loading {
 /*span.btn-bookbag-toggle {
     background: #fff;
     border-radius: 1px;
-    padding: 5px 12px;    
+    padding: 5px 12px;
     box-shadow: 0px 6px 24px 0 rgba(42, 42, 183, 0.14);
 }*/
 span.cart-link-label {
@@ -14035,7 +14035,7 @@ body {
 @media (min-width:768px) {
     .main .sidebar {
         padding: 0
-    } 
+    }
     .adv-submit.bottomed div {
         margin: 60px 0 40px !important;
     }
@@ -14301,7 +14301,7 @@ ul.random.image li img {
 }
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=cyrillic');
 .breadcrumb, .searchtools, .navbar-header, #searchForm_type, .searchForm button, .searchForm a {
-    display: none !important;
+    /* display: none !important; */
 }
 .main {
     background-color: #ecf1f5;
@@ -14823,7 +14823,7 @@ a, .btn-link {
     font-weight: normal;
     text-transform: uppercase;
     padding: 13px 40px;
-    color: #fff; 
+    color: #fff;
     border: none;
     outline: none;
 }
@@ -15011,5 +15011,3 @@ select#limit_topic_facet {
         height: auto !important;
     }
 }
-
-
