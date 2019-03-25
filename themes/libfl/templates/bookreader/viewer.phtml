@@ -174,7 +174,7 @@
     };
     br.numLeafs = exemplar.CountJPG;
     br.bookTitle = bookInfo.Title;
-    br.bookUrl = '//'+location.host+'/Record/'+window.location.search.replace( '?', '').split('=')[1].split('&')[0];
+    br.bookUrl = '//'+location.host+'/Record/'+bookInfo.ID;
     br.bookUrlText = 'Вернуться к описанию издания';
     br.bookUrlTitle = 'Back to details on book';
     var img = new Image();
