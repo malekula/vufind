@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,700,700i&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700&amp;subset=cyrillic"');
 @font-face {
     font-family: 'Leto Sans';
     src: url('../../bootstrap3/css/fonts/letosans-bold-webfont.svg') format('svg'),
@@ -57,8 +57,9 @@ a {
     color: #0000f3;
     text-decoration: none;
 }
-a:hover {
-    opacity: 0.8;
+a:hover, a:focus {
+    color: #250dc0;
+    transition: color .2s;
 }
 .open_popup {
     cursor: pointer;
@@ -378,6 +379,66 @@ a.float_small_type {
 }
 .switcher_wrapper.list_type {
     margin-bottom: 37px;
+}
+.record_media_buttons {
+    display: flex;
+    margin: 30px 0 55px;
+}
+.btn {
+    cursor: pointer;
+    text-decoration: none!important;
+}
+.btn-blue {
+    width: 160px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .25px;
+    line-height: 20px;
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #0000f3;
+    border-radius: 4px;
+    padding: 10px 0;
+    margin-right: 15px;
+}
+.btn-blue:hover,
+.btn-blue:focus {
+    background-color: #250dc0;
+    transition: background-color .2s;
+}
+.btn-white {
+    width: 160px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .25px;
+    line-height: 20px;
+    color: #0000f3;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: 1px solid #e0e0fa;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,243,.12);
+    padding: 10px 0;
+}
+.btn-white:hover,
+.btn-white:focus {
+    color: #250dc0;
+    box-shadow: 0 2px 5px 0 rgba(0,0,243,.22);
+    transition: color .2s;
+}
+
+.media-body .table>tbody>tr>th,
+.media-body .table>tbody>tr>td {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    color: #232325;
+}
+.media-body .table>tbody>tr>th {
+    width: 180px !important;
+    color: #b4bac1;
 }
 .list_type.wide_content {
     width: 940px;
@@ -4925,6 +4986,11 @@ a.breadcrumb_parent {
     color: #060606;
     background-color: #edeff1;
 }
+
+.navbar-brand {
+    display: none;
+}
+
 
 @media print {
     .scheme_header {

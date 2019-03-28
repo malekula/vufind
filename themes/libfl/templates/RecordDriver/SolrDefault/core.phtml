@@ -45,7 +45,11 @@
             $type_of_record = $this->driver->getFundRecordUID($this->driver->getUniqueId());
             $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
         ?>
-        <div class="record_media_split_line"></div>
+        <div class="record_media_buttons">
+            <a href="" class="btn btn-blue">Добавить в заказ</a>
+            <a href="" class="btn btn-white">Читать книгу</a>
+        </div>
+        <!--<div class="record_media_split_line"></div>-->
             <? if (!empty($coreFields)): ?>
                 <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
                     <? foreach ($coreFields as $key => $current): ?>
@@ -61,6 +65,8 @@
     </div>
     <? if ($QRCode || $cover || $preview): ?>
         <div class="media-right <?= $this->escapeHtmlAttr($coverDetails['size']) ?> img-col">
+
+
             <? /* Display thumbnail if appropriate: */ ?>
             <? if ($cover): ?>
                 <?=$cover ?>
@@ -84,6 +90,17 @@
             <?= $preview ?>
                 </div>
             <? endif; ?>
+
+            <div class="book-availability">
+                <div class="book-availability-note">
+                    <span>Доступность</span><a href="/" class="btn btn-note">?</a>
+                </div>
+
+                <div class="book-availability-status">Бумажный экземпляр</div>
+                <div class="book-availability-status unavailable">Электронный экземпляр</div>
+                <div class="book-availability-status unavailable">В библиотеке</div>
+            </div>
+
         </div>
     <? endif; ?>
 </div>

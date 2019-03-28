@@ -409,48 +409,51 @@ $this->headScript()->appendScript($setupJS);
               <?=$this->render('header.phtml')?>
             </div>
             <div class="breadcrumbs">
-              <div class="container">
-                <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
-                  && !empty($this->layout()->breadcrumbs)
-                  && $this->layout()->breadcrumbs !== false
-                  ): ?>
-                  <ul class="breadcrumb hidden-print">
-                    <? if(is_array($this->layout()->breadcrumbs)): ?>
-                    <? if(count($this->layout()->breadcrumbs) > 1): ?>
-                    <?=$this->render('breadcrumbs/multi.phtml', [
-                      'parents' => $this->layout()->breadcrumbs,
-                      'title'   => $this->layout()->title,
-                      'from'    => $this->layout()->from
-                      ]) ?>
-                    <? else: ?>
-                    <?=$this->render('breadcrumbs/default.phtml', [
-                      'parents' => $this->layout()->breadcrumbs,
-                      'title'   => $this->layout()->title
-                      ]) ?>
+                <div class="content-wrap">
+                    <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
+                      && !empty($this->layout()->breadcrumbs)
+                      && $this->layout()->breadcrumbs !== false
+                      ): ?>
+                        <ul class="breadcrumb hidden-print">
+                            <a href="https://libfl.ru/" class="btn breadcrumb-btn"></a>
+                            <? if(is_array($this->layout()->breadcrumbs)): ?>
+                            <? if(count($this->layout()->breadcrumbs) > 1): ?>
+                            <?=$this->render('breadcrumbs/multi.phtml', [
+                              'parents' => $this->layout()->breadcrumbs,
+                              'title'   => $this->layout()->title,
+                              'from'    => $this->layout()->from
+                              ]) ?>
+                            <? else: ?>
+                            <?=$this->render('breadcrumbs/default.phtml', [
+                              'parents' => $this->layout()->breadcrumbs,
+                              'title'   => $this->layout()->title
+                              ]) ?>
+                            <? endif; ?>
+                          <? else: ?>
+                          <?=$this->layout()->breadcrumbs ?>
+                            <? endif; ?>
+                        </ul>
                     <? endif; ?>
-                  <? else: ?>
-                  <?=$this->layout()->breadcrumbs ?>
-                <? endif; ?>
-              </ul>
-            <? endif; ?>
-          </div>
-        </div>
-        <div role="main" class="main">
-          <div id="content" class="container">
-            <!-- -->
-            <? $cart = $this->cart(); if ($cart->isActive()): ?>
-            <div id="cartSummary">
-              <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
-                <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
-                <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
-              </a>
+                    <!-- -->
+                    <? $cart = $this->cart(); if ($cart->isActive()): ?>
+                    <div id="cartSummary">
+                      <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
+                        <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
+                        <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
+                      </a>
+                    </div>
+                    <? endif; ?>
+                    <!-- -->
+
+                </div>
             </div>
-          <? endif; ?>
-          <!-- -->
+<div role="main" class="main">
+<div id="content" class="container">
           <?=$this->layout()->content ?>
         </div>
       </div>
 
+      <?=$this->render('footer.phtml')?>
       <?=$this->render('footer.phtml')?>
     </div>
     <!-- MODAL IN CASE WE NEED ONE -->
