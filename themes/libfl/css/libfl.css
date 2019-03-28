@@ -407,6 +407,25 @@ a.float_small_type {
     background-color: #250dc0;
     transition: background-color .2s;
 }
+.btn-red {
+    width: 160px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .25px;
+    line-height: 20px;
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #f8541c;
+    border-radius: 4px;
+    padding: 10px 0;
+    margin-right: 15px;
+}
+.btn-red:hover,
+.btn-red:focus {
+    background-color: #dc3f09;
+    transition: background-color .2s;
+}
 .btn-white {
     width: 160px;
     font-size: 12px;
