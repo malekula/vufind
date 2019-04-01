@@ -6,8 +6,8 @@
   if ($cover):
     ob_start(); ?>
     <div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtmlAttr($coverDetails['size'])?>">
-      <!--<?=$cover ?>-->
-      <a data-fancybox="covers" href="" style="display:none"></a><a href="/Record/BJVVV_252814"><img alt="Значок книги" data-linkpreview="true" class="recordcover" src="/themes/libfl/images/678768.jpg"></a>
+      <?=$cover ?>
+      <!--<a data-fancybox="covers" href="" style="display:none"></a><a href="/Record/BJVVV_252814"><img alt="Значок книги" data-linkpreview="true" class="recordcover" src="/themes/libfl/images/678768.jpg"></a>-->
     </div>
     <? $thumbnail = ob_get_contents(); ?>
   <? ob_end_clean(); ?>
