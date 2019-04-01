@@ -118,7 +118,6 @@ input, textarea {
     border: none;
     background: transparent;
     outline: none;
-    font-family: 'Leto Sans';
     font-size: 14px;
     /*color: rgba(66,66,66,0.3);*/
     border-bottom: 1px solid #d5dde3;
@@ -149,7 +148,14 @@ input.error, textarea.error {
     font-weight: 100;
     color: #888
 }
-/**/
+input::placeholder,
+input::-moz-placeholder,
+input::-webkit-input-placeholder,
+input:-ms-input-placeholder,
+input::-ms-input-placeholder {
+    color: red!important;
+}
+
 .float_block {
     margin: 0 0 32px;
     float: left;
@@ -384,6 +390,15 @@ a.float_small_type {
     display: flex;
     margin: 30px 0 55px;
 }
+.record_media_buttons .btn-blue {
+    margin-right: 8px;
+}
+.record_media_buttons .btn-red {
+    margin-right: 8px;
+}
+.record_media_buttons .btn-white {
+    margin-left: 8px;
+}
 .btn {
     cursor: pointer;
     text-decoration: none!important;
@@ -400,12 +415,30 @@ a.float_small_type {
     background-color: #0000f3;
     border-radius: 4px;
     padding: 10px 0;
-    margin-right: 15px;
 }
 .btn-blue:hover,
 .btn-blue:focus {
     background-color: #250dc0;
     transition: background-color .2s;
+}
+.btn-clear-narrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -.47px;
+    line-height: 20px;
+    color: #0000f3;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.btn-clear-narrow:hover,
+.btn-clear-narrow:focus {
+    color: #250dc0;
+    text-decoration: none;
+    border: 1px solid #dedede;
+    transition: border .2s;
 }
 .btn-red {
     width: 160px;
