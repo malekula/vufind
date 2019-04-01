@@ -692,7 +692,7 @@ div#BRslider {
     height: 18px;
     border-radius:2px;
     top: -7px;
-    margin-left: -9px; /* Center icon */
+    /*margin-left: -9px;*/ /* Center icon */
     z-index: 103;
     background-color: #d8d8d8;
     box-shadow: 0 2px 15px 0px rgba(0,0,0,.50)
