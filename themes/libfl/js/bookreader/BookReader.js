@@ -522,12 +522,12 @@ BookReader.prototype.setupTooltips = function() {
         shrinkToFit: true,
         spikeGirth: 5,
         spikeLength: 3,
-        fill: '#4A90E2',
+        fill: '#111112',
         cornerRadius: 0,
         strokeWidth: 0,
         cssStyles: {
           color: 'white',
-          fontSize: '1.25em',
+          fontSize: '1em',
           whiteSpace: 'nowrap'
         },
       }
@@ -2873,7 +2873,7 @@ BookReader.prototype.prepareFlipRightToLeft = function(nextL, nextR) {
     $(this.prefetchedImgs[nextR]).css({
         position: 'absolute',
         left:   gutter+'px',
-        top:    top+'px',
+        //top:    top+'px',
         height: this.twoPage.height,
         width:  scaledW+'px',
         zIndex: 1
@@ -2889,7 +2889,7 @@ BookReader.prototype.prepareFlipRightToLeft = function(nextL, nextR) {
     $(this.prefetchedImgs[nextL]).css({
         position: 'absolute',
         right:   $('#BRtwopageview').prop('clientWidth')-gutter+'px',
-        top:    top+'px',
+        //top:    top+'px',
         height: this.twoPage.height,
         width:  0+'px', // Start at 0 width, then grow to the left
         zIndex: 2
@@ -3720,7 +3720,7 @@ BookReader.prototype.initEmbedNavbar = function() {
         +         '<button class="BRicon book_left"></button>'
         +         '<button class="BRicon book_right"></button>'
         +   "</span>"
-        +   "<a class='logo' href='" + this.logoURL + "' 'target='_blank' ></a>"
+        +   "<a class='back'></a>"
         +   "<span id='BRembedreturn'><a href='" + thisLink + "' target='_blank' ></a></span>"
         + '</div>'
     );
@@ -3738,13 +3738,13 @@ BookReader.prototype.getNavPageNumString = function(index, excludePrefix) {
     if (pageNum[0] == 'n') { // funny index
         pageStr = index + 1 + ' / ' + this.numLeafs; // Accessible index starts at 0 (alas) so we add 1 to make human
     } else {
-        pageStr = pageNum + ' of ' + this.maxPageNum;
-        if (!excludePrefix) pageStr = 'Page ' + pageStr;
+        pageStr = '<span>' + pageNum + '</span>' + ' из ' + this.maxPageNum;
+        //if (!excludePrefix) pageStr = 'Page ' + pageStr;
     }
     return pageStr;
 }
 BookReader.prototype.updateNavPageNum = function(index) {
-    $('.currentpage').text(this.getNavPageNumString(index));
+    $('.currentpage').html(this.getNavPageNumString(index));
 }
 
 /*
@@ -4037,7 +4037,7 @@ BookReader.prototype.buildToolbarElement = function() {
     +   "<span id='BRtoolbarbuttons' >"
     +     "<span class='BRtoolbarLeft'>"
     +       "<span class='BRtoolbarSection BRtoolbarSectionLogo tc'>"
-    +         "<a class='logo' href='" + this.logoURL + "'></a>"
+    +         "<a class='back'></a>"
     +       "</span>"
 
     +       "<span class='BRtoolbarSection BRtoolbarSectionTitle title tl ph10 last'>"
@@ -4240,7 +4240,9 @@ BookReader.prototype.initToolbar = function(mode, ui) {
     }
 
     //--------------------------------------------------------
-
+    $('a.back')
+        .attr({'href': self.bookUrl, 'title': self.bookTitle, 'target':'_blank'})
+    ;
 
     $('#BRreturn a')
       .addClass('BRTitleLink')
@@ -4594,14 +4596,14 @@ BookReader.prototype.bindNavigationHandlers = function() {
                 $('#BRnavCntlBtm').addClass('BRup').removeClass('BRdn');
                 $('#BRnavCntlTop').addClass('BRdn').removeClass('BRup');
                 $('#BRnavCntlBtm.BRnavCntl').animate({height:'45px'});
-                $('.BRnavCntl').delay(1000).animate({opacity:.25}, 1000);
+                //$('.BRnavCntl').delay(1000).animate({opacity:.25}, 1000);
             } else {
                 promises.push($('#BRtoolbar').animate({top:0}).promise());
                 promises.push($('#BRnav').animate({bottom:0}).promise());
                 $('#BRnavCntlBtm').addClass('BRdn').removeClass('BRup');
                 $('#BRnavCntlTop').addClass('BRup').removeClass('BRdn');
                 $('#BRnavCntlBtm.BRnavCntl').animate({height:'30px'});
-                $('.BRvavCntl').animate({opacity:1})
+                //$('.BRvavCntl').animate({opacity:1})
             };
             $.when.apply($, promises).done(function() {
               // Only do full resize in auto mode and need to recalc. size
@@ -5922,7 +5924,7 @@ BookReader.prototype.buildShareDiv = function(jShareDiv)
                   '<input type="text" name="booklink" id="booklink" value="' + bookView + '"/>',
               '</fieldset>',
               '<fieldset class="copyright">',
-                  '<p>Здесь можно написать какой-то текст с правилами копирайта и шары...</p>',
+                  //'<p>Здесь можно написать какой-то текст с правилами копирайта и шары...</p>',
               '</fieldset>',
           '</form>',
         '</div>',

@@ -8,11 +8,11 @@
 }
 
 .BRup {
-    background-image: url("../../images/bookreader/nav_control-up_ia.png");
+    background-image: url("../../images/bookreader/up.svg");
 }
 
 .BRdn {
-    background-image: url("../../images/bookreader/nav_control-dn_ia.png");
+    background-image: url("../../images/bookreader/down.svg");
 }
 
 body, html {

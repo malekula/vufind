@@ -7,25 +7,25 @@
   outline: none;
 }
 #BookReader, .BRfloat {
-  font-family: "Helvetica Neue", Arial, Verdana, sans-serif
+  font-family: 'Open Sans', Arial, Helvetica;
 }
 #BookReader {
   font-size: 67.5%;
   margin: 0;
   padding: 0;
   position:relative;
-  background-color: #3a3b3b;
+  background-color: #111112;
 }
 #BRtoolbar {
     position: absolute;
     top: 0;
     left: 0;
     padding: 0;
-    height: 50px;
+    height: 48px;
     width: 100%;
     z-index: 100;
-    background-color: rgb(247,247,247);
-    -webkit-box-shadow: 0 1px 3px #999;
+    background-color: #111112;
+    /*-webkit-box-shadow: 0 1px 3px #999;*/
     /* Shadow here on FF causes scroll bars */
     /*overflow: hidden;*/
 }
@@ -34,11 +34,12 @@
     color: #999;
 }
 #BRtoolbar a {
-    color: rgb(74, 144, 226); /* theme's blue */
+    color: #fff; /* theme's blue */
     text-decoration:none;
 }
 #BRtoolbar a:hover {
-  color: rgb(94, 163, 244);
+  opacity: .8;
+  transition: opacity .2s;
 }
 #BRtoolbar a:active {
   color: rgb(55, 123, 201);
@@ -50,7 +51,7 @@
   width:100%;
   height:100%;
   /*height: 43px;*/
-  border-bottom: 2px solid rgb(209,209,209);
+  border-bottom: 1px solid #313131;
   box-sizing: border-box;
 }
 #BRcontainer {
@@ -156,6 +157,7 @@
 }
 
 .BRleafEdgeR {
+    display: none!important;
     /*
     border-style: solid solid solid none;
     border-color: rgb(51, 51, 34);
@@ -166,6 +168,7 @@
 }
 
 .BRleafEdgeL {
+    display: none!important;
     /*
     border-style: solid none solid solid;
     border-color: rgb(51, 51, 34);
@@ -216,11 +219,13 @@
 }
 #BRreturn {
     color: #333;
-    font-size: 14px;
-    line-height:18px;
-    height: 100%;
+    font-size: 12px;
+    letter-spacing: -.02px;
+    line-height:17px;
+    height: auto;
+    /*height: 100%;*/
     overflow-y: hidden;
-    padding-top:7px;
+    padding-top:14px;
     display:block;
     position: absolute;
 }
@@ -229,8 +234,12 @@
     /*color: #036daa;*/
     overflow: hidden;
 }
+#BRreturn a:hover {
+    opacity: .8;
+    transition: opacity .2s;
+}
 .BRreturnTitle {
-  font-size: 18px;
+  font-size: 12px;
   font-weight:bold;
 }
 .BRicon {
@@ -260,28 +269,28 @@
 }
 i.BRicon { display: inline-block; }
 .BRicon.logo {background-position:0 0;}
-.BRicon.info {background-position:-40px 0;}
-.BRicon.share {background-position:-120px 0;}
+.BRicon.info {background: url(../../images/bookreader/info.svg) center no-repeat; background-size: 21px;}
+.BRicon.share {background: url(../../images/bookreader/share.svg) center no-repeat; background-size: 17px;}
 .BRicon.read {background-position:-200px 0;}
 .BRicon.unread {background-position:-280px 0;}
 .BRicon.full {background-position:-360px 0;}
-.BRicon.HQ-icon {background-position:-1840px 0;}
-.BRicon.LQ-icon {background-position:-1920px 0;}
-.BRicon-disabled.HQ-icon {background-position:-1840px 0;}
-.BRicon-disabled.LQ-icon {background-position:-1920px 0;}
-.BRicon.HQ-icon-active {background-position:-1880px 0;}
-.BRicon.LQ-icon-active {background-position:-1960px 0;}
-.BRicon-disabled.HQ-icon-active {background-position:-1840px 0;}
-.BRicon-disabled.LQ-icon-active {background-position:-1920px 0;}
+.BRicon.HQ-icon {background: url(../../images/bookreader/hq.svg) center no-repeat; background-size: 21px;}
+.BRicon.LQ-icon {background: url(../../images/bookreader/lq.svg) center no-repeat; background-size: 21px;}
+.BRicon-disabled.HQ-icon {background: url(../../images/bookreader/hq.svg) center no-repeat; background-size: 21px;}
+.BRicon-disabled.LQ-icon {background: url(../../images/bookreader/lq.svg) center no-repeat; background-size: 21px;}
+.BRicon.HQ-icon-active {background: url(../../images/bookreader/hq.svg) center no-repeat; background-size: 21px;}
+.BRicon.LQ-icon-active {background: url(../../images/bookreader/lq.svg) center no-repeat; background-size: 21px;}
+.BRicon-disabled.HQ-icon-active {background: url(../../images/bookreader/hq.svg) center no-repeat; background-size: 17px;}
+.BRicon-disabled.LQ-icon-active {background: url(../../images/bookreader/lq.svg) center no-repeat; background-size: 17px;}
 .BRicon.book_left {background-position:-440px 0;}
 .BRicon.book_right {background-position:-520px 0;}
-.BRicon.zoom_out {background-position:-600px 0;}
-.BRicon.zoom_in {background-position:-680px 0;}
+.BRicon.zoom_out {background: url(../../images/bookreader/zoom-in.svg) center no-repeat; background-size: 21px;}
+.BRicon.zoom_in {background: url(../../images/bookreader/zoom-out.svg) center no-repeat; background-size: 21px;}
 .BRicon.play {background-position:-760px 0;}
 .BRicon.pause {background-position:-840px 0;}
-.BRicon.twopg {background-position:-920px 0;}
-.BRicon.onepg {background-position:-1000px 0;}
-.BRicon.thumb {background-position:-1080px 0;}
+.BRicon.twopg {background: url(../../images/bookreader/two.svg) center no-repeat; background-size: 28px;}
+.BRicon.onepg {background: url(../../images/bookreader/one.svg) center no-repeat; background-size: 14px;}
+.BRicon.thumb {background: url(../../images/bookreader/four.svg) center no-repeat; background-size: 17px;}
 .BRicon.fit {background-position:-1160px 0;}
 .BRicon.fit:hover {background-position:-1200px 0;}
 .BRicon.download {background-position:-1520px 0;}
@@ -292,22 +301,22 @@ i.BRicon { display: inline-block; }
 .BRicon.twitter {background-position:-1640px 0;}
 .BRicon.email {background-position:-1680px 0;}
 
-.no-touch .BRicon.info:hover {background-position:-80px 0;}
-.no-touch .BRicon.share:hover {background-position:-160px 0;}
+.no-touch .BRicon.info:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.share:hover {opacity: .8; transition: opacity .2s;}
 .no-touch .BRicon.read:hover {background-position:-240px 0;}
 .no-touch .BRicon.unread:hover {background-position:-320px 0;}
 .no-touch .BRicon.full:hover {background-position:-400px 0;}
-.no-touch .BRicon.HQ-icon:hover {background-position:-1880px 0;}
-.no-touch .BRicon.LQ-icon:hover {background-position:-1960px 0;}
-.no-touch .BRicon.book_left:hover {background-position:-480px 0;}
-.no-touch .BRicon.book_right:hover {background-position:-560px 0;}
-.no-touch .BRicon.zoom_out:hover {background-position:-640px 0;}
-.no-touch .BRicon.zoom_in:hover {background-position:-720px 0;}
+.no-touch .BRicon.HQ-icon:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.LQ-icon:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.book_left:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.book_right:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.zoom_out:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.zoom_in:hover {opacity: .8; transition: opacity .2s;}
 .no-touch .BRicon.play:hover {background-position:-800px 0;}
 .no-touch .BRicon.pause:hover {background-position:-880px 0;}
-.no-touch .BRicon.twopg:hover {background-position:-960px 0;}
-.no-touch .BRicon.onepg:hover {background-position:-1040px 0;}
-.no-touch .BRicon.thumb:hover {background-position:-1120px 0;}
+.no-touch .BRicon.twopg:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.onepg:hover {opacity: .8; transition: opacity .2s;}
+.no-touch .BRicon.thumb:hover {opacity: .8; transition: opacity .2s;}
 .no-touch .BRicon.download:hover {background-position:-1560px 0;}
 .no-touch .BRicon.return:hover {background-position:-1480px 0;}
 
@@ -330,15 +339,18 @@ i.BRicon { display: inline-block; }
 .touch .BRicon.download:active {background-position:-1560px 0;}
 .touch .BRicon.return:active {background-position:-1480px 0;}
 
-a.logo {
+a.back {
   display: inline-block;
-  width: 50px;
-  height: 38px;
-  margin: 0 25px;
-  /*background: transparent url(../../images/bookreader/icon_home.svg) no-repeat center center;*/
-  background: transparent url('http://libfl.ru/images/svg/tilde-icon.svg') no-repeat center center;
-  background-size: contain;
-  margin-top: 7px;
+    width: 31px;
+    height: 31px;
+    background: #3b3b41 url(../../images/bookreader/arrow-back.svg) center no-repeat;
+    background-size: 18px;
+    border-radius: 11px;
+    margin: 8px;
+}
+a.back:hover, a.back:focus {
+    background-color: #53535c;
+    transition: background-color .2s;
 }
 a.popOff {
     position: absolute;
@@ -592,27 +604,41 @@ div#BRpage {
     margin-right: 4px;
 }
 div#BRpage .BRicon.book_left {
-  border-bottom-left-radius: 5px;
+  /*border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   border-right: 2px solid rgb(193,193,193);
-  box-sizing: content-box;
+  box-sizing: content-box;*/
+    width: 30px;
+    height: 30px;
+    background: #0000f3 url("../../images/bookreader/down-white.svg") center no-repeat;
+    background-size: 11px;
+    border-radius: 25px;
+    transform: rotate(90deg);
+    margin-right: 5px;
 }
 div#BRpage .BRicon.book_right {
-  border-bottom-right-radius: 5px;
+  /*border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
-  box-sizing: content-box;
+  box-sizing: content-box;*/
+    width: 30px;
+    height: 30px;
+    background: #0000f3 url("../../images/bookreader/down-white.svg") center no-repeat;
+    background-size: 11px;
+    border-radius: 25px;
+    transform: rotate(-90deg);
+    margin-left: 5px;
 }
 div#BRpage .BRicon.onepg {
-  border-bottom-left-radius: 5px;
+  /*border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   border-right: 2px solid rgb(193,193,193);
-  box-sizing: content-box;
+  box-sizing: content-box;*/
 }
 div#BRpage .BRicon.thumb {
-  border-bottom-right-radius: 5px;
+  /*border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
   border-left: 2px solid rgb(193,193,193);
-  box-sizing: content-box;
+  box-sizing: content-box;*/
 }
 
 div#BRnav {
@@ -621,13 +647,12 @@ div#BRnav {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;
-    padding-top:5px;
+    height: 40px;
     overflow: visible;
     z-index: 100;
-    background-color: rgb(247,247,247);
-
-    -webkit-box-shadow: 1px 1px 2px #333;
+    background-color: #111112;
+    border-top: 1px solid #313131;
+    /*-webkit-box-shadow: 1px 1px 2px #333;*/
     /* No shadow for FF, to be consistent with toolbar */
     _position:absolute;
     _top: expression(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight);
@@ -647,11 +672,11 @@ div#BRpager {
     /* Account for padding around nav line */
     margin-left: 10px;
     margin-right: 10px;
-    height: 14px;
-    top: 14px;
-    background-color: rgb(216,216,216);
-    border-radius: 10px;
-    box-shadow: inset 0px 1px 1px 0px rgba(155,154,155,0.39)
+    height: 3px;
+    top: 15px;
+    background-color: #5f5f5f;
+    border-radius: 2px;
+    /*box-shadow: inset 0px 1px 1px 0px rgba(155,154,155,0.39)*/
 }
 div#BRslider {
     position: absolute;
@@ -661,14 +686,16 @@ div#BRslider {
 
 /* XXXmang verify correct use of handle class */
 #BRpager .ui-slider-handle {
+    cursor: pointer;
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius:50%;
-    top: -2px;
+    width: 9px;
+    height: 18px;
+    border-radius:2px;
+    top: -7px;
     margin-left: -9px; /* Center icon */
     z-index: 103;
-    background-color: rgb(36,94,131);
+    background-color: #d8d8d8;
+    box-shadow: 0 2px 15px 0px rgba(0,0,0,.50)
 }
 /* handle active state for touch */
 .touch #BRpager .ui-slider-handle.ui-state-active {
@@ -679,7 +706,7 @@ div#BRslider {
 }
 
 #BRpager .ui-slider-range {
-    background: #90A2B6;
+    background: #878787;
     height: 100%;
     border-radius: 10px;
 }
@@ -709,13 +736,19 @@ div#BRnavline {
 
 #BRcurrentpageWrapper {
   position: absolute;
+  top: 2px;
+  right: 230px;
   width: 100%;
-  text-align: center;
-  padding: 0 0 0 0;
-  font-size: 1.1em;
-  top: 5px;
+  text-align: right;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -.02px;
+  color: #73787d;
 }
-
+span.currentpage span {
+    color: #b4bac1;
+}
 
 div#BRfiller {
     position: absolute;
@@ -975,22 +1008,23 @@ div#BRzoombtn {
 }
 
 .BRnavCntl {
-    background-color: #868686;
+    background-color: #3a3a3a;
     position: absolute;
     right: 20px;
-    width: 40px;
-    height: 30px;
+    width: 32px;
+    height: 26px;
     cursor: pointer;
 }
 #BRnavCntlBtm {
-    bottom: 50px;
-    -moz-border-radius-topright: 8px;
-    -webkit-border-top-right-radius: 8px;
-    -moz-border-radius-topleft: 8px;
-    -webkit-border-top-left-radius: 8px;
+    bottom: 40px;
+    -moz-border-radius-topright: 7px;
+    -webkit-border-top-right-radius: 7px;
+    -moz-border-radius-topleft: 7px;
+    -webkit-border-top-left-radius: 7px;
 }
 #BRnavCntlBtm:hover {
-    background-color: rgb(74, 144, 226);
+    opacity: .8;
+    transition: opacity .2s;
 }
 #BRnavCntlTop {
     top: 40px;
@@ -1001,18 +1035,20 @@ div#BRzoombtn {
     display: none;
 }
 .BRup {
-    background-image: url("../../images/bookreader/nav_control-up.png");
+    background-image: url("../../images/bookreader/up.svg");
     background-repeat: no-repeat;
+    background-size: 11px;
 }
 .BRdn {
-    background-image: url("../../images/bookreader/nav_control-dn.png");
+    background-image: url("../../images/bookreader/down.svg");
     background-repeat: no-repeat;
+    background-size: 11px;
 }
 #BRnavCntlBtm.BRup,#BRnavCntlBtm.BRdn {
-    background-position: 8px 4px;
+    background-position: center 10px;
 }
 #BRnavCntlTop.BRup,#BRnavCntlTop.BRdn {
-    background-position: 8px 4px;
+    background-position: center 10px;
 }
 
 
@@ -1197,10 +1233,10 @@ body.high-contrast #BRtwopageview img {
 .BRtoolbarSection {
   display: block;
   float: left;
-  border-right: 2px solid #e3e3e3;
+  /*border-right: 2px solid #e3e3e3;*/
   white-space: nowrap;
   height:100%;
-  background-color: rgb(247,247,247);
+  /*background-color: rgb(247,247,247);*/
 }
 .BRtoolbarSection.last {
   border-right:none;
@@ -1224,7 +1260,7 @@ body.high-contrast #BRtwopageview img {
   right:0;
   top:0;
   display:block;
-  border-left: 2px solid #e3e3e3;
+  /*border-left: 2px solid #e3e3e3;*/
   height:100%;
 }
 
