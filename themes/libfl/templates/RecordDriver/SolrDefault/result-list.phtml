@@ -8,8 +8,26 @@
     <div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtmlAttr($coverDetails['size'])?>">
       <?=$cover ?>
       <div class="book-carrier">
-        <div class="e-book" title="Электронная книга"></div>
-        <div class="printed-book" title="Печатный экземпляр"></div>
+          <?
+            $formats = array_unique($this->driver->getFormats());
+            foreach ($formats as $format_code) {
+                switch ($format_code) {
+                    case '3000': echo "<div class='' title='Аудиокассета'>?</div>"; break;
+                    case '3001': echo "<div class='printed-book' title='Печатный экземпляр'></div>"; break;
+                    case '3002': echo "<div class='' title='Видеокассета'>?</div>"; break;
+                    case '3003': echo "<div class='' title='Грампластинка'>?</div>"; break;
+                    case '3004': echo "<div class='' title='Дискета'>?</div>"; break;
+                    case '3005': echo "<div class='' title='Комплект(бумага+)'>?</div>"; break;
+                    case '3006': echo "<div class='' title='Магнитная лента'>?</div>"; break;
+                    case '3007': echo "<div class='' title='Микрофильм'>?</div>"; break;
+                    case '3008': echo "<div class='' title='Микрофиша'>?</div>"; break;
+                    case '3009': echo "<div class='' title='СD/DVD'>?</div>"; break;
+                    case '3010': echo "<div class='' title='Слайд'>?</div>"; break;
+                    case '3011': echo "<div class='e-book' title='Электронная копия'></div>"; break;
+                    case '3012': echo "<div class='e-book' title='Электронное издание'></div>"; break;
+                }
+            }
+          ?>
       </div>
     </div>
     <? $thumbnail = ob_get_contents(); ?>
@@ -21,7 +39,7 @@
   <div class="media-body">
     <div class="result-body">
         <div class="result-formats">
-            <?//=$this->record($this->driver)->getFormatList() ?>
+            <?=$this->record($this->driver)->getFormatList() ?>
             <?=$this->record($this->driver)->getFormatList();?>
             <? if (!$openUrlActive && empty($urls) && $this->driver->supportsAjaxStatus()): ?>
                 <span class="status ajax-availability hidden">
