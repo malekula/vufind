@@ -51,7 +51,7 @@
             <?
                 $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
                 if ($accessMethod['protection'] == 0) {
-                    echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('Add to Book Bag')."</a>";
+                    echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
                 }
             ?>
         </div>
