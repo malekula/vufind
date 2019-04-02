@@ -172,22 +172,24 @@ class StatusController extends AbstractBase
      */
     protected function getBookStatusesAjax()
     {
+        $config = $this->getConfig();
         $this->disableSessionWrites();  // avoid session write timing bug
         $ILS = $this->getILS();
         $bookID = $this->params()->fromPost('id', $this->params()->fromQuery('id'));
         $getStatuses = $ILS->getStatuses($bookID);
-        $results = json_decode($getStatuses->GetBookStatusResult);
-        switch ($results->availability) {
-            case 'available':
-                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
-                break;
-            case 'unavailable':
-                $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
-                break;
-            default:
-                $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
-                break;
-        }
+        $results = json_decode($getStatuses);
+        // switch ($results->availability) {
+        //     case 'available':
+        //         $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+        //         break;
+        //     case 'unavailable':
+        //         $results->availability_message = "<span class='label status-".$results->availability."'>".$this->translate('status_'.$results->availability)."</span>";
+        //         break;
+        //     default:
+        //         $results->availability_message = "<span class='label status-unknown'>".$this->translate('status_unknown')."</span>";
+        //         break;
+        // }
+        // return $this->output($results, self::STATUS_OK);
         return $this->output($results, self::STATUS_OK);
     }
 

@@ -27,7 +27,7 @@
  * @link     https://vufind.org/wiki/development:plugins:ils_drivers Wiki
  */
 namespace VuFind\ILS\Driver;
-
+use Zend\Http\Client;
 /**
  * Lightweight Dummy ILS Driver -- Always returns hard-coded sample values.
  *
@@ -85,12 +85,43 @@ class LIBFL extends AbstractBase
      */
     public function getStatuses($bookID)
     {
+        $map = array();
+        $exemplars = array();
+        $statuses = array();
         try {
-            $status = $this->soap->GetBookStatus(array("id"=>$bookID));
+            // $status = $this->soap->GetBookStatus(array("id"=>$bookID));
+            $alis_host = $this->config['ALIS']['alis_host'];
+            $client = new Client($alis_host . '/ALISAPI/ReferenceBook/AccessCodeToOrderType', array(
+                'maxredirects' => 0,
+                'timeout' => 30
+            ));
+            $client->setMethod('GET');
+            $response = $client->send();
+            if ($response->isSuccess()) {
+                $map = json_decode($response->getBody());
+            } else {
+                return false;
+            }
+
+            $client = new Client($alis_host . '/ALISAPI/Books/' . $bookID, array(
+                'maxredirects' => 0,
+                'timeout' => 30
+            ));
+            $client->setMethod('GET');
+            $response = $client->send();
+            if ($response->isSuccess()) {
+                $bookInfo = json_decode($response->getBody());
+            } else {
+                return false;
+            }
+
+            foreach ($bookInfo->Exemplars as $k => $exemplar) {
+                $statuses['access_method_' . $map->{$exemplar->AccessCode}] = 'available';
+            }
         } catch (Exception $e) {
             $status = $e->getMessage();
         }
-        return $status;
+        return json_encode($statuses);
     }
 
     /**

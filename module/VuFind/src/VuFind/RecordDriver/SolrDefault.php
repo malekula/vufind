@@ -28,6 +28,7 @@
  */
 namespace VuFind\RecordDriver;
 use VuFindCode\ISBN, VuFind\View\Helper\Root\RecordLink;
+use Zend\Http\Client;
 
 /**
  * Default model for Solr records -- used when a more specific model based on
@@ -2206,5 +2207,28 @@ class SolrDefault extends AbstractBase
     public function supportsAjaxStatus()
     {
         return true;
+    }
+
+    public function checkCopyright($bookID)
+    {
+        $alis_host = $this->mainConfig->ALIS->alis_host;
+        $client = new Client($alis_host . '/ALISAPI/Books/' . $bookID, array(
+            'maxredirects' => 0,
+            'timeout' => 30
+        ));
+        $client->setMethod('GET');
+        $response = $client->send();
+        if ($response->isSuccess()) {
+            $bookInfo = json_decode($response->getBody());
+            foreach ($bookInfo->Exemplars as $exemplar) {
+                if ($exemplar->AccessCode == 1001) {
+                    return array('protection'=>'0', 'viewerURL'=>$exemplar->BookUrl);
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 }

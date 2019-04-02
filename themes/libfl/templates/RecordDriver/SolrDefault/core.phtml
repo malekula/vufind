@@ -4,6 +4,7 @@
         $this->headMeta()->appendName('description', $this->driver->getTitle().' | Библиотека иностранной литературы');
         $this->headMeta()->appendName('keywords', 'Библиотека иностранной литературы ' . $this->driver->getTitle());
         $this->headScript()->appendFile("check_exemplar_statuses.js");
+        $this->headScript()->appendFile("check_book_statuses.js");
         $QRCode = $this->record($this->driver)->getQRCode("core");
         $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
         $cover = $coverDetails['html-record'];
@@ -46,8 +47,13 @@
             $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
         ?>
         <div class="record_media_buttons">
-            <a href="" class="btn btn-blue">Добавить в заказ</a>
-            <a href="" class="btn btn-white">Читать книгу</a>
+            <?=$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);?>
+            <?
+                $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
+                if ($accessMethod['protection'] == 0) {
+                    echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('Add to Book Bag')."</a>";
+                }
+            ?>
         </div>
         <!--<div class="record_media_split_line"></div>-->
             <? if (!empty($coreFields)): ?>
@@ -93,10 +99,12 @@
                 <div class="book-availability-note">
                     <span>Доступность</span><a href="/" class="btn btn-note">?</a>
                 </div>
-
-                <div class="book-availability-status">Бумажный экземпляр</div>
-                <div class="book-availability-status unavailable">Электронный экземпляр</div>
-                <div class="book-availability-status unavailable">В библиотеке</div>
+                <div class="access_method_1 book-availability-status unavailable">На дом</div>
+                <div class="access_method_2 book-availability-status unavailable">В библиотеке</div>
+                <div class="access_method_3 book-availability-status unavailable">Удаленный доступ</div>
+                <!-- <div class="access_method_4 book-availability-status unavailable">????</div>
+                <div class="access_method_5 book-availability-status unavailable">????</div>
+                <div class="access_method_6 book-availability-status unavailable">????</div> -->
             </div>
 
         </div>
