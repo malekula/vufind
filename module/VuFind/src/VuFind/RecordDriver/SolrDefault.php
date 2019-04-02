@@ -2224,11 +2224,11 @@ class SolrDefault extends AbstractBase
                 if ($exemplar->AccessCode == 1001) {
                     return array('protection'=>'0', 'viewerURL'=>$exemplar->BookUrl);
                 } else {
-                    return false;
+                    return array('protection'=>'1');
                 }
             }
         } else {
-            return false;
+            return 'false';
         }
     }
 }
