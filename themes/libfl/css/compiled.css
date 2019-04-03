@@ -12215,7 +12215,7 @@ header .container.navbar {
     .result .media-left.medium>a,
     .record .media-left.medium>img,
     .result .media-left.medium>img {
-        width: 100px;
+        /*width: 100px;*/
     }
     .record .media-right.medium>a,
     .result .media-right.medium>a,

@@ -211,7 +211,7 @@ $this->headScript()->appendScript($setupJS);
         <button type="button" class="hamburger hamburger--squeeze">
           <span class="hamburger-box"><span class="hamburger-inner"></span></span>
         </button>
-        <a href="/" class="logo_wrapper"><img src="/images/svg/breve-icon.svg" alt=""></a>
+        <a href="/" class="logo_wrapper"><img src="/themes/libfl/images/svg/breve-icon.svg" alt=""></a>
       </div>
 
       <div id="nav" class="clear">
@@ -287,7 +287,9 @@ $this->headScript()->appendScript($setupJS);
                 <a href="http://libfl.ru/ru/item/about" class="link menu__link">О библиотеке</a>
               </li>
 
-              <a href="http://opac.libfl.ru/WebReaderT/" id="become-member" class="menu__link link_blue" target="_blank">Стать читателем</a>
+
+              <a id="become-member" href="http://opac.libfl.ru/WebReaderT/" class="menu__item link link_blue">Стать читателем</a>
+              <a id="become-member" href="/" style="display:none;" class="become_icon"></a>
               <!--<a href="http://opac.libfl.ru/WebReaderT/" id="become-member" class="menu__link link_blue" target="_blank">Стать читателем</a>-->
             </ul>
           </div>
@@ -453,7 +455,6 @@ $this->headScript()->appendScript($setupJS);
         </div>
       </div>
 
-      <?=$this->render('footer.phtml')?>
       <?=$this->render('footer.phtml')?>
     </div>
     <!-- MODAL IN CASE WE NEED ONE -->
