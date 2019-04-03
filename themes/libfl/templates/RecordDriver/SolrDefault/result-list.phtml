@@ -9,7 +9,7 @@
       <?=$cover ?>
       <div class="book-carrier">
           <?
-            $formats = array_unique($this->driver->getFormats());
+            $formats = array_unique($this->driver->getExemplarsCarrier());
             foreach ($formats as $format_code) {
                 switch ($format_code) {
                     case '3000': echo "<div class='' title='Аудиокассета'>?</div>"; break;

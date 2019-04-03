@@ -552,7 +552,7 @@ class SolrDefault extends AbstractBase
      */
     public function getFormats()
     {
-        return isset($this->fields['format']) ? $this->fields['format'] : ['n/a'];
+        return isset($this->fields['exemplar_carrier']) ? $this->fields['exemplar_carrier'] : ['n/a'];
     }
 
     /**
@@ -2230,5 +2230,18 @@ class SolrDefault extends AbstractBase
         } else {
             return 'false';
         }
+    }
+
+    public function getExemplarsCarrier()
+    {
+        $getExemplar = isset($this->fields['Exemplar']) ? $this->fields['Exemplar'] : false;
+        $carrier = array();
+        if (is_array($getExemplar)) {
+            $exemplars = json_decode($getExemplar[0]);
+            foreach ($exemplars as $id => $exemplar) {
+                $carrier[$id] = $exemplar->exemplar_carrier;
+            }
+        }
+        return $carrier;
     }
 }
