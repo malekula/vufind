@@ -552,7 +552,7 @@ class SolrDefault extends AbstractBase
      */
     public function getFormats()
     {
-        return isset($this->fields['exemplar_carrier']) ? $this->fields['exemplar_carrier'] : ['n/a'];
+        return isset($this->fields['format']) ? $this->fields['format'] : ['n/a'];
     }
 
     /**
