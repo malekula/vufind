@@ -62,8 +62,10 @@ function checkBookStatuses() {
     var bookID = $('.hiddenId').val();
     getBookStatus(bookID)
     .done(function (result) {
-        $.each(result.data, function (index, status) {
-            $('.' + index).removeClass('unavailable').addClass(status);
+        // console.log(result);
+        $.each(result.data, function (index, info) {
+            console.log(info);
+            $('.m' + info[0]).removeClass('unavailable hidden').addClass(info[2]);
         });
     })
 }

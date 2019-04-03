@@ -115,8 +115,9 @@ class LIBFL extends AbstractBase
                 return false;
             }
 
-            foreach ($bookInfo->Exemplars as $k => $exemplar) {
-                $statuses['access_method_' . $map->{$exemplar->AccessCode}] = 'available';
+            foreach ($bookInfo->Exemplars as $exemplar) {
+                // $statuses['access_method_' . $map->{$exemplar->AccessCode}] = 'available';
+                $statuses[$exemplar->ID] = array($exemplar->MethodOfAccessCode, $exemplar->MethodOfAccess, $exemplar->AvailabilityStatus);
             }
         } catch (Exception $e) {
             $status = $e->getMessage();
