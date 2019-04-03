@@ -26,7 +26,6 @@
             <?= $this->truncate($annotation, 10000) ?>
         <!--
             <p><?= $this->truncate($annotation, 300) ?></p>
-
             <? if (strlen($annotation) > 300): ?>
                 <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
             <? endif; ?>
@@ -99,9 +98,9 @@
                 <div class="book-availability-note">
                     <span>Доступность</span><a href="/" class="btn btn-note">?</a>
                 </div>
-                <div class="m4001 book-availability-status">На дом</div>
+                <div class="m4001 book-availability-status">Бумажный экземпляр</div>
+                <div class="m4002 book-availability-status busy">Электронный экземпляр</div>
                 <div class="m4000 book-availability-status unavailable">В библиотеке</div>
-                <div class="m4002 book-availability-status busy">Удаленный доступ</div>
                 <!-- <div class="access_method_4 book-availability-status unavailable">????</div>
                 <div class="access_method_5 book-availability-status unavailable">????</div>
                 <div class="access_method_6 book-availability-status unavailable">????</div> -->
