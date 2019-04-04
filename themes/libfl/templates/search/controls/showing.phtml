@@ -28,8 +28,9 @@
 <? endif; */?>
 <div class="search_info_wrapper">
     <!-- Place alert here -->    
-    <div class="search_info_you">Вы искали</div>
+    <!--<div class="search_info_you">Вы искали</div>-->
     <!--<div class="search_info_text"><? echo $this->escapeHtml($this->lookfor) ?></div>-->
+    <div class="search_info_advanced"><a href="/Search/Advanced">Расширенный поиск</a></div>
     <? if ($this->layout()->searchbox !== false): ?>
         <div class="search container navbar">
             <nav class="nav searchbox hidden-print">
@@ -37,8 +38,22 @@
             </nav>
         </div>
     <? endif; ?>
+    <div class="search-tools-wrapper" style="display: flex; justify-content: space-between">
     <div class="search_info_found desktop_version">Найдено документов: <? echo $this->localizedNumber($this->results->getStartRecord()) ?>&mdash;<? echo $this->localizedNumber($this->results->getEndRecord()) ?> из <? echo $this->localizedNumber($this->recordTotal) ?>.</div>
     <div class="search_info_found mobile_version">Найдено: <? echo $this->localizedNumber($this->results->getStartRecord()) ?>&mdash;<? echo $this->localizedNumber($this->results->getEndRecord()) ?> из <? echo $this->localizedNumber($this->recordTotal) ?>.</div>
-    <div class="search_info_advanced desktop_version"><a href="/Search/Advanced">Перейти к расширенному поиску</a></div>
-    <div class="search_info_advanced mobile_version"><a href="/Search/Advanced">Расширенный поиск</a></div>
+
+
+    <? if (($recordTotal = $this->results->getResultTotal()) > 0): // only display these at very top if we have results ?>
+        <? endif; ?>
+    <? if ($recordTotal > 0): ?>
+    <div class="search-controls">
+
+    <?=$this->render('search/controls/limit.phtml')?>
+    <?=$this->render('search/controls/sort.phtml')?>
+    <?=$this->render('search/controls/view.phtml')?>
+    </div>
+    <? endif; ?>
+</div>
+
+
 </div>

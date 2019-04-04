@@ -46,15 +46,17 @@
     <? $placeholder = $this->searchbox()->getPlaceholderText(isset($searchTabs['selected']['id']) ? $searchTabs['selected']['id'] : null); ?>
     <input id="searchForm_lookfor" class="searchForm_lookfor form-control search-query<? if($this->searchbox()->autocompleteEnabled($this->searchClassId)):?> autocomplete searcher:<?=$this->escapeHtmlAttr($this->searchClassId) ?><? endif ?>" type="text" name="lookfor" value="<?=$this->escapeHtmlAttr($this->lookfor)?>"<? if ($placeholder): ?> placeholder="<?=$this->transEsc($placeholder) ?>"<? endif ?> />
     <? if ($handlerCount > 1): ?>
-      <select id="searchForm_type" class="search-options" name="type" data-native-menu="false">
-        <? foreach ($handlers as $handler): ?>
-          <option value="<?=$this->escapeHtmlAttr($handler['value'])?>"<?=$handler['selected'] ? ' selected="selected"' : ''?>><?=$handler['indent'] ? '-- ' : ''?><?=$this->transEsc($handler['label'])?></option>
-        <? endforeach; ?>
-      </select>
+        <div class="search-options-wrapper">
+          <select id="searchForm_type" class="search-options" name="type" data-native-menu="false">
+            <? foreach ($handlers as $handler): ?>
+              <option value="<?=$this->escapeHtmlAttr($handler['value'])?>"<?=$handler['selected'] ? ' selected="selected"' : ''?>><?=$handler['indent'] ? '-- ' : ''?><?=$this->transEsc($handler['label'])?></option>
+            <? endforeach; ?>
+          </select>
+        </div>
     <? elseif ($handlerCount == 1): ?>
       <input type="hidden" name="type" value="<?=$this->escapeHtmlAttr($handlers[0]['value'])?>" />
     <? endif; ?>
-    <button type="submit" class="btn btn-blue"><?=$this->transEsc("Find")?></button>
+    <!--<button type="submit" class="btn btn-blue"><?=$this->transEsc("Find")?></button>-->
     <!--<? if ($advSearch): ?>
       <a href="<?=$this->url($advSearch) . ((isset($this->searchId) && $this->searchId) ? '?edit=' . $this->escapeHtmlAttr($this->searchId) : $hiddenFilterParams) ?>" class="btn btn-link" rel="nofollow"><?=$this->transEsc("Advanced")?></a>
     <? endif; ?>-->
@@ -79,6 +81,7 @@
           isset($this->checkboxFilters) && is_array($this->checkboxFilters) ? $this->checkboxFilters : []
       );
     ?>
+    <!--
     <? if ((isset($hasDefaultsApplied) && $hasDefaultsApplied) || !empty($filterDetails)): ?>
       <? $defaultFilterState = $options->getRetainFilterSetting() ? ' checked="checked"' : ''; ?>
       <div class="checkbox">
@@ -99,6 +102,8 @@
         <? endif; ?>
       </div>
     <? endif; ?>
+    -->
+
     <? foreach ($hiddenFilters as $key => $filter): ?>
       <? foreach ($filter as $value): ?>
         <input type="hidden" name="hiddenFilters[]" value="<?=$this->escapeHtmlAttr($key) . ':' . $this->escapeHtmlAttr($value)?>" />
