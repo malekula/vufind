@@ -5349,10 +5349,10 @@ span.quantity {
 }
 .ajaxItem .media-body .result-body {
     width: 100%;
-    padding: 0 50px 30px 0;
+    padding: 0 50px 0 0;
 }
 .ajaxItem .media-left {
-    width: 25%;
+    width: 135px;
 }
 .book-carrier {
     display: flex;
@@ -5390,7 +5390,7 @@ span.quantity {
 
 .media-left,
 .media>.pull-left {
-    padding-right: 10px
+    /*padding-right: 10px*/
 }
 
 .media-left,
@@ -12163,17 +12163,14 @@ header .container.navbar {
 }
 
 @media (min-width:768px) {
+    .record .media-left,
     .record .media-right {
         width: 30%;
         padding-left: 70px;
     }
-    .record .media-left,
     .result .media-left,
-    .record .media-right,
     .result .media-right {
         width: 135px;
-        /*width: 30%;
-        ßpadding-left: 70px;*/
     }
     .record .media-left a,
     .result .media-left a,
@@ -13836,7 +13833,6 @@ body.rtl i.fa-flag {
 
 .result {
     padding: 1rem;
-    margin-left: -1rem
 }
 
 .result:nth-child(even) {
@@ -14474,7 +14470,7 @@ div#footer {
 #content {
     position: relative;
     width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto 80px;
 }
 #cartSummary {
 }
@@ -14516,7 +14512,7 @@ div#footer {
 .mainbody.left {
     /*padding-left: 75px;*/
     padding-right: 90px;
-    padding-bottom: 80px;
+    /*padding-bottom: 80px;*/
 }
 .search-stats {
     padding-top: 25px;
@@ -14585,7 +14581,6 @@ div#footer {
 }
 .result {
     padding: 20px 0;
-    /*margin-left: -38px;*/
     border-bottom: 1px solid #e6e6e6;
 }
 .result:nth-child(even) {
@@ -14849,7 +14844,7 @@ input#publishDateto {
     transition: background-color .2s;
 }
 .record.sourceSolr {
-    padding: 80px 160px 50px;
+    padding: 50px 200px;
 }
 .record.sourceSolr .mainbody {
     width: 100%;
