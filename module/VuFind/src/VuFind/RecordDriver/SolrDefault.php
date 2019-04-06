@@ -2222,14 +2222,13 @@ class SolrDefault extends AbstractBase
             $bookInfo = json_decode($response->getBody());
             foreach ($bookInfo->Exemplars as $exemplar) {
                 if ($exemplar->AccessCode == 1001) {
-                    return array('protection'=>'0', 'viewerURL'=>$exemplar->BookUrl);
-                } else {
-                    return array('protection'=>'1');
+                    return array('protection'=>false, 'viewerURL'=>$exemplar->BookUrl);
                 }
             }
         } else {
-            return 'false';
+            return false;
         }
+        return array('protection'=>true);
     }
 
     public function getExemplarsCarrier()

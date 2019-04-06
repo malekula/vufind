@@ -46,10 +46,11 @@
             $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
         ?>
         <div class="record_media_buttons">
-            <?=$this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);?>
             <?
                 $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
-                if ($accessMethod && $accessMethod['protection'] == 0) {
+                if ($this->driver->getFundRecordUID($this->driver->getUniqueId) != 'Litres') {
+                    echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+                } else if ($accessMethod && $accessMethod['protection'] == 0) {
                     echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
                 }
             ?>
