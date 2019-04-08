@@ -102,7 +102,11 @@
                     <span>Доступность</span><a href="/" class="btn btn-note">?</a>
                 </div>
                 <div class="m4001 book-availability-status">Взять на дом</div>
+                <? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
+                <div class="m4002 book-availability-status available">Электронный экземпляр</div>
+                <? else: ?>
                 <div class="m4002 book-availability-status">Электронный экземпляр</div>
+                <? endif; ?>
                 <div class="m4000 book-availability-status">Читать в библиотеке</div>
                 <!-- <div class="access_method_4 book-availability-status unavailable">????</div>
                 <div class="access_method_5 book-availability-status unavailable">????</div>
