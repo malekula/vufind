@@ -34,28 +34,28 @@ $(document).ready(function() {
     /* Random quote */
 
     var NumberOfDivsToRandomDisplay = 4,
-    CookieName = 'DivRamdomValueCookie';
-    
+        CookieName = 'DivRamdomValueCookie';
+
     function DisplayRandomQuote() {
         var r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay);
         if(NumberOfDivsToRandomDisplay > 1) {
             var ck = 0;
             var cookiebegin = document.cookie.indexOf(CookieName + "=");
             if(cookiebegin > -1) {
-            cookiebegin += 1 + CookieName.length;
-            cookieend = document.cookie.indexOf(";",cookiebegin);
+                cookiebegin += 1 + CookieName.length;
+                cookieend = document.cookie.indexOf(";",cookiebegin);
                 if(cookieend < cookiebegin) { cookieend = document.cookie.length; }
                 ck = parseInt(document.cookie.substring(cookiebegin,cookieend));
-                }
+            }
             while(r == ck) { r = Math.ceil(Math.random() * NumberOfDivsToRandomDisplay); }
             document.cookie = CookieName + "=" + r;
-            }
+        }
         for( var i=1; i<=NumberOfDivsToRandomDisplay; i++) {
             document.getElementById("random_quote"+i).style.display='none';
         }
-    document.getElementById("random_quote"+r).style.display='block';
+        document.getElementById("random_quote"+r).style.display='block';
     }
-    
+
     DisplayRandomQuote();
 
     /**/
@@ -86,7 +86,7 @@ $(document).ready(function() {
         $("#search").attr('placeholder', placeholders[Math.floor(Math.random()*placeholders.length)]);
     }
     changeSearchPlaceholder();
-    
+
     $("#search").keypress(function(e){
         var q = $(this).val();
         if (q.length && e.which==13) {
@@ -495,8 +495,9 @@ $(document).ready(function() {
             $('.vf_search_select').hide();
         }
         if (!t.hasClass('breadcrumb_current')) $('.breadcrumb_links').hide();
-    }).on('touchend', '#mobile_menu_btn', function() {
+    }).on('touchend', '.hamburger', function() {
         $('#nav').toggleClass('active');
+        $(this).toggleClass('is-active');
     }).on('click', '.switch_type', function() {
         $('.listing_wrapper, .filters_wrapper, .switcher_wrapper').toggleClass('list_type');
     }).on('change', '.end_date', function() {
