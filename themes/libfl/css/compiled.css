@@ -14422,6 +14422,12 @@ header .searchbox .tab-content .navbar-text {
     .search-controls {
         display: none;
     }
+    .bookbag-full {
+        margin-right: 0;
+    }
+    span.cart_text {
+        display: none;
+    }
 }
 
 

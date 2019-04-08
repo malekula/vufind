@@ -6931,7 +6931,9 @@ img.news_right_image {
     .random-quote__text {
         font-size: 21px
     }
-
+    .main .container .navbar {
+        display: block;
+    }
     .navbar {
         display: none
     }
