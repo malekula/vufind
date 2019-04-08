@@ -5453,7 +5453,7 @@ span.quantity {
     font-size: 12px;
     font-weight: 400;
     line-height: 30px;
-    color: #232325;
+    color: #b4bac1;
 }
 .book-availability-status:before {
     content: "";
@@ -5461,14 +5461,20 @@ span.quantity {
     width: 6px;
     height: 6px;
     margin: 0 10px 1px 0;
-    background-color: #2dbf40;
+    background-color: #b4bac1;
     border-radius: 50%;
 }
 .book-availability-status.unavailable {
-    color: #b4bac1;
+    color: #232325;
 }
 .book-availability-status.unavailable:before {
     background-color: #f8541c;
+}
+.book-availability-status.available {
+    color: #232325;
+}
+.book-availability-status.available:before {
+    background-color: #2dbf40;
 }
 
 .list-group {
