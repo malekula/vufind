@@ -412,6 +412,18 @@ $this->headScript()->appendScript($setupJS);
             </div>
             <div class="breadcrumbs">
                 <div class="content-wrap">
+
+                    <!-- -->
+                    <? $cart = $this->cart(); if ($cart->isActive()): ?>
+                    <div id="cartSummary">
+                      <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
+                        <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
+                        <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
+                      </a>
+                    </div>
+                    <? endif; ?>
+                    <!-- -->
+
                     <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
                       && !empty($this->layout()->breadcrumbs)
                       && $this->layout()->breadcrumbs !== false
@@ -436,16 +448,6 @@ $this->headScript()->appendScript($setupJS);
                             <? endif; ?>
                         </ul>
                     <? endif; ?>
-                    <!-- -->
-                    <? $cart = $this->cart(); if ($cart->isActive()): ?>
-                    <div id="cartSummary">
-                      <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
-                        <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><?=$this->transEsc('My Books')?>  <span class="quantity"><?=count($cart->getItems())?></span>
-                        <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
-                      </a>
-                    </div>
-                    <? endif; ?>
-                    <!-- -->
 
                 </div>
             </div>

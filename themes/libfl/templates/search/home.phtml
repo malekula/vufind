@@ -19,6 +19,9 @@
 ?>
 
 <div class="searchHomeContent">
+  <div class="title">Каталог
+  <br>
+  <span>Библиотеки иностранной литературы</span></div>
   <?
   $ilsStatusScript = <<<JS
 $(document).ready(function() {
@@ -38,6 +41,18 @@ JS;
 
   <?=$this->context($this)->renderInContext("search/searchbox.phtml", ['ignoreHiddenFilterMemory' => true])?>
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$("#searchForm_lookfor").focus();', 'SET'); ?>
+</div>
+
+<div class="catalogue_banners">
+	<div class="catalogue_banner banner_collections">
+		<a href="https://libfl.ru/ru/item/bookscollections" class="catalogue_banner_title">Книжные подборки</a><div class="catalogue-item_links">
+		<a href="https://libfl.ru/ru/item/bookscollections#{&quot;collection&quot;:&quot;Foreigner recommends&quot;}">Иностранка рекомендует</a><a href="https://libfl.ru/ru/item/bookscollections#{&quot;collection&quot;:&quot;Our publications&quot;}">Наши издания</a><a href="https://libfl.ru/ru/item/bookscollections#{&quot;collection&quot;:&quot;For professionals&quot;}">Профессионалам</a><a href="https://libfl.ru/ru/item/bookscollections#{&quot;collection&quot;:&quot;Childrens&quot;}">Детские</a><a href="https://libfl.ru/ru/item/bookscollections#{&quot;collection&quot;:&quot;Rare book&quot;}">Редкая книга</a></div><a href="https://libfl.ru/ru/item/bookscollections" class="button button__label">Посмотреть все</a><div class="catalogue-item_collections-books"><img src="themes/libfl/images/5b6af4f7726e889721c9729d-preview.jpg" alt=""><img src="themes/libfl/images/594d0b85d452083a7351fa9e-preview.jpg" alt=""><img src="themes/libfl/images/5ac77951c859da5d65ad7777-preview.jpg" alt=""></div>
+	</div>
+
+	<div class="catalogue_banner banner_online_resourses">
+		<a href="https://libfl.ru/static/online_resources/" class="catalogue_banner_title">Online-ресурсы</a>
+		<div class="catalogue-item_links"><a href="https://www.litres.ru/" target="_blank">ЛитРес</a><a href="https://ebookcentral.proquest.com/lib/libflru" target="_blank">ProQuest Ebook Central</a><a href="http://search.proquest.com/" target="_blank">ProQuest Dissertations &amp; Theses Global</a><a href="http://dlib.eastview.com/" target="_blank">East View</a><a href="https://www.scopus.com/search/form.uri?display=basic&amp;clear=t&amp;origin=SearchAffiliationLookup&amp;txGid=33E3DD9866C996F38BB94C91EBC5FAB7.wsnAw8kcdt7IPYLO0V48gA%3a61" target="_blank">Scopus</a></div><a href="/static/online_resources/" class="button button__label">Посмотреть все</a>
+	</div>
 </div>
 
 <? if (isset($facetList) && is_array($facetList)): ?>
