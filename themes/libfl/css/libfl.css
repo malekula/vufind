@@ -752,7 +752,7 @@ a.quick-links__item_blue {
     float: right;
 }*/
 .hamburger {
-    padding: 20px 15px 18px 20px;
+    padding: 12px 15px 10px 15px;
     display: inline-block;
     cursor: pointer;
     transition-property: opacity, filter;
@@ -7019,7 +7019,7 @@ img.news_right_image {
 @media screen and (max-width: 768px) {
     body {
         min-width:0;
-        padding-top: 60px
+        padding-top: 44px
     }
 
     .catalogue-search_background {
@@ -7267,7 +7267,7 @@ img.news_right_image {
         top: 0;
         left: 0;
         width: 100%;
-        height: 60px;
+        height: 44px;
         background-color: #fff;
         z-index: 999;
         border-bottom: 1px solid #edf0f1;
@@ -7305,7 +7305,7 @@ img.news_right_image {
     #nav {
         z-index: 100;
         position: fixed;
-        margin-top: 60px;
+        margin-top: 44px;
         width: 100%;
         height: 100vh;
         background-color: #232325;
@@ -8635,7 +8635,7 @@ img.news_right_image {
 
     .logo_wrapper img {
         width: 36px;
-        height: 60px;
+        height: 44px;
         margin-top: 0
     }
 

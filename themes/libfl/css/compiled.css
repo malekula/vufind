@@ -4696,7 +4696,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 .breadcrumbs .content-wrap {
     display: flex;
-    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
     height: 45px;
@@ -12220,11 +12219,12 @@ header .container.navbar {
         width: 80px;
     }
     .record .media-right.medium>a,
+    .record .media-right.medium>img {
+        width: 168px;
+    }
     .result .media-right.medium>a,
-    .record .media-right.medium>img,
     .result .media-right.medium>img {
         width: 100px;
-        /*width: 168px;*/
     }
     .record .media-left.large>a,
     .result .media-left.large>a,
@@ -13753,22 +13753,59 @@ body.rtl i.fa-flag {
 
 .searchHomeContent {
     position: relative;
-    height: 430px;
-    padding: 6% 26% 0;
-    text-align: center;
-    background: rgba(5,5,138,.54) url("../../libfl/images/catalogue.jpg") 50%/cover;
-    background-blend-mode: multiply;
+    padding: 80px 20% 180px;
 }
-.searchHomeContent .title {
-    font-family: 'Leto Sans', Arial, Helvetica;
-    font-size: 28px;
-    line-height: 1.3;
-    text-transform: uppercase;
-    color: #fff;
-    padding-bottom: 55px;
+.searchHome_row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
-.searchHomeContent span {
-    font-size: 20px;
+a.adv_search {
+    cursor: pointer;
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -.11px;
+    color: #0000f3;
+}
+a.advanced_search:hover,
+a.advanced_search:focus {
+    color: #250dc0;
+    transition: color .2s;
+}
+.global_search {
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    color: #232325;
+}
+.global_search:after {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #e6e6e6 url(/themes/libfl/images/svg/arrow-back.svg) center no-repeat;
+    background-size: 7px;
+    border-radius: 5px;
+    transform: rotate(180deg);
+    margin-bottom: -3px;
+    margin-left: 5px;
+}
+.catalogue-readme {
+    position: absolute;
+    right: 0;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -.11px;
+    line-height: 18px;
+    color: #232325;
+}
+.catalogue-readme span {
+    display: block;
+    font-weight: 400;
+    color: #b4bac1;
 }
 .catalogue_banners {
     width: 100%;
@@ -13776,49 +13813,47 @@ body.rtl i.fa-flag {
     justify-content: space-between;
 }
 .catalogue_banner {
+    cursor: pointer;
     position: relative;
-    flex: 0 0 50%;
-    max-width: 584px;
-    height: 420px;
-    padding: 50px;
-    margin: 35px 0 60px;
-    background: #ecf1f5;
-}
-.catalogue_banner.banner_collections {
-
-}
-.catalogue_banner.banner_online_resourses {
-    background: url("../../libfl/images/online-resourses.jpg") 50% no-repeat;
-}
-.catalogue_banner_title {
-    font-family: Leto Sans,Arial,Helvetica;
-    padding: 0 0 30px;
     display: block;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: #232325;
+    flex: 0 0 24%;
+    max-width: 281px;
+    height: 155px;
+    padding: 20px 25px;
+    border: 1px solid #e6e6e6;
+}
+.catalogue_banner.banner_identity {
+    background: #fff url("/themes/libfl/images/svg/funny-face.svg") 215px 80px no-repeat;
+    background-size: 40px;
+}
+.catalogue_banner.banner_litres {
+    background: #fff url("/themes/libfl/images/svg/litres-logo.svg") 185px 105px no-repeat;
+    background-size: 68px;
+}
+.catalogue_banner span {
+    font-family: 'Leto Sans', Arial, Helvetica;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
     text-transform: uppercase;
+    color: #232325;
 }
-.catalogue-item_links a {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #0000f3;
-    line-height: 2.2;
+.catalogue_banner.banner_litres span {
+    font-size: 15px;
+    line-height: 22px;
 }
-.catalogue-item_collections-books {
-    position: absolute;
-    max-width: 330px;
-    width: 50%;
-    bottom: 80px;
-    right: 0;
-    text-align: right;
+.catalogue_banner:hover,
+.catalogue_banner:focus {
+    border: 1px solid #dedede;
+    transition: .2s;
 }
-.catalogue-item_collections-books img {
-    width: 33%;
-    padding-right: 6%;
+.catalogue_banner span:hover,
+.catalogue_banner span:focus {
+    color: #545454;
+    transition: .2s;
 }
+
+
 a.button {
     display: inline-block;
     text-decoration: none;
@@ -14169,10 +14204,10 @@ input[type=checkbox] {
     margin: 0;
 }
 .searchHomeContent .navbar-form .search-options-wrapper {
-    top: 0;
-    right: 0;
-    width: 48px;
-    height: 48px;
+    top: 1px;
+    right: 1px;
+    width: 46px;
+    height: 46px;
     border-radius: 4px;
 }
 .pagination {
@@ -14358,6 +14393,34 @@ header .searchbox .tab-content .navbar-text {
     header .searchForm_type {
         margin-top: 2px;
         margin-bottom: 2px
+    }
+    .searchHomeContent {
+        padding: 20px 0 40px
+    }
+    .catalogue_banners {
+        flex-wrap: wrap;
+    }
+    .catalogue_banner {
+        flex: 0 0 100%;
+        min-width: 100%;
+        height: auto;
+        border-bottom: none;
+        background: none!important;
+    }
+    .catalogue_banner:last-child {
+        border-bottom: 1px solid #e6e6e6;
+    }
+    .catalogue-readme {
+        display: none;
+    }
+    .tab-content>.active {
+        margin-right: 0;
+    }
+    .ajaxItem .media-body .result-body {
+        padding: 0;
+    }
+    .search-controls {
+        display: none;
     }
 }
 
@@ -15090,6 +15153,7 @@ i.fa-add {
     border-radius: 21px;
     padding: 4px 26px;
     margin-top: 10px;
+    margin-left: 15px;
 }
 .facet.narrow-toggle:hover,
 .facet.narrow-toggle:focus {
