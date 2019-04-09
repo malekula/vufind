@@ -18,6 +18,8 @@ $(document).ready(function() {
         }
     })*/
 
+    $(".searchHomeContent").parents("#content").parents(".main").siblings(".breadcrumbs").children(".content-wrap").children("ul").html("<a class=\"btn breadcrumb-btn disabled\"></a>");
+
 
     function resizeSelectForIphone() {
         if(navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
@@ -448,6 +450,7 @@ $(document).ready(function() {
             $('.working-hours').hide();
         });
     }
+
 
     /*if (window.innerWidth < 760) {
         $('.listing_wrapper, .filters_wrapper, .switcher_wrapper').removeClass('list_type');

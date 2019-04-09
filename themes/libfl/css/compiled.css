@@ -4694,6 +4694,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     border-radius: 11px;
     margin-right: 13px;
 }
+.breadcrumb-btn.disabled {
+    cursor: default;
+}
 .breadcrumbs .content-wrap {
     display: flex;
     justify-content: space-between;
@@ -13800,6 +13803,8 @@ a.advanced_search:focus {
     transition: color .2s;
 }
 .catalogue-readme {
+    display: none;
+    cursor: pointer;
     position: absolute;
     right: 0;
 

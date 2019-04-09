@@ -20,8 +20,8 @@
 
 <div class="searchHomeContent">
   <div class='searchHome_row'>
-    <div class='global_search'>Более 1 528 000 книг</div>
-    <a class='adv_search'>Расширенный поиск</a>
+    <div class='global_search'><a href="/Search/Results?lookfor=&type=AllFields">Более 1 528 000 книг</a></div>
+    <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
     <!--<div><а href='/Search/Advanced' class='link'>Расширенный поиск</а></div>-->
   </div>
   <?
@@ -49,10 +49,10 @@ JS;
 </div>
 
 <div class="catalogue_banners">
-	<a href="" class="catalogue_banner banner_identity"><span>Книжные подборки</span></a>
-	<a href="" class="catalogue_banner"><span>Пресса</span></a>
-	<a href="" class="catalogue_banner"><span>Online-ресурсы</span></a>
-	<a href="" class="catalogue_banner banner_litres"><span>Бесплатные электронные книги для читателей иностранки</span></a>
+	<a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue_banner banner_identity"><span>Книжные подборки</span></a>
+	<a href="https://press.libfl.ru/login/?next=/" target="_blank" class="catalogue_banner"><span>Пресса</span></a>
+	<a href="https://libfl.ru/static/online_resources/" target="_blank" class="catalogue_banner"><span>Online-ресурсы</span></a>
+	<a href="https://libfl.ru/static/litres/" target="_blank" class="catalogue_banner banner_litres"><span>Бесплатные электронные книги для читателей иностранки</span></a>
 </div>
 
 <? if (isset($facetList) && is_array($facetList)): ?>
