@@ -85,7 +85,6 @@ class BookreaderController extends AbstractBase
                     if ($exemplars->MethodOfAccessCode == 4002) {
                         if ($exemplars->AccessCode == 1001) {
                             // Книга в свободном доступе
-                            $view->setVariable('bookInfo', json_encode($bookInfo));
                             $client = new Client('http://80.250.173.142/ALISAPI/Books/ElectronicCopy/' . $this->_bookID, array(
                                 'maxredirects' => 0,
                                 'timeout' => 30
@@ -93,29 +92,32 @@ class BookreaderController extends AbstractBase
                             $client->setMethod('GET');
                             $response = $client->send();
                             if ($response->isSuccess()) {
+                                $layout->setTemplate('layout/bookreader');
+                                $view->setTemplate('bookreader/viewer.phtml');
+                                $view->setVariable('bookInfo', json_encode($bookInfo));
                                 $view->setVariable('exemplar', $response->getBody());
                             } else {
                                 $layout->setTemplate('layout/layout');
                                 $view->setTemplate('bookreader/error.phtml');
                                 $view->setVariable('error_code', 'E001');
                                 $view->setVariable('error_msg', 'Не удалось получить электронную копию книги.');
-                                return $view;
+                                // return $view;
                             }
-                            return $view;
+                            // return $view;
                         } else {
                             // Книга защищена авторским правом
                             $layout->setTemplate('layout/layout');
                             $view->setTemplate('bookreader/error.phtml');
                             $view->setVariable('error_code', 'E001');
                             $view->setVariable('error_msg', 'Не удалось получить данные об экзмеплярах книги.');
-                            return $view;
+                            // return $view;
                         }
                     } else {
                         $layout->setTemplate('layout/layout');
                         $view->setTemplate('bookreader/error.phtml');
                         $view->setVariable('error_code', 'E001');
                         $view->setVariable('error_msg', 'У книги нет электронных экземпляров.');
-                        return $view;
+                        // return $view;
                     }
                 }
             } else {
@@ -123,8 +125,9 @@ class BookreaderController extends AbstractBase
                 $view->setTemplate('bookreader/error.phtml');
                 $view->setVariable('error_code', 'E001');
                 $view->setVariable('error_msg', 'Не удалось получить данные об экзмеплярах книги.');
-                return $view;
+                // return $view;
             }
+            return $view;
         }
 
 
