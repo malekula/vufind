@@ -134,7 +134,7 @@ class BookreaderController extends AbstractBase
         if ($this->_orderID) {
             $cookie = $this->getRequest()->getCookie();
             if (!$cookie->offsetExists('ReaderToken')) {
-                return $this->redirect()->toUrl('//dev-oauth.libfl.ru');
+                return $this->redirect()->toUrl('//oauth.libfl.ru');
             } else {
                 $readerToken = $cookie->offsetGet('ReaderToken');
             }
@@ -146,7 +146,7 @@ class BookreaderController extends AbstractBase
             $response = $client->send();
             if ($response->isSuccess()) {
                 $orderInfo = json_decode($response->getBody());
-                $client = new Client('https://dev-oauth.libfl.ru/api/getUser', array(
+                $client = new Client('https://oauth.libfl.ru/api/getUser', array(
                     'maxredirects' => 0,
                     'timeout' => 30
                 ));
