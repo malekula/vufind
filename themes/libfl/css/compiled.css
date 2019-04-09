@@ -13008,7 +13008,7 @@ footer {
     box-shadow: 0 6px 24px rgba(42,42,183,0.14);
     margin-top: 15px;*/
 }
-.cart-add {
+.cart-add, .btn-blue {
     display: block;
     width: 160px;
     font-size: 12px;
@@ -13023,7 +13023,9 @@ footer {
     padding: 10px 0;
 }
 .cart-add:hover,
-.cart-add:focus {
+.cart-add:focus,
+.btn-blue:hover,
+.btn-blue:focus {
     background-color: #250dc0;
     transition: background-color .2s;
 }
@@ -13774,13 +13776,13 @@ a.advanced_search:focus {
     color: #250dc0;
     transition: color .2s;
 }
-.global_search {
+.global_search a {
     cursor: pointer;
     font-size: 13px;
     font-weight: 700;
     color: #232325;
 }
-.global_search:after {
+.global_search a:after {
     content: '';
     display: inline-block;
     width: 15px;
@@ -13791,6 +13793,11 @@ a.advanced_search:focus {
     transform: rotate(180deg);
     margin-bottom: -3px;
     margin-left: 5px;
+}
+.global_search a:hover,
+.global_search a:focus {
+    color: #232325;
+    transition: color .2s;
 }
 .catalogue-readme {
     position: absolute;

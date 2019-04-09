@@ -53,7 +53,7 @@
                 } else if ($accessMethod && $accessMethod['protection'] == 0) {
                     echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
                 } else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
-                    echo "Аля кнопка для литреса";
+                    echo "<a href="https://libfl.ru/static/litres/" target="_blank" class="">Как получить доступ?</a>";
                 }
             ?>
         </div>
