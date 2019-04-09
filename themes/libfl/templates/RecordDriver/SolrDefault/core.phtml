@@ -50,7 +50,7 @@
                 $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
                 if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
                     echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
-                    if ($accessMethod && $accessMethod['protection'] == 0) {
+                    if ($accessMethod && $accessMethod['protection'] == false) {
                         echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
                     }
                 } else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
