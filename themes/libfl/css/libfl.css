@@ -712,6 +712,10 @@ h1 {
     font-weight: 700;
     line-height: 1em;
 }
+.menu__item-blue {
+    line-height: 50px;
+    margin-left: 13px;
+}
 .menu__item {
     line-height: 50px;
     list-style-type: none;
