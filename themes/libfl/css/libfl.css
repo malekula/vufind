@@ -390,6 +390,7 @@ a.float_small_type {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 a.litres_library {
     cursor: pointer;

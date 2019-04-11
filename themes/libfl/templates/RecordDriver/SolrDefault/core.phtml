@@ -99,14 +99,17 @@
             <? endif; ?>
 
             <div class="book-availability">
+                <div class="book-availability-header">
+                    <span>Доступность</span><a href="/" class="btn btn-note js-availability-hover">?</a>
+                </div>
                 <div class="book-availability-note">
-                    <span>Доступность</span><a href="/" class="btn btn-note">?</a>
+                    <span>Зеленым цветом отмечены экземпляры доступные для заказа, красным – временно недоступные. Серый цвет – экземпляра нет в наличии.</span>
                 </div>
                 <div class="m4001 book-availability-status">Взять на дом</div>
                 <? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
-                <div class="m4002 book-availability-status available">Электронный экземпляр</div>
+                <div class="m4002 book-availability-status available">Электронное издание</div>
                 <? else: ?>
-                <div class="m4002 book-availability-status">Электронный экземпляр</div>
+                <div class="m4002 book-availability-status">Электронное издание</div>
                 <? endif; ?>
                 <div class="m4000 book-availability-status">Читать в библиотеке</div>
                 <!-- <div class="access_method_4 book-availability-status unavailable">????</div>

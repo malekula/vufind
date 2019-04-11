@@ -5423,17 +5423,39 @@ span.quantity {
 }
 
 .book-availability {
+    position: relative;
     text-align: left;
 }
-.book-availability-note {
+.book-availability-header {
+    display: flex;
+    align-items: baseline;
     margin-bottom: 20px;
 }
-.book-availability span {
+.book-availability_header span {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: -.5px;
     color: #b4bac1;
 }
+.book-availability-note {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 11px;
+    padding: 30px 35px 35px;
+}
+.book-availability-note span {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    color: #232325;
+}
+
 .btn-note {
     cursor: pointer;
     display: inline-block;
@@ -15268,6 +15290,7 @@ a.tag-record {
 .record .media-body p {
     font-size: 14px;
     line-height: 1.8;
+    margin: 30px 0;
 }
 .record .media-body table.table {
     margin-left: -7px;
