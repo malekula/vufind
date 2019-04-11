@@ -417,8 +417,8 @@ a.litres_library:focus {
     color: #0000f3;
     margin-left: 15px;
 }
-litres_links a:hover,
-litres_links a:focus {
+.litres_links a:hover,
+.litres_links a:focus {
     color: #250dc0;
     transition: color .2s;
 }

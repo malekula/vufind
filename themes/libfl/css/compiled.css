@@ -14672,6 +14672,7 @@ div#footer {
     margin: 0 auto 80px;
 }
 #cartSummary {
+    margin-left: auto;
 }
 #cartSummary a {
     font-family: 'Open Sans', Arial, Helvetica;
