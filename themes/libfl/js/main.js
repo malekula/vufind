@@ -20,9 +20,9 @@ $(document).ready(function() {
 
 
     $('body').on('mouseenter', '.js-availability-hover', function() {
-        $('.book-availability-note').show(300);
+        $('.book-availability-note').fadeIn(300);
     }).on('mouseleave', '.js-availability-hover', function() {
-        $('.book-availability-note').hide(300);
+        $('.book-availability-note').fadeOut(300);
     });
 
     $(".searchHomeContent").parents("#content").parents(".main").siblings(".breadcrumbs").children(".content-wrap").children("ul").html("<a class=\"btn breadcrumb-btn disabled\"></a>");
