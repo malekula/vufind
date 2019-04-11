@@ -14813,6 +14813,12 @@ span.about_label {
     width: 80px;
     color: #b4bac1;
 }
+.book_quote {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    color: #242728;
+}
 .sidebar .facet-group {
     margin-bottom: 18px;
 }

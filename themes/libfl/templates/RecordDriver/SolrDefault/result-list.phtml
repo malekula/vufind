@@ -110,7 +110,7 @@
             <strong><?=$this->transEsc($snippet['caption']) ?>:</strong>
           <? endif; ?>
           <? if (!empty($snippet['snippet'])): ?>
-            <span class="quotestart">&#8220;</span>...<?=$this->highlight($snippet['snippet']) ?>...<span class="quoteend">&#8221;</span><br/>
+            <div class="book_quote"><span class="quotestart">«</span>...<?=$this->highlight($snippet['snippet']) ?>...<span class="quoteend">»</span></div>
           <? endif; ?>
         <? endif; ?>
       <? endif; ?>
