@@ -5431,7 +5431,7 @@ span.quantity {
     align-items: baseline;
     margin-bottom: 20px;
 }
-.book-availability_header span {
+.book-availability-header span {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: -.5px;
@@ -5441,13 +5441,15 @@ span.quantity {
     display: none;
     z-index: 9999;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
+    top: -125px;
+    right: 45px;
+    width: 265px;
     height: auto;
+    padding: 15px 20px 15px;
     background-color: #fff;
-    border-radius: 11px;
-    padding: 30px 35px 35px;
+    border: 1px solid #e0e0fa;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,243,.12);
 }
 .book-availability-note span {
     font-size: 12px;
@@ -13037,7 +13039,7 @@ footer {
     display: block;
     width: 160px;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: .25px;
     line-height: 20px;
     color: #fff !important;
