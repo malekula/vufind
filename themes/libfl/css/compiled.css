@@ -11664,7 +11664,7 @@ body.rtl .modal-loading {
 
 @media screen and (max-width:767px) {
     body.offcanvas {
-        overflow-x: hidden
+        overflow: hidden
     }
     body.offcanvas .sidebar {
         position: fixed;
