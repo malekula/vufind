@@ -5843,9 +5843,11 @@ img.news_right_image {
         transform: none;
     }
     .modal-body {
-        padding: 40px 10px;
+        padding: 40px 20px;
     }
     .modal-content {
+        width: 100%;
+        border-radius: 0;
         background-clip: content-box;
     }
     .cart-buttons .btn-success, .cart-buttons .btn-continue {
