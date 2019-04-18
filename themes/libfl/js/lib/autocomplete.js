@@ -18,16 +18,17 @@
                 left: '20px',
                 right: '20px',
                 width: 'calc(100% - 40px)'
-                maxHeight: ''
             });
         }
         else {
             element.css({
                 top: position.top + input.outerHeight(),
                 left: position.left,
-                minWidth: input.width()
+                minWidth: input.width() + 42
             });
         }
+
+        console.log(input.width());
       };
 
       var show = function show() {
