@@ -177,7 +177,10 @@ button:focus {
     outline: none !important;
 }
 input {
-    line-height: normal
+    line-height: normal;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 input[type="checkbox"],
@@ -11114,7 +11117,7 @@ body.rtl .date-to {
     margin: 0;
     margin-top: 2px;
     padding: 0;
-    border: 1px solid lightgray;
+    border: 1px solid #e9e9e9;
     background-color: #fff;
     overflow: hidden;
     z-index: 50
@@ -11122,9 +11125,10 @@ body.rtl .date-to {
 
 .autocomplete-results .ac-item {
     display: block;
+    color: #232325;
     margin: 0;
-    padding: .5rem;
-    border-bottom: 1px solid lightgray;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #e9e9e9;
     cursor: pointer
 }
 
@@ -11132,8 +11136,10 @@ body.rtl .date-to {
     border: 0
 }
 
-.autocomplete-results .ac-item:hover {
-    background-color: #cce1c0
+.autocomplete-results .ac-item:hover,
+.autocomplete-results .ac-item:focus {
+    border: none;
+    background-color: #dbdcfe
 }
 
 .autocomplete-results .ac-item.loading {
@@ -11141,8 +11147,7 @@ body.rtl .date-to {
 }
 
 .autocomplete-results .ac-item.selected {
-    background-color: #619144;
-    color: #fff
+    background-color: #dbdcfe;
 }
 
 .autocomplete-results .ac-item small {

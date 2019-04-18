@@ -11,12 +11,24 @@
 
       var _align = function _align() {
         var position = input.offset();
-        element.css({
-          top: position.top + input.outerHeight(),
-          left: position.left,
-          minWidth: input.width()
-        });
-      }
+
+        if ($(window).width() < 768) {
+            element.css({
+                top: position.top + input.outerHeight(),
+                left: '20px',
+                right: '20px',
+                width: 'calc(100% - 40px)'
+                maxHeight: ''
+            });
+        }
+        else {
+            element.css({
+                top: position.top + input.outerHeight(),
+                left: position.left,
+                minWidth: input.width()
+            });
+        }
+      };
 
       var show = function show() {
         element.removeClass(options.hidingClass);
