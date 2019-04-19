@@ -437,6 +437,10 @@ $this->headScript()->appendScript($setupJS);
                           <?=$this->layout()->breadcrumbs ?>
                             <? endif; ?>
                         </ul>
+                    <? else: ?>
+                        <ul class="breadcrumb hidden-print">
+                            <li><a href="/">Поиск</a></li>
+                        </ul>
                     <? endif; ?>
 
                     <!-- -->
