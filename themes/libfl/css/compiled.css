@@ -13864,12 +13864,24 @@ a.advanced_search:focus {
     padding: 20px 25px;
     border: 1px solid #e6e6e6;
 }
-.catalogue_banner.banner_identity {
-    background: #fff url("/themes/libfl/images/svg/funny-face.svg") 215px 80px no-repeat;
+.catalogue_banner.banner_identity:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    width: 60px;
+    height: 56px;
+    background: #fff url("/themes/libfl/images/svg/funny-face.svg") center no-repeat;
     background-size: 40px;
 }
-.catalogue_banner.banner_litres {
-    background: #fff url("/themes/libfl/images/svg/litres-logo.svg") 185px 105px no-repeat;
+.catalogue_banner.banner_litres:after {
+    content: "";
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    width: 68px;
+    height: 26px;
+    background: #fff url("/themes/libfl/images/svg/litres-logo.svg") center no-repeat;
     background-size: 68px;
 }
 .catalogue_banner span {

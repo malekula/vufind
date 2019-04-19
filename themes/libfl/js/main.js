@@ -19,13 +19,19 @@ $(document).ready(function() {
     })*/
 
 
+    var homePageBreadcrumb = $(".searchHomeContent").parents("#content").parents(".main").siblings(".breadcrumbs").children(".content-wrap");
+    $(homePageBreadcrumb).children(".breadcrumb-btn").addClass("disabled");
+
+    $(homePageBreadcrumb).children("ul").children("li").children("a").html("");
+
+
     $('body').on('mouseenter', '.js-availability-hover', function() {
         $('.book-availability-note').fadeIn(300);
     }).on('mouseleave', '.js-availability-hover', function() {
         $('.book-availability-note').fadeOut(300);
     });
 
-    $(".searchHomeContent").parents("#content").parents(".main").siblings(".breadcrumbs").children(".content-wrap").children("ul").html("<a class=\"btn breadcrumb-btn disabled\"></a>");
+
 
 
     function resizeSelectForIphone() {
@@ -497,7 +503,6 @@ $(document).ready(function() {
     if ($('meta[property="og:image"]').length) {
         //$('meta[property="og:image"]').attr('content', 'http://libfl.ru' + $('meta[property="og:image"]').attr('content'));
     }*/
-
 
     $('body').on('click', '*', function(e) {
         var t = $(e.target);
@@ -1266,6 +1271,7 @@ $(document).ready(function() {
 
 });
 $(window).load(function() {
+
     if ($('.about_block').length) {
         $('.about_block span').css('visibility', 'hidden');
         $('.about_block').each(function(i,e) {
