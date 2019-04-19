@@ -5823,6 +5823,9 @@ img.news_right_image {
     ul.footer_list {
         padding-left: 0;
     }
+    .breadcrumb>.active {
+        display: none;
+    }
     .searchForm input.form-control {
         font-size: 16px;
     }
@@ -6116,6 +6119,9 @@ img.news_right_image {
     .nav-tabs>li>a {
         font-size: 14px;
         margin-right: 15px;
+    }
+    .nav-tabs>li>a:last-child {
+        margin-right: 0;
     }
 
     .ui-selectmenu-button, .filters_wrapper .ui-selectmenu-button, .filters_wrapper .date_wrapper, .input-daterange {

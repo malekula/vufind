@@ -4702,7 +4702,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 .breadcrumbs .content-wrap {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 45px;
     border-top: 1px solid #e6e6e6;
@@ -4723,7 +4722,10 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .breadcrumb>li {
     display: inline-block
 }
-
+.breadcrumb>li>a {
+    color: #232325;
+    text-decoration: none;
+}
 .breadcrumb>li+li:before {
     content: "";
     width: 10px;

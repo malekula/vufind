@@ -412,13 +412,14 @@ $this->headScript()->appendScript($setupJS);
             </div>
             <div class="breadcrumbs">
                 <div class="content-wrap">
+                    <a href="#" onclick="history.back(); return false;" class="btn breadcrumb-btn"></a>
 
                     <? if((!isset($this->layout()->showBreadcrumbs) || $this->layout()->showBreadcrumbs == true)
                       && !empty($this->layout()->breadcrumbs)
                       && $this->layout()->breadcrumbs !== false
                       ): ?>
                         <ul class="breadcrumb hidden-print">
-                            <a href="#" onclick="history.back(); return false;" class="btn breadcrumb-btn"></a>
+                            <li><a href="/">Поиск</a></li>
                             <? if(is_array($this->layout()->breadcrumbs)): ?>
                             <? if(count($this->layout()->breadcrumbs) > 1): ?>
                             <?=$this->render('breadcrumbs/multi.phtml', [

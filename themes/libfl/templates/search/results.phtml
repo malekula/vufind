@@ -29,7 +29,7 @@
   if (isset($this->overrideTitle)) {
     $this->layout()->breadcrumbs .= '<li class="active">' . $this->escapeHtml($this->overrideTitle) . '</li>';
   } else {
-    $this->layout()->breadcrumbs .= '<li class="active">Результаты поиска:&nbsp;' . $this->escapeHtml($lookfor) . '</li>';
+    $this->layout()->breadcrumbs .= '<li class="active">Результаты поиска: ' . $this->escapeHtml($lookfor) . '</li>';
   }
 
   // Enable cart if appropriate:
