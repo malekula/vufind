@@ -419,7 +419,6 @@ $this->headScript()->appendScript($setupJS);
                       && $this->layout()->breadcrumbs !== false
                       ): ?>
                         <ul class="breadcrumb hidden-print">
-                            <li><a href="/">Поиск</a></li>
                             <? if(is_array($this->layout()->breadcrumbs)): ?>
                             <? if(count($this->layout()->breadcrumbs) > 1): ?>
                             <?=$this->render('breadcrumbs/multi.phtml', [
