@@ -13901,8 +13901,9 @@ a.advanced_search:focus {
     border: 1px solid #dedede;
     transition: .2s;
 }
-.catalogue_banner span:hover,
-.catalogue_banner span:focus {
+a.catalogue_banner span:hover,
+a.catalogue_banner span:focus {
+    border: none;
     color: #545454;
     transition: .2s;
 }
@@ -14463,6 +14464,11 @@ header .searchbox .tab-content .navbar-text {
     }
     .catalogue_banner:last-child {
         border-bottom: 1px solid #e6e6e6;
+    }
+    .catalogue_banner.banner_identity:after,
+    .catalogue_banner.banner_litres:after {
+        content: '';
+        display: none;
     }
     .catalogue-readme {
         display: none;

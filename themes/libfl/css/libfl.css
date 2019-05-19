@@ -7345,6 +7345,8 @@ img.news_right_image {
         position: fixed;
         top: 0;
         left: 0;
+        display: flex;
+        justify-content: space-between;
         width: 100%;
         height: 44px;
         background-color: #fff;
@@ -7620,6 +7622,13 @@ img.news_right_image {
     .logo_wrapper {
         float: left;
         padding-left: 15px
+    }
+    .oauth_logo {
+        display: block;
+        width: 44px;
+        height: 44px;
+        background: url("/themes/libfl/images/svg/user.svg") center no-repeat;
+        background-size: 24px;
     }
 
     .logo_wrapper>span {
