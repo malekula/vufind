@@ -1,7 +1,7 @@
 <? /* Display thumbnail if appropriate: */ ?>
 
 <?php
-if ($additional_covers) {
+if (is_array($additional_covers) && !empty($additional_covers[0])) {
     $local_cover = NULL;
     usort($additional_covers);
     foreach ($additional_covers as $addCover) {
