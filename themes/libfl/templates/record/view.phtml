@@ -14,7 +14,11 @@
 
   // Set up breadcrumbs:
   // $this->layout()->breadcrumbs = '<li><a href="/">Поиск</a></li>';
-  $this->layout()->breadcrumbs .= '<li>' . $this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb(), 'Результаты поиска: ', '</li> ');
+ print_r(  );
+  if ($this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb())) {
+    $this->layout()->breadcrumbs .= '<li>' . $this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb(), 'Результаты поиска: ', '</li> ');
+  }
+
     // '<li class="active">' . $this->recordLink()->getBreadcrumb($this->driver) . '</li> ';
   $this->layout()->title = $this->driver->getShortTitle();
 ?>
@@ -80,7 +84,8 @@
                   $tab_classes[] = 'active';
                 }
                 $tab_classes[] = 'initiallyActive';
-                //$this->layout()->breadcrumbs .= '<li class="active">' . $this->transEsc($desc) . '</li>';
+                // $this->layout()->breadcrumbs .= '<li class="active">' . $this->transEsc($desc) . '</li>';
+                $this->layout()->breadcrumbs .= '<li class="active">' . $this->driver->getShortTitle() . '</li>';
                 $this->layout()->breadcrumbs .= '<li class="active">Книга</li>';
                 $activeTabObj = $obj;
               }
