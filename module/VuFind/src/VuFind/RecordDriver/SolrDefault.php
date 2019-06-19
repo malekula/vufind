@@ -2049,7 +2049,7 @@ class SolrDefault extends AbstractBase
     {
         $fund = $this->getFundRecordUID($recordUID);
         if (isset($exemplar_id) && !empty($exemplar_id)) {
-            $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+            $client = new \SoapClient("http://80.250.173.142/LIBFLDataProviderAPI/service.asmx?WSDL");
             switch ($fund) {
                 case 'bjvvv':
                     try {
