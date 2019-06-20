@@ -4720,7 +4720,11 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 .breadcrumb>li {
-    display: inline-block
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .breadcrumb>li>a {
     color: #232325;
@@ -12794,7 +12798,7 @@ img {
 }
 
 .breadcrumb {
-    margin-top: .5rem;
+    margin-top: .8rem;
     margin-bottom: .5rem
 }
 
