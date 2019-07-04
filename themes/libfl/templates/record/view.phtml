@@ -17,6 +17,8 @@
  print_r(  );
   if ($this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb())) {
     $this->layout()->breadcrumbs .= '<li>' . $this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb(), 'Результаты поиска: ', '</li> ');
+  } else {
+    $this->layout()->breadcrumbs .= '<li>' . $this->driver->getShortTitle() . '</li>';
   }
 
     // '<li class="active">' . $this->recordLink()->getBreadcrumb($this->driver) . '</li> ';
@@ -85,7 +87,6 @@
                 }
                 $tab_classes[] = 'initiallyActive';
                 // $this->layout()->breadcrumbs .= '<li class="active">' . $this->transEsc($desc) . '</li>';
-                $this->layout()->breadcrumbs .= '<li class="active">' . $this->driver->getShortTitle() . '</li>';
                 $this->layout()->breadcrumbs .= '<li class="active">Книга</li>';
                 $activeTabObj = $obj;
               }
