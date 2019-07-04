@@ -18,7 +18,7 @@
   if ($this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb())) {
     $this->layout()->breadcrumbs .= '<li>' . $this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb(), 'Результаты поиска: ', '</li> ');
   } else {
-    $this->layout()->breadcrumbs .= '<li>' . $this->driver->getShortTitle() . '</li>';
+    $this->layout()->breadcrumbs .= '<li>Результаты поиска: <a href="/Search/Results?lookfor=' . $this->driver->getShortTitle() . '&type=AllFields&limit=20&sort=relevance">' . $this->driver->getShortTitle() . '</a></li>';
   }
 
     // '<li class="active">' . $this->recordLink()->getBreadcrumb($this->driver) . '</li> ';
