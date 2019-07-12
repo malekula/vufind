@@ -26,8 +26,8 @@ use Zend\Mail\Address;
  */
 class SendaccessController extends AbstractBase
 {
-    protected $link_registration = "http://80.250.173.142/WebReaderT";
-    protected $link_login = "http://80.250.173.142/personal/loginemployee.aspx";
+    protected $link_registration = "http://opac.libfl.ru/WebReaderT";
+    protected $link_login = "http://opac.libfl.ru/personal/loginemployee.aspx";
     protected $link_contactsLibrary = "https://libfl.ru/ru/item/contacts";
 
     /**

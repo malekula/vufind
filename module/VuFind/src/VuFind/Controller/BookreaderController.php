@@ -73,7 +73,7 @@ class BookreaderController extends AbstractBase
         $view = $this->createViewModel();
 
         if ($this->_bookID) {
-            $client = new Client('http://80.250.173.142/ALISAPI/Books/' . $this->_bookID, array(
+            $client = new Client('http://opac.libfl.ru/ALISAPI/Books/' . $this->_bookID, array(
                 'maxredirects' => 0,
                 'timeout' => 30
             ));
@@ -85,7 +85,7 @@ class BookreaderController extends AbstractBase
                     if ($exemplars->MethodOfAccessCode == 4002) {
                         if ($exemplars->AccessCode == 1001) {
                             // Книга в свободном доступе
-                            $client = new Client('http://80.250.173.142/ALISAPI/Books/ElectronicCopy/' . $this->_bookID, array(
+                            $client = new Client('http://opac.libfl.ru/ALISAPI/Books/ElectronicCopy/' . $this->_bookID, array(
                                 'maxredirects' => 0,
                                 'timeout' => 30
                             ));
@@ -138,7 +138,7 @@ class BookreaderController extends AbstractBase
             } else {
                 $readerToken = $cookie->offsetGet('ReaderToken');
             }
-            $client = new Client('http://80.250.173.142/ALISAPI/Circulation/Orders/ById/' . $this->_orderID, array(
+            $client = new Client('http://opac.libfl.ru/ALISAPI/Circulation/Orders/ById/' . $this->_orderID, array(
                 'maxredirects' => 0,
                 'timeout' => 30
             ));
@@ -172,7 +172,7 @@ class BookreaderController extends AbstractBase
                     return $view;
                 }
                 $view->setVariable('bookInfo', json_encode($orderInfo->Book));
-                $client = new Client('http://80.250.173.142/ALISAPI/Books/ElectronicCopy/' . $orderInfo->Book->ID, array(
+                $client = new Client('http://opac.libfl.ru/ALISAPI/Books/ElectronicCopy/' . $orderInfo->Book->ID, array(
                     'maxredirects' => 0,
                     'timeout' => 30
                 ));

@@ -481,7 +481,7 @@ class CartController extends AbstractBase
             //. '<a href="http://80.250.173.142/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
             //. $this->translate('order_go_to_list') . '</a>.'
             //. '<script type="text/javascript">window.location.replace("http://80.250.173.142/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '")</script>'
-            . '<script type="text/javascript">window.location.replace("https://dev-lk.libfl.ru")</script>'
+            . '<script type="text/javascript">window.location.replace("https://lk.libfl.ru")</script>'
         ];
         return $this->redirectToSource('success', $message);
     }
