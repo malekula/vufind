@@ -73,7 +73,7 @@
     <?=$this->flashmessages()?>
     <?=$this->record($this->driver)->getCoreMetadata()?>
       <?=$this->record($this->driver)->getToolbar()?>
-    <? if (count($this->tabs) > 0): ?>
+    <? if (count($this->tabs) > 0 && $this->driver->getSourceIdentifier() !== 'EDS'): ?>
       <a name="tabnav"></a>
       <div class="record-tabs">
         <ul class="nav nav-tabs">
@@ -111,6 +111,7 @@
 
     <?=$this->driver->supportsCoinsOpenURL()?'<span class="Z3988" title="'.$this->escapeHtmlAttr($this->driver->getCoinsOpenURL()).'"></span>':''?>
 
+    <? if ($this->driver->getSourceIdentifier() !== 'EDS'): ?>
     <div class='access_info clearfix'>
       <div class='left'>
         <span>Информация о доступе</span>
@@ -137,6 +138,7 @@
         ?>
       </div>
     </div>
+    <? endif; ?>
   </div>
 
   <!--<div class="<?=$this->layoutClass('sidebar')?>">
