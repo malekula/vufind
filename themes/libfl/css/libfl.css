@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600,700&amp;subset=cyrillic"');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap&subset=cyrillic-ext');
 @font-face {
     font-family: 'Leto Sans';
     src: url('../../bootstrap3/css/fonts/letosans-bold-webfont.svg') format('svg'),
@@ -58,7 +59,7 @@ a {
     text-decoration: none;
 }
 a:hover, a:focus {
-    color: #250dc0;
+    color: #761CEA;
     transition: color .2s;
 }
 .open_popup {
@@ -389,7 +390,6 @@ a.float_small_type {
 .litres_options {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 a.litres_library {
@@ -408,18 +408,22 @@ a.litres_library:focus {
     box-shadow: 1px 3px 10px 0 rgba(0,0,243,.12);
     transition: .2s;
 }
+.litres_links {
+    margin-right: 10px;
+}
 .litres_links a {
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: -.12px;
+    line-height: 1.35;
     color: #0000f3;
-    margin-left: 15px;
+    margin-left: 20px;
 }
 .litres_links a:hover,
 .litres_links a:focus {
-    color: #250dc0;
+    color: #761CEA;
     transition: color .2s;
 }
 
@@ -455,7 +459,7 @@ a.litres_library:focus {
 }
 .btn-blue:hover,
 .btn-blue:focus {
-    background-color: #250dc0;
+    background-color: #761CEA;
     transition: background-color .2s;
 }
 .btn-clear-narrow {
@@ -472,7 +476,7 @@ a.litres_library:focus {
 }
 .btn-clear-narrow:hover,
 .btn-clear-narrow:focus {
-    color: #250dc0;
+    color: #761CEA;
     text-decoration: none;
     border: 1px solid #dedede;
     transition: border .2s;
@@ -513,7 +517,7 @@ a.litres_library:focus {
 }
 .btn-white:hover,
 .btn-white:focus {
-    color: #250dc0;
+    color: #761CEA;
     box-shadow: 0 2px 5px 0 rgba(0,0,243,.22);
     transition: color .2s;
 }
@@ -523,6 +527,7 @@ a.litres_library:focus {
     font-size: 14px;
     font-weight: 400;
     letter-spacing: -.5px;
+    line-height: 1.35;
     color: #232325;
 }
 .media-body .table>tbody>tr>th {
@@ -1272,7 +1277,7 @@ a.infobar__link_academy:before {
 .header {
     position: relative;
     height: 210px;
-    margin-top: 30px 0 10px;
+    margin: 30px 0 10px;
 }
 .logo_wrapper {
     float: left;
@@ -1296,7 +1301,7 @@ a.quick-links__item {
 }
 a.quick-links__item:hover,
 a.quick-links__item:focus {
-    color: #250dc0;
+    color: #761CEA;
     transition: color .2s;
 }
 a.quick-links__item_blue {
@@ -1318,7 +1323,7 @@ a.closing-time:after {
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: #e6e6e6 url(/libfl/images/svg/arrow-back.svg) 50% no-repeat;
+    background: #e6e6e6 url(../images/svg/arrow-back.svg) 50% no-repeat;
     background-size: 10px;
     border-radius: 4px;
     transform: rotate(180deg);
@@ -5193,7 +5198,7 @@ a.breadcrumb_parent {
     display: inline-block;
     width: 15px;
     height: 15px;
-    background: #e6e6e6 url(/images/svg/arrow-back.svg) 50% no-repeat;
+    background: #e6e6e6 url("../images/svg/arrow-back.svg") 50% no-repeat;
     background-size: 10px;
     border-radius: 4px;
     transform: rotate(180deg);
@@ -5738,6 +5743,12 @@ img.news_right_image {
     /**/
     .record.sourceSolr .media-body {
         width: 60%;
+    }
+}
+@media screen and (max-width: 980px) {
+    #fixed_menu .content_big, #nav .content_big, #header .content_big, .index_news_wrapper .content_big, .content_big, .content, .banner_wrapper, #content {
+        width: 100%;
+        padding: 0 40px;
     }
 }
 
@@ -7131,6 +7142,25 @@ img.news_right_image {
 
     a.menu__link {
         font-size: 13px
+    }
+
+    .catalogue-banners {
+        flex-wrap: wrap;
+    }
+    .catalogue-banner {
+        flex: 0 0 100%;
+        min-width: 100%;
+        height: auto;
+        border-bottom: none;
+        background: none!important;
+    }
+    .catalogue-banner:last-child {
+        border-bottom: 1px solid #e6e6e6;
+    }
+    .catalogue-banner.banner_identity:after,
+    .catalogue-banner.banner_litres:after {
+        content: '';
+        display: none;
     }
 }
 
