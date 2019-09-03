@@ -49,8 +49,10 @@
                   <?=$item['Data']?> </a>
                 <? else:?>
                   <p>
-                    <b><?=$this->transEsc($item['Label'])?>:</b>
-                    <?=$item['Data']?>
+                    <? if('Au' == $item['Group']): ?>
+                        <b><?=$this->transEsc($item['Label'])?>:</b>
+                        <?=$item['Data']?>
+                    <? endif; ?>
                   </p>
                 <? endif;?>
               </div>
