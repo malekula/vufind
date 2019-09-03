@@ -19,11 +19,6 @@
 ?>
 
 <div class="searchHomeContent">
-  <div class='searchHome_row'>
-    <div class='global_search'><a href="/Search/Results?lookfor=&type=AllFields">Более 1 528 000 книг</a></div>
-    <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
-    <!--<div><а href='/Search/Advanced' class='link'>Расширенный поиск</а></div>-->
-  </div>
   <?
   $ilsStatusScript = <<<JS
 $(document).ready(function() {
@@ -40,19 +35,24 @@ $(document).ready(function() {
 JS;
   ?>
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, $ilsStatusScript, 'SET'); ?>
-
   <?=$this->context($this)->renderInContext("search/searchbox.phtml", ['ignoreHiddenFilterMemory' => true])?>
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$("#searchForm_lookfor").focus();', 'SET'); ?>
+
+  <div class='searchHome_row'>
+      <a class='global_search' href="/Search/Results?lookfor=&type=AllFields">Более 1 528 000 книг</a>
+      <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
+  </div>
 
 <div class="catalogue-readme"><span>Инструкция</span>Как сделать заказ?</div>
 
 </div>
 
-<div class="catalogue_banners">
-	<a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue_banner banner_identity"><span>Книжные подборки</span></a>
-	<a href="https://press.libfl.ru/login/?next=/" target="_blank" class="catalogue_banner"><span>Пресса</span></a>
-	<a href="https://libfl.ru/static/online_resources/" target="_blank" class="catalogue_banner"><span>Online-ресурсы</span></a>
-	<a href="https://libfl.ru/static/litres/" target="_blank" class="catalogue_banner banner_litres"><span>Бесплатные электронные книги для читателей иностранки</span></a>
+<div class="catalogue-banners">
+	<a href="https://opac.libfl.ru/opacper/simple-search.html" target="_blank" class="catalogue-banner identity"><span>Периодические<br>издания</span></a>
+	<a href="https://press.libfl.ru/login/?next=/" target="_blank" class="catalogue-banner"><span>Пресса</span></a>
+	<a href="https://libfl.ru/static/online_resources/" target="_blank" class="catalogue-banner resourses"><span>Online-ресурсы</span><small>Поиск по лицензионным базам данных и ресурсам открытого доступа</small><small class="catalogue-banner__link">Узнать больше</small></a>
+	<a href="https://libfl.ru/static/litres/" target="_blank" class="catalogue-banner litres"><span>Бесплатные электронные книги для читателей иностранки</span></a>
+	<a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue-banner become-member"><span class="catalogue-banner__header">Книжные подборки</span></a>
 </div>
 
 <? if (isset($facetList) && is_array($facetList)): ?>
