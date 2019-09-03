@@ -9,44 +9,59 @@
     $restrictedView = empty($accessLevel) ? false : true;
 ?>
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?=$this->driver->getSchemaOrgFormats()?> Product">
-  <div class="media-left medium img-col">
-    <? if ($thumb): ?>
-      <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+   <!--<div class="media-body">
+    <? /* if ($thumb): ?>
+        <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
     <? else: ?>
-      <span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>
+        <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
+    <? endif; */ ?>
+    <? /* if ($pubType): ?>
+        <p><?=$this->transEsc($pubType)?></p>
+    <? endif; */ ?>
+  </div>-->
+  <div class="media-body info-col">
+    <? if ($thumb): ?>
+        <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+    <? else: ?>
+        <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
     <? endif; ?>
     <? if ($pubType): ?>
-      <p><?=$this->transEsc($pubType)?></p>
+        <span class="EDS-source"><?=$this->transEsc($pubType)?></span>
     <? endif; ?>
+
+    <h3 property="name"><?=$this->driver->getTitle()?></h3>
 
     <div class="external-links">
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
         <span>
-          <a href="<?=$this->escapeHtmlAttr($pLink)?>">
-            <?=$this->transEsc('View in EDS')?>
+          <a href="<?=$this->escapeHtmlAttr($pLink)?>" target="_blank">
+            <?=$this->transEsc('Просмотр в EDS')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
       <? $pdfLink = $this->driver->getPdfLink();
           if ($pdfLink): ?>
         <span>
-          <a href="<?=$pdfLink?>" class="icon pdf fulltext">
-            <?=$this->transEsc('PDF Full Text')?>
+          <a href="<?=$pdfLink?>" class="fulltext">
+            <?=$this->transEsc('PDF')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
       <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
         <span>
-          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="icon html fulltext">
-            <?=$this->transEsc('HTML Full Text')?>
+          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="fulltext">
+            <?=$this->transEsc('Текст')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
+
+        <div class="external-links__readme">
+            <a href="" class="">Как получить доступ?</a>
+            <br>
+            <a href="" class="">Об Online-ресурсах</a>
+        </div>
     </div>
-  </div>
-  <div class="media-body info-col">
-    <h3 property="name"><?=$this->driver->getTitle()?></h3>
 
     <table class="table table-striped" summary="<?=$this->transEsc('Bibliographic Details')?>">
       <? foreach ($items as $key => $item): ?>
@@ -87,22 +102,54 @@
     </table>
 
     <div class="resultItemLine4 custom-links">
-
-    <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());
-    if (!empty($customLinks)): ?>
-      <? foreach ($customLinks as $customLink): ?>
-      <? $url = isset($customLink['Url']) ? $customLink['Url'] : '';
-          $mot = isset($customLink['MouseOverText'])? $customLink['MouseOverText'] : '';
-          $icon = isset ($customLink['Icon']) ? $customLink['Icon'] : '';
-          $name = isset($customLink['Text']) ? $customLink['Text'] : '';
-      ?>
-      <span>
-        <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
-          <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
-        </a>
-      </span>
-      <? endforeach; ?>
-    <? endif; ?>
+        <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());
+        if (!empty($customLinks)): ?>
+          <? foreach ($customLinks as $customLink): ?>
+          <? $url = isset($customLink['Url']) ? $customLink['Url'] : '';
+              $mot = isset($customLink['MouseOverText'])? $customLink['MouseOverText'] : '';
+              $icon = isset ($customLink['Icon']) ? $customLink['Icon'] : '';
+              $name = isset($customLink['Text']) ? $customLink['Text'] : '';
+          ?>
+          <span>
+            <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+              <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
+            </a>
+          </span>
+          <? endforeach; ?>
+        <? endif; ?>
     </div>
+
+    <div class="external-links">
+      <? $pLink = $this->driver->getPLink();
+          if($pLink): ?>
+        <span>
+          <a href="<?=$this->escapeHtmlAttr($pLink)?>" target="_blank">
+            <?=$this->transEsc('Просмотр в EDS')?>
+          </a>
+        </span>
+      <? endif; ?>
+      <? $pdfLink = $this->driver->getPdfLink();
+          if ($pdfLink): ?>
+        <span>
+          <a href="<?=$pdfLink?>" class="fulltext">
+            <?=$this->transEsc('PDF')?>
+          </a>
+        </span>
+      <? endif; ?>
+      <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
+        <span>
+          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="fulltext">
+            <?=$this->transEsc('Текст')?>
+          </a>
+        </span>
+      <? endif; ?>
+
+        <div class="external-links__readme">
+            <a href="" class="">Как получить доступ?</a>
+            <br>
+            <a href="" class="">Об Online-ресурсах</a>
+        </div>
+    </div>
+
   </div>
 </div>
