@@ -30,7 +30,13 @@
     <? endif; ?>
 
     <h3 property="name"><?=$this->driver->getTitle()?></h3>
-
+    <?
+        foreach($items as $item):
+            if ('Ab' == $item['Group']) {
+                echo '<p>'.$item['Data'].'</p>';
+            }
+        endforeach;
+    ?>
     <div class="external-links">
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
@@ -65,7 +71,7 @@
 
     <table class="table table-striped" summary="<?=$this->transEsc('Bibliographic Details')?>">
       <? foreach ($items as $key => $item): ?>
-        <? if (!empty($item['Data'])): ?>
+        <? if (!empty($item['Data']) && 'Ab' != $item['Group']): ?>
         <tr>
           <th><?=$this->transEsc($item['Label'])?>:</th>
           <td><?=$this->driver->linkUrls($item['Data'])?></td>
