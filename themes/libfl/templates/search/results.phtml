@@ -74,7 +74,7 @@
     <? endif; ?>
 
   <?=$this->flashmessages()?>
-  <nav class="search-header hidden-print">    
+  <nav class="search-header hidden-print">
     <div class="search-stats">
       <? if ($recordTotal > 0): ?>
         <?=$this->context()->renderInContext('search/controls/showing.phtml', ['lookfor' => $lookfor, 'recordTotal' => $recordTotal]) ?>
