@@ -8,17 +8,18 @@
   $thumbnail = false;
   $thumbnailAlignment = $this->record($this->driver)->getThumbnailAlignment('result');
   ob_start(); ?>
-  <div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtml($coverDetails['size'])?>">
-    <? if ($coverDetails['cover']): ?>
-      <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="_record_link">
+  <!-- <div class="media-body"> -->
+    <!--<div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtml($coverDetails['size'])?>">-->
+    <? /* if ($coverDetails['cover']): ?>
+      <!--<a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="_record_link">
         <img src="<?=$this->escapeHtmlAttr($coverDetails['cover'])?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
-      </a>
+      </a>-->
     <? else: ?>
-      <span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>
-      <div><?=$this->driver->getPubType()?></div>
-    <? endif; ?>
-  </div>
-<? $thumbnail = ob_get_contents(); ?>
+      <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
+      <!--<div class="source-type"><?=$this->driver->getPubType()?></div>-->
+    <? endif; */ ?>
+  <!-- </div> -->
+  <? $thumbnail = ob_get_contents(); ?>
 <? ob_end_clean(); ?>
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getUniqueID())?>" class="hiddenId" />
 <input type="hidden" value="<?=$this->escapeHtmlAttr($this->driver->getSourceIdentifier())?>" class="hiddenSource" />
@@ -26,7 +27,17 @@
   <? if ($thumbnail && $thumbnailAlignment == 'left'): ?>
     <?=$thumbnail ?>
   <? endif; ?>
+
   <div class="media-body">
+
+    <? if ($coverDetails['cover']): ?>
+      <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="_record_link">
+        <img src="<?=$this->escapeHtmlAttr($coverDetails['cover'])?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+      </a>
+    <? else: ?>
+    <div class="source-type"><?=$this->driver->getPubType()?></div>
+    <? endif; ?>
+
     <div class="result-body a">
       <? $items = $this->driver->getItems();
         if (isset($items) && !empty($items)):
@@ -66,28 +77,33 @@
               $icon = isset ($customLink['Icon']) ? $customLink['Icon'] : '';
               $name = isset($customLink['Text']) ? $customLink['Text'] : '';
           ?>
-          <span>
-            <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
-              <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
-            </a>
-          </span>
+            <!-- -->
+            <span>
+              <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+                <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
+              </a>
+            </span>
           <? endforeach; ?>
         <? endif; ?>
-      </div>
 
-      <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
-        <a href="<?= $this->recordLink()->getUrl($this->driver, 'fulltext') ?>#html" class="icon html fulltext _record_link" target="_blank">
-          <?=$this->transEsc('HTML Full Text')?>
-        </a>
-        &nbsp; &nbsp;
-      <? endif; ?>
+        <!-- HTML -->
+        <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
+            <a href="<?= $this->recordLink()->getUrl($this->driver, 'fulltext') ?>#html" class="fulltext _record_link" target="_blank">
+                <?=$this->transEsc('HTML')?>
+            </a>
+        <? endif; ?>
 
-      <? if ($this->driver->hasPdfAvailable()): ?>
-        <a href="<?= $this->recordLink()->getUrl($this->driver).'/PDF'; ?>" class="icon pdf fulltext" target="_blank">
-          <?=$this->transEsc('PDF Full Text')?>
-        </a>
-      <? endif; ?>
+        <!-- PDF -->
+        <? if ($this->driver->hasPdfAvailable()): ?>
+              <a href="<?= $this->recordLink()->getUrl($this->driver).'/PDF'; ?>" class="fulltext" target="_blank">
+                <?=$this->transEsc('PDF')?>
+              </a>
+        <? endif; ?>
+
     </div>
+
+    </div>
+
     <div class="result-links hidden-print">
       <? /* Display qrcode if appropriate: */ ?>
       <? if ($QRCode = $this->record($this->driver)->getQRCode("results")): ?>

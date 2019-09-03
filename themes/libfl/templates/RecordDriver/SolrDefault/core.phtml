@@ -15,7 +15,7 @@
         <div class="record-info">
             <input type="hidden" name="recordID" value="<?=$this->driver->getFundRecordUID($this->driver->getUniqueId())?>" class="recordID">
         </div>
-        <a class="back-to-search" href='javascript:history.back()'>Вернуться к поиску</a>
+
         <span class='author'><?= $this->driver->tryMethod('getPrimaryAuthor') ?></span>
         <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
         <?
@@ -103,7 +103,7 @@
                     <span>Доступность</span><a href="/" class="btn btn-note js-availability-hover">?</a>
                 </div>
                 <div class="book-availability-note">
-                    <span>Зеленым цветом отмечены экземпляры доступные для заказа, красным – временно недоступные. Серый цвет – экземпляра нет в наличии.</span>
+                    <span>Зеленым цветом отмечены экземпляры доступные для заказа, красным – временно недоступные.<br>Серый цвет означает, что экземпляра нет в наличии.</span>
                 </div>
                 <div class="m4001 book-availability-status">Взять на дом</div>
                 <? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
