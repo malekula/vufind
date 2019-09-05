@@ -12606,13 +12606,23 @@ body.rtl .facet-group .excludable {
     padding-right: 15px
 }
 
-.checkbox-filter {
-    display: block;
-    padding-bottom: 1rem;
-    font-weight: bold;
-    color: #333
+a.checkbox-filter {
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #4a4a4a;
+    padding-bottom: 10px;
 }
-
+a.checkbox-filter>i {
+    font-size: 20px;
+    padding-right: 10px;
+}
+a.checkbox-filter:hover,
+a.checkbox-filter:focus {
+    color: #232325;
+    transition: color .2s;
+}
 .facet-group>.checkbox,
 .sidebar .facet.checkbox {
     margin: 0;
@@ -14332,7 +14342,7 @@ input[type=checkbox] {
     margin: 0;
 }
 .searchHomeContent .navbar-form .search-options-wrapper {
-    top: 1px;
+    top: 34px;
     right: 1px;
     width: 46px;
     height: 46px;
@@ -14445,7 +14455,7 @@ body {
 
 @media (min-width:768px) {
     .main .sidebar {
-        background-color: #f1f1f1;
+        background-color: #f9f9f9;
         padding: 0;
         margin-top: 35px;
     }
@@ -14914,6 +14924,7 @@ select#limit:after {
     color: #b4bac1;
 }
 .search_info_advanced {
+    z-index: 100;
     position: absolute;
     top: 0;
     right: 0;
@@ -14924,7 +14935,7 @@ select#limit:after {
     color: #0000f3;
 }
 .result {
-    padding: 20px 0;
+    padding: 36px 0 18px;
     border-bottom: 1px solid #e6e6e6;
 }
 .result:nth-child(even) {
@@ -14954,12 +14965,12 @@ select#limit:after {
     font-size: 12px;
 }
 .record-number {
-    padding-top: 3px;
+    padding-top: 2px;
     margin-right: 28px;
 }
 .source-type {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -.5px;
     line-height: 19px;
     color: #b4bac1;
@@ -15082,7 +15093,6 @@ span.about_label {
     color: #242728;
 }
 .sidebar .checkboxFilter {
-    background-color: #fff;
     padding: 20px 10px 10px;
 }
 .sidebar .facet-group {
@@ -15100,12 +15110,14 @@ span.about_label {
     font-size: 14px;
     font-weight: 700;
     border: none;
-    border-bottom: 1px solid #e6e6e6;
+    /*border-bottom: 1px solid #E6E6E6;*/
+    border-top: 15px solid #fff;
     padding: 10px 15px;
     /*margin-bottom: 15px;*/
 }
 .facet-group .collapse.in {
     margin-bottom: 15px;
+    border-top: 1px solid #E6E6E6;
 }
 .facet-group.active-filters .title {
     color: #f8541c;
@@ -15118,8 +15130,13 @@ span.about_label {
     border: none;
 }
 .facet-group .facet .text {
+     color: #4a4a4a;
+     text-decoration: none;
+}
+.facet-group .facet .text:hover,
+.facet-group .facet .text:focus {
     color: #232325;
-    text-decoration: none;
+    transition: .2s;
 }
 .facet-group .facet .badge {
     color: #b4bac1;
@@ -15214,7 +15231,7 @@ input#publishDateto {
     line-height: normal;
     color: #242728;
     padding: 0 5px;
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #e6e6e6;
     border-radius: 4px;
     outline: none;
@@ -15233,7 +15250,7 @@ input#publishDateto {
     border: none;
     background-color: #fff;
     border-radius: 100%;
-    box-shadow: 0 3px 10px rgba(42, 42, 183, 0.45);
+    box-shadow: 0 3px 10px rgba(0,0,0,.11);
     opacity: 1;
     top: 1px;
     width: 18px;
@@ -15245,11 +15262,11 @@ input#publishDateto {
 }
 .slider-track-low, .slider-track-high,
 .slider-container .slider-track {
-    background-color: #ebeff2;
+    background-color: #e6e6e6;
     box-shadow: none;
 }
 .slider-container .slider-selection {
-    background-color: #0000f3;
+    background-color: #232325;
 }
 .pagination>li>a, .pagination>li>span {
     display: inline-block;
@@ -15700,6 +15717,9 @@ label.search_bool {
 select.adv-term-type,
 select.boolean,
 select.jumpMenu {
+    background: url('../images/svg/down.svg') right center no-repeat;
+    background-size: 8px;
+    padding-right: 15px;
     /*for WebKit*/
     -webkit-appearance: none;
     /* for FF */
@@ -15709,13 +15729,6 @@ select.jumpMenu {
     /* for IE */
     -ms-appearance: none;
     appearance: none!important;
-    background-image: url('../images/svg/caron-icon.svg');
-    background-position: 94% center;
-    background-repeat: no-repeat;
-    background-size: 10px;
-}
-select.jumpMenu {
-    width: 125px;
 }
 select.boolean {
     background-position: 85% center;
