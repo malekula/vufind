@@ -65,7 +65,7 @@
         <div class="external-links__readme">
             <a href="" class="">Как получить доступ?</a>
             <br>
-            <a href="" class="">Об Online-ресурсах</a>
+            <a href="http://libfl.ru/static/online_resources" target="_blank" class="">Об Online-ресурсах</a>
         </div>
     </div>
 
@@ -73,7 +73,7 @@
       <? foreach ($items as $key => $item): ?>
         <? if (!empty($item['Data']) && 'Ab' != $item['Group']): ?>
         <tr>
-          <th><?=$this->transEsc($item['Label'])?>:</th>
+          <th><?=$this->transEsc($item['Label'])?></th>
           <td><?=$this->driver->linkUrls($item['Data'])?></td>
         </tr>
         <? endif; ?>
@@ -81,11 +81,10 @@
 
       <? if ($dbLabel): ?>
         <tr>
-          <th><?=$this->transEsc('Database')?>:</th>
+          <th><?=$this->transEsc('Database')?></th>
           <td><?=$this->escapeHtml($dbLabel)?></td>
         </tr>
       <? endif; ?>
-
       <?if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
           $fullText = $this->driver->getHtmlFullText();?>
         <tr id="html">
@@ -123,38 +122,6 @@
           </span>
           <? endforeach; ?>
         <? endif; ?>
-    </div>
-
-    <div class="external-links">
-      <? $pLink = $this->driver->getPLink();
-          if($pLink): ?>
-        <span>
-          <a href="<?=$this->escapeHtmlAttr($pLink)?>" target="_blank">
-            <?=$this->transEsc('Просмотр в EDS')?>
-          </a>
-        </span>
-      <? endif; ?>
-      <? $pdfLink = $this->driver->getPdfLink();
-          if ($pdfLink): ?>
-        <span>
-          <a href="<?=$pdfLink?>" class="fulltext">
-            <?=$this->transEsc('PDF')?>
-          </a>
-        </span>
-      <? endif; ?>
-      <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
-        <span>
-          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="fulltext">
-            <?=$this->transEsc('Текст')?>
-          </a>
-        </span>
-      <? endif; ?>
-
-        <div class="external-links__readme">
-            <a href="" class="">Как получить доступ?</a>
-            <br>
-            <a href="" class="">Об Online-ресурсах</a>
-        </div>
     </div>
 
   </div>
