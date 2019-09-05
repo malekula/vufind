@@ -37,6 +37,9 @@
             $HPID = $this->driver->getHierarchyParentID()[0];
             echo "ID верхнего уровня: " . $HTID . "<br/>";
             echo "ID сводного уровня: " . $HPID . "<br/><br/>";
+            print_r($this->driver->getHierarchyTopID());
+            echo "<br/>";
+            print_r($this->driver->getHierarchyParentID());
             if (!empty($HTT)) {
                 foreach ($HTT as $hierarchy_top_title) {
                     echo "<span style='color:grey'>Серия:</span> <a href='/Collection/".$HTID."'>" . $hierarchy_top_title . "</a><br/>";
