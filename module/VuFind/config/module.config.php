@@ -734,7 +734,6 @@ $config = [
                     'Exemplars' => 'Exemplar',
                     'LIBFLDescription' => 'LIBFLDescription',
                     'LIBFLAccess' => 'LIBFLAccess',
-                    'Collection' => 'CollectionList',
                 ],
                 'defaultTab' => null,
                 // 'backgroundLoadedTabs' => ['UserComments', 'Details']
