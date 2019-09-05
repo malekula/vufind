@@ -21,16 +21,25 @@
 
         <!-- Серии и коллекции -->
         <?
-            // if ($this->driver->isCollection()) {
-            //     $HTT = $this->driver->getHierarchyTopTitle();
-            //     $HTID = $this->driver->getHierarchyTopID();
-            //     $HPT = $this->driver->getHierarchyParentTitle();
-            //     $HPID = $this->driver->getHierarchyParentID();
-            //     $diff = array_diff($HTID, $HPID);
-            //     if ($diff) {
-            //
-            //     }
-            // }
+            if ($this->driver->isCollection()) {
+                $HTT = $this->driver->getHierarchyTopTitle();
+                $HTID = $this->driver->getHierarchyTopID();
+                $HPT = $this->driver->getHierarchyParentTitle();
+                $HPID = $this->driver->getHierarchyParentID();
+                $diff = array_diff($HTID, $HPID);
+                if (!empty($diff)) {
+                    echo "Серия: ";
+                    foreach ($HTID as $hierarchy_top_title) {
+                        echo "<a href='/Collection/".$HTID."'>".$hierarchy_top_title."</a>";
+                    }
+
+                    echo "Подсерия: ";
+                    foreach ($HPID as $hierarchy_parent_title) {
+                        echo "<a href='/Collection/".$HPID."'>".$hierarchy_parent_title."</a>";
+                    }
+                }
+            }
+            echo "<br><br>";
             $HTT = $this->driver->getHierarchyTopTitle();
             $HTID = $this->driver->getHierarchyTopID()[0];
             $HPT = $this->driver->getHierarchyParentTitle();
@@ -50,6 +59,7 @@
                     echo "<span style='color:grey'>Подсерия:</span> <a href='".$HPID."'>" . $hierarchy_parent_title . "</a><br/>";
                 }
             }
+            echo "<br><br>";
         ?>
         <?
             $annotation = $this->driver->getAnnotation();
