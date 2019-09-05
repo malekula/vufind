@@ -18,6 +18,22 @@
 
         <span class='author'><?= $this->driver->tryMethod('getPrimaryAuthor') ?></span>
         <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
+
+        <!-- Серии и коллекции -->
+        <?
+            $HTT = $this->driver->getHierarchyTopTitle();
+            $HPT = $this->driver->getHierarchyParentTitle();
+            if (!empty($HTT)) {
+                foreach ($HTT as $hierarchy_top_title) {
+                    echo "<span style='color:grey'>Название серии верхнего уровня:</span> " . $hierarchy_top_title . "<br/>";
+                }
+            }
+            if (!empty($HPT)) {
+                foreach ($HTT as $hierarchy_parent_title) {
+                    echo "<span style='color:grey'>Заглавие сводного уровня, которому принадлежит эта запись:</span> " . $hierarchy_parent_title . "<br/>";
+                }
+            }
+        ?>
         <?
             $annotation = $this->driver->getAnnotation();
             $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;

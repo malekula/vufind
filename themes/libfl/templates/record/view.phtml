@@ -14,7 +14,7 @@
 
   // Set up breadcrumbs:
   // $this->layout()->breadcrumbs = '<li><a href="/">Поиск</a></li>';
- print_r(  );
+
   if ($this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb())) {
     $this->layout()->breadcrumbs .= '<li>' . $this->searchMemory()->getLastSearchLink($this->driver->getBreadcrumb(), 'Результаты поиска: ', '</li> ');
   } else {
