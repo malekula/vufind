@@ -85,29 +85,18 @@
           <td><?=$this->escapeHtml($dbLabel)?></td>
         </tr>
       <? endif; ?>
-      <?if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
-          $fullText = $this->driver->getHtmlFullText();?>
-        <tr id="html">
-          <td colspan="2">
+    </table>
+    <?if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
+      $fullText = $this->driver->getHtmlFullText();?>
+        <div id="html">
             <?=$fullText?>
-          </td>
-        </tr>
-      <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
-        <!--<tr id="html">-->
-          <!--<td>-->
-          <div class="ebsco-warning" id="#html">
+        </div>
+    <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
+        <div class="ebsco-warning" id="html">
             <?=$this->transEsc('Full text is not displayed to guests')?>
             <span><a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow"><?=$this->transEsc('Login for full access')?></a></span>
           <div>
-          <!--</td>-->
-          <!--<td>-->
-            <!--<a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow">
-              <strong><?=$this->transEsc('Login for full access')?></strong>
-            </a>-->
-          <!--</td>-->
-        <!--</tr>-->
-      <? endif; ?>
-    </table>
+    <? endif; ?>
 
     <div class="resultItemLine4 custom-links">
         <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());

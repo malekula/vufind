@@ -4747,13 +4747,13 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     list-style: none;
 }
 
-.breadcrumb>li {
+/*.breadcrumb>li {
     display: inline-block;
     max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
+}*/
 .breadcrumb>li>a {
     color: #232325;
     text-decoration: none;
@@ -12880,8 +12880,7 @@ img {
 }
 
 .breadcrumb {
-    margin-top: .8rem;
-    margin-bottom: .5rem
+    display: flex;
 }
 
 .label,
@@ -15440,6 +15439,7 @@ input#publishDateto {
     background-color: #F9EF65;
     text-align: center;
     padding: 15px 30px;
+    margin-top: 40px;
 }
 .ebsco-warning span a {
     display: block;

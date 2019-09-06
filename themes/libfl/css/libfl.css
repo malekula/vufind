@@ -7169,7 +7169,13 @@ img.news_right_image {
         min-width:0;
         padding-top: 44px
     }
-
+    .breadcrumb>li {
+        display: inline-block;
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     .record.sourceEDS {
         padding: 0;
     }
