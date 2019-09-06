@@ -93,16 +93,19 @@
           </td>
         </tr>
       <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
-        <tr id="html">
-          <td>
+        <!--<tr id="html">-->
+          <!--<td>-->
+          <div class="ebsco-warning" id="#html">
             <?=$this->transEsc('Full text is not displayed to guests')?>
-          </td>
-          <td>
-            <a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow">
+            <span><a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow"><?=$this->transEsc('Login for full access')?></a></span>
+          <div>
+          <!--</td>-->
+          <!--<td>-->
+            <!--<a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow">
               <strong><?=$this->transEsc('Login for full access')?></strong>
-            </a>
-          </td>
-        </tr>
+            </a>-->
+          <!--</td>-->
+        <!--</tr>-->
       <? endif; ?>
     </table>
 
