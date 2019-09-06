@@ -24,7 +24,7 @@
     </div>
   <? endif; ?>
   <div class="media-body">
-
+    <span class="collection-header">Серия</span>
     <h2><?=$this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection())?></h2>
 
     <? $summary = $this->driver->getSummary(); $summary = isset($summary[0]) ? $summary[0] : false; ?>
