@@ -93,7 +93,7 @@
         <div class="record_media_buttons">
             <?
                 $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
-                if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres' && !$this->driver->isCollection()) {
+                if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
                     echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                     if ($accessMethod && $accessMethod['protection'] == false) {
                         echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
@@ -104,7 +104,7 @@
             ?>
         </div>
         <!--<div class="record_media_split_line"></div>-->
-            <? if (!empty($coreFields) && !$this->driver->isCollection()): ?>
+            <? if (!empty($coreFields)): ?>
                 <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
                     <? foreach ($coreFields as $key => $current): ?>
                         <? if (in_array($key, array('genre', 'location', 'fund', 'format'))): ?>
@@ -143,7 +143,6 @@
                 </div>
             <? endif; ?>
 
-            <? if (!$this->driver->isCollection()): ?>
             <div class="book-availability">
                 <div class="book-availability-header">
                     <span>Доступность</span><a href="/" class="btn btn-note js-availability-hover">?</a>
@@ -162,7 +161,6 @@
                 <div class="access_method_5 book-availability-status unavailable">????</div>
                 <div class="access_method_6 book-availability-status unavailable">????</div> -->
             </div>
-            <? endif; ?>
 
         </div>
     <? endif; ?>
