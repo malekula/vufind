@@ -6,7 +6,7 @@
   if ($cover):
     ob_start(); ?>
     <div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtmlAttr($coverDetails['size'])?>">
-      <?=$cover ?>
+      <? /* =$cover */ ?>
       <div class="book-carrier">
           <?
             $formats = array_unique($this->driver->getExemplarsCarrier());
@@ -58,7 +58,7 @@
             </span>
         </div>
       <div>
-        <? echo $this->driver->isCollection() ? 'серия' : '' ;?>
+        <? echo $this->driver->isCollection() ? '<div class="collection-subheader">Серия:</div>' : '' ;?>
         <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title getFull" data-view="<?=$this->params->getOptions()->getListViewOption() ?>">
           <?=$this->record($this->driver)->getTitleHtml()?>
         </a>

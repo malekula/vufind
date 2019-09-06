@@ -28,18 +28,18 @@
                 $HPID = $this->driver->getHierarchyParentID();
                 $diff = array_diff($HTID, $HPID);
                 if (!empty($diff)) {
-                    echo "Серия: ";
+                    echo "<span class='book-collection'>Серия: </span>";
                     foreach ($HTID as $key=>$hierarchy_top_id) {
                         echo "<a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a>";
                     }
 
-                    echo "Подсерия: ";
+                    echo "<span class='book-collection'>Подсерия: </span>";
                     foreach ($HPID as $hierarchy_parent_id) {
                         echo "<a href='/Collection/".$hierarchy_parent_id."'>".$HPT[$key]."</a>";
                     }
                 } else {
-                    echo "Серия: ";
-                    echo "<ul>";
+                    echo "<span class='book-collection'>Серия: </span>";
+                    echo "<ul class='book-collection'>";
                     foreach ($HTID as $key=>$hierarchy_top_id) {
                         echo "<li><a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a></li>";
                     }
