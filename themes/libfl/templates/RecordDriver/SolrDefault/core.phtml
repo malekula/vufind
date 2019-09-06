@@ -37,7 +37,7 @@
                     foreach ($HPID as $hierarchy_parent_id) {
                         echo "<a href='/Collection/".$hierarchy_parent_id."'>".$HPT[$key]."</a>";
                     }
-                } else {
+                } else if (!empty($HTID)) {
                     echo "<span class='book-collection'>Серия: </span>";
                     echo "<ul class='book-collection'>";
                     foreach ($HTID as $key=>$hierarchy_top_id) {
