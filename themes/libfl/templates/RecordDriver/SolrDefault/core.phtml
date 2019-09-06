@@ -39,27 +39,6 @@
                     }
                 }
             }
-            echo "<br><br>";
-            $HTT = $this->driver->getHierarchyTopTitle();
-            $HTID = $this->driver->getHierarchyTopID()[0];
-            $HPT = $this->driver->getHierarchyParentTitle();
-            $HPID = $this->driver->getHierarchyParentID()[0];
-            echo "ID верхнего уровня: " . $HTID . "<br/>";
-            echo "ID сводного уровня: " . $HPID . "<br/><br/>";
-            print_r($this->driver->getHierarchyTopID());
-            echo "<br/>";
-            print_r($this->driver->getHierarchyParentID());
-            if (!empty($HTT)) {
-                foreach ($HTT as $hierarchy_top_title) {
-                    echo "<span style='color:grey'>Серия:</span> <a href='/Collection/".$HTID."'>" . $hierarchy_top_title . "</a><br/>";
-                }
-            }
-            if (!empty($HPT)) {
-                foreach ($HTT as $hierarchy_parent_title) {
-                    echo "<span style='color:grey'>Подсерия:</span> <a href='".$HPID."'>" . $hierarchy_parent_title . "</a><br/>";
-                }
-            }
-            echo "<br><br>";
         ?>
         <?
             $annotation = $this->driver->getAnnotation();
