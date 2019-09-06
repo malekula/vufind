@@ -21,7 +21,7 @@
 
         <!-- Серии и коллекции -->
         <?
-            if ($this->driver->isCollection()) {
+            // if ($this->driver->isCollection()) {
                 $HTT = $this->driver->getHierarchyTopTitle();
                 $HTID = $this->driver->getHierarchyTopID();
                 $HPT = $this->driver->getHierarchyParentTitle();
@@ -29,21 +29,23 @@
                 $diff = array_diff($HTID, $HPID);
                 if (!empty($diff)) {
                     echo "Серия: ";
-                    foreach ($HTID as $hierarchy_top_title) {
-                        echo "<a href='/Collection/".$HTID."'>".$hierarchy_top_title."</a>";
+                    foreach ($HTID as $key=>$hierarchy_top_id) {
+                        echo "<a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a>";
                     }
 
                     echo "Подсерия: ";
-                    foreach ($HPID as $hierarchy_parent_title) {
-                        echo "<a href='/Collection/".$HPID."'>".$hierarchy_parent_title."</a>";
+                    foreach ($HPID as $hierarchy_parent_id) {
+                        echo "<a href='/Collection/".$hierarchy_parent_id."'>".$HPT[$key]."</a>";
                     }
                 } else {
                     echo "Серия: ";
-                    foreach ($HTID as $hierarchy_top_title) {
-                        echo "<a href='/Collection/".$HTID."'>".$hierarchy_top_title."</a>";
+                    echo "<ul>";
+                    foreach ($HTID as $key=>$hierarchy_top_id) {
+                        echo "<li><a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a></li>";
                     }
+                    echo "</ul>";
                 }
-            }
+            // }
         ?>
         <?
             $annotation = $this->driver->getAnnotation();
