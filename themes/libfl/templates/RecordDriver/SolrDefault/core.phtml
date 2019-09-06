@@ -37,6 +37,11 @@
                     foreach ($HPID as $hierarchy_parent_title) {
                         echo "<a href='/Collection/".$HPID."'>".$hierarchy_parent_title."</a>";
                     }
+                } else {
+                    echo "Серия: ";
+                    foreach ($HTID as $hierarchy_top_title) {
+                        echo "<a href='/Collection/".$HTID."'>".$hierarchy_top_title."</a>";
+                    }
                 }
             }
         ?>
