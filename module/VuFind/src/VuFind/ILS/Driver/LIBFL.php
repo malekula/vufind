@@ -107,6 +107,7 @@ class LIBFL extends AbstractBase
                 'maxredirects' => 0,
                 'timeout' => 30
             ));
+
             $client->setMethod('GET');
             $response = $client->send();
             if ($response->isSuccess()) {

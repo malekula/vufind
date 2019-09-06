@@ -62,7 +62,7 @@ function checkBookStatuses() {
     var bookID = $('.hiddenId').val();
     getBookStatus(bookID)
     .done(function (result) {
-        console.log(result);
+        // console.log(result);
         $.each(result.data, function (index, info) {
             $('.m' + info[0]).addClass(info[2].toLowerCase());
         });
