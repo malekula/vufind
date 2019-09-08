@@ -531,7 +531,7 @@ a.litres_library:focus {
     color: #232325;
 }
 .media-body .table>tbody>tr>th {
-    width: 180px !important;
+    width: 37% !important;
     color: #b4bac1;
 }
 .list_type.wide_content {

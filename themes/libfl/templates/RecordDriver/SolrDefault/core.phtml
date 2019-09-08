@@ -1,153 +1,168 @@
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?= $this->driver->getSchemaOrgFormats() ?> Product">
 
-    <?
-        $this->headMeta()->appendName('description', $this->driver->getTitle().' | Библиотека иностранной литературы');
-        $this->headMeta()->appendName('keywords', 'Библиотека иностранной литературы ' . $this->driver->getTitle());
-        $this->headScript()->appendFile("check_exemplar_statuses.js");
-        $this->headScript()->appendFile("check_book_statuses.js");
-        $QRCode = $this->record($this->driver)->getQRCode("core");
-        $coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
-        $cover = $coverDetails['html-record'];
-        $preview = $this->record($this->driver)->getPreviews();
-    ?>
+	<?
+	$this->headMeta()->appendName('description', $this->driver->getTitle().' | Библиотека иностранной литературы');
+	$this->headMeta()->appendName('keywords', 'Библиотека иностранной литературы ' . $this->driver->getTitle());
+	$this->headScript()->appendFile("check_exemplar_statuses.js");
+	$this->headScript()->appendFile("check_book_statuses.js");
+	$QRCode = $this->record($this->driver)->getQRCode("core");
+	$coverDetails = $this->record($this->driver)->getCoverDetails('core', 'medium', $this->record($this->driver)->getThumbnail('large'));
+	$cover = $coverDetails['html-record'];
+	$preview = $this->record($this->driver)->getPreviews();
+	?>
 
-    <div class="media-body">
-        <div class="record-info">
-            <input type="hidden" name="recordID" value="<?=$this->driver->getFundRecordUID($this->driver->getUniqueId())?>" class="recordID">
-        </div>
+	<div class="media-body">
+		<div class="record-info">
+			<input type="hidden" name="recordID" value="<?=$this->driver->getFundRecordUID($this->driver->getUniqueId())?>" class="recordID">
+		</div>
 
-        <span class='author'><?= $this->driver->tryMethod('getPrimaryAuthor') ?></span>
-        <h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
+		<span class='author'><?= $this->driver->tryMethod('getPrimaryAuthor') ?></span>
+		<h3 property="name"><?= $this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection()) ?></h3>
 
-        <!-- Серии и коллекции -->
-        <?
-            // if ($this->driver->isCollection()) {
-                $HTT = $this->driver->getHierarchyTopTitle();
-                $HTID = $this->driver->getHierarchyTopID();
-                $HPT = $this->driver->getHierarchyParentTitle();
-                $HPID = $this->driver->getHierarchyParentID();
-                $diff = array_diff($HTID, $HPID);
-                if (!empty($diff)) {
-                    echo "<span class='book-collection'>Серия: </span>";
-                    foreach ($HTID as $key=>$hierarchy_top_id) {
-                        echo "<a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a>";
-                    }
+		<?
+		$annotation = $this->driver->getAnnotation();
+		$annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
+		?>
 
-                    echo "<span class='book-collection'>Подсерия: </span>";
-                    foreach ($HPID as $hierarchy_parent_id) {
-                        echo "<a href='/Collection/".$hierarchy_parent_id."'>".$HPT[$key]."</a>";
-                    }
-                } else if (!empty($HTID)) {
-                    echo "<span class='book-collection'>Серия: </span>";
-                    echo "<ul class='book-collection'>";
-                    foreach ($HTID as $key=>$hierarchy_top_id) {
-                        echo "<li><a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a></li>";
-                    }
-                    echo "</ul>";
-                }
-            // }
-        ?>
-        <?
-            $annotation = $this->driver->getAnnotation();
-            $annotation = isset($annotation[0]) ? $this->escapeHtml($annotation[0]) : false;
-        ?>
-        <p>
-            <? if ($annotation): ?>
-            <?= $this->truncate($annotation, 10000) ?>
-            <!--
-            <p><?= $this->truncate($annotation, 300) ?></p>
-            <? if (strlen($annotation) > 300): ?>
-                <p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
-            <? endif; ?>
-            -->
-        <? endif; ?>
-        </p>
+		<p>
+		<? if ($annotation): ?>
+		<?= $this->truncate($annotation, 10000) ?>
+		<!--
+		<p><?= $this->truncate($annotation, 300) ?></p>
+		<? if (strlen($annotation) > 300): ?>
+			<p><a href='<?= $this->recordLink()->getTabUrl($this->driver, 'LIBFLDescription') ?>#tabnav'><?= $this->transEsc('Full description') ?></a></p>
+		<? endif; ?>
+			-->
+		<? endif; ?>
+		</p>
 
-        <? if ($this->userlist()->getMode() !== 'disabled'): ?>
-        <? /* Display the lists that this record is saved to */ ?>
-            <div class="savedLists">
-                <strong><?= $this->transEsc("Saved in") ?>:</strong>
-            </div>
-        <? endif; ?>
+		<? if ($this->userlist()->getMode() !== 'disabled'): ?>
+			<? /* Display the lists that this record is saved to */ ?>
+			<div class="savedLists">
+				<strong><?= $this->transEsc("Saved in") ?>:</strong>
+			</div>
+		<? endif; ?>
 
-        <? /* Display Main Details */ ?>
-        <?
-            $formatter = $this->recordDataFormatter();
-            $type_of_record = $this->driver->getFundRecordUID($this->driver->getUniqueId());
-            $coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
-        ?>
-        <div class="record_media_buttons">
-            <?
-                $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
-                if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
-                    echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
-                    if ($accessMethod && $accessMethod['protection'] == false) {
-                        echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
-                    }
-                } else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
-                    echo "<div class='litres_options'><a href='https://al.litres.ru/' target='_blank' class='litres_library'></a><div class='litres_links'><a href='https://libfl.ru/static/litres/docs/litres_how_to.pdf' target='_blank'>Как получить доступ?</a><a href='https://libfl.ru/static/litres/' target='_blank'>О проекте</a></div></div>";
-                }
-            ?>
-        </div>
-        <!--<div class="record_media_split_line"></div>-->
-            <? if (!empty($coreFields)): ?>
-                <table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
-                    <? foreach ($coreFields as $key => $current): ?>
-                        <? if (in_array($key, array('genre', 'location', 'fund', 'format'))): ?>
-                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $this->translate($current['value']) ?></td></tr>
-                        <? else: ?>
-                        <tr><th><?= $this->transEsc($key) ?></th><td><?= $current['value'] ?></td></tr>
-                        <? endif; ?>
-                    <? endforeach; ?>
-                </table>
-            <? endif; ?>
-        <? /* End Main Details */ ?>
-    </div>
-    <? if ($QRCode || $cover || $preview): ?>
-        <div class="media-right <?= $this->escapeHtmlAttr($coverDetails['size']) ?> img-col">
-            <? /* Display thumbnail if appropriate: */ ?>
-            <? if ($cover): ?>
-                <?=$cover ?>
-            <? endif; ?>
+		<? /* Display Main Details */ ?>
+		<?
+		$formatter = $this->recordDataFormatter();
+		$type_of_record = $this->driver->getFundRecordUID($this->driver->getUniqueId());
+		$coreFields = $formatter->getData($driver, $formatter->getDefaults($type_of_record));
+		?>
 
-            <? /* Display qrcode if appropriate: */ ?>
-            <? if ($QRCode): ?>
-                <span class="hidden-xs">
-                    <br/><img alt="<?= $this->transEsc('QR Code') ?>" class="qrcode" src="<?= $this->escapeHtmlAttr($QRCode); ?>"/>
-                </span>
-            <? endif; ?>
+		<div class="record_media_buttons">
+			<?
+			$accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
+			if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
+				echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+				if ($accessMethod && $accessMethod['protection'] == false) {
+					echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
+				}
+			} else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
+				echo "<div class='litres_options'><a href='https://al.litres.ru/' target='_blank' class='litres_library'></a><div class='litres_links'><a href='https://libfl.ru/static/litres/docs/litres_how_to.pdf' target='_blank'>Как получить доступ?</a><a href='https://libfl.ru/static/litres/' target='_blank'>О проекте</a></div></div>";
+			}
+			?>
+		</div>
 
-            <?
-            // if you have a preview tab but want to move or remove the preview link
-            // from this area of the record view, this can be split into
-            // getPreviewData() (should stay here) and
-            // getPreviewLink() (can go in your desired tab)
-            ?>
-            <? if ($preview): ?>
-                <div class="record-previews">
-            <?= $preview ?>
-                </div>
-            <? endif; ?>
+		<!--<div class="record_media_split_line"></div>-->
 
-            <div class="book-availability">
-                <div class="book-availability-header">
-                    <span>Доступность</span><a href="/" class="btn btn-note js-availability-hover">?</a>
-                </div>
-                <div class="book-availability-note">
-                    <span>Зеленым цветом отмечены экземпляры доступные для заказа, красным – временно недоступные.<br>Серый цвет означает, что экземпляра нет в наличии.</span>
-                </div>
-                <div class="m4001 book-availability-status">Взять на дом</div>
-                <? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
-                <div class="m4002 book-availability-status available">Электронное издание</div>
-                <? else: ?>
-                <div class="m4002 book-availability-status">Электронное издание</div>
-                <? endif; ?>
-                <div class="m4000 book-availability-status">Читать в библиотеке</div>
-                <!-- <div class="access_method_4 book-availability-status unavailable">????</div>
-                <div class="access_method_5 book-availability-status unavailable">????</div>
-                <div class="access_method_6 book-availability-status unavailable">????</div> -->
-            </div>
+		<? if (!empty($coreFields)): ?>
+		<table class="table table-striped" summary="<?= $this->transEsc('Bibliographic Details') ?>">
+			<? foreach ($coreFields as $key => $current): ?>
+			<? if (in_array($key, array('genre', 'location', 'fund', 'format'))): ?>
+			<tr><th><?= $this->transEsc($key) ?></th><td><?= $this->translate($current['value']) ?></td></tr>
+		<? else: ?>
+		<tr><th><?= $this->transEsc($key) ?></th><td><?= $current['value'] ?></td></tr>
+		<? endif; ?>
+		<? endforeach; ?>
+		</table>
+		<? endif; ?>
+		<? /* End Main Details */ ?>
 
-        </div>
-    <? endif; ?>
+		<!-- Серии и коллекции -->
+		<?
+		// if ($this->driver->isCollection()) {
+		$HTT = $this->driver->getHierarchyTopTitle();
+		$HTID = $this->driver->getHierarchyTopID();
+		$HPT = $this->driver->getHierarchyParentTitle();
+		$HPID = $this->driver->getHierarchyParentID();
+		$diff = array_diff($HTID, $HPID);
+		if (!empty($diff)) {
+			echo "<span class='book-collection'>Входит в серию </span>";
+			foreach ($HTID as $key=>$hierarchy_top_id) {
+				echo "<a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a>";
+			}
+
+			echo "<span class='book-collection'>Входит в подсерию </span>";
+			foreach ($HPID as $hierarchy_parent_id) {
+				echo "<a href='/Collection/".$hierarchy_parent_id."'>".$HPT[$key]."</a>";
+			}
+		} else if (!empty($HTID)) {
+			echo "<span class='book-collection'>Входит в серию </span>";
+			echo "<ul class='book-collection'>";
+			foreach ($HTID as $key=>$hierarchy_top_id) {
+				echo "<li><a href='/Collection/".$hierarchy_top_id."'>".$HTT[$key]."</a></li>";
+			}
+			echo "</ul>";
+		}
+					// }
+		?>
+
+
+
+	</div>
+
+
+
+
+<? if ($QRCode || $cover || $preview): ?>
+	<div class="media-right <?= $this->escapeHtmlAttr($coverDetails['size']) ?> img-col">
+		<? /* Display thumbnail if appropriate: */ ?>
+		<? if ($cover): ?>
+		<?=$cover ?>
+<? endif; ?>
+
+<? /* Display qrcode if appropriate: */ ?>
+<? if ($QRCode): ?>
+	<span class="hidden-xs">
+		<br/><img alt="<?= $this->transEsc('QR Code') ?>" class="qrcode" src="<?= $this->escapeHtmlAttr($QRCode); ?>"/>
+	</span>
+<? endif; ?>
+
+<?
+	// if you have a preview tab but want to move or remove the preview link
+	// from this area of the record view, this can be split into
+	// getPreviewData() (should stay here) and
+	// getPreviewLink() (can go in your desired tab)
+?>
+
+<? if ($preview): ?>
+	<div class="record-previews">
+		<?= $preview ?>
+	</div>
+<? endif; ?>
+
+<div class="book-availability">
+	<div class="book-availability-header">
+		<span>Доступность</span>
+		<a href="/" class="btn btn-note js-availability-hover">?</a>
+	</div>
+	<div class="book-availability-note">
+		<span>Зеленым цветом отмечены экземпляры доступные для заказа, красным – временно недоступные.<br>Серый цвет означает, что экземпляра нет в наличии.</span>
+	</div>
+	<div class="m4001 book-availability-status">Взять на дом</div>
+
+	<? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
+		<div class="m4002 book-availability-status available">Электронное издание</div>
+	<? else: ?>
+		<div class="m4002 book-availability-status">Электронное издание</div>
+	<? endif; ?>
+		<div class="m4000 book-availability-status">Читать в библиотеке</div>
+				<!-- <div class="access_method_4 book-availability-status unavailable">????</div>
+				<div class="access_method_5 book-availability-status unavailable">????</div>
+				<div class="access_method_6 book-availability-status unavailable">????</div> -->
+		</div>
+		</div>
+	<? endif; ?>
+
 </div>

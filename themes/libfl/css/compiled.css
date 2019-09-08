@@ -4099,7 +4099,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .tab-content>.active {
     display: block;
-    margin-right: 120px;
+    /*margin-right: 120px;*/
 }
 
 .nav-tabs .dropdown-menu {
@@ -14385,7 +14385,7 @@ input[type=checkbox] {
 }
 .pagination {
     display: table;
-    margin: 18px auto
+    margin: 18px auto;
 }
 
 .pagination>li>a,
@@ -14958,6 +14958,12 @@ body.template-dir-collection .record .record-tabs {
     margin-top: 60px;
 }
 body.template-dir-collection .record .media-left {
+    display: none;
+}
+body.template-dir-collection .media-body {
+    padding-top: 40px;
+}
+ul.record-nav {
     display: none;
 }
 .record-number {
@@ -15750,8 +15756,8 @@ span.book-collection {
     padding-bottom: 15px;
 }
 ul.book-collection {
-    padding: 0;
-    margin-left: 20px;
+    list-style-type: none;
+    padding: 0 0 20px 0;
 }
 ul.book-collection>li {
     font-family: 'Open Sans', Arial, Helvetica;
@@ -15760,7 +15766,18 @@ ul.book-collection>li {
     letter-spacing: -.12px;
     line-height: 1.35;
     color: #0000f3;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
+}
+ul.book-collection>li:before {
+    content: '';
+    display: inline-block;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: #0000f3;
+    margin-right: 15px;
+    margin-bottom: 3px;
+}
 }
 ul.book-collection>li:hover,
 ul.book-collection>li:focus {
@@ -15794,6 +15811,7 @@ ul.book-collection>li:focus {
 }
 .record .media-body table.table {
     margin-left: -7px;
+    margin-bottom: 15px;
 }
 .record_media_split_line {
     width: 100%;

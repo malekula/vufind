@@ -86,7 +86,8 @@
         </tr>
       <? endif; ?>
     </table>
-    <?if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
+
+    <? if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
       $fullText = $this->driver->getHtmlFullText();?>
         <div id="html">
             <?=$fullText?>
@@ -95,7 +96,7 @@
         <div class="ebsco-warning" id="html">
             <?=$this->transEsc('Full text is not displayed to guests')?>
             <span><a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow"><?=$this->transEsc('Login for full access')?></a></span>
-          <div>
+        <div>
     <? endif; ?>
 
     <div class="resultItemLine4 custom-links">
