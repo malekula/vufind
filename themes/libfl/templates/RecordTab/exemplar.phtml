@@ -16,7 +16,7 @@
     if (!empty($exemplars)) {
         foreach ($exemplars as $num=>$exemplar):
             echo '<div id="exemplar_'.$num.'" class=exemplar>';
-            echo '<h3 style="font-weight:bold;">Экземпляр&nbsp;№&nbsp;' . $num .'</h3>';
+            echo '<h3 style="font-weight:bold;">#&nbsp;' . $num .'</h3>';
             echo '<table class="table table-striped" summary="'.$this->transEsc('Exemplars').'" style="margin-bottom:40px;">';
             foreach ($fields as $field) {
                 if (!empty($exemplar->$field)) {
