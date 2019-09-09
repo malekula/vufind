@@ -60,7 +60,7 @@ a {
 }
 a:hover, a:focus {
     color: #761CEA;
-    transition: color .2s;
+    transition: all .2s;
 }
 .open_popup {
     cursor: pointer;
@@ -530,9 +530,20 @@ a.litres_library:focus {
     line-height: 1.35;
     color: #232325;
 }
+.media-body .table>tbody>tr>th a,
+.media-body .table>tbody>tr>td a {
+    color: #3838bb;
+}
+.media-body .table>tbody>tr>th a:hover,
+.media-body .table>tbody>tr>td a:hover {
+    color: #3838bb;
+    text-decoration: underline;
+    transition: all .2s;
+}
 .media-body .table>tbody>tr>th {
-    width: 37% !important;
     color: #b4bac1;
+    width: 25%;
+    max-width: 200px !important;
 }
 .list_type.wide_content {
     width: 940px;
