@@ -6,7 +6,7 @@
   if ($cover):
     ob_start(); ?>
     <div class="media-<?=$thumbnailAlignment ?> <?=$this->escapeHtmlAttr($coverDetails['size'])?>">
-      <? /* =$cover */ ?>
+      <?=$cover?>
       <div class="book-carrier">
           <?
             $formats = array_unique($this->driver->getExemplarsCarrier());
