@@ -58,7 +58,7 @@
             </span>
         </div>
       <div>
-        <? echo $this->driver->isCollection() ? '<div class="collection-subheader">Серия:</div>' : '' ;?>
+        <? echo $this->driver->isCollection() ? '<div class="collection-subheader">Серия</div>' : '' ;?>
         <a href="<?=$this->recordLink()->getUrl($this->driver)?>" class="title getFull" data-view="<?=$this->params->getOptions()->getListViewOption() ?>">
           <?=$this->record($this->driver)->getTitleHtml()?>
         </a>

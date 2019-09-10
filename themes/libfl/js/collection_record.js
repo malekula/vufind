@@ -1,4 +1,4 @@
-function toggleCollectionInfo() {
+/*function toggleCollectionInfo() {
   $("#collectionInfo").toggle();
 }
 
@@ -17,4 +17,4 @@ function showMoreInfoToggle() {
 
 $(document).ready(function collectionRecordReady() {
   showMoreInfoToggle();
-});
+});*/
