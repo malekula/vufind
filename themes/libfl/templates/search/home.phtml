@@ -38,6 +38,11 @@ JS;
   <?=$this->context($this)->renderInContext("search/searchbox.phtml", ['ignoreHiddenFilterMemory' => true])?>
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$("#searchForm_lookfor").focus();', 'SET'); ?>
 
+  <div class='search_readme'>
+    <span>Инструкция</span>
+    <a href='' data-lightbox>Как использовать?</a>
+    <img src='/themes/libfl/images/ebscohost.png' alt='EBSCOhost'>
+  </div>
   <div class='searchHome_row'>
       <a class='global_search' href=''></a>
       <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
