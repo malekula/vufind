@@ -5,16 +5,28 @@ $(document).ready(function() {
         $('.closing-time').text('Сегодня ' + time[moment().day()]);
     })();
 
+    $("#widthTempOption").html($('#sort_options_1 option:selected').text());
+    $("#sort_options_1").width($("#selectTagWidth").width()).css("width", "-=20");
+
+    $('#sort_options_1').change(function(){
+        $("#widthTempOption").html($('#sort_options_1 option:selected').text());
+        $(this).width($("#selectTagWidth").width()).css("width", "-=20");
+    });
+
+
     if($('body').hasClass('template-dir-eds')) {
         $('a.global_search').removeClass('becomelink');
         $('a.global_search').text('Более 2 000 280 000 документов');
         $('a.global_search').attr('href', '/');
         $('a.global_search').css('cursor', 'default');
         $('a.global_search').css('pointer-events', 'none');
+        $('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
+        $('.search_readme img').css('display', 'block');
     } else {
         $('a.global_search').addClass('becomelink');
         $('a.global_search').text('Более 1 528 000 книг');
         $('a.global_search').attr('href', '/Search/Results?lookfor=&type=AllFields');
+        $('.search_readme a').attr('href', '/');
     }
 
     /* Placeholder */
