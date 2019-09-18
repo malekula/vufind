@@ -13881,6 +13881,34 @@ body.rtl i.fa-flag {
     position: relative;
     padding: 80px 25% 120px;
 }
+.search_readme {
+    position: absolute;
+    top: 40%;
+    right: 0;
+}
+.search_readme span {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.38;
+    color: #B4BAC1;
+}
+.search_readme a {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -.11px;
+    line-height: 1.38;
+    color: #232325;
+}
+.search_readme a:hover,
+.search_readme a:focus {
+    color: #4a4a4a;
+    transition: color .2s;
+}
+.search_readme img {
+    display: none;
+    width: 120px;
+}
 .searchHome_row {
     width: 100%;
     display: flex;
@@ -13923,6 +13951,7 @@ a.global_search.becomelink:focus {
     color: #5c5c61;
     transition: color .2s;
 }
+
 .catalogue-readme {
     display: none;
     cursor: pointer;
@@ -14981,6 +15010,9 @@ body.template-dir-collection .record .record-tabs {
 body.template-dir-collection .record .media-left {
     display: none;
 }
+body.template-dir-collection .main {
+    margin-top: 30px;
+}
 ul.record-nav {
     display: none;
 }
@@ -15192,6 +15224,10 @@ span.about_label {
     font-weight: 400;
     color: #242728;
 }
+.facet-group.active-filters {
+    color: #fff;
+    background-color: #232325;
+}
 .facet-group .title {
     font-size: 14px;
     font-weight: 700;
@@ -15234,7 +15270,7 @@ span.about_label {
 }
 .sidebar .facet.active, .sidebar .facet.active:hover, .sidebar .active-filters .facet {
     color: #000;
-    background-color: #f1f1f1;
+    background-color: #e1e2e7;
     /*font-weight: bold;*/
 }
 .fa-remove:before, .fa-close:before, .fa-times:before {
@@ -15242,7 +15278,7 @@ span.about_label {
     display: block;
     width: 12px;
     height: 12px;
-    background: url('../images/svg/exclude.svg');
+    background: url('../images/svg/exclude.svg') center no-repeat;
     background-size: 12px;
     margin-top: 4px;
 }
@@ -15250,8 +15286,8 @@ span.about_label {
     content: "";
     width: 10px;
     height: 10px;
-    background: url("../images/svg/down.svg") center no-repeat;
-    background-size: 8px;
+    background: url("../images/svg/angle-down-solid.svg") center no-repeat;
+    background-size: 10px;
     margin-top: 6px;
     transform: rotate(-90deg);
 }
@@ -15412,8 +15448,10 @@ input#publishDateto {
 .record.sourceEDS .media-body {
     display: block;
     float: left;
-    /*width: 540px;*/
     width: 70%;
+}
+.record.sourceEDS .media-body {
+    width: 80%;
 }
 .record.sourceSolr .img-col,
 .record.sourceEDS .img-col {
@@ -15428,6 +15466,9 @@ input#publishDateto {
 .record.sourceSolr .media,
 .record.sourceEDS .media {
     overflow: visible;
+}
+.record.sourceEDS .media {
+    display: flex;
 }
 .record.sourceSolr .media:after,
 .record.sourceEDS .media:after {
@@ -15494,6 +15535,26 @@ table#collectionInfo {
 .ebsco-warning span a:hover {
     color: #4a4a4a;
     transition: color .2s;
+}
+.ebsco-note {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.12px;
+    line-height: 1.64;
+    color: #232325;
+    background-color: #f9f9f9;
+    text-align: center;
+    padding: 15px 30px;
+    margin-top: 40px;
+}
+.ebsco-note span {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -.12px;
+    color: #232325;
 }
 .record.sourceEDS .table-striped>tbody>tr#html {
     display: flex;
@@ -15738,32 +15799,30 @@ span.EDS-source {
 }
 .external-links {
     display: flex;
+    align-items: center;
     margin: 20px 0 40px;
 }
 .external-links span {
-    display: inline-block;
-    padding: 9px 16px 11px;
-    background-color: #fff;
-    border: 1px solid #e0e0fa;
-    border-radius: 3px;
-    box-shadow: 0 2px 5px rgba(0,0,243,.12);
     margin-right: 5px;
 }
-.external-links span:hover,.external-links span:focus {
-    box-shadow: 0 2px 20px rgba(0,0,243,.12);
-    transition: all .2s;
-}
 .external-links span a {
+    display: inline-block;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: .25px;
     line-height: 17px;
     color: #0000f3;
     text-transform: uppercase;
+    background-color: #fff;
+    border: 1px solid #e0e0fa;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,243,.12);
+    padding: 9px 16px 11px;
 }
 .external-links span a:hover,.external-links span a:focus {
     color: #761CEA;
-    transition: color .2s;
+    box-shadow: 0 2px 20px rgba(0,0,243,.12);
+    transition: all .2s;
 }
 .external-links__readme {
     display: inline-block;
@@ -15852,6 +15911,10 @@ ul.book-collection>li>a:focus {
     line-height: 1.46;
     color: #232325;
     margin: 30px 0;
+}
+.record.sourceEDS .media-body p {
+    line-height: 1.6;
+    color: #4a4a4a;
 }
 .record .media-body table.table {
     margin-left: -7px;

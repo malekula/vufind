@@ -20,11 +20,6 @@
     <? endif; */ ?>
   </div>-->
   <div class="media-body info-col">
-    <? if ($thumb): ?>
-        <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
-    <? else: ?>
-        <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
-    <? endif; ?>
     <? if ($pubType): ?>
         <span class="EDS-source"><?=$this->transEsc($pubType)?></span>
     <? endif; ?>
@@ -37,6 +32,10 @@
             }
         endforeach;
     ?>
+    <div class="ebsco-note">
+      Просмотр в EDS временно доступен только из помещения библиотеки
+      <span>Ведутся работы по обеспечению удаленного доступа авторизованных читателей</span>
+    </div>
     <div class="external-links">
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
@@ -118,4 +117,12 @@
     </div>
 
   </div>
+
+  <div class="media-right info-col">
+      <? if ($thumb): ?>
+          <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+      <? else: ?>
+          <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
+      <? endif; ?>
+    </div>
 </div>
