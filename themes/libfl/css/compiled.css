@@ -13996,7 +13996,7 @@ a.global_search.becomelink:focus {
 }
 .ebsco-annotation {
     display: none;
-    width: 640px;
+    width: 100%;
     margin: 60px auto 0;
 }
 .ebsco-annotation span {

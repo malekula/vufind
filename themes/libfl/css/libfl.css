@@ -7136,6 +7136,9 @@ img.news_right_image {
 }
 
 @media screen and (max-width: 900px) {
+    .searchHomeContent {
+        padding: 80px 25% 120px 0;
+    }
     .logo_wrapper img {
         width:155px;
         margin-top: 35px
@@ -7181,6 +7184,12 @@ img.news_right_image {
     body {
         min-width:0;
         padding-top: 44px
+    }
+    .searchHomeContent {
+        padding: 20px 0 40px;
+    }
+    .search_readme {
+        display: none;
     }
     .breadcrumb>li {
         display: inline-block;
