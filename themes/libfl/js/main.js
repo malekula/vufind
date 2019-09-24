@@ -13,20 +13,36 @@ $(document).ready(function() {
         $(this).width($("#selectTagWidth").width()).css("width", "-=20");
     });
 
+    /* CUSTOM POPUP */
+    $('body').on('click', '.search_readme a', function(e) {
+        e.preventDefault();
+        $('.popup-box').hide();
+        var text = $('.search_readme a').data('text');
+        $(".popup-text").html(text);
+        $('#popup-wrapper, #popup-readme').show();
+        $('header, nav, main, #footer').css('filter', 'blur(5px)');
+    }).on('click', '#popup-wrapper, .popup-close, .mobile-close', function(e) {
+        if ($(this).hasClass('popup-close') || $(this).hasClass('mobile-close') || $(e.target).attr('id') == 'popup-wrapper') {
+            $('.popup-box').hide();
+            $('#popup-wrapper').hide();
+            $('header, nav, main, #footer').css('filter', 'blur(0)');
+            $('body').css('overflow', 'auto');
+        }
+    });
+    /* */
 
     if($('body').hasClass('template-dir-eds')) {
+        $('.ebsco-annotation').show();
         $('a.global_search').removeClass('becomelink');
         $('a.global_search').text('Более 2 000 280 000 документов');
         $('a.global_search').attr('href', '/');
-        $('a.global_search').css('cursor', 'default');
-        $('a.global_search').css('pointer-events', 'none');
-        $('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
-        $('.search_readme img').css('display', 'block');
+        $('a.global_search').css('cursor', 'default').css('pointer-events', 'none');
+        //$('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
+        $('.search_readme a').data('text', '333');
     } else {
-        $('a.global_search').addClass('becomelink');
         $('a.global_search').text('Более 1 528 000 книг');
         $('a.global_search').attr('href', '/Search/Results?lookfor=&type=AllFields');
-        $('.search_readme a').attr('href', '/');
+        $('.search_readme a').data('text', '<h2>Как пользоваться Каталогом?</h2><p>Авторизуйтесь, чтобы воспользоваться возможностями электронного Каталога.</p><p>Добавьте книгу в корзину</p>');
     }
 
     /* Placeholder */
