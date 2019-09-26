@@ -13131,6 +13131,9 @@ footer {
     box-shadow: 0 6px 24px rgba(42,42,183,0.14);
     margin-top: 15px;*/
 }
+.btn-default {
+
+}
 .cart-add, .btn-blue {
     display: block;
     width: 160px;
@@ -13968,7 +13971,7 @@ a.global_search.becomelink:focus {
     width: 640px;
     height: auto;
     min-height: 218px;
-    padding: 30px 35px;
+    padding: 60px 65px;
     background-color: #ffffff;
     box-shadow: 0 6px 24px 0 rgba(42,42,183,.14);
 }
@@ -13988,11 +13991,21 @@ a.global_search.becomelink:focus {
     opacity: .8;
     transition: opacity .2s;
 }
-.popup-text {
+.popup-text p {
     font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.29px;
+    line-height: 20px;
+    color: #232325;
+    margin-bottom: 20px;
+}
+.popup-title {
+    font-size: 24px;
+    font-weight: 700;
     letter-spacing: -0.29px;
     line-height: 19px;
     color: #232325;
+    padding-bottom: 15px;
 }
 .ebsco-annotation {
     display: none;
@@ -14006,6 +14019,26 @@ a.global_search.becomelink:focus {
     letter-spacing: -.11px;
     line-height: 15px;
     color: #232325;
+}
+.ebsco-annotation .btn {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .25px;
+    line-height: 17px;
+    color: #0000f3;
+    text-transform: uppercase;
+    background-color: #fff;
+    border: 1px solid #e0e0fa;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,243,.12);
+    padding: 9px 16px 11px;
+    margin-top: 20px;
+}
+.ebsco-annotation .btn:hover, .ebsco-annotation .btn:focus {
+    color: #761CEA;
+    box-shadow: 0 2px 20px rgba(0,0,243,.12);
+    transition: all .2s;
 }
 .ebsco-logo {
     width: 100px;
@@ -14404,6 +14437,7 @@ a,
     color: #222;
     text-shadow: 0 1px 0 #fff
 }
+
 
 /*.btn:not(.btn-default) {
     font-weight: bold
@@ -15109,6 +15143,7 @@ ul.record-nav {
 .template-dir-eds .ajaxItem .media-body {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: flex-end;
     width: 100%;
 }
 .template-dir-eds .ajaxItem .media-body .result-body {

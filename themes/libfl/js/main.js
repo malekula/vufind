@@ -14,10 +14,11 @@ $(document).ready(function() {
     });
 
     /* CUSTOM POPUP */
-    $('body').on('click', '.search_readme a', function(e) {
+    // TODO: Make multipurpose
+    $('body').on('click', '.js-open-popup', function(e) {
         e.preventDefault();
         $('.popup-box').hide();
-        var text = $('.search_readme a').data('text');
+        var text = $('.js-open-popup').data('text');
         $(".popup-text").html(text);
         $('#popup-wrapper, #popup-readme').show();
         $('header, nav, main, #footer').css('filter', 'blur(5px)');
@@ -37,12 +38,13 @@ $(document).ready(function() {
         $('a.global_search').text('Более 2 000 280 000 документов');
         $('a.global_search').attr('href', '/');
         $('a.global_search').css('cursor', 'default').css('pointer-events', 'none');
-        //$('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
-        $('.search_readme a').data('text', '333');
+        $('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
+        //$('.search_readme a').data('text', '333');
     } else {
         $('a.global_search').text('Более 1 528 000 книг');
         $('a.global_search').attr('href', '/Search/Results?lookfor=&type=AllFields');
-        $('.search_readme a').data('text', '<h2>Как пользоваться Каталогом?</h2><p>Авторизуйтесь, чтобы воспользоваться возможностями электронного Каталога.</p><p>Добавьте книгу в корзину</p>');
+        $('.search_readme a').addClass('js-open-popup');
+        $('.search_readme a').data('text', '<div class="popup-title">Как пользоваться Каталогом?</div><br><p><a href="https://oauth.libfl.ru/">Авторизуйтесь</a>, чтобы воспользоваться возможностью заказа книг из электронного Каталога через Личный кабинет.</p><p>После авторизации все книги, добавленные в заказ через электронный Каталог Библиотеки, попадают в корзину Личного кабинета.</p>');
     }
 
     /* Placeholder */
