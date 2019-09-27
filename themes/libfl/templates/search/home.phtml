@@ -38,13 +38,30 @@ JS;
   <?=$this->context($this)->renderInContext("search/searchbox.phtml", ['ignoreHiddenFilterMemory' => true])?>
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$("#searchForm_lookfor").focus();', 'SET'); ?>
 
+  <div class='search_readme'>
+    <span>Инструкция</span>
+    <a data-text=''>Как использовать?</a>
+  </div>
   <div class='searchHome_row'>
-      <a class='global_search' href=''></a>
+      <a class='global_search becomelink' href=''></a>
       <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
   </div>
 
-<div class="catalogue-readme"><span>Инструкция</span>Как сделать заказ?</div>
+    <div class="catalogue-readme"><span>Инструкция</span>Как сделать заказ?</div>
 
+    <div class="ebsco-annotation">
+        <div class="ebsco-logo"></div>
+        <span>Благодаря EBSCO Иностранка предоставляет доступ к двенадцати англоязычным базам периодических изданий разнообразной тематики: от медицины и здравоохранения до библиотечного дела.<br>Обратите внимание на базы бизнес-тематики: здесь можно найти свежие выпуски таких широко цитируемых в научной среде изданий, как Quarterly Journal of Economics, Journal of Finance, Econometrica, Journal of Political Economy и др.</span>
+    </div>
+
+</div>
+
+<!-- CUSTOM MODAL -->
+<div id='popup-wrapper'>
+    <div id='popup-readme' class='popup-box'>
+        <div class='popup-close'></div>
+        <div class='popup-text'></div>
+    </div>
 </div>
 
 <div class="catalogue-banners">
