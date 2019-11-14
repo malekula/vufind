@@ -61,8 +61,8 @@ a {
     text-decoration: none;
 }
 a:hover, a:focus {
-    color: #761CEA;
-    transition: all .2s;
+    color: #250dc0;
+    transition: color .2s;
 }
 .open_popup {
     cursor: pointer;
@@ -392,7 +392,16 @@ a.float_small_type {
 .litres_options {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+}
+.litres_links {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    /*color: #b4bac1;*/
+    color: #FF4C00;
+    margin-left: 60px;
 }
 a.litres_library {
     cursor: pointer;
