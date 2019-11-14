@@ -40,7 +40,7 @@
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
         <span>
-          <a href="<?=$this->escapeHtmlAttr($pLink)?>" target="_blank">
+          <a href="<?=$this->ProxyUrl($pLink)?>" target="_blank">
             <?=$this->transEsc('Просмотр в EDS')?>
           </a>
         </span>
