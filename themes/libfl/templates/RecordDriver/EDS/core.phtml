@@ -62,7 +62,7 @@
       <? endif; ?>
 
         <div class="external-links__readme">
-            <a href="" class="">Как получить доступ?</a>
+            <a href="" class="js-open-popup" data-text="<h3>Как получить доступ?</h3> Просмотр в EDS временно доступен только из помещения библиотеки. Ведутся работы по обеспечению удаленного доступа авторизованных читателей.">Как получить доступ?</a>
             <br>
             <a href="http://libfl.ru/static/online_resources" target="_blank" class="">Об Online-ресурсах</a>
         </div>
@@ -92,10 +92,12 @@
             <?=$fullText?>
         </div>
     <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
+        <!--
         <div class="ebsco-warning" id="html">
             <?=$this->transEsc('Full text is not displayed to guests')?>
             <span><a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow"><?=$this->transEsc('Login for full access')?></a></span>
         <div>
+        -->
     <? endif; ?>
 
     <div class="resultItemLine4 custom-links">
