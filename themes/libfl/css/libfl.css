@@ -7182,10 +7182,20 @@ img.news_right_image {
     .catalogue-banner:last-child {
         border-bottom: 1px solid #e6e6e6;
     }
+    .catalogue-banner.collections:after,
     .catalogue-banner.banner_identity:after,
     .catalogue-banner.banner_litres:after {
         content: '';
         display: none;
+    }
+    .catalogue-banner small {
+        padding: 10px 0 5px;
+    }
+    .main .container .navbar {
+        padding-left: 0;
+    }
+    .search-tools-wrapper {
+        padding-left: 0;
     }
 }
 
