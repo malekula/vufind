@@ -81,7 +81,7 @@
 
 		<!-- Серии и коллекции -->
 		<?
-		// if ($this->driver->isCollection()) {
+		if ($this->driver->isCollection()) {
 		$HTT = $this->driver->getHierarchyTopTitle();
 		$HTID = $this->driver->getHierarchyTopID();
 		$HPT = $this->driver->getHierarchyParentTitle();
@@ -105,7 +105,7 @@
 			}
 			echo "</ul>";
 		}
-					// }
+		}
 		?>
 
 
