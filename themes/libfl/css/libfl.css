@@ -5745,7 +5745,7 @@ img.news_right_image {
     .result .media-left.medium>img,
     .record .media-right.medium>img,
     .result .media-right.medium>img {
-        width: 140px;
+        /*width: 140px;*/
     }
 }
 
@@ -7001,6 +7001,16 @@ img.news_right_image {
 }
 
 @media screen and (max-width: 1100px) {
+    .mainbody.left {
+        width: calc(100% - 245px - 50px);
+        padding: 0;
+        /*padding-left: 75px;*/
+        /*padding-right: 90px;*/
+        /*padding-bottom: 80px;*/
+    }
+    .sidebar.right {
+        width: 245px;
+    }
     #fixed_menu .header_right {
         margin-right:0
     }

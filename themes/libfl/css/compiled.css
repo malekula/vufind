@@ -12271,9 +12271,9 @@ header .container.navbar {
 .result .media-left.large img,
 .record .media-right.large img,
 .result .media-right.large img {
-    display: inline-block;
+    /*display: inline-block;
     width: 60px;
-    max-width: none
+    max-width: none*/
 }
 
 @media (min-width:768px) {
@@ -15027,9 +15027,14 @@ select#limit:after {
     padding: 46px 120px 70px;
 }
 .mainbody.left {
+    width: calc(100% - 300px - 100px);
+    padding: 0;
     /*padding-left: 75px;*/
-    padding-right: 90px;
+    /*padding-right: 90px;*/
     /*padding-bottom: 80px;*/
+}
+.sidebar.right {
+    width: 300px;
 }
 .search-stats {
     padding: 40px 0 40px 56px;
