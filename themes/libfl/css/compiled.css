@@ -15266,6 +15266,8 @@ a#moreInfoToggle:hover {
     display: none;
 }
 .resultItemLine4.custom-links {
+    display: flex;
+    align-items: center;
 }
 .resultItemLine4.custom-links > span {
     display: inline-block;
