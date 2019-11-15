@@ -7,6 +7,9 @@
         <option value="<?=$this->escapeHtmlAttr($sortType)?>"<?=$sortData['selected']?' selected="selected"':''?>><?=$this->transEsc($sortData['desc'])?></option>
       <? endforeach; ?>
     </select>
+    <select id="selectTagWidth" style="display: none;">
+        <option id="widthTempOption"></option>
+    </select>
     <noscript><input type="submit" class="btn btn-default" value="<?=$this->transEsc("Set")?>" /></noscript>
   </form>
 <? endif; ?>

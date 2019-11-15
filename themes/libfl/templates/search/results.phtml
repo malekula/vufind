@@ -74,7 +74,7 @@
     <? endif; ?>
 
   <?=$this->flashmessages()?>
-  <nav class="search-header hidden-print">    
+  <nav class="search-header hidden-print">
     <div class="search-stats">
       <? if ($recordTotal > 0): ?>
         <?=$this->context()->renderInContext('search/controls/showing.phtml', ['lookfor' => $lookfor, 'recordTotal' => $recordTotal]) ?>
@@ -114,7 +114,13 @@
     </form>
     <?=$this->render('search/list-' . $this->params->getView() . '.phtml')?>
     <?=$this->context($this)->renderInContext('search/bulk-action-buttons.phtml', ['idPrefix' => 'bottom_', 'formAttr' => 'search-cart-form'])?>
+
+    <div style="padding-left: 40px; display: flex; justify-content: space-between; margin-top: 30px">
+
     <?=$this->paginationControl($this->results->getPaginator(), 'Sliding', 'search/pagination.phtml', ['results' => $this->results, 'options' => isset($this->paginationOptions) ? $this->paginationOptions : []])?>
+    <?=$this->render('search/controls/limit.phtml')?>
+
+    </div>
 
     <div class="searchtools hidden-print">
       <strong><?=$this->transEsc('Search Tools')?>:</strong>

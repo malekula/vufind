@@ -1,8 +1,52 @@
 $(document).ready(function() {
+
     (function setWorkdayEnd() {
-        var time = ['у Иностранки выходной', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 21:00', 'Иностранка работает до 19:00'];
-        $('#workday_end').text(time[moment().day()]);
+        var time = ['мы работаем до 19:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 19:00'];
+        $('.closing-time').text('Сегодня ' + time[moment().day()]);
     })();
+
+    $("#widthTempOption").html($('#sort_options_1 option:selected').text());
+    $("#sort_options_1").width($("#selectTagWidth").width()).css("width", "-=20");
+
+    $('#sort_options_1').change(function(){
+        $("#widthTempOption").html($('#sort_options_1 option:selected').text());
+        $(this).width($("#selectTagWidth").width()).css("width", "-=20");
+    });
+
+    /* CUSTOM POPUP */
+    // TODO: Make multipurpose
+    $('body').on('click', '.js-open-popup', function(e) {
+        e.preventDefault();
+        $('.popup-box').hide();
+        var text = $('.js-open-popup').data('text');
+        $(".popup-text").html(text);
+        $('#popup-wrapper, #popup-readme').show();
+        $('header, nav, main, #footer').css('filter', 'blur(5px)');
+    }).on('click', '#popup-wrapper, .popup-close, .mobile-close', function(e) {
+        if ($(this).hasClass('popup-close') || $(this).hasClass('mobile-close') || $(e.target).attr('id') == 'popup-wrapper') {
+            $('.popup-box').hide();
+            $('#popup-wrapper').hide();
+            $('header, nav, main, #footer').css('filter', 'blur(0)');
+            $('body').css('overflow', 'auto');
+        }
+    });
+    /* */
+
+    if($('body').hasClass('template-dir-eds')) {
+        $('.ebsco-annotation').show();
+        $('a.global_search').removeClass('becomelink');
+        $('a.global_search').text('Более 2 000 280 000 документов');
+        $('a.global_search').attr('href', '/');
+        $('a.global_search').css('cursor', 'default').css('pointer-events', 'none');
+        $('.search_readme a').attr('href', 'https://connect.ebsco.com/s/article/Русскoязычные-ресурсы?language=en_US');
+        //$('.search_readme a').data('text', '333');
+    } else {
+        $('a.global_search').text('Более 1 528 000 книг');
+        $('a.global_search').attr('href', '/Search/Results?lookfor=&type=AllFields');
+        $('.search_readme a').addClass('js-open-popup');
+        $('.search_readme a').data('text', '<div class="popup-title">Как пользоваться Каталогом?</div><br><p><a href="https://oauth.libfl.ru/">Авторизуйтесь</a>, чтобы воспользоваться возможностью заказа книг из электронного Каталога через Личный кабинет.</p><p>После авторизации все книги, добавленные в заказ через электронный Каталог Библиотеки, попадают в корзину Личного кабинета.</p>');
+    }
+
     /* Placeholder */
 
     function changeCatalogueSearchPlaceholder() {

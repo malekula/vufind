@@ -24,7 +24,7 @@
     </div>
   <? endif; ?>
   <div class="media-body">
-
+    <span class="collection-header">Серия</span>
     <h2><?=$this->escapeHtml($this->driver->getShortTitle() . ' ' . $this->driver->getSubtitle() . ' ' . $this->driver->getTitleSection())?></h2>
 
     <? $summary = $this->driver->getSummary(); $summary = isset($summary[0]) ? $summary[0] : false; ?>
@@ -37,7 +37,9 @@
       <strong><?=$this->transEsc("Saved in")?>:</strong>
     </div>
 
-    <a id="moreInfoToggle" href="#" class="hidden"><?=$this->transEsc('more_info_toggle')?></a>
+    <!--
+    <a id="moreInfoToggle" href="#" class="hidden"><? /* =$this->transEsc('more_info_toggle') */ ?></a>
+    -->
     <?/* Display Main Details */?>
     <?
       $formatter = $this->recordDataFormatter();
@@ -46,10 +48,11 @@
     <? if (!empty($fields)): ?>
       <table id="collectionInfo" class="table table-striped" summary="<?=$this->transEsc('Bibliographic Details')?>">
         <? foreach ($fields as $key => $current): ?>
-          <tr><th><?=$this->transEsc($key)?>:</th><td><?=$current['value']?></td></tr>
+          <tr><th><?=$this->transEsc($key)?></th><td><?=$current['value']?></td></tr>
         <? endforeach; ?>
       </table>
     <? endif; ?>
     <?/* End Main Details */?>
+
   </div>
 </div>

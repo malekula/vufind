@@ -201,7 +201,7 @@ class BookreaderController extends AbstractBase
             $view->setVariable('bookInfo', json_encode($bookInfo));
         }
 
-        $client = new Client('https://opac.libfl.ru/ALISAPI/Books/ElectronicCopy/' . $this->_bookID, array(
+        $client = new Client('http://80.250.173.142/ALISAPI/Books/ElectronicCopy/' . $this->_bookID, array(
             'maxredirects' => 0,
             'timeout' => 30
         ));

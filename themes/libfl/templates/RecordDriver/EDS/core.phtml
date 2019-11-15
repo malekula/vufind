@@ -9,50 +9,70 @@
     $restrictedView = empty($accessLevel) ? false : true;
 ?>
 <div class="media" vocab="http://schema.org/" resource="#record" typeof="<?=$this->driver->getSchemaOrgFormats()?> Product">
-  <div class="media-left medium img-col">
-    <? if ($thumb): ?>
-      <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+   <!--<div class="media-body">
+    <? /* if ($thumb): ?>
+        <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
     <? else: ?>
-      <span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>
-    <? endif; ?>
+        <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
+    <? endif; */ ?>
+    <? /* if ($pubType): ?>
+        <p><?=$this->transEsc($pubType)?></p>
+    <? endif; */ ?>
+  </div>-->
+  <div class="media-body info-col">
     <? if ($pubType): ?>
-      <p><?=$this->transEsc($pubType)?></p>
+        <span class="EDS-source"><?=$this->transEsc($pubType)?></span>
     <? endif; ?>
 
+    <h3 property="name"><?=$this->driver->getTitle()?></h3>
+    <?
+        foreach($items as $item):
+            if ('Ab' == $item['Group']) {
+                echo '<p>'.$item['Data'].'</p>';
+            }
+        endforeach;
+    ?>
+    <div class="ebsco-note">
+      Просмотр в EDS доступен из помещения библиотеки, а также для&nbspавторизованных читателей
+      <span>Авторизуйтесь, чтобы получить удаленный доступ</span>
+    </div>
     <div class="external-links">
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
         <span>
-          <a href="<?=$this->ProxyUrl($pLink)?>">
-            <?=$this->transEsc('View in EDS')?>
+          <a href="<?=$this->ProxyUrl($pLink)?>" target="_blank">
+            <?=$this->transEsc('Просмотр в EDS')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
       <? $pdfLink = $this->driver->getPdfLink();
           if ($pdfLink): ?>
         <span>
-          <a href="<?=$pdfLink?>" class="icon pdf fulltext">
-            <?=$this->transEsc('PDF Full Text')?>
+          <a href="<?=$pdfLink?>" class="fulltext">
+            <?=$this->transEsc('PDF')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
       <? if ($this->driver->hasHTMLFullTextAvailable()): ?>
         <span>
-          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="icon html fulltext">
-            <?=$this->transEsc('HTML Full Text')?>
+          <a href="<?=$this->recordLink()->getUrl($this->driver, 'fulltext')?>#html" class="fulltext">
+            <?=$this->transEsc('Текст')?>
           </a>
-        </span><br />
+        </span>
       <? endif; ?>
+
+        <div class="external-links__readme">
+            <a href="" class="js-open-popup" data-text="<h3>Как получить доступ?</h3> Просмотр в EDS временно доступен только из помещения библиотеки. Ведутся работы по обеспечению удаленного доступа авторизованных читателей.">Как получить доступ?</a>
+            <br>
+            <a href="http://libfl.ru/static/online_resources" target="_blank" class="">Об Online-ресурсах</a>
+        </div>
     </div>
-  </div>
-  <div class="media-body info-col">
-    <h3 property="name"><?=$this->driver->getTitle()?></h3>
 
     <table class="table table-striped" summary="<?=$this->transEsc('Bibliographic Details')?>">
       <? foreach ($items as $key => $item): ?>
-        <? if (!empty($item['Data'])): ?>
+        <? if (!empty($item['Data']) && 'Ab' != $item['Group']): ?>
         <tr>
-          <th><?=$this->transEsc($item['Label'])?>:</th>
+          <th><?=$this->transEsc($item['Label'])?></th>
           <td><?=$this->driver->linkUrls($item['Data'])?></td>
         </tr>
         <? endif; ?>
@@ -60,49 +80,51 @@
 
       <? if ($dbLabel): ?>
         <tr>
-          <th><?=$this->transEsc('Database')?>:</th>
+          <th><?=$this->transEsc('Database')?></th>
           <td><?=$this->escapeHtml($dbLabel)?></td>
-        </tr>
-      <? endif; ?>
-
-      <?if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
-          $fullText = $this->driver->getHtmlFullText();?>
-        <tr id="html">
-          <td colspan="2">
-            <?=$fullText?>
-          </td>
-        </tr>
-      <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
-        <tr id="html">
-          <td>
-            <?=$this->transEsc('Full text is not displayed to guests')?>
-          </td>
-          <td>
-            <a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow">
-              <strong><?=$this->transEsc('Login for full access')?></strong>
-            </a>
-          </td>
         </tr>
       <? endif; ?>
     </table>
 
-    <div class="resultItemLine4 custom-links">
-
-    <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());
-    if (!empty($customLinks)): ?>
-      <? foreach ($customLinks as $customLink): ?>
-      <? $url = isset($customLink['Url']) ? $customLink['Url'] : '';
-          $mot = isset($customLink['MouseOverText'])? $customLink['MouseOverText'] : '';
-          $icon = isset ($customLink['Icon']) ? $customLink['Icon'] : '';
-          $name = isset($customLink['Text']) ? $customLink['Text'] : '';
-      ?>
-      <span>
-        <a href="<?=$this->ProxyUrl($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
-          <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
-        </a>
-      </span>
-      <? endforeach; ?>
+    <? if ($this->driver->hasHTMLFullTextAvailable() && !$restrictedView):
+      $fullText = $this->driver->getHtmlFullText();?>
+        <div id="html">
+            <?=$fullText?>
+        </div>
+    <? elseif ($this->driver->hasHTMLFullTextAvailable() && $restrictedView): ?>
+        <!--
+        <div class="ebsco-warning" id="html">
+            <?=$this->transEsc('Full text is not displayed to guests')?>
+            <span><a class="login" href="<?=$this->url('myresearch-home')?>" rel="nofollow"><?=$this->transEsc('Login for full access')?></a></span>
+        <div>
+        -->
     <? endif; ?>
+
+    <div class="resultItemLine4 custom-links">
+        <? $customLinks = array_merge($this->driver->getFTCustomLinks(), $this->driver->getCustomLinks());
+        if (!empty($customLinks)): ?>
+          <? foreach ($customLinks as $customLink): ?>
+          <? $url = isset($customLink['Url']) ? $customLink['Url'] : '';
+              $mot = isset($customLink['MouseOverText'])? $customLink['MouseOverText'] : '';
+              $icon = isset ($customLink['Icon']) ? $customLink['Icon'] : '';
+              $name = isset($customLink['Text']) ? $customLink['Text'] : '';
+          ?>
+          <span>
+            <a href="<?=$this->ProxyUrl($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+              <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
+            </a>
+          </span>
+          <? endforeach; ?>
+        <? endif; ?>
     </div>
+
   </div>
+
+  <div class="media-right info-col">
+      <? if ($thumb): ?>
+          <img src="<?=$this->escapeHtmlAttr($thumb)?>" class="recordcover" alt="<?=$this->transEsc('Cover Image')?>"/>
+      <? else: ?>
+          <!--<span class="recordcover pt-icon pt-<?=$this->driver->getPubTypeId()?>"></span>-->
+      <? endif; ?>
+    </div>
 </div>

@@ -8,6 +8,9 @@ TAGS
 public
 public/robots.txt
 local/config/vufind/config.ini
+local/config/vufind/EDS.ini
+local/config/vufind/combined.ini
+local/config/vufind/
 config/vufind/permissions.ini
 downloads
 solr/vendor

@@ -1528,6 +1528,26 @@ class SolrDefault extends AbstractBase
     }
 
     /**
+     * ID сводного уровня, которому принадлежит данная запись
+     *
+     * @return array
+     */
+    public function getHierarchyParentID()
+    {
+        return isset($this->fields['hierarchy_parent_id']) ? $this->fields['hierarchy_parent_id'] : [];
+    }
+
+    /**
+     * заглавие сводного уровня, которому принадлежит данная запись
+     *
+     * @return array
+     */
+    public function getHierarchyParentTitle()
+    {
+        return isset($this->fields['hierarchy_parent_title']) ? $this->fields['hierarchy_parent_title'] : [];
+    }
+
+    /**
      * Get an associative array (id => title) of collections containing this record.
      *
      * @return array

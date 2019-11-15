@@ -54,7 +54,7 @@ class LIBFL extends AbstractBase
     public function init()
     {
         ini_set("soap.wsdl_cache_enabled", "0");
-        $this->soap = $client = new \SoapClient("https://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+        $this->soap = $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
     }
 
     /**
@@ -107,6 +107,7 @@ class LIBFL extends AbstractBase
                 'maxredirects' => 0,
                 'timeout' => 30
             ));
+
             $client->setMethod('GET');
             $response = $client->send();
             if ($response->isSuccess()) {

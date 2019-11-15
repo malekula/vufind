@@ -472,15 +472,15 @@ class CartController extends AbstractBase
         if (!is_array($ids) || empty($ids)) {
             return $this->redirectToSource('error', 'bulk_noitems_advice');
         }
-        // $client = new \SoapClient("http://opac.libfl.ru/LIBFLDataProviderAPI/service.asmx?WSDL");
+        // $client = new \SoapClient("http://80.250.173.142/LIBFLDataProviderAPI/service.asmx?WSDL");
         // $pins = $this->getPins($ids);
         // $client->InsertArrayIntoBasket(array('PINs' => $pins, 'IDSession' => $_COOKIE['VUFIND_SESSION']));
         $message = [
             'html' => true,
             'msg' => $this->translate('order_save_success') . ' '
-            //. '<a href="http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
+            //. '<a href="http://80.250.173.142/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '" target="_blank" class="gotolist">'
             //. $this->translate('order_go_to_list') . '</a>.'
-            //. '<script type="text/javascript">window.location.replace("http://opac.libfl.ru/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '")</script>'
+            //. '<script type="text/javascript">window.location.replace("http://80.250.173.142/personal/loginemployee.aspx?id=' . $_COOKIE['VUFIND_SESSION'] . '")</script>'
             . '<script type="text/javascript">window.location.replace("https://lk.libfl.ru")</script>'
         ];
         return $this->redirectToSource('success', $message);
