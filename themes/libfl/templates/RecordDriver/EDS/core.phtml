@@ -23,7 +23,7 @@
       <? $pLink = $this->driver->getPLink();
           if($pLink): ?>
         <span>
-          <a href="<?=$this->escapeHtmlAttr($pLink)?>">
+          <a href="<?=$this->ProxyUrl($pLink)?>">
             <?=$this->transEsc('View in EDS')?>
           </a>
         </span><br />
@@ -97,7 +97,7 @@
           $name = isset($customLink['Text']) ? $customLink['Text'] : '';
       ?>
       <span>
-        <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+        <a href="<?=$this->ProxyUrl($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
           <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
         </a>
       </span>
