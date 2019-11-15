@@ -5886,6 +5886,9 @@ img.news_right_image {
     .search_info_wrapper {
         width: 100%;
     }
+    .search-tools-wrapper {
+        margin-top: 10px;
+    }
     .search_tools {
         padding-left: 0;
     }
@@ -7191,11 +7194,8 @@ img.news_right_image {
     .catalogue-banner small {
         padding: 10px 0 5px;
     }
-    .main .container .navbar {
-        padding-left: 0;
-    }
-    .search-tools-wrapper {
-        padding-left: 0;
+    .search-stats {
+        padding: 40px 0;
     }
 }
 

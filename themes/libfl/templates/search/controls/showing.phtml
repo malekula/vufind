@@ -39,7 +39,7 @@
             </nav>
         </div>
     <? endif; ?>
-    <div class="search-tools-wrapper" style="display: flex; justify-content: space-between">
+    <div class="search-tools-wrapper">
     <div class="search_info_found desktop_version">Найдено документов: <? echo $this->localizedNumber($this->results->getStartRecord()) ?>&mdash;<? echo $this->localizedNumber($this->results->getEndRecord()) ?> из <? echo $this->localizedNumber($this->recordTotal) ?>.</div>
     <div class="search_info_found mobile_version">Найдено: <? echo $this->localizedNumber($this->results->getStartRecord()) ?>&mdash;<? echo $this->localizedNumber($this->results->getEndRecord()) ?> из <? echo $this->localizedNumber($this->recordTotal) ?>.</div>
 

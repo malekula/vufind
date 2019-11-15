@@ -12105,7 +12105,8 @@ header .container.navbar {
 }
 
 .search-sort {
-    display: flex
+    display: flex;
+    align-items: baseline;
 }
 
 .search-sort label {
@@ -14641,8 +14642,6 @@ body {
 .main .container .navbar {
     position: relative;
     padding-top: 0;
-    padding-left: 56px;
-    padding-bottom: 10px;
 }
 
 @media (min-width:768px) {
@@ -15033,7 +15032,7 @@ select#limit:after {
     /*padding-bottom: 80px;*/
 }
 .search-stats {
-    padding: 40px 0;
+    padding: 40px 0 40px 56px;
 }
 .search_info_wrapper {
     /*width: 553px;*/
@@ -15097,7 +15096,9 @@ input#keywordFilter_lookfor {
     z-index: 99999;
 }
 .search-tools-wrapper {
-    padding-left: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .search_info_found {
     font-size: 13px;
@@ -15425,10 +15426,10 @@ span.about_label {
     background: url("../images/svg/angle-down-solid.svg") center no-repeat;
     background-size: 10px;
     margin-top: 6px;
-    transform: rotate(-90deg);
+    transform: rotate(0deg);
 }
 .facet-group .collapsed[data-toggle="collapse"]::after {
-    transform: rotate(0deg);
+    transform: rotate(-90deg);
 }
 .form-control {
     display: block;
