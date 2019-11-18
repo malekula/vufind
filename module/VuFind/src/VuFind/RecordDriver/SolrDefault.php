@@ -1488,7 +1488,7 @@ class SolrDefault extends AbstractBase
             $this->hierarchyDriver = $type
                 ? $this->hierarchyDriverManager->get($type) : false;
         }
-        return $this->hierarchyDriver;
+	return $this->hierarchyDriver;
     }
 
     /**
@@ -1617,7 +1617,7 @@ class SolrDefault extends AbstractBase
         if (!($hierarchyDriver = $this->getHierarchyDriver())) {
             // Not a hierarchy type record
             return false;
-        }
+    	}
 
         // Check config setting for what constitutes a collection
         switch ($hierarchyDriver->getCollectionLinkType()) {
@@ -1633,7 +1633,7 @@ class SolrDefault extends AbstractBase
         default:
             // Default to not be a collection level record
             return false;
-        }
+	}
     }
 
     /**
@@ -1661,9 +1661,10 @@ class SolrDefault extends AbstractBase
      */
     public function getHierarchyType()
     {
-        if (isset($this->fields['hierarchy_top_id'])) {
+	    if (isset($this->fields['hierarchy_top_id'])) {
+	    //$this->fieldstrim($this->fields['hierarchytype']);
             $hierarchyType = isset($this->fields['hierarchytype'])
-                ? $this->fields['hierarchytype'] : false;
+		    ? trim($this->fields['hierarchytype']) : false;
             if (!$hierarchyType) {
                 $hierarchyType = isset($this->mainConfig->Hierarchy->driver)
                     ? $this->mainConfig->Hierarchy->driver : false;
