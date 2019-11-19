@@ -80,11 +80,19 @@
               $name = isset($customLink['Text']) ? $customLink['Text'] : '';
           ?>
             <!-- -->
-            <span>
-              <a href="<?=$this->ProxyUrl($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
-                <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
-              </a>
-            </span>
+            <? if ($mot !== ''): ?>
+                <span>
+                  <a href="<?=$this->ProxyUrl($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+                    <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
+                  </a>
+                </span>
+            <? else: ?>
+                <span>
+                  <a href="<?=$this->escapeHtmlAttr($url)?>" target="_blank" title="<?=$this->escapeHtmlAttr($mot)?>" class="custom-link">
+                    <? if ($icon): ?><img src="<?=$this->escapeHtmlAttr($icon)?>" /> <? endif; ?><?=$this->escapeHtml($name)?>
+                  </a>
+                </span>
+            <? endif; ?>
           <? endforeach; ?>
         <? endif; ?>
 
