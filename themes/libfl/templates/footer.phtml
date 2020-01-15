@@ -3,65 +3,130 @@
         <div class="content_big">
             <div class="footer_columns">
                 <div class="footer_column_left footer_left">
-                    <div class="footer_logo"><a><img src="/themes/bootstrap3/images/svg/tilde-icon.svg"></a></div>
+                    <div class="footer_logo">
+                      <a><img src="/themes/bootstrap3/images/svg/tilde-icon.svg"></a>
+                    </div>
                     <ul id="footer_menu">
-                        <li><a href="http://libfl.ru/ru/item/catalogue">Каталоги</a></li>
-                        <li><a href="http://libfl.ru/ru/item/events">Мероприятия</a></li>
-                        <li><a href="http://libfl.ru/ru/item/novosti-biblioteki">Контекст</a></li>
-                        <li><a href="http://libfl.ru/ru/item/about">О библиотеке</a></li>
+                        <li>
+                          <a href="http://libfl.ru/ru/item/catalogue"><?=$this->transEsc(«Catalogue»)?></a>
+                        </li>
+                        <li>
+                          <a href="http://libfl.ru/ru/item/events"><?=$this->transEsc(«Events»)?></a>
+                        </li>
+                        <li>
+                          <a href="http://libfl.ru/ru/item/novosti-biblioteki"><?=$this->transEsc(«Context»)?></a>
+                        </li>
+                        <li>
+                          <a href="http://libfl.ru/ru/item/about"><?=$this->transEsc(«About Library»)?></a>
+                        </li>
                     </ul>
                     <div class="footer_social_wrapper">
                         <div class="footer_list">
-                            <div class="footer_social_header">Присоединяйтесь</div>
-                            <li><a href="https://vk.com/public59877134" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/vk-grey-icon.svg"><span>ВКонтакте</span></a></li>
-                            <li>				<a href="https://www.facebook.com/LIBFL.RU/" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/fb-grey-icon.svg"><span>Facebook</span></a></li>
-                            <li><a href="https://www.instagram.com/libfl/" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/in-grey-icon.svg"><span>Instagram</span></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCyK_Z9yBQCcFzUZePsR5W4w" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/yt-grey-icon.svg"><span>YouTube</span></a></li>
+                            <div class="footer_social_header"><?=$this->transEsc(«Join us»)?></div>
+                            <li>
+                              <a href="https://vk.com/public59877134" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/vk-grey-icon.svg"><span><?=$this->transEsc(«VK»)?></span></a>
+                            </li>
+                            <li>
+                              <a href="https://www.facebook.com/LIBFL.RU/" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/fb-grey-icon.svg"><span>Facebook</span></a>
+                            </li>
+                            <li>
+                              <a href="https://www.instagram.com/libfl/" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/in-grey-icon.svg"><span>Instagram</span></a>
+                            </li>
+                            <li>
+                              <a href="https://www.youtube.com/channel/UCyK_Z9yBQCcFzUZePsR5W4w" target="_blank"><img style="width: 12px; margin-right: .8em;" src="/themes/bootstrap3/images/svg/yt-grey-icon.svg"><span>YouTube</span></a>
+                            </li>
                         </div>
                     </div>
                     <div class="clear"></div>
                     <div class="footer_list_wrapper">
                         <ul class="footer_list">
-                            <li><a href="http://libfl.ru/ru/item/contacts">Контактная информация</a></li>
-                            <li><a href="http://libfl.ru/ru/item/pravila-biblioteki">Правила библиотеки</a></li>
-                            <li><a href="http://libfl.ru/ru/item/istoriya-biblioteki">История библиотеки</a></li>
-                            <li><a href="http://libfl.ru/ru/item/uslugi-biblioteki">Услуги</a></li>
-                            <li><a href="https://libfl.ru/ru/item/vakansii-biblioteki-inostrannoy-literatury">Вакансии</a></li>
-                            <li><a href="http://libfl.ru/ru/item/projects">Спецпроекты</a></li>
-                            <li><a href="http://libfl.ru/ru/item/awards">Премии</a></li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/contacts"><?=$this->transEsc(«Contact»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/pravila-biblioteki"><?=$this->transEsc(«Library Rules»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/istoriya-biblioteki"><?=$this->transEsc(«Library History»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/uslugi-biblioteki"><?=$this->transEsc(«Services»)?></a>
+                            </li>
+                            <li>
+                              <a href="https://libfl.ru/ru/item/vakansii-biblioteki-inostrannoy-literatury"><?=$this->transEsc(«Vacant positions»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/projects"><?=$this->transEsc(«Special projects»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/awards"><?=$this->transEsc(«Awards»)?></a>
+                            </li>
                         </ul>
                         <ul class="footer_list">
-                            <li><a href="http://libfl.ru/ru/item/official-documents">Официальные документы</a></li>
-                            <li><a href="http://libfl.ru/ru/item/antikorrupcionnye-dokumenty">Антикоррупционные документы</a></li>
-                            <li><a href="http://libfl.ru/ru/item/protivodeystvie-extremizmy">Противодействие экстремизму</a></li>
-                            <li><a href="http://libfl.ru/ru/item/council">Международный попечительский совет</a></li>
-                            <li><a href="http://libfl.ru/ru/item/science-council">Ученый совет</a></li>
-                            <li><a href="http://libfl.ru/ru/item/departments">Организационная структура</a></li>
-                            <li><a href="http://libfl.ru/ru/item/partners">Партнеры</a></li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/official-documents"><?=$this->transEsc(«Official documents»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/antikorrupcionnye-dokumenty"><?=$this->transEsc(«Anti-corruption documents»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/protivodeystvie-extremizmy"><?=$this->transEsc(«Countering Extremism»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/council"><?=$this->transEsc(«International boards of trustees»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/science-council"><?=$this->transEsc(«Academic board»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/departments"><?=$this->transEsc(«Corporate documents»)?></a>
+                            </li>
+                            <li>
+                              <a href="http://libfl.ru/ru/item/partners"><?=$this->transEsc(«Partners»)?></a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="clear">								</div>
+                    <div class="clear"></div>
                 </div>
-                <div class="footer_column"><span class="footer_header">Адрес:</span><br><span class="work_time">109240, г. Москва, ул. Николоямская, д. 1 <a target="_blank" href="https://maps.yandex.ru/213/moscow/?utm_source=geoblock_maps_moscow&amp;text=109189%2C%20%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%8F%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C%20%D0%B4.%201&amp;sll=37.620393%2C55.753960&amp;sspn=1.852570%2C0.629645&amp;ol=geo&amp;ouri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D37.648%252C55.748%26spn%3D0.001%252C0.001%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259C%25D0%25BE%25D1%2581%25D0%25BA%25D0%25B2%25D0%25B0%252C%2520%25D0%259D%25D0%25B8%25D0%25BA%25D0%25BE%25D0%25BB%25D0%25BE%25D1%258F%25D0%25BC%25D1%2581%25D0%25BA%25D0%25B0%25D1%258F%2520%25D1%2583%25D0%25BB%25D0%25B8%25D1%2586%25D0%25B0%252C%25201&amp;ll=37.648133%2C55.748234&amp;z=16">Посмотреть на карте</a></span><br><br>
-                    <!--a.work_time(href='/' + lang + '/item/contacts#scheme_anchor')=__("Схема библиотеки")-->
-                    <!--br-->
-                    <!--br--><span class="footer_header">Приемная:</span><br><span class="work_time">+7 (495) 915-36-21</span><br><br><span class="footer_header">Справочно-библиографические консультации:</span><br><span class="work_time">+7 (495) 915–36–41</span><br><br><span class="footer_header">Наш летний график работы с 1 июня по 31 августа:</span><br><span class="work_time">В будние дни — с 11.00 до 21.00</span><br><span class="work_time">В предпраздничные и субботние дни — с 11.00 до 19.00</span><br><span class="work_time">Воскресенье — выходной</span><!--<br><span class="work_time">Последний четверг каждого месяца — санитарный день</span>--><br><br><span class="footer_header">Запись читателей и вход их в библиотеку завершается за полчаса до окончания работы.</span>
+                <div class="footer_column">
+                  <span class="footer_header"><?=$this->transEsc(«Address»)?>:</span>
+                  <br>
+                  <span class="work_time"><?=$this->transEsc(«Nikoloyamskaya Street 1, Moscow 109240»)?> <a target="_blank" href="https://maps.yandex.ru/213/moscow/?utm_source=geoblock_maps_moscow&amp;text=109189%2C%20%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE%D1%8F%D0%BC%D1%81%D0%BA%D0%B0%D1%8F%2C%20%D0%B4.%201&amp;sll=37.620393%2C55.753960&amp;sspn=1.852570%2C0.629645&amp;ol=geo&amp;ouri=ymapsbm1%3A%2F%2Fgeo%3Fll%3D37.648%252C55.748%26spn%3D0.001%252C0.001%26text%3D%25D0%25A0%25D0%25BE%25D1%2581%25D1%2581%25D0%25B8%25D1%258F%252C%2520%25D0%259C%25D0%25BE%25D1%2581%25D0%25BA%25D0%25B2%25D0%25B0%252C%2520%25D0%259D%25D0%25B8%25D0%25BA%25D0%25BE%25D0%25BB%25D0%25BE%25D1%258F%25D0%25BC%25D1%2581%25D0%25BA%25D0%25B0%25D1%258F%2520%25D1%2583%25D0%25BB%25D0%25B8%25D1%2586%25D0%25B0%252C%25201&amp;ll=37.648133%2C55.748234&amp;z=16"><?=$this->transEsc(«View Map»)?></a></span>
+                  <br>
+                  <br>
+                  <span class="footer_header"><?=$this->transEsc(«Reader Registration Office»)?>:</span>
+                  <br>
+                  <span class="work_time">+7 (495) 915-36-21</span>
+                  <br>
+                  <br>
+                  <span class="footer_header"><?=$this->transEsc(«Information Service»)?>:</span>
+                  <br>
+                  <span class="work_time">+7 (495) 915–36–41</span>
+                  <br>
+                  <br>
+                  <span class="footer_header"><?=$this->transEsc(«Book Store»)?>:</span>
+                  <br>
+                  <span class="work_time">+7 (495) 915–35–17</span>
+                  <br>
+                  <br>
+                  <span class="footer_header"><?=$this->transEsc(«Opening Hours»)?>:</span>
+                  <br>
+                  <span class="work_time"><?=$this->transEsc(«On weekdays - from 11.00 to 21.00»)?></span>
+                  <br>
+                  <span class="work_time"><?=$this->transEsc(«On holidays and Saturdays - from 11.00 to 19.00»)?></span>
+                  <br>
+                  <span class="work_time"><?=$this->transEsc(«Sunday is a day off.»)?></span>
+                  <!--<br><span class="work_time">Последний четверг каждого месяца — санитарный день</span>-->
+                  <br>
+                  <br>
+                  <span class="footer_header"><?=$this->transEsc(«Admission and registration of users close 30 minutes prior to Library's closing time.»)?></span>
                 </div>
             </div>
             <div class="clear"></div>
             <div class="footer_copy">
                 <div class="content_big">
-                    <div class="footer_copy_text">© 2013 Федеральное государственное бюджетное учреждение культуры «Всероссийская государственная библиотека иностранной литературы имени М.И.Рудомино». Вся информация, представленная на сайте охраняется авторским правом и другими правами на интеллектуальную собственность и является собственностью соответствующих правообладателей или БИБЛИОТЕКИ.</div>
-                    <!--a.footer_counter(href="https://metrika.yandex.ru/stat/?id=35488675&amp;from=informer", target="_blank", rel="nofollow", style='float: right;')img(src="https://informer.yandex.ru/informer/35488675/3_1_FFFFFFFF_EFEFEFFF_0_pageviews", style="width:88px; height:31px; border:0;", alt="Яндекс.Метрика", title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)", onclick="try{Ya.Metrika.informer({i:this,id:35488675,lang:'ru'});return false}catch(e){}")
-                    -->
-                    <!--.footer_banner--><span class="footer_year">© 2019
-                  <!--a(href='http://quality.mkrf.ru/mark/?orgid=0373100000308', target='_blank')
-                  img(src='/static/mkrf_controlquality.png', alt='')
-                  | Оценка качества услуг
-                  br
-                  | учреждений культуры
-
-                  --></span>
+                    <div class="footer_copy_text"><?=$this->transEsc(«© 2013 All-Russian State Library for Foreign Literature named after M.I.Rudomino.The entire content of this website is protected by copyright and other intellectual property rights and is the property of the respective copyright holders or the LIBRARY.»)?></div>
+                    <span class="footer_year">© 2019</span>
                     <div class="clear"></div>
                 </div>
             </div>

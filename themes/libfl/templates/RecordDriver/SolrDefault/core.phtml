@@ -144,20 +144,20 @@
 
 <div class="book-availability">
 	<div class="book-availability-header">
-		<span>Доступность</span>
+		<span><?=$this->transEsc(«Availability»)?></span>
 		<a href="/" class="btn btn-note js-availability-hover">?</a>
 	</div>
 	<div class="book-availability-note">
-		<span>Зеленым цветом отмечены экземпляры доступные для заказа, красным &mdash; временно недоступные.<br>Серый цвет означает, что экземпляра нет в наличии.</span>
+		<span><?=$this->transEsc(«Green colour indicates the item is available for order, red – temporarily unavailable. Gray indicates that the item is unavailable.»)?></span>
 	</div>
-	<div class="m4001 book-availability-status">Взять на дом</div>
+	<div class="m4001 book-availability-status"><?=$this->transEsc(«Borrow at home»)?></div>
 
 	<? if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres'): ?>
-		<div class="m4002 book-availability-status available">Электронное издание</div>
+		<div class="m4002 book-availability-status available"><?=$this->transEsc(«E-book»)?></div>
 	<? else: ?>
-		<div class="m4002 book-availability-status">Электронное издание</div>
+		<div class="m4002 book-availability-status"><?=$this->transEsc(«E-book»)?></div>
 	<? endif; ?>
-		<div class="m4000 book-availability-status">Читать в библиотеке</div>
+		<div class="m4000 book-availability-status"><?=$this->transEsc(«In library only»)?></div>
 				<!-- <div class="access_method_4 book-availability-status unavailable">????</div>
 				<div class="access_method_5 book-availability-status unavailable">????</div>
 				<div class="access_method_6 book-availability-status unavailable">????</div> -->

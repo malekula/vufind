@@ -167,28 +167,14 @@ $this->headScript()->appendScript($setupJS);
 </head>
 <!--<body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> <?=$this->layoutClass('offcanvas-row')?><? if ($this->layout()->rtl): ?> rtl<? endif; ?>">-->
 <body class="template-dir-<?=$this->templateDir?> template-name-<?=$this->templateName?> offcanvas offcanvas-right flip <? if ($this->layout()->rtl): ?> rtl<? endif; ?>">
-<!--<div class='infobar'>
-    <div class='infobar_left'>
-        <span>Подружись с Иностранкой</span>
-    </div>
-    <div class='infobar_left'>
-        <a href='https://vk.com/public59877134' class='vk__element'></a>
-        <a href='https://www.facebook.com/LIBFL/' class='fb__element'></a>
-        <a href='https://www.instagram.com/libfl/' class='insta__element'></a>
-        <a href='https://www.youtube.com/channel/UCyK_Z9yBQCcFzUZePsR5W4w' class='youtube__element'></a>
-    </div>
-    <div class='infobar_right'>
-        <a href='http://profi.libfl.ru/prepodavateli/' target='_blank'>Сведения об организации, осуществляющей образовательную деятельность</a>
-    </div>
-</div>
-  -->
+
   <div id="layout_wrapper">
 
     <div class="infobar desktop_version">
       <div class="content-wrap">
 
         <div class="infobar__link left">
-          <span>Подружись с Иностранкой</span>
+          <span><?=$this->transEsc("Let's be friends")?></span>
         </div>
 
         <div class="infobar__link left">
@@ -199,7 +185,7 @@ $this->headScript()->appendScript($setupJS);
         </div>
 
         <div class="right">
-          <a href="https://libfl.ru/ru/item/svedeniya-ob-organizacii-osushchestvlyayushchey-obrazovatelnuyu-deyatelnost" class="link infobar__link_academy">Сведения об организации, осуществляющей образовательную деятельность</a>
+          <a href="https://libfl.ru/ru/item/svedeniya-ob-organizacii-osushchestvlyayushchey-obrazovatelnuyu-deyatelnost" class="link infobar__link_academy"><?=$this->transEsc("Information about the organization engaged in educational activities")?></a>
         </div>
 
       </div>
@@ -223,20 +209,21 @@ $this->headScript()->appendScript($setupJS);
             </div>
             <ul class="menu header__menu">
               <li class="menu__item">
-                <a href="/" class="link menu__link">Каталог</a>
+                <a href="/" class="link menu__link"><?=$this->transEsc("Catalogue")?></a>
               </li>
               <li class="menu__item">
-                <a href="https://libfl.ru/ru/item/events" class="link menu__link">Мероприятия</a>
+                <a href="https://libfl.ru/ru/item/events" class="link menu__link"><?=$this->transEsc("Events")?></a>
               </li>
               <li class="menu__item">
-                <a href="https://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link">Контекст</a></li>
+                <a href="https://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link"><?=$this->transEsc("Context")?></a></li>
               <li class="menu__item">
-                <a href="https://libfl.ru/ru/item/about" class="link menu__link">О библиотеке</a>
+                <a href="https://libfl.ru/ru/item/about" class="link menu__link"><?=$this->transEsc("About Library")?></a>
               </li>
-
-              <a href="https://oauth.libfl.ru/" class="menu__item-blue" style="margin-left: 30px;">Войти</a>
-              <a href="https://oauth.libfl.ru/signup" class="menu__item-blue" target="_blank">Стать читателем</a>
-              <a href="https://oauth.libfl.ru/" class="become_icon"></a>
+              <div class="header-menu__links" style="margin-left:auto;">
+                <a class="become-member desktop_version" href="https://oauth.libfl.ru/" style="margin-left:30px"><?=$this->transEsc("Log in")?></a>
+                <a class="become-member desktop_version js-become-member"><?=$this->transEsc("Become a user")?></a>
+                <a class="switch-language" style="background: url(/images/svg/lang-en.svg) center no-repeat" href="/en"></a>
+              </div>
             </ul>
 
             <div class="quick_links_wrapper mobile_version">
@@ -267,21 +254,22 @@ $this->headScript()->appendScript($setupJS);
           <div class="content-wrap">
             <ul class="menu header__menu">
               <li class="menu__item">
-                <a href="/" class="link menu__link">Каталог</a>
+                <a href="/" class="link menu__link"><?=$this->transEsc("Catalogue")?></a>
               </li>
               <li class="menu__item">
-                <a href="http://libfl.ru/ru/item/events" class="link menu__link">Мероприятия</a>
+                <a href="http://libfl.ru/ru/item/events" class="link menu__link"><?=$this->transEsc("Events")?></a>
               </li>
               <li class="menu__item">
-                <a href="http://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link">Контекст</a>
+                <a href="http://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link"><?=$this->transEsc("Context")?></a>
               </li>
               <li class="menu__item">
-                <a href="http://libfl.ru/ru/item/about" class="link menu__link">О библиотеке</a>
+                <a href="http://libfl.ru/ru/item/about" class="link menu__link"><?=$this->transEsc("About Library")?></a>
               </li>
-
-              <a href="https://oauth.libfl.ru/" class="menu__item-blue link link_blue" style="margin-left: 30px;">Войти</a>
-              <a href="https://oauth.libfl.ru/signup" class="menu__item-blue link link_blue" target="_blank">Стать читателем</a>
-              <a href="https://oauth.libfl.ru/" style="display:none;" class="become_icon"></a>
+              <div class="header-menu__links" style="margin-left:auto;">
+                <a class="become-member desktop_version" href="https://oauth.libfl.ru/" style="margin-left:30px">Войти</a>
+                <a class="become-member desktop_version js-become-member">Стать читателем</a>
+                <a class="switch-language" style="background: url(/images/svg/lang-en.svg) center no-repeat" href="/en"></a>
+              </div>
             </ul>
           </div>
 
