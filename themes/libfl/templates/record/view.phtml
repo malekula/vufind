@@ -114,7 +114,7 @@
     <? if ($this->driver->getSourceIdentifier() !== 'EDS'): ?>
     <div class='access_info clearfix'>
       <div class='left'>
-        <span><?=$this->transEsc(«Access information»)?></span>
+        <span><?=$this->transEsc('Access information')?></span>
         <?php echo "<a data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true)))."' rel='nofollow'>".$this->transEsc('access_print')."</a>";?><br>
         <?php echo "<a data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true)))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";?>
       </div>
