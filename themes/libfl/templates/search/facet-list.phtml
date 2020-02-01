@@ -10,7 +10,7 @@
 <h2><?=$this->transEsc($this->facetLabel) ?></h2>
 <? if (count($this->sortOptions) > 1): ?>
   <div class="full-facet-sort-options">
-    <label><?=$this->translate('Sort') ?></label>
+    <!--<label><? /* =$this->translate('Sort') */ ?></label>-->
     <div class="btn-group">
       <? foreach ($this->sortOptions as $key=>$sort): ?>
         <a href="<?=$urlBase . '&amp;facetpage=1&amp;facetsort=' . urlencode($key) ?>" class="btn btn-default js-facet-sort<? if($this->sort == $key): ?> active<? endif; ?>" data-sort="<?=$key ?>" data-lightbox-ignore><?=$this->translate($sort) ?></a>
@@ -69,5 +69,5 @@
     </div>
   <? endforeach; ?>
 </div>
-<button class="btn btn-default lightbox-only" data-dismiss="modal"><?=$this->translate('close') ?></button>
+<!--<button class="btn btn-default lightbox-only" data-dismiss="modal"><? /* =$this->translate('close') */ ?></button>-->
 <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '(typeof VuFind.lightbox_facets !== "undefined") && VuFind.lightbox_facets.setup();', 'SET'); ?>

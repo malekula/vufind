@@ -53,7 +53,7 @@
     [
     'href' => $this->url('search-opensearch') . '?method=describe',
     'type' => 'application/opensearchdescription+xml',
-    'title' => $this->transEsc('Library Catalog Search'),
+    'title' => $this->transEsc("Library Catalog Search"),
     'rel' => 'search'
     ]
     );
@@ -383,7 +383,7 @@ $this->headScript()->appendScript($setupJS);
                 <? if (isset($this->layout()->srmessage)): // message for benefit of screen-reader users ?>
                 <span class="sr-only"><?=$this->layout()->srmessage ?></span>
               <? endif; ?>
-              <a class="sr-only" href="#content"><?=$this->transEsc('Skip to content') ?></a>
+              <a class="sr-only" href="#content"><?=$this->transEsc("Skip to content") ?></a>
               <?=$this->render('header.phtml')?>
             </div>
             <div class="breadcrumbs">
@@ -422,9 +422,9 @@ $this->headScript()->appendScript($setupJS);
                     <!-- -->
                     <? $cart = $this->cart(); if ($cart->isActive()): ?>
                     <div id="cartSummary">
-                      <a id="cartItems" data-lightbox title="<?=$this->transEsc('View Book Bag')?>" href="<?=$this->url('cart-home')?>">
-                        <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><span class="cart_text"><?=$this->transEsc('My Books')?></span>  <span class="quantity"><?=count($cart->getItems())?></span>
-                        <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc('bookbag_full') ?>)</span>
+                      <a id="cartItems" data-lightbox title="<?=$this->transEsc("View Book Bag")?>" href="<?=$this->url('cart-home')?>">
+                        <img src='/themes/libfl/images/svg/book-cart.svg' class='bookbag-full'><span class="cart_text"><?=$this->transEsc("My Books")?></span>  <span class="quantity"><?=count($cart->getItems())?></span>
+                        <span class="full<?=!$cart->isFull() ? ' hidden' : '' ?>">(<?=$this->transEsc("bookbag_full") ?>)</span>
                       </a>
                     </div>
                     <? endif; ?>
@@ -445,11 +445,11 @@ $this->headScript()->appendScript($setupJS);
       <div class="modal-dialog">
         <div class="modal-content">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-          <div class="modal-body"><?=$this->transEsc('Loading') ?>...</div>
+          <div class="modal-body"><?=$this->transEsc("Loading") ?>...</div>
         </div>
       </div>
     </div>
-    <div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc('sidebar_expand') ?>"></i></div>
+    <div class="offcanvas-toggle" data-toggle="offcanvas"><i class="fa" title="<?=$this->transEsc("sidebar_expand") ?>"></i></div>
     <div class="offcanvas-overlay" data-toggle="offcanvas"></div>
     <?=$this->googleanalytics()?>
     <?=$this->piwik()?>
