@@ -1518,6 +1518,7 @@ textarea:focus:-ms-input-placeholder {
     right: 0;
     width: 570px;
 }
+
 /*.wisemen_block img {
     position: absolute;
     left: 610px;
@@ -1561,9 +1562,6 @@ textarea:focus:-ms-input-placeholder {
     margin-top: 70px;
     margin-left: 25px;
 }*/
-.random-quote__image {
-    margin-top: -20px;
-}
 .random-quote {
     position: absolute;
     top: 105px;
@@ -1572,11 +1570,50 @@ textarea:focus:-ms-input-placeholder {
     border-radius: 15px;
     padding: 15px;
 }
+.wisemen_block#rudomino .random-quote {
+    display: flex;
+    flex-direction: column;
+    top: 75px;
+    left: 170px;
+    padding: 0;
+    border-radius: 0;
+}
+.wisemen_block#rudomino .random-quote .random-quote__digit {
+    font-family: Leto Sans,Arial,Helvetica;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1.09px;
+    line-height: 1em;
+    color: #25252d
+}
+.wisemen_block#rudomino .random-quote .random-quote__digit small {
+    font-size: 14px
+}
+.wisemen_block#rudomino .random-quote .random-quote__small {
+    font-family: Open Sans,Arial,Helvetica;
+    font-size: 14px;
+    line-height: 1;
+    color: #b4bac1;
+    margin-top: -5px
+}
+.random-quote__image {
+    margin-top: -20px;
+}
+.wisemen_block#rudomino .random-quote__image {
+    margin-top: -10px
+}
 .random-quote__text {
     font-family: 'Leto Sans', Arial, Helvetica;
     font-size: 26px;
     font-weight: 700;
     letter-spacing: -.0132em;
+    line-height: 1em;
+}
+.random-quote__year {
+    font-family: 'Leto Sans', Arial, Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1.09em;
     line-height: 1em;
 }
 .random_quote_block span {

@@ -153,7 +153,7 @@ $(document).ready(function() {
         document.getElementById("random_quote"+r).style.display='block';
     }
 
-    DisplayRandomQuote();
+    //DisplayRandomQuote();
 
     /**/
 
