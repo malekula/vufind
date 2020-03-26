@@ -39,21 +39,21 @@ JS;
   <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, '$("#searchForm_lookfor").focus();', 'SET'); ?>
 
   <div class='search_readme'>
-    <span>Инструкция</span>
-    <a data-text=''>Как использовать?</a>
+    <span><?=$this->transEsc("Instruction")?></span>
+    <a data-text=''><?=$this->transEsc("How do I use it?")?></a>
   </div>
   <div class='searchHome_row'>
       <a class='global_search becomelink' href=''></a>
-      <a class='adv_search' href="/Search/Advanced">Расширенный поиск</a>
+      <a class='adv_search' href="/Search/Advanced"><?=$this->transEsc("Advanced search")?></a>
   </div>
 
-    <div class="catalogue-readme"><span>Инструкция</span>Как сделать заказ?</div>
+    <div class="catalogue-readme"><span><?=$this->transEsc("Instruction")?></span><?=$this->transEsc("How do I order?")?></div>
 
     <div class="ebsco-annotation">
         <div class="ebsco-logo"></div>
-        <span>Благодаря EBSCO Иностранка предоставляет доступ к двенадцати англоязычным базам периодических изданий разнообразной тематики: от медицины и здравоохранения до библиотечного дела.<br>Обратите внимание на базы бизнес-тематики: здесь можно найти свежие выпуски таких широко цитируемых в научной среде изданий, как Quarterly Journal of Economics, Journal of Finance, Econometrica, Journal of Political Economy и др.</span>
+        <span><?=$this->transEsc("EBSCO annotation")?></span>
         <br>
-        <a href="https://libfl.ru/static/online_resources/" target="_blank" class="btn">Узнать больше</a>
+        <a href="https://libfl.ru/static/online_resources/" target="_blank" class="btn"><?=$this->transEsc("Learn More")?></a>
     </div>
 
 
@@ -68,10 +68,10 @@ JS;
 </div>
 
 <div class="catalogue-banners">
-  <a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue-banner collections"><span class="catalogue-banner__header">Книжные подборки</span></a>
-	<a href="https://opac.libfl.ru/opacper/simple-search.html" target="_blank" class="catalogue-banner identity"><span>Периодические<br>издания</span></a>
-	<a href="https://press.libfl.ru/login/?next=/" target="_blank" class="catalogue-banner"><span>Пресса</span></a>
-	<a href="https://libfl.ru/static/online_resources/" target="_blank" class="catalogue-banner resourses"><span>Online-ресурсы</span><small>Поиск по лицензионным базам данных и ресурсам открытого доступа</small><small class="catalogue-banner__link">Узнать больше</small></a>
+  <a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue-banner collections"><span class="catalogue-banner__header"><?=$this->transEsc("Books Collections")?></span></a>
+	<a href="https://opac.libfl.ru/opacper/simple-search.html" target="_blank" class="catalogue-banner identity"><span><?=$this->transEsc("Periodicals")?></span></a>
+	<a href="https://press.libfl.ru/login/?next=/" target="_blank" class="catalogue-banner"><span><?=$this->transEsc("Press")?></span></a>
+	<a href="https://libfl.ru/static/online_resources/" target="_blank" class="catalogue-banner resourses"><span><?=$this->transEsc("Online resourses")?></span><small><?=$this->transEsc("Search by license databases and open access resources")?></small><small class="catalogue-banner__link"><?=$this->transEsc("Learn More")?></small></a>
 	<!--
 	<a href="https://libfl.ru/ru/item/bookscollections" target="_blank" class="catalogue-banner become-member"><span class="catalogue-banner__header">Стать читателем</span></a>-->
 </div>

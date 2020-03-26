@@ -228,16 +228,16 @@ $this->headScript()->appendScript($setupJS);
 
             <div class="quick_links_wrapper mobile_version">
               <div class="quick_links mobile_version">
-                <a href="/ru/item/contacts">Контактная информация</a>
+                <a href="/ru/item/contacts"><?=$this->transEsc("Contact")?></a>
                 <br>
-                <div class="closing-time">Сегодня Иностранка не работает</div>
+                <div class="closing-time"><?=$this->transEsc("Сегодня Иностранка не работает")?></div>
               </div>
               <div class="grey_quick_links">
                 <a href="/ru/department/akademiya-rudomino">Академия Рудомино</a>
                 <br>
-                <a href="/static/online_resources">Online-Ресурсы</a>
+                <a href="/static/online_resources"><?=$this->transEsc("Online resourses")?></a>
                 <br>
-                <a href="/ru/item/projects">Проекты библиотеки </a>
+                <a href="/ru/item/projects"><?=$this->transEsc("Special projects")?></a>
               </div>
               <div class="educational_institution">
                 <a href="https://libfl.ru/ru/item/svedeniya-ob-organizacii-osushchestvlyayushchey-obrazovatelnuyu-deyatelnost">Сведения об организации, осуществляющей образовательную&nbsp;деятельность</a>
@@ -299,39 +299,39 @@ $this->headScript()->appendScript($setupJS);
 
           <div class="quick-links desktop_version">
             <div class="quick-links__group">
-              <a href="https://libfl.ru/ru/novosti-biblioteki#{%22promovement%22:true}" class="link quick-links__item">PRO-движение</a>
+              <a href="http://libfl.ru/static/online_resources" class="link quick-links__item"><?=$this->transEsc("Online resourses")?></a>
               <br>
-              <a href="http://libfl.ru/static/online_resources" class="link quick-links__item">Online-Ресурсы</a>
+              <a href="" class="link quick-links__item" id="random-department"></a>
               <br>
-              <a href="http://libfl.ru/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+              <a href="https://readymag.com/u3137742749/1704431/" class="link quick-links__item">Information for foreign partners</a>
               <br>
-              <a href="http://libfl.ru/ru/item/contacts" class="link quick-links__item">Контактная информация</a>
+              <a href="http://libfl.ru/ru/item/contacts" class="link quick-links__item"><?=$this->transEsc("Contact")?></a>
               <br>
-              <a href="http://libfl.ru/ru/hours" class="closing-time"></a>
+              <a href="http://libfl.ru/ru/hours" class="closing-time"><?=$this->transEsc("Open until")?> </a>
             </div>
           </div>
 
           <div id="search_wrapper" class="vf_search_wrapper catalogue">
 
-            <span class="search_switch">Поиск <b>по каталогу&nbsp;</b></span>
-            <a href="/Search/Results?lookfor=&amp;type=AllFields" class="full-index">Более 1 528 000 книг</a>
+            <span class="search_switch"><?=$this->transEsc("Search")?> <b>по каталогу&nbsp;</b></span>
+            <a href="/Search/Results?lookfor=&amp;type=AllFields" class="full-index"><?=$this->transEsc("Over 1 528 000 Books")?></a>
             <div class="vf_search_form desktop_version">
               <input id="search" name="search" type="text" value="">
               <img src="/themes/libfl/images/svg/options.svg">
 
               <div class="vf_search_select site_search">
-                <div data-text="Поиск по сайту" data-action="" class="vf_search_option">весь сайт</div>
-                <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option">мероприятия</div>
-                <div data-text="Поиск по статьям" data-action="articles" class="vf_search_option">статьи</div>
-                <div data-text="Поиск по документам" data-action="documents" class="vf_search_option">документы</div>
-                <div data-text="Поиск по подборкам" data-action="books_collections" class="vf_search_option">подборки</div>
+                <div data-text="Поиск по сайту" data-action="" class="vf_search_option"><?=$this->transEsc("website")?></div>
+                <div data-text="Поиск по мероприятиям" data-action="events" class="vf_search_option"><?=$this->transEsc("events")?></div>
+                <div data-text="Поиск по статьям" data-action="articles" class="vf_search_option"><?=$this->transEsc("articles")?></div>
+                <div data-text="Поиск по документам" data-action="documents" class="vf_search_option"><?=$this->transEsc("documents")?></div>
+                <div data-text="Поиск по подборкам" data-action="books_collections" class="vf_search_option"><?=$this->transEsc("collections")?></div>
               </div>
               <div class="vf_search_select catalogue_search">
-                <div data-text="Поиск по каталогу" data-action="" class="vf_search_option">весь каталог</div>
-                <div data-text="Поиск по автору" data-action="author" class="vf_search_option">автор</div>
-                <div data-text="Поиск по названию" data-action="title" class="vf_search_option">название</div>
-                <div data-text="Поиск по предметной области" data-action="subject" class="vf_search_option">предметная область</div>
-                <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISSN</div><a href="http://catalog.libfl.ru/Search/Advanced" class="advanced_search" target="_blank">расширенный поиск</a>
+                <div data-text="Поиск по каталогу" data-action="" class="vf_search_option"><?=$this->transEsc("catalogue")?></div>
+                <div data-text="Поиск по автору" data-action="author" class="vf_search_option"><?=$this->transEsc("author")?></div>
+                <div data-text="Поиск по названию" data-action="title" class="vf_search_option"><?=$this->transEsc("title")?></div>
+                <div data-text="Поиск по предметной области" data-action="subject" class="vf_search_option"><?=$this->transEsc("subject")?></div>
+                <div data-text="Поиск по ISBN/ISNN" data-action="isbn" class="vf_search_option">ISBN/ISSN</div><a href="http://catalog.libfl.ru/Search/Advanced" class="advanced_search" target="_blank"><?=$this->transEsc("Advanced search")?></a>
               </div>
             </div>
 
@@ -369,13 +369,7 @@ $this->headScript()->appendScript($setupJS);
             <clear></clear>
           </div>
 
-          <!--<div class="working-hours" style="display: none;">
-            <div class="working-hours__row"><b>Будние дни</b>&nbsp;—&nbsp;с 11.00 до 21.00</div>
-            <div class="working-hours__row working-hours__row_bordered"><b>Сб, вс и предпраздничные дни</b>&nbsp;—&nbsp;с 11.00 до 19.00</div>
-            <div class="working-hours__row"><b>Санитарный день</b>&nbsp;—&nbsp;последний четверг месяца</div>
-          </div>-->
-
-        </div>
+          </div>
       </div>
     </header>
 

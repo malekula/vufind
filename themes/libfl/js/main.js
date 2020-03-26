@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
     (function setWorkdayEnd() {
-        var time = ['мы работаем до 19:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 19:00'];
-        $('.closing-time').text('Сегодня ' + time[moment().day()]);
+        //var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '21:00', '19:00'];
+        //$('.closing-time').append(time[moment().day()]);
+        $(".closing-time").text("Библиотека закрыта");
     })();
 
     $("#widthTempOption").html($('#sort_options_1 option:selected').text());
@@ -46,6 +47,43 @@ $(document).ready(function() {
         $('.search_readme a').addClass('js-open-popup');
         $('.search_readme a').data('text', '<div class="popup-title">Как пользоваться Каталогом?</div><br><p><a href="https://oauth.libfl.ru/">Авторизуйтесь</a>, чтобы воспользоваться возможностью заказа книг из электронного Каталога через Личный кабинет.</p><p>После авторизации все книги, добавленные в заказ через электронный Каталог Библиотеки, попадают в корзину Личного кабинета.</p>');
     }
+
+    /* Random Department */
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    //<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>
+    function showRandomDeaprtment() {
+        /*var departments = {
+            tl:[11,11],
+            tk:[33,33],
+            tr:[55,55],
+            td:[77,77],
+            th:[99,99],
+        }
+        var res = Object.keys(departments);
+        var randCorner = Math.floor( Math.random()*(Object.keys(departments).length));
+        console.log(randCorner);*/
+
+        var departments = [
+            '<a href="/ru/department/akademiya-rudomino" class="link quick-links__item">Академия Рудомино</a>',
+            '<a href="/ru/department/iberoamerikanskiy-kulturnyy-centr" class="link quick-links__item">Ибероамериканский культурный центр</a>',
+            '<a href="/ru/department/frankoteka" class="link quick-links__item">Культурный центр «Франкотека»</a>',
+            '<a href="/ru/department/amerikanskiy-kulturnyy-centr" class="link quick-links__item">Центр американской культуры</a>',
+            '<a href="/ru/department/centr-slavyanskih-kultur" class="link quick-links__item">Центр славянских культур</a>',
+            '<a href="/ru/department/azerbaidjanskiy-kulturnyy-centr" class="link quick-links__item">Азербайджанский культурный центр</a>',
+            '<a href="/ru/department/bolgarskiy-kulturnyy-institut" class="link quick-links__item">Болгарский культурный институт</a>',
+            '<a href="/ru/department/niderlandskiy-obrazovatelnyy-centr" class="link quick-links__item">Нидерландский образовательный центр</a>',
+            '<a href="/ru/department/yaponskiy-kulturnyy-centr" class="link quick-links__item">Отдел японской культуры</a>',
+            '<a href="/ru/department/Pearson%20Learning%20Studio" class="link quick-links__item">Центр Pearson Learning Studio</a>',
+        ];
+        $("#random-department").replaceWith(departments[Math.floor(Math.random()*departments.length)]);
+    }
+    showRandomDeaprtment();
 
     /* Placeholder */
 
