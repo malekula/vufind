@@ -72,6 +72,7 @@
                 case 'access_group_3':
                     echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
+                    /*
                     echo "<div class='marginal_note'>"
                         ."<span>Информация по проекту</span><br>"
                         ."<a href='https://al.litres.ru/' target='_blank'>".$this->transEsc('access_descriptionLitres')."</a><br/>"
@@ -79,6 +80,7 @@
                         ."<a href='https://libfl.ru/static/litres/' target='_blank'>".$this->transEsc('access_instructionsForAccessAndWorkLitres')."</a>"
                         ."</div>";
                     break;
+                    */
                 case 'access_group_4':
                     echo "<script type='text/javascript'>$(document).ready(function(){ $('.digitizingBook').remove(); $('.digitizingBook-disabled').show(); });</script>";
                     echo "<h3 style='font-weight:bold; padding-bottom:0px;'>".$this->transEsc($accessGroup)."</h3>";
@@ -155,12 +157,14 @@
 			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '3':
+                        /*
                         echo "<ol>"
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".str_replace("%%signin%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_sigIn')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
                             ."</ol>";
                         echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."' target='_blank'>".$this->transEsc('access_gainAccess')."</a>";
                         break;
+                        */
                     case '4':
                         echo "<ol>"
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
