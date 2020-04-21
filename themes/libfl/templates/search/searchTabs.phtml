@@ -1,9 +1,15 @@
 <? if (count($searchTabs) > 0): ?>
-  <ul class="nav nav-tabs">
-    <? foreach ($searchTabs as $tab): ?>
-      <li<?=$tab['selected'] ? ' class="active"' : ''?>>
-        <a <?=$tab['selected'] ? '' : 'href="' . $this->escapeHtmlAttr($tab['url']) . '"' ?>><?=$this->transEsc($tab['label']); ?></a>
-      </li>
-    <? endforeach; ?>
-  </ul>
+  	<div class="row">
+		<ul class="nav nav-tabs">
+		    <? foreach ($searchTabs as $tab): ?>
+		      <li<?=$tab['selected'] ? ' class="active"' : ''?>>
+		        <a <?=$tab['selected'] ? '' : 'href="' . $this->escapeHtmlAttr($tab['url']) . '"' ?>><?=$this->transEsc($tab['label']); ?></a>
+		      </li>
+		    <? endforeach; ?>
+		</ul>
+		<div class="imcat">
+			<a href="https://imcat.libfl.ru/ic/book/index.php">Перейти в имидж-каталог</a>
+			<span style="display: none;">Книги и периодика на 186 языках из фондов Иностранки</span>
+		</div>
+	</div>
 <? endif; ?>

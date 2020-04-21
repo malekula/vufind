@@ -113,6 +113,12 @@ $(document).ready(function() {
         $('.book-availability-note').fadeOut(300);
     });
 
+    $('body').on('mouseenter', '.imcat a', function() {
+        $('.imcat span').fadeIn(300);
+    }).on('mouseleave', '.imcat a', function() {
+        $('.imcat span').fadeOut(300);
+    });
+
 
 
 
