@@ -9475,3 +9475,57 @@ img.news_right_image {
         margin-left: -35px
     }
 }
+.row {
+    display: flex;
+    align-items: center;
+}
+.imcat {
+    position: relative;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+.imcat a {
+    font-size: 13px;
+    font-weight: 400;
+    color: #0000f3;
+}
+.imcat a:before {
+    display: inline-block;
+    content: 'новое';
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #F78145;
+    padding: 2px 8px;
+    margin-right: 8px;
+}
+.imcat a:after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 13px;
+    background: url("/themes/libfl/images/svg/arrow-fwd.svg") center no-repeat;
+    background-size: 13px;
+    margin-bottom: -3px;
+    margin-left: 5px;
+}
+.imcat span {
+    display: none;
+    z-index: 9999;
+    position: absolute;
+    top: -150px;
+    right: 60px;
+    width: 250px;
+    height: auto;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    line-height: 1.8;
+    color: #232325;
+    padding: 15px 20px 15px;
+    background-color: #fff;
+    border: 1px solid #e0e0fa;
+    border-radius: 3px;
+    box-shadow: 0 2px 12px rgba(0,0,243,.09);
+}
