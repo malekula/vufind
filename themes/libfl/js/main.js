@@ -1,9 +1,14 @@
 $(document).ready(function() {
 
     (function setWorkdayEnd() {
-        //var time = ['19:00', '21:00', '21:00', '21:00', '21:00', '21:00', '19:00'];
-        //$('.closing-time').append(time[moment().day()]);
-        $(".closing-time").text("Библиотека закрыта");
+        var time = ['мы не работаем', 'мы работаем до 20:00', 'мы работаем до 20:00', 'мы работаем до 20:00', 'мы работаем до 20:00', 'мы работаем до 20:00', 'мы не работаем'];
+
+        if (new Date().toLocaleDateString() == '27.06.2020') {
+            $('.closing-time').text('Сегодня мы работаем до 19:00');
+        } else {
+            console.log(moment().day())
+            $('.closing-time').text('Сегодня ' + time[moment().day()]);
+        }
     })();
 
     $("#widthTempOption").html($('#sort_options_1 option:selected').text());
