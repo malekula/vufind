@@ -157,8 +157,23 @@
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-			echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+			//echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+
+
+			$accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
+			if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
+				//echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+				/*if ($accessMethod && $accessMethod['protection'] == false) {
+					echo 'free';
+					echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
+				}*/
+			} else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
+				echo "<div class='litres_options'><a href='https://al.litres.ru/' target='_blank' class='litres_library'></a><div class='litres_links'>Дорогой Читатель!<br>Мы работаем над расширением нашей подписки в Литрес. Доступ к книгам скоро появится.<!--<a href='https://libfl.ru/static/litres/docs/litres_how_to.pdf' target='_blank'>Как получить доступ?</a><a href='https://libfl.ru/static/litres/' target='_blank'>О проекте</a>--></div></div>";
+			}
+
+
+
+			//echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '3':
                         /*
