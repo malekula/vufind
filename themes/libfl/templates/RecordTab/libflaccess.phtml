@@ -217,7 +217,13 @@
                                 echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                                 echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                                 echo "</ol>";
-                                break;
+				break;
+			    case '1014':
+				echo "<ol>";
+				echo "<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>";
+				echo "<li>".str_replace("%%exemplar_location%%", "<a href='$link_contactsLibrary' target='_blank'>".$this->transEsc('access_staticLocation_2009')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+				echo "</ol>";
+				break;
                             default:
                                 echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
                                 break;
