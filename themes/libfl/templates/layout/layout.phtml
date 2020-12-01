@@ -3,33 +3,20 @@
 <head>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
-        (function (d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter49410553 = new Ya.Metrika2({
-                        id:49410553,
-                        clickmap:true,
-                        trackLinks:true,
-                        accurateTrackBounce:true,
-                        webvisor:true
-                    });
-                } catch(e) { }
-            });
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function () { n.parentNode.insertBefore(s, n); };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/tag.js";
-
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-        })(document, window, "yandex_metrika_callbacks2");
+    ym(49410553, "init", {
+    clickmap:true,
+    trackLinks:true,
+    accurateTrackBounce:true,
+    webvisor:true
+    });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/49410553" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74053759-9"></script>
   <script>
@@ -218,7 +205,7 @@ $this->headScript()->appendScript($setupJS);
                 <a href="https://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link"><?=$this->transEsc("News")?></a>
               </li>
               <li class="menu__item">
-                  <a href="http://press-libfl.tilda.ws/videoteka" class="link menu__link">Видеотека</a>
+                  <a href="https://libfl.ru/ru/departments" class="link menu__link">Департаменты</a>
               </li>
               <li class="menu__item">
                 <a href="https://libfl.ru/ru/item/about" class="link menu__link"><?=$this->transEsc("About Library")?></a>
@@ -237,11 +224,11 @@ $this->headScript()->appendScript($setupJS);
                 <div class="closing-time"></div>
               </div>
               <div class="grey_quick_links">
-                <a href="/ru/department/akademiya-rudomino">Академия Рудомино</a>
-                <br>
                 <a href="/static/online_resources"><?=$this->transEsc("Online resourses")?></a>
                 <br>
-                <a href="/ru/item/projects"><?=$this->transEsc("Special projects")?></a>
+                <a href="http://press-libfl.tilda.ws/videoteka" target="_blank">Видеотека</a>
+                <br>
+                <a href="https://libfl.ru/ru/bookscollections">Книжные коллекции</a>
               </div>
               <div class="educational_institution">
                 <a href="https://libfl.ru/ru/item/svedeniya-ob-organizacii-osushchestvlyayushchey-obrazovatelnuyu-deyatelnost">Сведения об организации, осуществляющей образовательную&nbsp;деятельность</a>
@@ -267,7 +254,7 @@ $this->headScript()->appendScript($setupJS);
                 <a href="http://libfl.ru/ru/item/novosti-biblioteki" class="link menu__link"><?=$this->transEsc("News")?></a>
               </li>
               <li class="menu__item">
-                <a href="http://press-libfl.tilda.ws/videoteka" class="link menu__link">Видеотека</a>
+                <a href="https://libfl.ru/ru/departments" class="link menu__link">Департаменты</a>
               </li>
               <li class="menu__item">
                 <a href="http://libfl.ru/ru/item/about" class="link menu__link"><?=$this->transEsc("About Library")?></a>
@@ -308,9 +295,9 @@ $this->headScript()->appendScript($setupJS);
             <div class="quick-links__group">
               <a href="http://libfl.ru/static/online_resources" class="link quick-links__item"><?=$this->transEsc("Online resourses")?></a>
               <br>
-              <a href="" class="link quick-links__item" id="random-department"></a>
+              <a href="http://press-libfl.tilda.ws/videoteka" target="_blank" class="link quick-links__item">Видеотека</a>
               <br>
-              <a href="https://readymag.com/u3137742749/1704431/" class="link quick-links__item">Information for foreign partners</a>
+              <a href="https://libfl.ru/ru/bookscollections" class="link quick-links__item">Книжные коллекции</a>
               <br>
               <a href="http://libfl.ru/ru/item/contacts" class="link quick-links__item"><?=$this->transEsc("Contact")?></a>
               <br>
