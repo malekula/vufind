@@ -231,10 +231,11 @@
                         echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '7':
-                        echo "<ol>"
-                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
-                            ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-                            ."</ol>";
+			echo "<ol>"
+			    ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
+                            //."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
+                            //."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
+			    ."</ol>";
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
@@ -294,12 +295,16 @@
                         break;
 		    case '9':
                         switch ($exemplar['exemplar_access_code']) {
-                            case '1007':
-                                /*echo "<ol>"
-                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
-                                    ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-                                    ."</ol>";*/
-                                echo "<p>1." . $this->transEsc($exemplar['exemplar_access_code']."_1") . "</p>";
+			    case '1007':
+				echo "<ol>";
+				    if (is_array($exemplar['exemplar_location'])) {
+					foreach($exemplar['exemplar_location'] as $cnt=>$exemplar_location) {
+					    echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar_location)."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
+					}
+				    } else {
+					echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'][1])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
+				    }
+                                echo "</ol>";
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
@@ -331,7 +336,7 @@
                                             ."</tr>";
                                     }
                                     echo "</table>";
-                                    echo "<p>2. " . $this->transEsc($exemplar['exemplar_access_code']."_2") . "</p>";
+                                    //echo "<p>2. " . $this->transEsc($exemplar['exemplar_access_code']."_2") . "</p>";
                                 } else {
                                     // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                                 }
@@ -408,6 +413,7 @@
                             ."</ol>";
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
+			print_r($exemplar);
 			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
 			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
