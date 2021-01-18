@@ -284,8 +284,8 @@ i.BRicon { display: inline-block; }
 .BRicon-disabled.LQ-icon-active {background: url(../../images/bookreader/lq.svg) center no-repeat; background-size: 17px;}
 .BRicon.book_left {background-position:-440px 0;}
 .BRicon.book_right {background-position:-520px 0;}
-.BRicon.zoom_out {background: url(../../images/bookreader/zoom-in.svg) center no-repeat; background-size: 21px;}
-.BRicon.zoom_in {background: url(../../images/bookreader/zoom-out.svg) center no-repeat; background-size: 21px;}
+.BRicon.zoom_out {background: url(../../images/bookreader/zoom-out.svg) center no-repeat; background-size: 21px;}
+.BRicon.zoom_in {background: url(../../images/bookreader/zoom-in.svg) center no-repeat; background-size: 21px;}
 .BRicon.play {background-position:-760px 0;}
 .BRicon.pause {background-position:-840px 0;}
 .BRicon.twopg {background: url(../../images/bookreader/two.svg) center no-repeat; background-size: 28px;}
