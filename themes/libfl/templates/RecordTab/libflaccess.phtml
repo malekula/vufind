@@ -17,13 +17,7 @@
     $link_registration = "//opac.libfl.ru/WebReaderT";
     $link_login = "//opac.libfl.ru/personal/loginemployee.aspx";
     $link_contactsLibrary = "//libfl.ru/ru/item/contacts";
-    /*echo '<pre>';
-    print_r($sortExemplars);
-    echo '</pre>';*/
 
-    /*echo '<pre>';
-    print_r($accessMethods);
-    echo '</pre>';*/
     $sendAccessData = array(
         'title'     => $this->driver->getTitle(),
         'author'    => $this->driver->getAuthor(),
@@ -149,31 +143,30 @@
                     case '1':
                         echo "<div class='clearfix'>"
                             ."<a class='cta_btn' href='".$exemplar['exemplar_hyperlink_newviewer']."' target='_blank'>".$this->transEsc('access_read')."</a>"
-			    ."</div>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+			                ."</div>";
+
+                        echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '2':
                         echo "<ol>"
                             ."<li>".str_replace("%%link%%", "<a href='".$link_registration."' target='_blank'>".$this->transEsc('access_toRegister')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
-			//echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+			                //echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
 
 
-			$accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
-			if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
-				//echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
-				/*if ($accessMethod && $accessMethod['protection'] == false) {
-					echo 'free';
-					echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
-				}*/
-			} else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
-				echo "<div class='litres_options'><a href='https://al.litres.ru/' target='_blank' class='litres_library'></a><div class='litres_links'>Дорогой Читатель!<br>Мы работаем над расширением нашей подписки в Литрес. Доступ к книгам скоро появится.<!--<a href='https://libfl.ru/static/litres/docs/litres_how_to.pdf' target='_blank'>Как получить доступ?</a><a href='https://libfl.ru/static/litres/' target='_blank'>О проекте</a>--></div></div>";
-			}
+		                $accessMethod = $this->driver->checkCopyright($this->driver->getUniqueID());
+		                if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) != 'litres') {
+                            //echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+                            /*if ($accessMethod && $accessMethod['protection'] == false) {
+                                echo 'free';
+                                echo "<a href=".$accessMethod['viewerURL']." class='btn btn-white' target='_blank'>".$this->transEsc('access_read')."</a>";
+                            }*/
+            			} else if ($this->driver->getFundRecordUID($this->driver->getUniqueId()) == 'litres') {
+            				echo "<div class='litres_options'><a href='https://al.litres.ru/' target='_blank' class='litres_library'></a><div class='litres_links'>Дорогой Читатель!<br>Мы работаем над расширением нашей подписки в Литрес. Доступ к книгам скоро появится.<!--<a href='https://libfl.ru/static/litres/docs/litres_how_to.pdf' target='_blank'>Как получить доступ?</a><a href='https://libfl.ru/static/litres/' target='_blank'>О проекте</a>--></div></div>";
+            			}
 
-
-
-			//echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+		                //echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '3':
                         /*
@@ -200,9 +193,10 @@
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_0')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_3'))."</li>"
                             ."</ol>";
+
                         //echo "<a class='cta_btn' href='//ebooks.libfl.ru/'>".$this->transEsc('access_makeRequest')."</a>";
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."' rel='nofollow'>".$this->transEsc('access_gainAccess')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '6':
                         switch ($exemplar['exemplar_access_code']) {
@@ -217,13 +211,16 @@
                                 echo "<li>".str_replace("%%account%%", "<a href='".$link_login."' target='_blank'>".$this->transEsc('access_account')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>";
                                 echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
                                 echo "</ol>";
-				break;
-			    case '1014':
-				echo "<ol>";
-				echo "<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>";
-				echo "<li>".str_replace("%%exemplar_location%%", "<a href='$link_contactsLibrary' target='_blank'>".$this->transEsc('access_staticLocation_2009')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
-				echo "</ol>";
-				break;
+                				break;
+            			    case '1014':
+                				// echo "<ol>";
+                				// echo "<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>";
+                				// echo "<li>".str_replace("%%exemplar_location%%", "<a href='$link_contactsLibrary' target='_blank'>".$this->transEsc('access_staticLocation_2009')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>";
+                				// echo "</ol>";
+                                echo "<ol>"
+                                    ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->translate('access_staticLocation_2009')."</a>", $this->translate($exemplar['exemplar_access_code']))."</li>"
+                                    ."</ol>";
+        				        break;
                             default:
                                 echo "<div>".$this->transEsc('access_unavailableExemplarLocation')."</div>";
                                 break;
@@ -231,16 +228,18 @@
                         echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '7':
-			echo "<ol>"
-			    ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
+			            echo "<ol>"
+            			    ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>"
                             //."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                             //."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
-			    ."</ol>";
+            			    ."</ol>";
+
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
                             $exemplarLocations = ['access_locationClarify'];
                         }
+
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -248,6 +247,7 @@
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
+
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
@@ -280,8 +280,8 @@
                         $sendAccessData['access_group'] = $this->translate($accessGroup);
                         //echo $exemplar['exemplar_access_code']." --> <a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info')."?bookinfo=".json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
                         ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-info', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_info')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '8':
                         echo "<ol>"
@@ -289,27 +289,31 @@
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1').str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2037')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_3')."</li>"
                             ."</ol>";
+
                         if (isset($exemplar['exemplar_hyperlink']))
-				echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            				echo "<a class='cta_btn' href='".$exemplar['exemplar_hyperlink']."'>".$this->transEsc('access_gainAccess')."</a>";
+
+                        echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
-		    case '9':
+		            case '9':
                         switch ($exemplar['exemplar_access_code']) {
-			    case '1007':
-				echo "<ol>";
-				    if (is_array($exemplar['exemplar_location'])) {
-					foreach($exemplar['exemplar_location'] as $cnt=>$exemplar_location) {
-					    echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar_location)."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
-					}
-				    } else {
-					echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'][1])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
-				    }
+            			    case '1007':
+                				echo "<ol>";
+            				    if (is_array($exemplar['exemplar_location'])) {
+                					foreach($exemplar['exemplar_location'] as $cnt=>$exemplar_location) {
+                					    echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar_location)."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
+                					}
+            				    } else {
+                					echo "<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'][1])."</a>", $this->transEsc($exemplar['exemplar_access_code']))."</li>";
+            				    }
                                 echo "</ol>";
+
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
                                     $exemplarLocations = ['access_locationClarify'];
                                 }
+
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -317,6 +321,7 @@
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
+
                                 $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                                 if (is_array($locations) && !empty($locations)) {
                                     echo "<table class='inventory'>";
@@ -356,11 +361,13 @@
                                     //."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_2'))."</li>"
                                     ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->translate('access_staticLocation_2009')."</a>", $this->translate($exemplar['exemplar_access_code']))."</li>"
                                     ."</ol>";
+
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
                                     $exemplarLocations = ['access_locationClarify'];
                                 }
+
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -368,7 +375,9 @@
                                 } else {
                                     $exemplarInventoryNumbers = [$this->translate('access_unavailableInventoryNumber')];
                                 }
+
                                 $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
+
                                 if (is_array($locations) && !empty($locations)) {
                                     echo "<table class='inventory'>";
                                     echo "<tr><th>Местонахождение в Библиотеке</th><th>Инвентарный номер</th></tr>";
@@ -403,8 +412,9 @@
                             default:
                                 # code...
                                 break;
-			}
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+			            }
+
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '10':
                         echo "<ol>"
@@ -413,20 +423,21 @@
                             ."</ol>";
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-			print_r($exemplar);
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '11':
                         echo "<ol>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_1')."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
+
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
                             $exemplarLocations = ['access_locationClarify'];
                         }
+
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -434,6 +445,7 @@
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
+
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
@@ -458,19 +470,21 @@
                         }
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '12':
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc($exemplar['exemplar_location'])."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
+
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
                             $exemplarLocations = ['access_locationClarify'];
                         }
+
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -478,6 +492,7 @@
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
+
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
@@ -501,8 +516,8 @@
                             // Нужен перевод для случаев, когда у экземпляров нет ни штрих-кода ни инв. номера...
                         }
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '13':
                         echo "<ol>"
@@ -512,8 +527,8 @@
                         //echo "<a class='cta_btn' href=''>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home')."?params_access=".json_encode(array('url'=>$this->serverUrl(true),'location'=>$exemplar['exemplar_location']))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-			echo "</div>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+			            // echo "</div>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     case '14':
                         switch ($exemplar['exemplar_access_code']) {
@@ -542,11 +557,13 @@
                                     ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2009')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                                     ."</ol>";
+
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
                                     $exemplarLocations = ['access_locationClarify'];
                                 }
+
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -554,6 +571,7 @@
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
+
                                 $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                                 if (is_array($locations) && !empty($locations)) {
                                     echo "<table class='inventory'>";
@@ -584,18 +602,20 @@
                                 //$sendAccessData['access_group'] = $this->translate($accessGroup);
                                 ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-access', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                                 //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-				echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+                				echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
                                 break;
                             case '1017':
                                 echo "<ol>"
                                     ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                                     ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                                     ."</ol>";
+
                                 if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                                     $exemplarLocations = $exemplar['exemplar_location'];
                                 } else {
                                     $exemplarLocations = ['access_locationClarify'];
                                 }
+
                                 if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                                     $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                                 } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -603,6 +623,7 @@
                                 } else {
                                     $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                                 }
+
                                 $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                                 if (is_array($locations) && !empty($locations)) {
                                     echo "<table class='inventory'>";
@@ -637,19 +658,22 @@
                                 break;
                             default:
                                 break;
-			}
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+			            }
+
+			            echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                     default:
                         echo "<ol>"
                             ."<li>".str_replace("%%exemplar_location%%", "<a href='".$link_contactsLibrary."' target='_blank'>".$this->transEsc('access_staticLocation_2007')."</a>", $this->transEsc($exemplar['exemplar_access_code'].'_1'))."</li>"
                             ."<li>".$this->transEsc($exemplar['exemplar_access_code'].'_2')."</li>"
                             ."</ol>";
+
                         if (is_array($exemplar['exemplar_location']) && !empty($exemplar['exemplar_location'][0])) {
                             $exemplarLocations = $exemplar['exemplar_location'];
                         } else {
                             $exemplarLocations = ['access_locationClarify'];
                         }
+
                         if (is_array($exemplar['exemplar_inventory_number']) && !empty($exemplar['exemplar_inventory_number'][0])) {
                             $exemplarInventoryNumbers = $exemplar['exemplar_inventory_number'];
                         } else if (is_array($exemplar['exemplar_barcode']) && !empty($exemplar['exemplar_barcode'][0])) {
@@ -657,6 +681,7 @@
                         } else {
                             $exemplarInventoryNumbers = ['access_unavailableInventoryNumber'];
                         }
+
                         $locations = $this->tab->combine($exemplarLocations, $exemplarInventoryNumbers);
                         if (is_array($locations) && !empty($locations)) {
                             echo "<table class='inventory'>";
@@ -687,8 +712,8 @@
                         //$sendAccessData['access_group'] = $this->translate($accessGroup);
                         ////echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-access', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
                         //echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('Email this')."</a>";
-			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
-			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
+            			echo "<a class='cta_btn' data-lightbox href='".$this->url('sendaccess-home', array(), array('query'=>array('bookinfo'=>urlencode(json_encode($sendAccessData, JSON_UNESCAPED_UNICODE)))))."' rel='nofollow'>".$this->transEsc('email_book_access')."</a>";
+            			echo $this->render('record/cart-buttons.phtml', ['id' => $this->driver->getUniqueId(), 'source' => $this->driver->getSourceIdentifier()]);
                         break;
                 }
                 echo "</div>";
