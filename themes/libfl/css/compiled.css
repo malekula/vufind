@@ -52,7 +52,7 @@ template {
 }
 
 a {
-    background-color: transparent
+    background-color: transparent;
 }
 
 a:active,
@@ -15237,6 +15237,16 @@ a#moreInfoToggle:hover {
     color: #5c5c61;
     text-decoration: none;
     transition: color .2s;
+}
+.result .subtitle {
+    display: block;
+    font-family: 'Open Sans', Arial, Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.58px;
+    line-height: 22px;
+    color: #B4BAC1;
+    padding-bottom: 5px;
 }
 .result-body {
     width: 553px;

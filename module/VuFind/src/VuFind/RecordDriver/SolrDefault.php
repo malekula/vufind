@@ -2183,6 +2183,7 @@ class SolrDefault extends AbstractBase
     public function getTitleAnotherChart()
     {
         return isset($this->fields['Title_another_chart']) ? $this->fields['Title_another_chart'] : [];
+        // return isset($this->fields['Title_another_chart']) ? $this->fields['title'] : 'title 2';
     }
 
     public function getTitleAlt()

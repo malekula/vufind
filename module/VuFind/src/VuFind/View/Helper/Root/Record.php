@@ -349,6 +349,31 @@ class Record extends AbstractHelper
     }
 
     /**
+     * Get Another Title HTML to render a title.
+     *
+     * @param int $maxLength Maximum length of non-highlighted title.
+     *
+     * @return string
+     */
+    public function getTitleAnotherChartHtml($maxLength = 180)
+    {
+        $highlightedTitle = $this->driver->tryMethod('getHighlightedTitle');
+        $title = array_pop($this->driver->tryMethod('getTitleAnotherChart'));
+        if (!empty($highlightedTitle)) {
+            $highlight = $this->getView()->plugin('highlight');
+            $addEllipsis = $this->getView()->plugin('addEllipsis');
+            return $highlight($addEllipsis($highlightedTitle, $title));
+        }
+        if (!empty($title)) {
+            $escapeHtml = $this->getView()->plugin('escapeHtml');
+            $truncate = $this->getView()->plugin('truncate');
+            return $escapeHtml($truncate($title, $maxLength));
+        }
+        $transEsc = $this->getView()->plugin('transEsc');
+        return false;
+    }
+
+    /**
      * Render the link of the specified type.
      *
      * @param string $type    Link type
