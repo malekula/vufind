@@ -357,13 +357,13 @@ class Record extends AbstractHelper
      */
     public function getTitleAnotherChartHtml($maxLength = 180)
     {
-        $highlightedTitle = $this->driver->tryMethod('getHighlightedTitle');
+        // $highlightedTitle = $this->driver->tryMethod('getHighlightedTitle');
         $title = array_pop($this->driver->tryMethod('getTitleAnotherChart'));
-        if (!empty($highlightedTitle)) {
-            $highlight = $this->getView()->plugin('highlight');
-            $addEllipsis = $this->getView()->plugin('addEllipsis');
-            return $highlight($addEllipsis($highlightedTitle, $title));
-        }
+        // if (!empty($highlightedTitle)) {
+        //     $highlight = $this->getView()->plugin('highlight');
+        //     $addEllipsis = $this->getView()->plugin('addEllipsis');
+        //     return $highlight($addEllipsis($highlightedTitle, $title));
+        // }
         if (!empty($title)) {
             $escapeHtml = $this->getView()->plugin('escapeHtml');
             $truncate = $this->getView()->plugin('truncate');
