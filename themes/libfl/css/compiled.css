@@ -14124,7 +14124,7 @@ a.global_search.becomelink:focus {
     bottom: 20px;
     width: 115px;
     height: 80px;
-    background: #fff url(/themes/libfl/images/svg/books.svg) center right no-repeat;
+    background: url(/themes/libfl/images/svg/books.svg) center right no-repeat;
     background-size: 80px;
 }
 .catalogue-banner.resourses {
@@ -14212,7 +14212,7 @@ a.button {
 .search-options-wrapper {
     cursor: pointer;
     position: absolute;
-    top: 2.65rem;
+    top: 50%;
     right: .4rem;
     width: 40px;
     height: 40px;
