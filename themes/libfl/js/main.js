@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    if (window.location.hash === '#become-member') {
+        $('.popup-box').hide();
+        $('#popup-wrapper, #popup-reader').show();
+        $('header, nav, main, #footer').css('filter', 'blur(5px)');
+    }
+
 // Working hours
     (function setWorkdayEnd() {
         var curDate = moment().format('DD.MM.YYYY');

@@ -6302,7 +6302,6 @@ button.close {
 .modal-open {
     overflow: hidden
 }
-/*
 .modal {
     display: none;
     overflow: hidden;
@@ -6315,7 +6314,6 @@ button.close {
     -webkit-overflow-scrolling: touch;
     outline: 0
 }
-*/
 .modal.fade .modal-dialog {
     /*-webkit-transform: translate(0, -25%);
     -ms-transform: translate(0, -25%);
@@ -14035,6 +14033,7 @@ a.global_search.becomelink:focus {
     background: url(/themes/libfl/images/svg/right-shape.svg) 50% no-repeat;
     background-size: contain
 }
+.popup_content {}
 .modal_parts {
     display: flex;
     justify-content: space-between
@@ -14202,7 +14201,7 @@ ul.modal_list li.noto a :focus,ul.modal_list li.noto a:hover {
     display: block;
     width: 50px;
     height: 18px;
-    background: url(/images/svg/tilde-icon.svg) 50% no-repeat;
+    background: url(/themes/libfl/images/svg/tilde-icon.svg) 50% no-repeat;
     background-size: contain;
     margin: 0 auto 20px
 }
