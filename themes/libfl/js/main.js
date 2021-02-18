@@ -1,9 +1,17 @@
 $(document).ready(function() {
 
-    // Working hours
+// Working hours
     (function setWorkdayEnd() {
+        var curDate = moment().format('DD.MM.YYYY');
         var time = ['мы не работаем', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 21:00', 'мы работаем до 20:00'];
-        $('.closing-time').text('Сегодня ' + time[moment().day()]);
+        var holidays = ['22.02.2021', '23.02.2021', '06.03.2021', '08.03.2021', '01.05.2021', '03.05.2021', '12.06.2021', '14.06.2021', '04.11.2021', '05.11.2021', '06.11.2021', '31.12.2021']
+
+        if ($.inArray(curDate, holidays) != -1) {
+            $('.closing-time').text('Сегодня мы не работаем');
+        } else {
+            $('.closing-time').text('Сегодня ' + time[moment().day()]);
+        }
+
     })();
 
     $("#widthTempOption").html($('#sort_options_1 option:selected').text());
@@ -30,7 +38,12 @@ $(document).ready(function() {
             $('header, nav, main, #footer').css('filter', 'blur(0)');
             $('body').css('overflow', 'auto');
         }
-    });
+    }).on('click', '.js-become-member', function(e) {
+        e.preventDefault();
+        $('.popup-box').hide();
+        $('#popup-wrapper, #popup-reader').show();
+        $('header, nav, main, #footer').css('filter', 'blur(5px)');
+    })
     /* */
 
     if($('body').hasClass('template-dir-eds')) {
